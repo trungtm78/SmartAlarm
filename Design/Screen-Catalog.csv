@@ -1,0 +1,234 @@
+﻿ID,Domain,Title VI,Title EN,Title JA,Role,Layout,Workflow,FR,Next,Mockup
+A01,Access,Chọn vùng và ngôn ngữ,Welcome & region,地域と言語の選択,Citizen,welcome,WF-01,FR-A01,A02,Prototype.html#A01
+A02,Access,Đăng nhập,Sign in,サインイン,All roles,form,WF-01,FR-A02,A03,Prototype.html#A02
+A03,Access,Xác minh danh tính,Verify identity,本人確認,All roles,form,WF-01,FR-A03,A04,Prototype.html#A03
+A04,Access,Chọn không gian làm việc,Workspace switcher,ワークスペースの選択,All roles,cards,WF-01,FR-A04,O01,Prototype.html#A04
+A05,Access,Khôi phục truy cập,Recover access,アクセスの復旧,All roles,form,WF-01,FR-A05,A02,Prototype.html#A05
+A06,Access,Chấp nhận lời mời,Accept invitation,招待の承認,All roles,form,WF-01,FR-A06,A07,Prototype.html#A06
+A07,Access,Quyền truy cập và đồng ý,Permissions & consent,権限と同意,Citizen,form,WF-01,FR-A07,C01,Prototype.html#A07
+A08,Access,Phiên và thiết bị đăng nhập,Session & device security,セッションと端末,All roles,list,WF-01,FR-A08,A09,Prototype.html#A08
+A09,Access,Thu hồi phiên đăng nhập,Revoke session,セッションの取り消し,All roles,form,WF-01,FR-A09,A08,Prototype.html#A09
+A10,Access,Hồ sơ và khả năng tiếp cận,Profile & accessibility,プロフィールとアクセシビリティ,All roles,form,WF-01,FR-A10,C01,Prototype.html#A10
+C01,Citizen,An toàn của bạn,Safety home,あなたの安全,Citizen,home,WF-13,FR-C01,C02,Prototype.html#C01
+C02,Citizen,Chi tiết cảnh báo,Alert detail,警報の詳細,Citizen,alert,WF-13,FR-C02,C03,Prototype.html#C02
+C03,Citizen,Hướng dẫn sơ tán,Evacuation guidance,避難案内,Citizen,floor,WF-13,FR-C03,C05,Prototype.html#C03
+C04,Citizen,Hướng dẫn bằng giọng nói,Voice & accessible guidance,音声案内,Citizen,form,WF-13,FR-C04,C03,Prototype.html#C04
+C05,Citizen,Chọn loại trợ giúp,SOS type,救援の種類を選択,Citizen,choices,WF-05,FR-C05,C06,Prototype.html#C05
+C06,Citizen,Vị trí và nội dung SOS,SOS location & details,SOSの位置と詳細,Citizen,form,WF-05,FR-C06,C07,Prototype.html#C06
+C07,Citizen,Xác nhận gửi SOS,Confirm SOS,SOS送信の確認,Citizen,alert,WF-05,FR-C07,C08,Prototype.html#C07
+C08,Citizen,Theo dõi yêu cầu trợ giúp,SOS tracking,救援要請の状況,Citizen,timeline,WF-05,FR-C08,C09,Prototype.html#C08
+C09,Citizen,Trao đổi với đội ứng cứu,Incident conversation,対応チームとの会話,Citizen,chat,WF-05,FR-C09,C09,Prototype.html#C09
+C10,Citizen,Cập nhật hoặc đề nghị hủy SOS,Update or cancel SOS,SOSの更新・取り消し申請,Citizen,form,WF-05,FR-C10,C08,Prototype.html#C10
+C11,Citizen,Báo trạng thái an toàn,Confirm personal safety,安全状況を報告,Citizen,form,WF-12,FR-C11,C12,Prototype.html#C11
+C12,Citizen,Biên nhận báo an toàn,Safety receipt,安全報告の受領確認,Citizen,success,WF-12,FR-C12,C13,Prototype.html#C12
+C13,Citizen,Hộp thông báo,Notification inbox,通知一覧,Citizen,list,WF-10,FR-C13,C02,Prototype.html#C13
+C14,Citizen,Nguy cơ gần bạn,Nearby hazards,周辺の危険情報,Citizen,map,WF-08,FR-C14,C15,Prototype.html#C14
+C15,Citizen,Thông tin thiên tai,Disaster advisory,災害情報,Citizen,alert,WF-08,FR-C15,C16,Prototype.html#C15
+C16,Citizen,Nơi trú ẩn và điểm tập kết,Shelters & assembly points,避難所と集合場所,Citizen,map,WF-13,FR-C16,C17,Prototype.html#C16
+C17,Citizen,Chi tiết nơi trú ẩn,Shelter details,避難所の詳細,Citizen,detail,WF-13,FR-C17,C18,Prototype.html#C17
+C18,Citizen,Thông tin an toàn ngoại tuyến,Offline safety pack,オフライン安全情報,Citizen,list,WF-13,FR-C18,C03,Prototype.html#C18
+C19,Citizen,Các nhóm của tôi,My circles,マイグループ,Citizen,cards,WF-12,FR-C19,C20,Prototype.html#C19
+C20,Citizen,Trò chuyện trong nhóm,Circle conversation,グループチャット,Citizen,chat,WF-12,FR-C20,C22,Prototype.html#C20
+C21,Citizen,Tạo hoặc sửa nhóm,Create or edit circle,グループの作成・編集,Citizen,form,WF-12,FR-C21,C19,Prototype.html#C21
+C22,Citizen,Trạng thái thành viên,Circle member status,メンバーの状況,Citizen,list,WF-12,FR-C22,C20,Prototype.html#C22
+C23,Citizen,Liên hệ khẩn cấp,Emergency contacts,緊急連絡先,Citizen,form,WF-12,FR-C23,C01,Prototype.html#C23
+C24,Citizen,Chăm sóc và phát hiện té ngã,Care & fall detection,見守りと転倒検知,Citizen,form,WF-06,FR-C24,C25,Prototype.html#C24
+C25,Citizen,Kiểm tra sau nghi ngờ té ngã,Possible fall check-in,転倒の可能性を確認,Citizen,countdown,WF-06,FR-C25,C08,Prototype.html#C25
+C26,Citizen,Báo sự cố giao thông,Road incident report,交通事故の報告,Citizen,form,WF-07,FR-C26,C07,Prototype.html#C26
+C27,Citizen,Yêu cầu trợ giúp kín đáo,Discreet assistance,目立たない救援要請,Citizen,alert,WF-05,FR-C27,C08,Prototype.html#C27
+C28,Citizen,Lịch sử yêu cầu,My reports & history,要請履歴,Citizen,list,WF-05,FR-C28,C08,Prototype.html#C28
+C29,Citizen,Quyền riêng tư và dữ liệu,Privacy & data requests,プライバシーとデータ,Citizen,form,WF-19,FR-C29,C30,Prototype.html#C29
+C30,Citizen,Biên nhận yêu cầu dữ liệu,Data request receipt,データ申請の受領確認,Citizen,detail,WF-19,FR-C30,C29,Prototype.html#C30
+R01,Responder,Ca trực và trạng thái sẵn sàng,Shift & readiness,勤務と対応準備,Responder,home,WF-11,FR-R01,R02,Prototype.html#R01
+R02,Responder,Nhiệm vụ được giao,Assignment inbox,担当任務,Responder,list,WF-11,FR-R02,R03,Prototype.html#R02
+R03,Responder,Tiếp nhận nhiệm vụ,Accept or decline task,任務の受諾,Responder,detail,WF-11,FR-R03,R04,Prototype.html#R03
+R04,Responder,Đường tiếp cận và đến nơi,Navigation & arrival,進入経路と現場到着,Responder,map,WF-11,FR-R04,R05,Prototype.html#R04
+R05,Responder,Tình hình hiện trường,Field situation,現場の状況,Responder,floor,WF-11,FR-R05,R06,Prototype.html#R05
+R06,Responder,Hồ sơ hỗ trợ tại hiện trường,Assistance & triage record,現場支援の記録,Responder,form,WF-11,FR-R06,R07,Prototype.html#R06
+R07,Responder,Trạng thái và bàn giao nhiệm vụ,Task status & handover,任務状況と引き継ぎ,Responder,form,WF-11,FR-R07,R08,Prototype.html#R07
+R08,Responder,Hoàn tất nhiệm vụ,Task completion,任務の完了,Responder,success,WF-11,FR-R08,R01,Prototype.html#R08
+R09,Responder,Trao đổi trong đội,Team communications,チーム連絡,Responder,chat,WF-11,FR-R09,R09,Prototype.html#R09
+R10,Responder,Ghi nhận bằng chứng,Evidence capture,証拠の記録,Responder,form,WF-11,FR-R10,R11,Prototype.html#R10
+R11,Responder,Dữ liệu chờ đồng bộ,Offline outbox,同期待ちデータ,Responder,list,WF-11,FR-R11,R12,Prototype.html#R11
+R12,Responder,Xử lý xung đột đồng bộ,Resolve field conflict,同期競合の解決,Responder,detail,WF-11,FR-R12,R02,Prototype.html#R12
+O01,Command,Tổng quan điều hành,Command overview,指令ダッシュボード,Operator,dashboard,WF-20,FR-O01,O04,Prototype.html#O01
+O02,Command,Bản đồ tình hình,Live situation map,状況マップ,Operator,map,WF-20,FR-O02,O04,Prototype.html#O02
+O03,Command,Hàng đợi xác minh tín hiệu,Signal triage queue,信号の確認待ち,Operator,list,WF-03,FR-O03,O05,Prototype.html#O03
+O04,Command,Không gian xử lý sự cố,Incident workspace,インシデント対応,Operator,incident,WF-20,FR-O04,O08,Prototype.html#O04
+O05,Command,Kiểm tra bằng chứng,Signal evidence review,証拠の確認,Operator,evidence,WF-04,FR-O05,O06,Prototype.html#O05
+O06,Command,Tạo sự cố,Create incident,インシデントの作成,Operator,form,WF-04,FR-O06,O04,Prototype.html#O06
+O07,Command,Liên kết hoặc tách sự cố,Correlate or split incidents,インシデントの関連付け・分割,Supervisor,form,WF-04,FR-O07,O04,Prototype.html#O07
+O08,Command,Bảng điều phối,Dispatch board,配備ボード,Dispatcher,dispatch,WF-11,FR-O08,O09,Prototype.html#O08
+O09,Command,Phân công đội ứng cứu,Assign responder,対応チームの割り当て,Dispatcher,form,WF-11,FR-O09,O10,Prototype.html#O09
+O10,Command,Dòng thời gian ứng cứu,Response timeline,対応タイムライン,Operator,timeline,WF-11,FR-O10,O11,Prototype.html#O10
+O11,Command,Theo dõi trạng thái con người,People accountability,安否確認一覧,Operator,list,WF-12,FR-O11,O12,Prototype.html#O11
+O12,Command,Chi tiết yêu cầu hỗ trợ,Person assistance detail,支援要請の詳細,Operator,detail,WF-12,FR-O12,O09,Prototype.html#O12
+O13,Command,Soạn cảnh báo,Compose warning,警報の作成,Warning author,form,WF-09,FR-O13,O14,Prototype.html#O13
+O14,Command,Xem trước nội dung và người nhận,Warning preview & audience,内容と対象者のプレビュー,Warning author,detail,WF-09,FR-O14,O15,Prototype.html#O14
+O15,Command,Duyệt cảnh báo,Approve warning,警報の承認,Warning approver,form,WF-09,FR-O15,O16,Prototype.html#O15
+O16,Command,Gửi tin và chuyển cấp,Delivery & escalation,配信とエスカレーション,Operator,list,WF-10,FR-O16,O17,Prototype.html#O16
+O17,Command,Xử lý gửi tin thất bại,Delivery failure review,配信失敗への対応,Operator,detail,WF-10,FR-O17,O16,Prototype.html#O17
+O18,Command,Duyệt lệnh thiết bị,Physical command approval,機器コマンドの承認,Authorized controller,form,WF-15,FR-O18,O19,Prototype.html#O18
+O19,Command,Trạng thái thực thi lệnh,Physical command status,コマンドの実行状況,Authorized controller,timeline,WF-15,FR-O19,O19,Prototype.html#O19
+O20,Command,Kiểm tra trước khi đóng sự cố,Incident closure review,終結前の確認,Supervisor,form,WF-20,FR-O20,O21,Prototype.html#O20
+O21,Command,Đánh giá sau sự cố,After-action review,対応後の振り返り,Supervisor,detail,WF-20,FR-O21,O22,Prototype.html#O21
+O22,Command,Hành động cải tiến,Improvement action,改善アクション,Supervisor,form,WF-20,FR-O22,O21,Prototype.html#O22
+O23,Command,Lập lịch diễn tập,Drill scheduler,訓練の計画,Supervisor,form,WF-20,FR-O23,O24,Prototype.html#O23
+O24,Command,Điều hành diễn tập,Drill control room,訓練の指揮,Supervisor,dashboard,WF-20,FR-O24,O21,Prototype.html#O24
+O25,Command,Bàn giao ca trực,Shift handover,勤務の引き継ぎ,Supervisor,form,WF-20,FR-O25,O01,Prototype.html#O25
+O26,Command,Vận hành nơi trú ẩn,Shelter operations,避難所の運営,Operator,list,WF-13,FR-O26,O27,Prototype.html#O26
+O27,Command,Cập nhật nơi trú ẩn,Edit shelter status,避難所情報の更新,Operator,form,WF-13,FR-O27,O26,Prototype.html#O27
+O28,Command,Nguồn cảnh báo thiên tai,Regional disaster feed,災害警報フィード,Operator,list,WF-08,FR-O28,O29,Prototype.html#O28
+O29,Command,Kiểm tra thông điệp CAP,CAP advisory review,CAP情報の確認,Operator,detail,WF-08,FR-O29,O06,Prototype.html#O29
+O30,Command,Tìm kiếm và lịch sử kiểm toán,Search & audit timeline,検索と監査履歴,Auditor,list,WF-19,FR-O30,T11,Prototype.html#O30
+S01,Sites,Danh mục địa điểm,Site directory,拠点一覧,Site admin,cards,WF-02,FR-S01,S02,Prototype.html#S01
+S02,Sites,Cấu trúc địa điểm,Site structure,拠点の構造,Site admin,tree,WF-02,FR-S02,S03,Prototype.html#S02
+S03,Sites,Chỉnh sửa vị trí,Location editor,位置情報の編集,Site admin,form,WF-02,FR-S03,S02,Prototype.html#S03
+S04,Sites,Biên tập sơ đồ tầng,Floor plan editor,フロア図の編集,Site admin,floor,WF-02,FR-S04,S05,Prototype.html#S04
+S05,Sites,Phê duyệt và phiên bản sơ đồ,Plan approval & versions,図面の承認と版管理,Supervisor,list,WF-02,FR-S05,S04,Prototype.html#S05
+S06,Sites,Danh mục thiết bị,Device inventory,機器一覧,Device admin,list,WF-14,FR-S06,S07,Prototype.html#S06
+S07,Sites,Chi tiết và sức khỏe thiết bị,Device detail & health,機器の詳細と稼働状態,Device admin,detail,WF-14,FR-S07,S08,Prototype.html#S07
+S08,Sites,Đăng ký thiết bị,Provision device,機器の登録,Device admin,form,WF-14,FR-S08,S07,Prototype.html#S08
+S09,Sites,Giám sát camera,Camera wall,カメラ監視,Operator,evidence,WF-14,FR-S09,O05,Prototype.html#S09
+S10,Sites,Bảo trì và hiệu chuẩn,Maintenance & calibration,保守と校正,Device admin,form,WF-14,FR-S10,S06,Prototype.html#S10
+S11,Sites,Thư viện quy tắc,Rule library,ルール一覧,Rule author,list,WF-04,FR-S11,S12,Prototype.html#S11
+S12,Sites,Biên tập và mô phỏng quy tắc,Rule editor & simulation,ルール編集とシミュレーション,Rule author,form,WF-04,FR-S12,S13,Prototype.html#S12
+S13,Sites,Kiểm thử và duyệt quy tắc,Rule test & approval,ルールのテストと承認,Rule approver,detail,WF-04,FR-S13,S12,Prototype.html#S13
+S14,Sites,Giám sát mô hình AI,AI model monitoring,AIモデルの監視,Model operator,detail,WF-04,FR-S14,O03,Prototype.html#S14
+I01,Integrations,Danh mục kết nối,Connector catalog,コネクター一覧,Integration admin,cards,WF-17,FR-I01,I02,Prototype.html#I01
+I02,Integrations,Thiết lập kết nối,Connector setup,コネクターの設定,Integration admin,form,WF-17,FR-I02,I03,Prototype.html#I02
+I03,Integrations,Ánh xạ dữ liệu,Schema mapping,データマッピング,Integration admin,form,WF-03,FR-I03,I04,Prototype.html#I03
+I04,Integrations,Kiểm thử kết nối,Connector test console,接続テスト,Integration admin,detail,WF-17,FR-I04,I05,Prototype.html#I04
+I05,Integrations,Sức khỏe các kết nối,Connector health,接続の稼働状態,Integration admin,list,WF-17,FR-I05,I06,Prototype.html#I05
+I06,Integrations,Xử lý lỗi và phát lại sự kiện,Dead-letter & replay,失敗イベントと再処理,Integration admin,form,WF-17,FR-I06,I05,Prototype.html#I06
+I07,Integrations,API client và phạm vi quyền,API clients & scopes,APIクライアントと権限,Tenant admin,form,WF-17,FR-I07,I08,Prototype.html#I07
+I08,Integrations,Đăng ký webhook,Webhook subscriptions,Webhookの登録,Integration admin,form,WF-17,FR-I08,I04,Prototype.html#I08
+I09,Integrations,Thỏa thuận trao đổi dữ liệu,Partner exchange agreements,データ共有契約,Tenant admin,form,WF-17,FR-I09,I10,Prototype.html#I09
+I10,Integrations,Lịch sử trao đổi IOC,IOC exchange history,IOC連携履歴,Operator,list,WF-17,FR-I10,I04,Prototype.html#I10
+I11,Integrations,Đội drone,Drone fleet,ドローン一覧,Drone operator,cards,WF-16,FR-I11,I12,Prototype.html#I11
+I12,Integrations,Lập nhiệm vụ drone,Drone mission planning,ドローン任務の計画,Drone operator,map,WF-16,FR-I12,I13,Prototype.html#I12
+I13,Integrations,Kiểm tra trước bay và phê duyệt,Drone preflight & approval,飛行前確認と承認,Drone supervisor,form,WF-16,FR-I13,I14,Prototype.html#I13
+I14,Integrations,Theo dõi nhiệm vụ drone,Drone mission telemetry,ドローン任務の監視,Drone operator,map,WF-16,FR-I14,I15,Prototype.html#I14
+I15,Integrations,Hồ sơ nhiệm vụ drone,Drone mission record,ドローン任務の記録,Drone operator,detail,WF-16,FR-I15,I11,Prototype.html#I15
+T01,Administration,Tổng quan tổ chức,Tenant overview,組織の概要,Tenant admin,dashboard,WF-20,FR-T01,T02,Prototype.html#T01
+T02,Administration,Tổ chức và vùng dữ liệu,Organization & regions,組織とデータ地域,Tenant admin,form,WF-18,FR-T02,T01,Prototype.html#T02
+T03,Administration,Người dùng và lời mời,Users & invitations,ユーザーと招待,Tenant admin,list,WF-01,FR-T03,T04,Prototype.html#T03
+T04,Administration,Vai trò và phạm vi quyền,Role & scope editor,ロールと権限範囲,Tenant admin,form,WF-01,FR-T04,T03,Prototype.html#T04
+T05,Administration,Lịch trực và chuyển cấp,On-call & escalation,当番とエスカレーション,Supervisor,form,WF-10,FR-T05,T01,Prototype.html#T05
+T06,Administration,Mẫu nội dung và ngôn ngữ,Message templates & languages,メッセージと言語,Content editor,form,WF-09,FR-T06,O14,Prototype.html#T06
+T07,Administration,Phân loại nguy cơ và quy trình,Hazard taxonomy & playbooks,危険分類と対応手順,Tenant admin,form,WF-20,FR-T07,T08,Prototype.html#T07
+T08,Administration,Phê duyệt quy trình,Playbook approval,対応手順の承認,Supervisor,detail,WF-20,FR-T08,T07,Prototype.html#T08
+T09,Administration,Lưu trữ và bảo toàn pháp lý,Retention & legal holds,保存とリーガルホールド,Privacy officer,form,WF-19,FR-T09,T10,Prototype.html#T09
+T10,Administration,Xử lý yêu cầu quyền riêng tư,Privacy request review,プライバシー申請の審査,Privacy officer,detail,WF-19,FR-T10,C30,Prototype.html#T10
+T11,Administration,Bản ghi kiểm toán,Audit record,監査記録,Auditor,detail,WF-19,FR-T11,O30,Prototype.html#T11
+T12,Administration,Sức khỏe dịch vụ và khôi phục,Service health & recovery,サービス状態と復旧,Platform operator,dashboard,WF-20,FR-T12,T13,Prototype.html#T12
+T13,Administration,Quy trình khôi phục,Recovery runbook,復旧手順,Platform operator,detail,WF-20,FR-T13,T12,Prototype.html#T13
+T14,Administration,Sử dụng và gói dịch vụ,Usage & subscription,利用状況と契約,Billing admin,detail,WF-20,FR-T14,T15,Prototype.html#T14
+T15,Administration,Dung lượng và giới hạn,Capacity & quota policy,容量と制限,Platform operator,form,WF-20,FR-T15,T14,Prototype.html#T15
+T16,Administration,Phân tích và xuất báo cáo,Analytics & export,分析とレポート出力,Analyst,detail,WF-20,FR-T16,T17,Prototype.html#T16
+T17,Administration,Lập lịch báo cáo,Report schedule,レポートのスケジュール,Analyst,form,WF-20,FR-T17,T16,Prototype.html#T17
+X01,System states,Mất mạng · SOS chưa gửi,No connection / SOS pending,オフライン・SOS未送信,Citizen,alert,WF-05,FR-X01,R11,Prototype.html#X01
+X02,System states,Không có quyền vị trí,Permission unavailable,位置情報の権限なし,Citizen,detail,WF-05,FR-X02,C06,Prototype.html#X02
+X03,System states,Không có sự cố đang mở,No active incidents,対応中のインシデントなし,Operator,success,WF-20,FR-X03,S06,Prototype.html#X03
+X04,System states,Không có quyền truy cập,Access denied,アクセス権限なし,All roles,detail,WF-01,FR-X04,A04,Prototype.html#X04
+X05,System states,Dịch vụ tạm gián đoạn,Service unavailable,サービスの一時停止,All roles,alert,WF-20,FR-X05,C18,Prototype.html#X05
+X06,System states,Thay đổi chưa lưu và xung đột,Unsaved changes & conflict,未保存の変更と競合,Site admin,detail,WF-02,FR-X06,S05,Prototype.html#X06
+X07,System states,Không có kết quả tìm kiếm,Empty search & filter reset,検索結果なし,Operator,detail,WF-20,FR-X07,O30,Prototype.html#X07
+X08,System states,Phiên đăng nhập hết hạn,Expired session,セッションの有効期限切れ,All roles,alert,WF-01,FR-X08,A02,Prototype.html#X08
+X09,System states,Đang tải và dữ liệu cũ,Loading & stale data,読み込み中・古いデータ,Operator,detail,WF-20,FR-X09,O01,Prototype.html#X09
+X10,System states,Tệp đính kèm bị từ chối,Attachment rejected,添付ファイルの拒否,Responder,detail,WF-11,FR-X10,R10,Prototype.html#X10
+G01,Platform,Vận hành các vùng dữ liệu,Regional operations,地域別運用,Platform operator,dashboard,WF-20,FR-G01,G02,Prototype.html#G01
+G02,Platform,Chi tiết regional cell,Regional cell detail,リージョナルセルの詳細,Platform operator,detail,WF-20,FR-G02,G03,Prototype.html#G02
+G03,Platform,Diễn tập khôi phục thảm họa,Disaster recovery drill,災害復旧訓練,Platform operator,form,WF-20,FR-G03,G04,Prototype.html#G03
+G04,Platform,Xác minh khôi phục,Recovery verification,復旧の検証,Platform operator,detail,WF-20,FR-G04,G01,Prototype.html#G04
+G05,Platform,Khởi tạo tổ chức,Tenant provisioning,テナントの作成,Platform admin,form,WF-18,FR-G05,G06,Prototype.html#G05
+G06,Platform,Vòng đời tổ chức,Tenant lifecycle,テナントのライフサイクル,Platform admin,detail,WF-18,FR-G06,G07,Prototype.html#G06
+G07,Platform,Truy cập hỗ trợ có thời hạn,Time-bound support access,期限付きサポートアクセス,Security operator,form,WF-19,FR-G07,G08,Prototype.html#G07
+G08,Platform,Duyệt quyền hỗ trợ,Support access approval,サポートアクセスの承認,Tenant admin,detail,WF-19,FR-G08,G06,Prototype.html#G08
+G09,Platform,Phát hành và tương thích schema,Release & schema compatibility,リリースとスキーマ互換性,Release manager,list,WF-20,FR-G09,G10,Prototype.html#G09
+G10,Platform,Cổng phát hành và rollback,Release gate & rollback,リリース判定とロールバック,Release manager,detail,WF-20,FR-G10,G09,Prototype.html#G10
+G11,Platform,Sự cố an ninh nền tảng,Security incidents,セキュリティインシデント,Security operator,list,WF-19,FR-G11,G12,Prototype.html#G11
+G12,Platform,Hồ sơ an ninh và cô lập,Security case & containment,セキュリティ対応と封じ込め,Security operator,form,WF-19,FR-G12,G11,Prototype.html#G12
+D01,Developer,Không gian nhà phát triển,Developer workspace,開発者ワークスペース,Partner developer,cards,WF-17,FR-D01,D02,Prototype.html#D01
+D02,Developer,Khám phá API,API explorer,APIエクスプローラー,Partner developer,detail,WF-03,FR-D02,D03,Prototype.html#D02
+D03,Developer,Kết quả yêu cầu sandbox,Sandbox request results,サンドボックスの実行結果,Partner developer,detail,WF-03,FR-D03,D04,Prototype.html#D03
+D04,Developer,Danh mục schema,Schema registry,スキーマレジストリー,Partner developer,list,WF-03,FR-D04,D05,Prototype.html#D04
+D05,Developer,Biên tập manifest kết nối,Connector manifest editor,コネクターマニフェストの編集,Partner developer,form,WF-17,FR-D05,D06,Prototype.html#D05
+D06,Developer,Kiểm tra tính tương thích,Conformance certification,適合性の審査,Integration reviewer,detail,WF-17,FR-D06,I01,Prototype.html#D06
+D07,Developer,Truy vết gửi webhook,Webhook delivery trace,Webhook配信の追跡,Partner developer,timeline,WF-10,FR-D07,I08,Prototype.html#D07
+D08,Developer,Luân chuyển thông tin xác thực,Credential rotation,認証情報のローテーション,Partner developer,form,WF-17,FR-D08,I07,Prototype.html#D08
+L01,Localization,Mức độ hoàn thiện ngôn ngữ,Language coverage,言語対応状況,Localization manager,dashboard,WF-18,FR-L01,L02,Prototype.html#L01
+L02,Localization,Biên tập bản dịch,Translation editor,翻訳エディター,Translator,form,WF-18,FR-L02,L03,Prototype.html#L02
+L03,Localization,Phê duyệt bản dịch,Translation review,翻訳のレビュー,Language reviewer,detail,WF-18,FR-L03,L01,Prototype.html#L03
+L04,Localization,Giọng đọc và phát âm,Voice & pronunciation,音声と発音,Content editor,form,WF-18,FR-L04,L01,Prototype.html#L04
+L05,Localization,Quy tắc ngôn ngữ dự phòng,Locale fallback policy,言語フォールバック設定,Tenant admin,form,WF-18,FR-L05,L01,Prototype.html#L05
+L06,Localization,Thuật ngữ khẩn cấp,Emergency terminology,緊急対応用語,Language reviewer,list,WF-18,FR-L06,L02,Prototype.html#L06
+C31,Citizen,Thành viên và lời mời nhóm,Circle membership & invitations,グループメンバーと招待,Citizen,list,WF-12,FR-C31,C32,Prototype.html#C31
+C32,Citizen,Mời thành viên nhóm,Invite circle member,メンバーの招待,Citizen,form,WF-12,FR-C32,C31,Prototype.html#C32
+C33,Citizen,Báo cáo hoặc chặn hội thoại,Report or block conversation,会話の報告・ブロック,Citizen,form,WF-12,FR-C33,C19,Prototype.html#C33
+C34,Citizen,Tùy chọn thông báo,Notification preferences,通知設定,Citizen,form,WF-10,FR-C34,C01,Prototype.html#C34
+O31,Command,Lưu trữ và mở lại sự cố,Incident archive & reopen,過去のインシデント,Supervisor,list,WF-20,FR-O31,O32,Prototype.html#O31
+O32,Command,Mở lại sự cố,Reopen incident,インシデントの再開,Supervisor,form,WF-20,FR-O32,O04,Prototype.html#O32
+O33,Command,Chia sẻ sự cố liên tổ chức,Federated incident sharing,組織間のインシデント共有,Supervisor,detail,WF-17,FR-O33,I10,Prototype.html#O33
+O34,Command,Hàng đợi hỗ trợ tiếp cận,Accessibility assistance queue,配慮が必要な方への支援,Dispatcher,list,WF-11,FR-O34,O09,Prototype.html#O34
+C35,Citizen,Dẫn đường thoát hiểm bằng giọng nói,Voice evacuation navigation,音声による避難ナビゲーション,Citizen,navigation,WF-22,FR-C35,C36,Prototype.html#C35
+C36,Citizen,Chặng dẫn đường và phương hướng,Navigation step & orientation,経路案内と方向確認,Citizen,navigation,WF-22,FR-C36,C36,Prototype.html#C36
+C37,Citizen,Thông báo thay đổi tuyến,Route change notification,経路変更のお知らせ,Citizen,alert,WF-22,FR-C37,C35,Prototype.html#C37
+C38,Citizen,Chưa rõ vị trí hoặc không có tuyến,Position uncertain / no route,位置不明・経路なし,Citizen,alert,WF-22,FR-C38,C05,Prototype.html#C38
+C39,Citizen,Di chuyển khỏi vùng nguy hiểm,Outdoor hazard avoidance,危険区域からの移動,Citizen,navigation,WF-22,FR-C39,C36,Prototype.html#C39
+C40,Citizen,Ngôn ngữ và tùy chọn giọng đọc,Voice language & guidance settings,音声案内の設定,Citizen,form,WF-22,FR-C40,C35,Prototype.html#C40
+P01,Public address,Vùng loa và độ bao phủ,Speaker zones & coverage,放送区域とカバレッジ,PA operator,map,WF-21,FR-P01,P02,Prototype.html#P01
+P02,Public address,Soạn thông báo cứu hộ,Compose rescue announcement,救援放送の作成,PA author,form,WF-21,FR-P02,P03,Prototype.html#P02
+P03,Public address,Nghe thử và duyệt thông báo,Preview & approve announcement,放送の確認と承認,PA approver,detail,WF-21,FR-P03,P04,Prototype.html#P03
+P04,Public address,Giám sát phát loa,Speaker playback monitoring,放送状況の監視,PA operator,timeline,WF-21,FR-P04,P05,Prototype.html#P04
+P05,Public address,Thiết bị loa và tự kiểm tra,Speaker device & self-test,スピーカーと自己診断,Device admin,detail,WF-21,FR-P05,P01,Prototype.html#P05
+P06,Public address,Micro cứu hộ trực tiếp,Live rescue microphone,救援用ライブマイク,Authorized announcer,livevoice,WF-21,FR-P06,P04,Prototype.html#P06
+P07,Public address,Loa trên drone hoặc phương tiện,Drone / vehicle speaker mission,ドローン・車両の拡声放送,Drone operator,form,WF-21,FR-P07,I13,Prototype.html#P07
+P08,Public address,Thư viện âm thanh và duyệt TTS,Audio library & TTS review,音声ライブラリーとTTS審査,Content editor,list,WF-21,FR-P08,L04,Prototype.html#P08
+P09,Public address,Ưu tiên và điều phối phát loa,PA priority & arbitration,放送の優先順位と調整,PA admin,form,WF-21,FR-P09,P01,Prototype.html#P09
+S15,Sites,Biên tập mạng lưới thoát hiểm,Evacuation graph editor,避難経路グラフの編集,Route designer,floor,WF-22,FR-S15,S16,Prototype.html#S15
+S16,Sites,Mô phỏng và phê duyệt tuyến,Route simulation & approval,経路の検証と承認,Safety reviewer,detail,WF-22,FR-S16,S15,Prototype.html#S16
+O35,Command,Vùng nguy hiểm và hạn chế di chuyển,Hazard zones & route restrictions,危険区域と移動制限,Incident commander,map,WF-22,FR-O35,O36,Prototype.html#O35
+O36,Command,Phân phối hướng dẫn và biên nhận,Guidance distribution & receipts,案内の配信と受領確認,Operator,list,WF-22,FR-O36,P01,Prototype.html#O36
+H01,Care profiles,Hồ sơ hỗ trợ cứu hộ của tôi,My rescue assistance profile,自分の救援支援プロフィール,Citizen,form,WF-26,FR-H01,H02,Prototype.html#H01
+H02,Care profiles,Chia sẻ thông tin hỗ trợ và sức khỏe,Health & assistance sharing,支援・健康情報の共有,Citizen,form,WF-26,FR-H02,H01,Prototype.html#H02
+H03,Care profiles,Người chăm sóc được ủy quyền,Caregiver relationships,介護者・支援者の権限,Citizen,list,WF-26,FR-H03,H04,Prototype.html#H03
+H04,Care profiles,Xác minh quyền người chăm sóc,Caregiver authorization,支援者権限の確認,Privacy officer,form,WF-26,FR-H04,H03,Prototype.html#H04
+H05,Care profiles,Hồ sơ người được chăm sóc,Dependent person profile,支援対象者のプロフィール,Authorized caregiver,detail,WF-26,FR-H05,H06,Prototype.html#H05
+H06,Care profiles,Cập nhật và kiểm tra hồ sơ,Profile update & review,プロフィールの更新と確認,Authorized caregiver,form,WF-26,FR-H06,H05,Prototype.html#H06
+H07,Care profiles,Danh mục người cần hỗ trợ,People & assistance registry,支援対象者一覧,Care coordinator,list,WF-26,FR-H07,H09,Prototype.html#H07
+H08,Care profiles,Chủ động ưu tiên cứu hộ,Proactive rescue queue,先行的な救援対応,Dispatcher,priority,WF-27,FR-H08,H09,Prototype.html#H08
+H09,Care profiles,Căn cứ ưu tiên và quyết định,Priority evidence & decision,優先度の根拠と判断,Dispatcher,detail,WF-27,FR-H09,O09,Prototype.html#H09
+H10,Care profiles,Hiện diện và kiểm đếm,Presence & accountability,在場状況と安否確認,Operator,map,WF-23,FR-H10,H08,Prototype.html#H10
+H11,Care profiles,Hồ sơ y tế hạn chế truy cập,Restricted medical record,制限付き医療情報,Authorized medical role,detail,WF-19,FR-H11,H09,Prototype.html#H11
+H12,Care profiles,Kết quả chủ động kiểm tra,Welfare check outcome,安否確認の結果,Responder,form,WF-27,FR-H12,R06,Prototype.html#H12
+Q01,Intelligence,Sức khỏe nguồn định vị,Positioning source health,測位ソースの状態,Positioning admin,dashboard,WF-23,FR-Q01,Q02,Prototype.html#Q01
+Q02,Intelligence,Chất lượng và lịch sử vị trí,Position quality & history,位置情報の品質と履歴,Operator,detail,WF-23,FR-Q02,H09,Prototype.html#Q02
+Q03,Intelligence,Hiệu chuẩn định vị trong nhà,Indoor calibration editor,屋内測位の校正,Positioning admin,floor,WF-23,FR-Q03,S15,Prototype.html#Q03
+Q04,Intelligence,Tối ưu phương án thoát hiểm,Evacuation optimization,避難戦略の最適化,Incident commander,optimization,WF-24,FR-Q04,Q05,Prototype.html#Q04
+Q05,Intelligence,So sánh và chọn tuyến,Route comparison & decision,経路の比較と判断,Safety reviewer,detail,WF-24,FR-Q05,O36,Prototype.html#Q05
+Q06,Intelligence,Trợ lý AI xử lý sự cố,AI incident copilot,インシデントAI支援,Operator,copilot,WF-25,FR-Q06,Q07,Prototype.html#Q06
+Q07,Intelligence,Bằng chứng và duyệt đề xuất AI,AI evidence & approval,AI提案の根拠と承認,Supervisor,detail,WF-25,FR-Q07,Q05,Prototype.html#Q07
+Q08,Intelligence,Chính sách AI và đánh giá mô hình,AI policies & model evaluation,AIポリシーとモデル評価,AI governance lead,detail,WF-25,FR-Q08,Q09,Prototype.html#Q08
+Q09,Intelligence,Quản trị triển khai AI,AI deployment governance,AI導入のガバナンス,AI governance lead,form,WF-25,FR-Q09,Q08,Prototype.html#Q09
+Q10,Intelligence,Mô phỏng dòng người và kịch bản,Simulation & crowd scenarios,群集とシナリオのシミュレーション,Safety planner,optimization,WF-24,FR-Q10,S16,Prototype.html#Q10
+F01,PhysicalSystems,Tổng quan hệ thống vật lý,Physical systems overview,物理システム概要,Physical supervisor,dashboard,WF-29,FR-F01,F07,Prototype.html?lang=vi#F01
+F02,PhysicalSystems,Danh mục bộ điều khiển,Controller inventory,制御装置一覧,Integration engineer,list,WF-28,FR-F02,F03,Prototype.html?lang=vi#F02
+F03,PhysicalSystems,Chi tiết khả năng bộ điều khiển,Controller capability detail,制御装置の機能詳細,Integration engineer,detail,WF-28,FR-F03,F04,Prototype.html?lang=vi#F03
+F04,PhysicalSystems,Ánh xạ điểm tín hiệu,Signal point mapping,信号点マッピング,Integration engineer,form,WF-28,FR-F04,F05,Prototype.html?lang=vi#F04
+F05,PhysicalSystems,Ánh xạ vùng vật lý,Physical zone mapping,物理ゾーンマッピング,Site engineer,form,WF-28,FR-F05,F06,Prototype.html?lang=vi#F05
+F06,PhysicalSystems,Ma trận nguyên nhân–tác động,Cause-and-effect matrix,原因・動作マトリクス,Fire systems engineer,detail,WF-28,FR-F06,F15,Prototype.html?lang=vi#F06
+F07,PhysicalSystems,Chi tiết sự kiện vật lý,Physical event detail,物理イベント詳細,Physical supervisor,detail,WF-29,FR-F07,F08,Prototype.html?lang=vi#F07
+F08,PhysicalSystems,Trạng thái nước chữa cháy,Fire-water status,消防用水状態,Physical supervisor,detail,WF-29,FR-F08,F09,Prototype.html?lang=vi#F08
+F09,PhysicalSystems,Xem xét kích hoạt có kiểm soát,Controlled release review,制御放出の審査,Authorized fire officer,detail,WF-30,FR-F09,F10,Prototype.html?lang=vi#F09
+F10,PhysicalSystems,Phê duyệt lệnh thiết bị,Command authorization,装置コマンド承認,Independent command approver,detail,WF-30,FR-F10,F11,Prototype.html?lang=vi#F10
+F11,PhysicalSystems,Phản hồi thực thi,Execution feedback,実行フィードバック,Physical supervisor,timeline,WF-30,FR-F11,F12,Prototype.html?lang=vi#F11
+F12,PhysicalSystems,Đối soát kết quả chưa rõ,Unknown-result reconciliation,結果不明の照合,Physical supervisor,form,WF-30,FR-F12,F13,Prototype.html?lang=vi#F12
+F13,PhysicalSystems,Ưu tiên cục bộ và bàn giao,Local override & handover,現地優先制御と引継ぎ,Site incident commander,form,WF-30,FR-F13,F01,Prototype.html?lang=vi#F13
+F14,PhysicalSystems,Suy giảm và chế độ kiểm thử,Impairment & test mode,機能障害と試験モード,Maintenance coordinator,form,WF-31,FR-F14,F18,Prototype.html?lang=vi#F14
+F15,PhysicalSystems,Kế hoạch nghiệm thu,Commissioning plan,試運転計画,Commissioning lead,form,WF-32,FR-F15,F16,Prototype.html?lang=vi#F15
+F16,PhysicalSystems,Bằng chứng lần kiểm thử,Test-run evidence,試験実施証跡,Commissioning witness,detail,WF-32,FR-F16,F17,Prototype.html?lang=vi#F16
+F17,PhysicalSystems,Hồ sơ tương thích và chứng nhận,Compatibility & certificate dossier,互換性・証明書台帳,Compliance reviewer,detail,WF-32,FR-F17,F20,Prototype.html?lang=vi#F17
+F18,PhysicalSystems,Bảo trì và khôi phục,Maintenance & restoration,保守と復旧,Maintenance coordinator,form,WF-31,FR-F18,F01,Prototype.html?lang=vi#F18
+F19,PhysicalSystems,Nhiệm vụ thiết bị cứu hộ,Rescue equipment mission,救助機材ミッション,Rescue mission commander,detail,WF-33,FR-F19,F11,Prototype.html?lang=vi#F19
+F20,PhysicalSystems,Kết nối hệ thống vật lý,Physical connector onboarding,物理コネクタ登録,Integration engineer,form,WF-28,FR-F20,F02,Prototype.html?lang=vi#F20

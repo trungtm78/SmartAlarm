@@ -1,0 +1,156 @@
+{
+  "revision": "3.0",
+  "pdf_count": 30,
+  "pdfs": [
+    {
+      "file": "Basic-Design.pdf",
+      "pages": 12,
+      "bytes": 3875001
+    },
+    {
+      "file": "BRD.pdf",
+      "pages": 9,
+      "bytes": 3812079
+    },
+    {
+      "file": "Detail-Design.pdf",
+      "pages": 18,
+      "bytes": 4107143
+    },
+    {
+      "file": "External-Integration-Standards-Deployment.pdf",
+      "pages": 9,
+      "bytes": 4070484
+    },
+    {
+      "file": "FRD.pdf",
+      "pages": 28,
+      "bytes": 4147540
+    },
+    {
+      "file": "Physical-Device-Catalog.pdf",
+      "pages": 7,
+      "bytes": 4044273
+    },
+    {
+      "file": "Positioning-AI-Care-Design.pdf",
+      "pages": 7,
+      "bytes": 3544694
+    },
+    {
+      "file": "Rescue-IoT-Device-Catalog.pdf",
+      "pages": 5,
+      "bytes": 4011823
+    },
+    {
+      "file": "Screen-Specifications.pdf",
+      "pages": 282,
+      "bytes": 2624567
+    },
+    {
+      "file": "SmartAlarm_Customer_Proposal_VI.pdf",
+      "pages": 188,
+      "bytes": 4542405
+    },
+    {
+      "file": "SmartAlarm_Master_Design_VI.pdf",
+      "pages": 180,
+      "bytes": 15971716
+    },
+    {
+      "file": "UIUX-Design.pdf",
+      "pages": 8,
+      "bytes": 217058
+    },
+    {
+      "file": "UX-Redesign-Audit.pdf",
+      "pages": 96,
+      "bytes": 639009
+    },
+    {
+      "file": "Voice-Rescue-Design.pdf",
+      "pages": 5,
+      "bytes": 3585057
+    },
+    {
+      "file": "BMS\\BMS-Research-and-Design-VI.pdf",
+      "pages": 22,
+      "bytes": 255675
+    },
+    {
+      "file": "BMS\\English\\BMS-Research-and-Design-EN.pdf",
+      "pages": 23,
+      "bytes": 244042
+    },
+    {
+      "file": "English\\Basic-Design.pdf",
+      "pages": 13,
+      "bytes": 3858800
+    },
+    {
+      "file": "English\\BRD.pdf",
+      "pages": 9,
+      "bytes": 3797949
+    },
+    {
+      "file": "English\\Detail-Design.pdf",
+      "pages": 19,
+      "bytes": 4096453
+    },
+    {
+      "file": "English\\External-Integration-Standards-Deployment.pdf",
+      "pages": 10,
+      "bytes": 4056283
+    },
+    {
+      "file": "English\\FRD.pdf",
+      "pages": 28,
+      "bytes": 4132604
+    },
+    {
+      "file": "English\\Physical-Device-Catalog.pdf",
+      "pages": 7,
+      "bytes": 4029876
+    },
+    {
+      "file": "English\\Positioning-AI-Care-Design.pdf",
+      "pages": 7,
+      "bytes": 3533721
+    },
+    {
+      "file": "English\\Rescue-IoT-Device-Catalog.pdf",
+      "pages": 6,
+      "bytes": 4001381
+    },
+    {
+      "file": "English\\Screen-Specifications.pdf",
+      "pages": 294,
+      "bytes": 2617920
+    },
+    {
+      "file": "English\\SmartAlarm_Customer_Proposal_EN.pdf",
+      "pages": 188,
+      "bytes": 4463867
+    },
+    {
+      "file": "English\\SmartAlarm_Master_Design_EN.pdf",
+      "pages": 186,
+      "bytes": 15943795
+    },
+    {
+      "file": "English\\UIUX-Design.pdf",
+      "pages": 8,
+      "bytes": 205093
+    },
+    {
+      "file": "English\\UX-Redesign-Audit.pdf",
+      "pages": 103,
+      "bytes": 628381
+    },
+    {
+      "file": "English\\Voice-Rescue-Design.pdf",
+      "pages": 6,
+      "bytes": 3573957
+    }
+  ]
+}

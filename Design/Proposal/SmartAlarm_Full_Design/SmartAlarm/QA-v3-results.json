@@ -1,0 +1,1735 @@
+{
+  "mode": "full",
+  "views": 723,
+  "errors": [],
+  "overflow": [],
+  "no_visual": [
+    {
+      "id": "C05",
+      "lang": "vi"
+    },
+    {
+      "id": "C09",
+      "lang": "vi"
+    },
+    {
+      "id": "C19",
+      "lang": "vi"
+    },
+    {
+      "id": "C20",
+      "lang": "vi"
+    },
+    {
+      "id": "C22",
+      "lang": "vi"
+    },
+    {
+      "id": "R09",
+      "lang": "vi"
+    },
+    {
+      "id": "T01",
+      "lang": "vi"
+    },
+    {
+      "id": "T05",
+      "lang": "vi"
+    },
+    {
+      "id": "T06",
+      "lang": "vi"
+    },
+    {
+      "id": "T14",
+      "lang": "vi"
+    },
+    {
+      "id": "T15",
+      "lang": "vi"
+    },
+    {
+      "id": "T16",
+      "lang": "vi"
+    },
+    {
+      "id": "T17",
+      "lang": "vi"
+    },
+    {
+      "id": "X01",
+      "lang": "vi"
+    },
+    {
+      "id": "X02",
+      "lang": "vi"
+    },
+    {
+      "id": "X03",
+      "lang": "vi"
+    },
+    {
+      "id": "X04",
+      "lang": "vi"
+    },
+    {
+      "id": "X05",
+      "lang": "vi"
+    },
+    {
+      "id": "X06",
+      "lang": "vi"
+    },
+    {
+      "id": "X07",
+      "lang": "vi"
+    },
+    {
+      "id": "X08",
+      "lang": "vi"
+    },
+    {
+      "id": "X09",
+      "lang": "vi"
+    },
+    {
+      "id": "X10",
+      "lang": "vi"
+    },
+    {
+      "id": "D01",
+      "lang": "vi"
+    },
+    {
+      "id": "D02",
+      "lang": "vi"
+    },
+    {
+      "id": "D03",
+      "lang": "vi"
+    },
+    {
+      "id": "D04",
+      "lang": "vi"
+    },
+    {
+      "id": "D05",
+      "lang": "vi"
+    },
+    {
+      "id": "L01",
+      "lang": "vi"
+    },
+    {
+      "id": "L02",
+      "lang": "vi"
+    },
+    {
+      "id": "L03",
+      "lang": "vi"
+    },
+    {
+      "id": "L04",
+      "lang": "vi"
+    },
+    {
+      "id": "L05",
+      "lang": "vi"
+    },
+    {
+      "id": "L06",
+      "lang": "vi"
+    },
+    {
+      "id": "C31",
+      "lang": "vi"
+    },
+    {
+      "id": "BMS01",
+      "lang": "vi"
+    },
+    {
+      "id": "BMS02",
+      "lang": "vi"
+    },
+    {
+      "id": "BMS03",
+      "lang": "vi"
+    },
+    {
+      "id": "BMS04",
+      "lang": "vi"
+    },
+    {
+      "id": "BMS05",
+      "lang": "vi"
+    },
+    {
+      "id": "BMS06",
+      "lang": "vi"
+    },
+    {
+      "id": "BMS07",
+      "lang": "vi"
+    },
+    {
+      "id": "BMS08",
+      "lang": "vi"
+    },
+    {
+      "id": "C05",
+      "lang": "en"
+    },
+    {
+      "id": "C09",
+      "lang": "en"
+    },
+    {
+      "id": "C19",
+      "lang": "en"
+    },
+    {
+      "id": "C20",
+      "lang": "en"
+    },
+    {
+      "id": "C22",
+      "lang": "en"
+    },
+    {
+      "id": "R09",
+      "lang": "en"
+    },
+    {
+      "id": "T01",
+      "lang": "en"
+    },
+    {
+      "id": "T05",
+      "lang": "en"
+    },
+    {
+      "id": "T06",
+      "lang": "en"
+    },
+    {
+      "id": "T14",
+      "lang": "en"
+    },
+    {
+      "id": "T15",
+      "lang": "en"
+    },
+    {
+      "id": "T16",
+      "lang": "en"
+    },
+    {
+      "id": "T17",
+      "lang": "en"
+    },
+    {
+      "id": "X01",
+      "lang": "en"
+    },
+    {
+      "id": "X02",
+      "lang": "en"
+    },
+    {
+      "id": "X03",
+      "lang": "en"
+    },
+    {
+      "id": "X04",
+      "lang": "en"
+    },
+    {
+      "id": "X05",
+      "lang": "en"
+    },
+    {
+      "id": "X06",
+      "lang": "en"
+    },
+    {
+      "id": "X07",
+      "lang": "en"
+    },
+    {
+      "id": "X08",
+      "lang": "en"
+    },
+    {
+      "id": "X09",
+      "lang": "en"
+    },
+    {
+      "id": "X10",
+      "lang": "en"
+    },
+    {
+      "id": "D01",
+      "lang": "en"
+    },
+    {
+      "id": "D02",
+      "lang": "en"
+    },
+    {
+      "id": "D03",
+      "lang": "en"
+    },
+    {
+      "id": "D04",
+      "lang": "en"
+    },
+    {
+      "id": "D05",
+      "lang": "en"
+    },
+    {
+      "id": "L01",
+      "lang": "en"
+    },
+    {
+      "id": "L02",
+      "lang": "en"
+    },
+    {
+      "id": "L03",
+      "lang": "en"
+    },
+    {
+      "id": "L04",
+      "lang": "en"
+    },
+    {
+      "id": "L05",
+      "lang": "en"
+    },
+    {
+      "id": "L06",
+      "lang": "en"
+    },
+    {
+      "id": "C31",
+      "lang": "en"
+    },
+    {
+      "id": "BMS01",
+      "lang": "en"
+    },
+    {
+      "id": "BMS02",
+      "lang": "en"
+    },
+    {
+      "id": "BMS03",
+      "lang": "en"
+    },
+    {
+      "id": "BMS04",
+      "lang": "en"
+    },
+    {
+      "id": "BMS05",
+      "lang": "en"
+    },
+    {
+      "id": "BMS06",
+      "lang": "en"
+    },
+    {
+      "id": "BMS07",
+      "lang": "en"
+    },
+    {
+      "id": "BMS08",
+      "lang": "en"
+    },
+    {
+      "id": "C05",
+      "lang": "ja"
+    },
+    {
+      "id": "C09",
+      "lang": "ja"
+    },
+    {
+      "id": "C19",
+      "lang": "ja"
+    },
+    {
+      "id": "C20",
+      "lang": "ja"
+    },
+    {
+      "id": "C22",
+      "lang": "ja"
+    },
+    {
+      "id": "R09",
+      "lang": "ja"
+    },
+    {
+      "id": "T01",
+      "lang": "ja"
+    },
+    {
+      "id": "T05",
+      "lang": "ja"
+    },
+    {
+      "id": "T06",
+      "lang": "ja"
+    },
+    {
+      "id": "T14",
+      "lang": "ja"
+    },
+    {
+      "id": "T15",
+      "lang": "ja"
+    },
+    {
+      "id": "T16",
+      "lang": "ja"
+    },
+    {
+      "id": "T17",
+      "lang": "ja"
+    },
+    {
+      "id": "X01",
+      "lang": "ja"
+    },
+    {
+      "id": "X02",
+      "lang": "ja"
+    },
+    {
+      "id": "X03",
+      "lang": "ja"
+    },
+    {
+      "id": "X04",
+      "lang": "ja"
+    },
+    {
+      "id": "X05",
+      "lang": "ja"
+    },
+    {
+      "id": "X06",
+      "lang": "ja"
+    },
+    {
+      "id": "X07",
+      "lang": "ja"
+    },
+    {
+      "id": "X08",
+      "lang": "ja"
+    },
+    {
+      "id": "X09",
+      "lang": "ja"
+    },
+    {
+      "id": "X10",
+      "lang": "ja"
+    },
+    {
+      "id": "D01",
+      "lang": "ja"
+    },
+    {
+      "id": "D02",
+      "lang": "ja"
+    },
+    {
+      "id": "D03",
+      "lang": "ja"
+    },
+    {
+      "id": "D04",
+      "lang": "ja"
+    },
+    {
+      "id": "D05",
+      "lang": "ja"
+    },
+    {
+      "id": "L01",
+      "lang": "ja"
+    },
+    {
+      "id": "L02",
+      "lang": "ja"
+    },
+    {
+      "id": "L03",
+      "lang": "ja"
+    },
+    {
+      "id": "L04",
+      "lang": "ja"
+    },
+    {
+      "id": "L05",
+      "lang": "ja"
+    },
+    {
+      "id": "L06",
+      "lang": "ja"
+    },
+    {
+      "id": "C31",
+      "lang": "ja"
+    },
+    {
+      "id": "BMS01",
+      "lang": "ja"
+    },
+    {
+      "id": "BMS02",
+      "lang": "ja"
+    },
+    {
+      "id": "BMS03",
+      "lang": "ja"
+    },
+    {
+      "id": "BMS04",
+      "lang": "ja"
+    },
+    {
+      "id": "BMS05",
+      "lang": "ja"
+    },
+    {
+      "id": "BMS06",
+      "lang": "ja"
+    },
+    {
+      "id": "BMS07",
+      "lang": "ja"
+    },
+    {
+      "id": "BMS08",
+      "lang": "ja"
+    }
+  ],
+  "states": [
+    {
+      "id": "C03",
+      "requested": "ready",
+      "state": "ready",
+      "visibleRoute": false,
+      "heading": "承認された避難図",
+      "pass": true
+    },
+    {
+      "id": "C03",
+      "requested": "loading",
+      "state": "loading",
+      "visibleRoute": false,
+      "heading": "情報を取得中",
+      "pass": true
+    },
+    {
+      "id": "C03",
+      "requested": "empty",
+      "state": "empty",
+      "visibleRoute": false,
+      "heading": "一致する記録なし",
+      "pass": true
+    },
+    {
+      "id": "C03",
+      "requested": "error",
+      "state": "error",
+      "visibleRoute": false,
+      "heading": "接続できません",
+      "pass": true
+    },
+    {
+      "id": "C03",
+      "requested": "offline",
+      "state": "offline",
+      "visibleRoute": false,
+      "heading": "オフラインです",
+      "pass": true
+    },
+    {
+      "id": "C03",
+      "requested": "denied",
+      "state": "denied",
+      "visibleRoute": false,
+      "heading": "権限が必要です",
+      "pass": true
+    },
+    {
+      "id": "C03",
+      "requested": "stale",
+      "state": "stale",
+      "visibleRoute": false,
+      "heading": "情報が古くなっています",
+      "pass": true
+    },
+    {
+      "id": "C03",
+      "requested": "blocked",
+      "state": "blocked",
+      "visibleRoute": false,
+      "heading": "確認済み経路なし",
+      "pass": true
+    },
+    {
+      "id": "C35",
+      "requested": "ready",
+      "state": "ready",
+      "visibleRoute": true,
+      "heading": "西階段を確認",
+      "pass": true
+    },
+    {
+      "id": "C35",
+      "requested": "loading",
+      "state": "loading",
+      "visibleRoute": false,
+      "heading": "情報を取得中",
+      "pass": true
+    },
+    {
+      "id": "C35",
+      "requested": "empty",
+      "state": "empty",
+      "visibleRoute": false,
+      "heading": "一致する記録なし",
+      "pass": true
+    },
+    {
+      "id": "C35",
+      "requested": "error",
+      "state": "error",
+      "visibleRoute": false,
+      "heading": "接続できません",
+      "pass": true
+    },
+    {
+      "id": "C35",
+      "requested": "offline",
+      "state": "offline",
+      "visibleRoute": false,
+      "heading": "オフラインです",
+      "pass": true
+    },
+    {
+      "id": "C35",
+      "requested": "denied",
+      "state": "denied",
+      "visibleRoute": false,
+      "heading": "権限が必要です",
+      "pass": true
+    },
+    {
+      "id": "C35",
+      "requested": "stale",
+      "state": "stale",
+      "visibleRoute": false,
+      "heading": "情報が古くなっています",
+      "pass": true
+    },
+    {
+      "id": "C35",
+      "requested": "blocked",
+      "state": "blocked",
+      "visibleRoute": false,
+      "heading": "確認済み経路なし",
+      "pass": true
+    },
+    {
+      "id": "C36",
+      "requested": "ready",
+      "state": "ready",
+      "visibleRoute": false,
+      "heading": "向きを推測せず目印を確認",
+      "pass": true
+    },
+    {
+      "id": "C36",
+      "requested": "loading",
+      "state": "loading",
+      "visibleRoute": false,
+      "heading": "情報を取得中",
+      "pass": true
+    },
+    {
+      "id": "C36",
+      "requested": "empty",
+      "state": "empty",
+      "visibleRoute": false,
+      "heading": "一致する記録なし",
+      "pass": true
+    },
+    {
+      "id": "C36",
+      "requested": "error",
+      "state": "error",
+      "visibleRoute": false,
+      "heading": "接続できません",
+      "pass": true
+    },
+    {
+      "id": "C36",
+      "requested": "offline",
+      "state": "offline",
+      "visibleRoute": false,
+      "heading": "オフラインです",
+      "pass": true
+    },
+    {
+      "id": "C36",
+      "requested": "denied",
+      "state": "denied",
+      "visibleRoute": false,
+      "heading": "権限が必要です",
+      "pass": true
+    },
+    {
+      "id": "C36",
+      "requested": "stale",
+      "state": "stale",
+      "visibleRoute": false,
+      "heading": "情報が古くなっています",
+      "pass": true
+    },
+    {
+      "id": "C36",
+      "requested": "blocked",
+      "state": "blocked",
+      "visibleRoute": false,
+      "heading": "確認済み経路なし",
+      "pass": true
+    },
+    {
+      "id": "C37",
+      "requested": "ready",
+      "state": "ready",
+      "visibleRoute": false,
+      "heading": "旧経路は取り消し",
+      "pass": true
+    },
+    {
+      "id": "C37",
+      "requested": "loading",
+      "state": "loading",
+      "visibleRoute": false,
+      "heading": "情報を取得中",
+      "pass": true
+    },
+    {
+      "id": "C37",
+      "requested": "empty",
+      "state": "empty",
+      "visibleRoute": false,
+      "heading": "一致する記録なし",
+      "pass": true
+    },
+    {
+      "id": "C37",
+      "requested": "error",
+      "state": "error",
+      "visibleRoute": false,
+      "heading": "接続できません",
+      "pass": true
+    },
+    {
+      "id": "C37",
+      "requested": "offline",
+      "state": "offline",
+      "visibleRoute": false,
+      "heading": "オフラインです",
+      "pass": true
+    },
+    {
+      "id": "C37",
+      "requested": "denied",
+      "state": "denied",
+      "visibleRoute": false,
+      "heading": "権限が必要です",
+      "pass": true
+    },
+    {
+      "id": "C37",
+      "requested": "stale",
+      "state": "stale",
+      "visibleRoute": false,
+      "heading": "情報が古くなっています",
+      "pass": true
+    },
+    {
+      "id": "C37",
+      "requested": "blocked",
+      "state": "blocked",
+      "visibleRoute": false,
+      "heading": "確認済み経路なし",
+      "pass": true
+    },
+    {
+      "id": "C38",
+      "requested": "ready",
+      "state": "ready",
+      "visibleRoute": false,
+      "heading": "確認済み経路なし",
+      "pass": true
+    },
+    {
+      "id": "C38",
+      "requested": "loading",
+      "state": "loading",
+      "visibleRoute": false,
+      "heading": "情報を取得中",
+      "pass": true
+    },
+    {
+      "id": "C38",
+      "requested": "empty",
+      "state": "empty",
+      "visibleRoute": false,
+      "heading": "一致する記録なし",
+      "pass": true
+    },
+    {
+      "id": "C38",
+      "requested": "error",
+      "state": "error",
+      "visibleRoute": false,
+      "heading": "接続できません",
+      "pass": true
+    },
+    {
+      "id": "C38",
+      "requested": "offline",
+      "state": "offline",
+      "visibleRoute": false,
+      "heading": "オフラインです",
+      "pass": true
+    },
+    {
+      "id": "C38",
+      "requested": "denied",
+      "state": "denied",
+      "visibleRoute": false,
+      "heading": "権限が必要です",
+      "pass": true
+    },
+    {
+      "id": "C38",
+      "requested": "stale",
+      "state": "stale",
+      "visibleRoute": false,
+      "heading": "情報が古くなっています",
+      "pass": true
+    },
+    {
+      "id": "C38",
+      "requested": "blocked",
+      "state": "blocked",
+      "visibleRoute": false,
+      "heading": "確認済み経路なし",
+      "pass": true
+    },
+    {
+      "id": "R04",
+      "requested": "ready",
+      "state": "ready",
+      "visibleRoute": false,
+      "heading": "進入経路と現場到着",
+      "pass": true
+    },
+    {
+      "id": "R04",
+      "requested": "loading",
+      "state": "loading",
+      "visibleRoute": false,
+      "heading": "情報を取得中",
+      "pass": true
+    },
+    {
+      "id": "R04",
+      "requested": "empty",
+      "state": "empty",
+      "visibleRoute": false,
+      "heading": "一致する記録なし",
+      "pass": true
+    },
+    {
+      "id": "R04",
+      "requested": "error",
+      "state": "error",
+      "visibleRoute": false,
+      "heading": "接続できません",
+      "pass": true
+    },
+    {
+      "id": "R04",
+      "requested": "offline",
+      "state": "offline",
+      "visibleRoute": false,
+      "heading": "オフラインです",
+      "pass": true
+    },
+    {
+      "id": "R04",
+      "requested": "denied",
+      "state": "denied",
+      "visibleRoute": false,
+      "heading": "権限が必要です",
+      "pass": true
+    },
+    {
+      "id": "R04",
+      "requested": "stale",
+      "state": "stale",
+      "visibleRoute": false,
+      "heading": "情報が古くなっています",
+      "pass": true
+    },
+    {
+      "id": "R04",
+      "requested": "blocked",
+      "state": "blocked",
+      "visibleRoute": false,
+      "heading": "確認済み経路なし",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C11-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C12-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C13-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C14-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C15-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C16-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C17-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C18-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C19-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C20-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C21-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C22-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C23-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C24-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C25-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C26-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C27-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C28-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C29-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C30-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R11-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R12-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O11-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O12-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O13-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O14-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O15-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O16-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O17-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O18-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O19-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O20-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O21-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O22-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O23-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O24-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O25-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O26-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O27-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O28-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O29-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O30-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S11-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S12-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S13-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S14-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I11-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I12-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I13-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I14-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I15-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T11-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T12-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T13-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T14-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T15-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T16-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T17-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G11-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G12-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C31-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C32-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C33-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C34-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O31-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O32-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O33-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O34-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C35-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C36-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C37-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C38-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C39-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C40-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S15-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S16-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O35-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O36-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H11-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H12-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F09-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F10-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F11-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F12-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F13-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F14-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F15-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F16-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F17-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F18-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F19-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F20-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS01-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS02-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS03-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS04-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS05-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS06-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS07-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS08-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\A10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C11-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C12-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C13-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C14-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C15-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C16-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C17-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C18-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C19-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C20-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C21-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C22-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C23-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C24-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C25-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C26-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C27-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C28-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C29-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C30-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R11-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R12-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O11-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O12-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O13-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O14-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O15-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O16-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O17-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O18-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O19-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O20-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O21-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O22-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O23-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O24-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O25-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O26-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O27-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O28-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O29-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O30-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S11-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S12-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S13-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S14-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I11-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I12-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I13-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I14-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\I15-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T11-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T12-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T13-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T14-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T15-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T16-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\T17-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\X10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G11-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G12-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\D08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C31-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C32-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C33-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C34-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O31-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O32-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O33-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O34-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C35-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C36-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C37-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C38-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C39-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C40-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S15-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\S16-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O35-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O36-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H11-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H12-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F09-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F10-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F11-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F12-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F13-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F14-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F15-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F16-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F17-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F18-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F19-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\F20-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS01-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS02-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS03-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS04-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS05-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS06-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS07-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\BMS08-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C01-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C02-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C03-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C05-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C06-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C07-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C08-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C25-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R03-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\R04-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O04-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\G01-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\L02-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C35-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C36-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C37-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C38-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\P04-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\H08-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\Q06-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C03-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C05-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C35-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C36-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C38-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O04-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C03-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C05-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C35-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C36-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C38-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O04-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C03-ja-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C05-ja-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C35-ja-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C36-ja-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C38-ja-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\O04-ja-mobile-390.png"
+  ],
+  "mobile": [
+    {
+      "id": "C01",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C02",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C03",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C05",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C06",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C07",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C08",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C25",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C35",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C36",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C37",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C38",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "R03",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "R04",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "O04",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "H08",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "Q06",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "P04",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "L02",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "G01",
+      "lang": "vi",
+      "overflow": false
+    },
+    {
+      "id": "C01",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C02",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C03",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C05",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C06",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C07",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C08",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C25",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C35",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C36",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C37",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C38",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "R03",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "R04",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "O04",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "H08",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "Q06",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "P04",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "L02",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "G01",
+      "lang": "en",
+      "overflow": false
+    },
+    {
+      "id": "C01",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C02",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C03",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C05",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C06",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C07",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C08",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C25",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C35",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C36",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C37",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "C38",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "R03",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "R04",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "O04",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "H08",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "Q06",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "P04",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "L02",
+      "lang": "ja",
+      "overflow": false
+    },
+    {
+      "id": "G01",
+      "lang": "ja",
+      "overflow": false
+    }
+  ],
+  "note": "Design prototype browser evidence only. No live backend, hardware, dispatch or operational safety acceptance."
+}

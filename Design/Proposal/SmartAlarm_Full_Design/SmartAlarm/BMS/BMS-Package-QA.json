@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "profiles": 11,
+  "schema_draft": "2020-12",
+  "profile_structure_checks": 11,
+  "negative_write_enabled_rejected": true,
+  "functional_requirements": 40,
+  "proposed_new_screen_contracts": 8,
+  "business_test_specifications": 20,
+  "protocol_test_specifications": 28,
+  "protocol_assurance_controls": 18,
+  "live_connector_tests": "not_run",
+  "implemented_adapters": 0,
+  "existing_mockups_unchanged": 233,
+  "sources": 45
+}

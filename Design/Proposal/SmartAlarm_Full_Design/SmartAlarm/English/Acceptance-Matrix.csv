@@ -1,0 +1,355 @@
+﻿Test ID,Workflow,Trigger,Expected evidence,Owner,Status
+ING-01,WF-03,Replay an event 100 times,One receipt and one business effect; retain source ID,Ingestion,DESIGNED — NOT EXECUTED ON PRODUCT
+ING-02,WF-03,Payload tenant differs from credential tenant,Reject; do not create an event in the target tenant,IAM/Ingestion,DESIGNED — NOT EXECUTED ON PRODUCT
+ING-03,WF-03,Broker stops after DB commit,Durable receipt; outbox replay loses no events,Ingestion,DESIGNED — NOT EXECUTED ON PRODUCT
+SOS-01,WF-05,"Send SOS offline, then lose the app",Local pending; one SOS after reconnect; genuine receipt,Assistance/Mobile,DESIGNED — NOT EXECUTED ON PRODUCT
+SOS-02,WF-05,Cancel after assignment,Cancellation request; operator review; do not delete the task,Assistance,DESIGNED — NOT EXECUTED ON PRODUCT
+FALL-01,WF-06,App killed during check-in,Server timer escalates; no conclusion of injury,Workflow,DESIGNED — NOT EXECUTED ON PRODUCT
+CAP-01,WF-08,Valid CAP Update/Cancel,Preserved lineage; correct active version,Connect,DESIGNED — NOT EXECUTED ON PRODUCT
+CAP-02,WF-08,CAP Test in production,Do not send to actual audience/devices,Connect,DESIGNED — NOT EXECUTED ON PRODUCT
+WARN-01,WF-09,"Approve v3, then change audience in v4",Do not send v4 using v3 approval,Warning,DESIGNED — NOT EXECUTED ON PRODUCT
+DEL-01,WF-10,Provider accepted without callback,State unknown; no fabricated human ACK,Delivery,DESIGNED — NOT EXECUTED ON PRODUCT
+DEL-02,WF-10,Provider 429,Backoff+fairness+fallback according to policy,Delivery,DESIGNED — NOT EXECUTED ON PRODUCT
+TASK-01,WF-11,Two dispatchers assign the same task,One owner; the other request conflicts,Dispatch,DESIGNED — NOT EXECUTED ON PRODUCT
+TASK-02,WF-11,Offline update after reassignment,Retain notes; do not reclaim ownership,Field,DESIGNED — NOT EXECUTED ON PRODUCT
+SAFE-01,WF-12,One person reports safe,Do not close the incident; update groups according to consent,Assistance,DESIGNED — NOT EXECUTED ON PRODUCT
+SAFE-02,WF-12,Contact in 3 groups,Deduplicate recipient; do not leak precise location,Collaboration,DESIGNED — NOT EXECUTED ON PRODUCT
+CMD-01,WF-15,Command reconnects after TTL,No actuation,Command/Edge,DESIGNED — NOT EXECUTED ON PRODUCT
+CMD-02,WF-15,ACK lost for a non-idempotent command,Unknown + reconcile; no blind retry,Command,DESIGNED — NOT EXECUTED ON PRODUCT
+DRONE-01,WF-16,Stale telemetry or missing clearance,Do not approve a mission dependent on those conditions,Mission,DESIGNED — NOT EXECUTED ON PRODUCT
+SEC-01,WF-19,Object ID from another tenant,Do not disclose data/existence,All services,DESIGNED — NOT EXECUTED ON PRODUCT
+SEC-02,WF-19,Legal hold + delete request,Retain held data; review requester; audit,Privacy,DESIGNED — NOT EXECUTED ON PRODUCT
+SEC-03,WF-17,Webhook URL targeting metadata/private host,Block SSRF according to policy; no outbound request,Connect,DESIGNED — NOT EXECUTED ON PRODUCT
+DR-01,WF-20,Loss of primary region,Fence writer; approved DR; measure RPO/RTO,Platform,DESIGNED — NOT EXECUTED ON PRODUCT
+DR-02,WF-20,Restore backup containing a tombstone,Apply deletion/hold policies after restore,Platform,DESIGNED — NOT EXECUTED ON PRODUCT
+PA-01,WF-21,Select 8 speakers in zone A05,Do not broadcast to other zones/tenants,PA,DESIGNED — NOT EXECUTED ON PRODUCT
+PA-02,WF-21,Speaker online with amplifier fault,Unknown/failed + coverage gap,PA,DESIGNED — NOT EXECUTED ON PRODUCT
+PA-03,WF-21,Controller ACK,Do not display that everyone has heard,PA,DESIGNED — NOT EXECUTED ON PRODUCT
+PA-04,WF-21,Higher-priority local emergency,Cloud does not preempt against policy,PA/Edge,DESIGNED — NOT EXECUTED ON PRODUCT
+PA-05,WF-21,Two microphones request the same zone lease,One session; clear conflict; TTL ends the session,PA/Media,DESIGNED — NOT EXECUTED ON PRODUCT
+NAV-01,WF-22,Uncertain floor/heading,No fabricated left/right directions; landmark/SOS fallback,Guidance,DESIGNED — NOT EXECUTED ON PRODUCT
+NAV-02,WF-22,New hazard cuts off the route,Withdraw route + cancel old TTS,Guidance/Mobile,DESIGNED — NOT EXECUTED ON PRODUCT
+NAV-03,WF-24,Wheelchair + stairs only,Do not return an unsuitable route; assistance/refuge area,Optimization,DESIGNED — NOT EXECUTED ON PRODUCT
+NAV-04,WF-22,Offline beyond hazard TTL,Show stale status and approved fallback; do not falsely present as current,Guidance,DESIGNED — NOT EXECUTED ON PRODUCT
+NAV-05,WF-22,Different guidance versions in app and PA,Visible mismatch; operator handles it,PA/Guidance,DESIGNED — NOT EXECUTED ON PRODUCT
+POS-01,WF-23,BLE indicates a different floor from the QR anchor,Flag conflict; do not average across incorrect floors,Positioning,DESIGNED — NOT EXECUTED ON PRODUCT
+POS-02,WF-23,Registered but last-seen is old,Presence uncertain; no present/safe default,Presence,DESIGNED — NOT EXECUTED ON PRODUCT
+AI-01,WF-25,External evidence contains prompt injection,Do not expand tools/scope; no actuation,AI Gateway,DESIGNED — NOT EXECUTED ON PRODUCT
+AI-02,WF-25,Model invents an exit,Schema/evidence guard rejects it,AI Copilot,DESIGNED — NOT EXECUTED ON PRODUCT
+AI-03,WF-25,Model offline,Deterministic alarm/SOS/workflows continue,AI/Platform,DESIGNED — NOT EXECUTED ON PRODUCT
+CARE-01,WF-27,Person needing assistance is in a hazard without SOS,Create proactive case with reasons/presence quality,Proactive,DESIGNED — NOT EXECUTED ON PRODUCT
+CARE-02,WF-27,SOS arrives after proactive case,Link; no duplicate dispatch,Proactive/Dispatch,DESIGNED — NOT EXECUTED ON PRODUCT
+CARE-03,WF-26,Caregiver authorization revoked,No profile access; audit,Care/IAM,DESIGNED — NOT EXECUTED ON PRODUCT
+CARE-04,WF-26,Profile has no data,Unknown; do not label healthy/normal,Care,DESIGNED — NOT EXECUTED ON PRODUCT
+CARE-05,WF-27,Only age group changes; exposure/ability unchanged,No black-box prioritization based on age alone,Policy,DESIGNED — NOT EXECUTED ON PRODUCT
+I18N-01,WF-18,VI/EN/JA text expansion,No CTA overflow; correct date/time,UX,DESIGNED — NOT EXECUTED ON PRODUCT
+I18N-02,WF-18,Missing approved Japanese warning,Explicit reviewed fallback; no automatic AI publication,Content,DESIGNED — NOT EXECUTED ON PRODUCT
+I18N-03,WF-22,Voice VI/EN/JA,Transcript parity; no landmark mispronunciation,Speech,DESIGNED — NOT EXECUTED ON PRODUCT
+A11Y-01,WF-18,Keyboard/screen reader/200% zoom,Complete labels/focus/errors; map has text alternative,UX,DESIGNED — NOT EXECUTED ON PRODUCT
+LOAD-01,WF-20,1000 critical events/s for 60s + media load,Measure p95; reserve SOS capacity; visible overload,Platform,DESIGNED — NOT EXECUTED ON PRODUCT
+QUOTA-01,WF-20,Tenant noisy neighbor,Fair queue; no silent SOS drop,Platform,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-A01,WF-01,Welcome & region,"Role/scope, fields, CTA A02, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-A02,WF-01,Sign in,"Role/scope, fields, CTA A03, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-A03,WF-01,Verify identity,"Role/scope, fields, CTA A04, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-A04,WF-01,Workspace switcher,"Role/scope, fields, CTA O01, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-A05,WF-01,Recover access,"Role/scope, fields, CTA A02, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-A06,WF-01,Accept invitation,"Role/scope, fields, CTA A07, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-A07,WF-01,Permissions & consent,"Role/scope, fields, CTA C01, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-A08,WF-01,Session & device security,"Role/scope, fields, CTA A09, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-A09,WF-01,Revoke session,"Role/scope, fields, CTA A08, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-A10,WF-01,Profile & accessibility,"Role/scope, fields, CTA C01, VI/EN/JA and error states",Access,DESIGNED — prototype QA separate
+AC-C01,WF-13,Safety home,"Role/scope, fields, CTA C02, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C02,WF-13,Alert detail,"Role/scope, fields, CTA C03, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C03,WF-13,Evacuation guidance,"Role/scope, fields, CTA C05, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C04,WF-13,Voice & accessible guidance,"Role/scope, fields, CTA C03, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C05,WF-05,SOS type,"Role/scope, fields, CTA C06, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C06,WF-05,SOS location & details,"Role/scope, fields, CTA C07, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C07,WF-05,Confirm SOS,"Role/scope, fields, CTA C08, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C08,WF-05,SOS tracking,"Role/scope, fields, CTA C09, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C09,WF-05,Incident conversation,"Role/scope, fields, CTA C09, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C10,WF-05,Update or cancel SOS,"Role/scope, fields, CTA C08, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C11,WF-12,Confirm personal safety,"Role/scope, fields, CTA C12, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C12,WF-12,Safety receipt,"Role/scope, fields, CTA C13, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C13,WF-10,Notification inbox,"Role/scope, fields, CTA C02, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C14,WF-08,Nearby hazards,"Role/scope, fields, CTA C15, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C15,WF-08,Disaster advisory,"Role/scope, fields, CTA C16, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C16,WF-13,Shelters & assembly points,"Role/scope, fields, CTA C17, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C17,WF-13,Shelter details,"Role/scope, fields, CTA C18, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C18,WF-13,Offline safety pack,"Role/scope, fields, CTA C03, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C19,WF-12,My circles,"Role/scope, fields, CTA C20, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C20,WF-12,Circle conversation,"Role/scope, fields, CTA C22, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C21,WF-12,Create or edit circle,"Role/scope, fields, CTA C19, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C22,WF-12,Circle member status,"Role/scope, fields, CTA C20, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C23,WF-12,Emergency contacts,"Role/scope, fields, CTA C01, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C24,WF-06,Care & fall detection,"Role/scope, fields, CTA C25, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C25,WF-06,Possible fall check-in,"Role/scope, fields, CTA C08, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C26,WF-07,Road incident report,"Role/scope, fields, CTA C07, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C27,WF-05,Discreet assistance,"Role/scope, fields, CTA C08, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C28,WF-05,My reports & history,"Role/scope, fields, CTA C08, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C29,WF-19,Privacy & data requests,"Role/scope, fields, CTA C30, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C30,WF-19,Data request receipt,"Role/scope, fields, CTA C29, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-R01,WF-11,Shift & readiness,"Role/scope, fields, CTA R02, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R02,WF-11,Assignment inbox,"Role/scope, fields, CTA R03, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R03,WF-11,Accept or decline task,"Role/scope, fields, CTA R04, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R04,WF-11,Navigation & arrival,"Role/scope, fields, CTA R05, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R05,WF-11,Field situation,"Role/scope, fields, CTA R06, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R06,WF-11,Assistance & triage record,"Role/scope, fields, CTA R07, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R07,WF-11,Task status & handover,"Role/scope, fields, CTA R08, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R08,WF-11,Task completion,"Role/scope, fields, CTA R01, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R09,WF-11,Team communications,"Role/scope, fields, CTA R09, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R10,WF-11,Evidence capture,"Role/scope, fields, CTA R11, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R11,WF-11,Offline outbox,"Role/scope, fields, CTA R12, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-R12,WF-11,Resolve field conflict,"Role/scope, fields, CTA R02, VI/EN/JA and error states",Responder,DESIGNED — prototype QA separate
+AC-O01,WF-20,Command overview,"Role/scope, fields, CTA O04, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O02,WF-20,Live situation map,"Role/scope, fields, CTA O04, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O03,WF-03,Signal triage queue,"Role/scope, fields, CTA O05, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O04,WF-20,Incident workspace,"Role/scope, fields, CTA O08, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O05,WF-04,Signal evidence review,"Role/scope, fields, CTA O06, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O06,WF-04,Create incident,"Role/scope, fields, CTA O04, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O07,WF-04,Correlate or split incidents,"Role/scope, fields, CTA O04, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O08,WF-11,Dispatch board,"Role/scope, fields, CTA O09, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O09,WF-11,Assign responder,"Role/scope, fields, CTA O10, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O10,WF-11,Response timeline,"Role/scope, fields, CTA O11, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O11,WF-12,People accountability,"Role/scope, fields, CTA O12, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O12,WF-12,Person assistance detail,"Role/scope, fields, CTA O09, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O13,WF-09,Compose warning,"Role/scope, fields, CTA O14, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O14,WF-09,Warning preview & audience,"Role/scope, fields, CTA O15, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O15,WF-09,Approve warning,"Role/scope, fields, CTA O16, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O16,WF-10,Delivery & escalation,"Role/scope, fields, CTA O17, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O17,WF-10,Delivery failure review,"Role/scope, fields, CTA O16, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O18,WF-15,Physical command approval,"Role/scope, fields, CTA O19, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O19,WF-15,Physical command status,"Role/scope, fields, CTA O19, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O20,WF-20,Incident closure review,"Role/scope, fields, CTA O21, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O21,WF-20,After-action review,"Role/scope, fields, CTA O22, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O22,WF-20,Improvement action,"Role/scope, fields, CTA O21, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O23,WF-20,Drill scheduler,"Role/scope, fields, CTA O24, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O24,WF-20,Drill control room,"Role/scope, fields, CTA O21, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O25,WF-20,Shift handover,"Role/scope, fields, CTA O01, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O26,WF-13,Shelter operations,"Role/scope, fields, CTA O27, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O27,WF-13,Edit shelter status,"Role/scope, fields, CTA O26, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O28,WF-08,Regional disaster feed,"Role/scope, fields, CTA O29, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O29,WF-08,CAP advisory review,"Role/scope, fields, CTA O06, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O30,WF-19,Search & audit timeline,"Role/scope, fields, CTA T11, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-S01,WF-02,Site directory,"Role/scope, fields, CTA S02, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S02,WF-02,Site structure,"Role/scope, fields, CTA S03, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S03,WF-02,Location editor,"Role/scope, fields, CTA S02, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S04,WF-02,Floor plan editor,"Role/scope, fields, CTA S05, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S05,WF-02,Plan approval & versions,"Role/scope, fields, CTA S04, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S06,WF-14,Device inventory,"Role/scope, fields, CTA S07, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S07,WF-14,Device detail & health,"Role/scope, fields, CTA S08, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S08,WF-14,Provision device,"Role/scope, fields, CTA S07, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S09,WF-14,Camera wall,"Role/scope, fields, CTA O05, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S10,WF-14,Maintenance & calibration,"Role/scope, fields, CTA S06, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S11,WF-04,Rule library,"Role/scope, fields, CTA S12, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S12,WF-04,Rule editor & simulation,"Role/scope, fields, CTA S13, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S13,WF-04,Rule test & approval,"Role/scope, fields, CTA S12, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S14,WF-04,AI model monitoring,"Role/scope, fields, CTA O03, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-I01,WF-17,Connector catalog,"Role/scope, fields, CTA I02, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I02,WF-17,Connector setup,"Role/scope, fields, CTA I03, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I03,WF-03,Schema mapping,"Role/scope, fields, CTA I04, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I04,WF-17,Connector test console,"Role/scope, fields, CTA I05, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I05,WF-17,Connector health,"Role/scope, fields, CTA I06, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I06,WF-17,Dead-letter & replay,"Role/scope, fields, CTA I05, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I07,WF-17,API clients & scopes,"Role/scope, fields, CTA I08, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I08,WF-17,Webhook subscriptions,"Role/scope, fields, CTA I04, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I09,WF-17,Partner exchange agreements,"Role/scope, fields, CTA I10, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I10,WF-17,IOC exchange history,"Role/scope, fields, CTA I04, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I11,WF-16,Drone fleet,"Role/scope, fields, CTA I12, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I12,WF-16,Drone mission planning,"Role/scope, fields, CTA I13, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I13,WF-16,Drone preflight & approval,"Role/scope, fields, CTA I14, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I14,WF-16,Drone mission telemetry,"Role/scope, fields, CTA I15, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-I15,WF-16,Drone mission record,"Role/scope, fields, CTA I11, VI/EN/JA and error states",Integrations,DESIGNED — prototype QA separate
+AC-T01,WF-20,Tenant overview,"Role/scope, fields, CTA T02, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T02,WF-18,Organization & regions,"Role/scope, fields, CTA T01, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T03,WF-01,Users & invitations,"Role/scope, fields, CTA T04, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T04,WF-01,Role & scope editor,"Role/scope, fields, CTA T03, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T05,WF-10,On-call & escalation,"Role/scope, fields, CTA T01, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T06,WF-09,Message templates & languages,"Role/scope, fields, CTA O14, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T07,WF-20,Hazard taxonomy & playbooks,"Role/scope, fields, CTA T08, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T08,WF-20,Playbook approval,"Role/scope, fields, CTA T07, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T09,WF-19,Retention & legal holds,"Role/scope, fields, CTA T10, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T10,WF-19,Privacy request review,"Role/scope, fields, CTA C30, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T11,WF-19,Audit record,"Role/scope, fields, CTA O30, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T12,WF-20,Service health & recovery,"Role/scope, fields, CTA T13, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T13,WF-20,Recovery runbook,"Role/scope, fields, CTA T12, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T14,WF-20,Usage & subscription,"Role/scope, fields, CTA T15, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T15,WF-20,Capacity & quota policy,"Role/scope, fields, CTA T14, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T16,WF-20,Analytics & export,"Role/scope, fields, CTA T17, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-T17,WF-20,Report schedule,"Role/scope, fields, CTA T16, VI/EN/JA and error states",Administration,DESIGNED — prototype QA separate
+AC-X01,WF-05,No connection / SOS pending,"Role/scope, fields, CTA R11, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-X02,WF-05,Permission unavailable,"Role/scope, fields, CTA C06, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-X03,WF-20,No active incidents,"Role/scope, fields, CTA S06, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-X04,WF-01,Access denied,"Role/scope, fields, CTA A04, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-X05,WF-20,Service unavailable,"Role/scope, fields, CTA C18, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-X06,WF-02,Unsaved changes & conflict,"Role/scope, fields, CTA S05, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-X07,WF-20,Empty search & filter reset,"Role/scope, fields, CTA O30, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-X08,WF-01,Expired session,"Role/scope, fields, CTA A02, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-X09,WF-20,Loading & stale data,"Role/scope, fields, CTA O01, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-X10,WF-11,Attachment rejected,"Role/scope, fields, CTA R10, VI/EN/JA and error states",System states,DESIGNED — prototype QA separate
+AC-G01,WF-20,Regional operations,"Role/scope, fields, CTA G02, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G02,WF-20,Regional cell detail,"Role/scope, fields, CTA G03, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G03,WF-20,Disaster recovery drill,"Role/scope, fields, CTA G04, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G04,WF-20,Recovery verification,"Role/scope, fields, CTA G01, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G05,WF-18,Tenant provisioning,"Role/scope, fields, CTA G06, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G06,WF-18,Tenant lifecycle,"Role/scope, fields, CTA G07, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G07,WF-19,Time-bound support access,"Role/scope, fields, CTA G08, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G08,WF-19,Support access approval,"Role/scope, fields, CTA G06, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G09,WF-20,Release & schema compatibility,"Role/scope, fields, CTA G10, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G10,WF-20,Release gate & rollback,"Role/scope, fields, CTA G09, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G11,WF-19,Security incidents,"Role/scope, fields, CTA G12, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-G12,WF-19,Security case & containment,"Role/scope, fields, CTA G11, VI/EN/JA and error states",Platform,DESIGNED — prototype QA separate
+AC-D01,WF-17,Developer workspace,"Role/scope, fields, CTA D02, VI/EN/JA and error states",Developer,DESIGNED — prototype QA separate
+AC-D02,WF-03,API explorer,"Role/scope, fields, CTA D03, VI/EN/JA and error states",Developer,DESIGNED — prototype QA separate
+AC-D03,WF-03,Sandbox request results,"Role/scope, fields, CTA D04, VI/EN/JA and error states",Developer,DESIGNED — prototype QA separate
+AC-D04,WF-03,Schema registry,"Role/scope, fields, CTA D05, VI/EN/JA and error states",Developer,DESIGNED — prototype QA separate
+AC-D05,WF-17,Connector manifest editor,"Role/scope, fields, CTA D06, VI/EN/JA and error states",Developer,DESIGNED — prototype QA separate
+AC-D06,WF-17,Conformance certification,"Role/scope, fields, CTA I01, VI/EN/JA and error states",Developer,DESIGNED — prototype QA separate
+AC-D07,WF-10,Webhook delivery trace,"Role/scope, fields, CTA I08, VI/EN/JA and error states",Developer,DESIGNED — prototype QA separate
+AC-D08,WF-17,Credential rotation,"Role/scope, fields, CTA I07, VI/EN/JA and error states",Developer,DESIGNED — prototype QA separate
+AC-L01,WF-18,Language coverage,"Role/scope, fields, CTA L02, VI/EN/JA and error states",Localization,DESIGNED — prototype QA separate
+AC-L02,WF-18,Translation editor,"Role/scope, fields, CTA L03, VI/EN/JA and error states",Localization,DESIGNED — prototype QA separate
+AC-L03,WF-18,Translation review,"Role/scope, fields, CTA L01, VI/EN/JA and error states",Localization,DESIGNED — prototype QA separate
+AC-L04,WF-18,Voice & pronunciation,"Role/scope, fields, CTA L01, VI/EN/JA and error states",Localization,DESIGNED — prototype QA separate
+AC-L05,WF-18,Locale fallback policy,"Role/scope, fields, CTA L01, VI/EN/JA and error states",Localization,DESIGNED — prototype QA separate
+AC-L06,WF-18,Emergency terminology,"Role/scope, fields, CTA L02, VI/EN/JA and error states",Localization,DESIGNED — prototype QA separate
+AC-C31,WF-12,Circle membership & invitations,"Role/scope, fields, CTA C32, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C32,WF-12,Invite circle member,"Role/scope, fields, CTA C31, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C33,WF-12,Report or block conversation,"Role/scope, fields, CTA C19, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C34,WF-10,Notification preferences,"Role/scope, fields, CTA C01, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-O31,WF-20,Incident archive & reopen,"Role/scope, fields, CTA O32, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O32,WF-20,Reopen incident,"Role/scope, fields, CTA O04, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O33,WF-17,Federated incident sharing,"Role/scope, fields, CTA I10, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O34,WF-11,Accessibility assistance queue,"Role/scope, fields, CTA O09, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-C35,WF-22,Voice evacuation navigation,"Role/scope, fields, CTA C36, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C36,WF-22,Navigation step & orientation,"Role/scope, fields, CTA C36, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C37,WF-22,Route change notification,"Role/scope, fields, CTA C35, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C38,WF-22,Position uncertain / no route,"Role/scope, fields, CTA C05, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C39,WF-22,Outdoor hazard avoidance,"Role/scope, fields, CTA C36, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-C40,WF-22,Voice language & guidance settings,"Role/scope, fields, CTA C35, VI/EN/JA and error states",Citizen,DESIGNED — prototype QA separate
+AC-P01,WF-21,Speaker zones & coverage,"Role/scope, fields, CTA P02, VI/EN/JA and error states",Public address,DESIGNED — prototype QA separate
+AC-P02,WF-21,Compose rescue announcement,"Role/scope, fields, CTA P03, VI/EN/JA and error states",Public address,DESIGNED — prototype QA separate
+AC-P03,WF-21,Preview & approve announcement,"Role/scope, fields, CTA P04, VI/EN/JA and error states",Public address,DESIGNED — prototype QA separate
+AC-P04,WF-21,Speaker playback monitoring,"Role/scope, fields, CTA P05, VI/EN/JA and error states",Public address,DESIGNED — prototype QA separate
+AC-P05,WF-21,Speaker device & self-test,"Role/scope, fields, CTA P01, VI/EN/JA and error states",Public address,DESIGNED — prototype QA separate
+AC-P06,WF-21,Live rescue microphone,"Role/scope, fields, CTA P04, VI/EN/JA and error states",Public address,DESIGNED — prototype QA separate
+AC-P07,WF-21,Drone / vehicle speaker mission,"Role/scope, fields, CTA I13, VI/EN/JA and error states",Public address,DESIGNED — prototype QA separate
+AC-P08,WF-21,Audio library & TTS review,"Role/scope, fields, CTA L04, VI/EN/JA and error states",Public address,DESIGNED — prototype QA separate
+AC-P09,WF-21,PA priority & arbitration,"Role/scope, fields, CTA P01, VI/EN/JA and error states",Public address,DESIGNED — prototype QA separate
+AC-S15,WF-22,Evacuation graph editor,"Role/scope, fields, CTA S16, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-S16,WF-22,Route simulation & approval,"Role/scope, fields, CTA S15, VI/EN/JA and error states",Sites,DESIGNED — prototype QA separate
+AC-O35,WF-22,Hazard zones & route restrictions,"Role/scope, fields, CTA O36, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-O36,WF-22,Guidance distribution & receipts,"Role/scope, fields, CTA P01, VI/EN/JA and error states",Command,DESIGNED — prototype QA separate
+AC-H01,WF-26,My rescue assistance profile,"Role/scope, fields, CTA H02, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H02,WF-26,Health & assistance sharing,"Role/scope, fields, CTA H01, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H03,WF-26,Caregiver relationships,"Role/scope, fields, CTA H04, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H04,WF-26,Caregiver authorization,"Role/scope, fields, CTA H03, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H05,WF-26,Dependent person profile,"Role/scope, fields, CTA H06, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H06,WF-26,Profile update & review,"Role/scope, fields, CTA H05, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H07,WF-26,People & assistance registry,"Role/scope, fields, CTA H09, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H08,WF-27,Proactive rescue queue,"Role/scope, fields, CTA H09, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H09,WF-27,Priority evidence & decision,"Role/scope, fields, CTA O09, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H10,WF-23,Presence & accountability,"Role/scope, fields, CTA H08, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H11,WF-19,Restricted medical record,"Role/scope, fields, CTA H09, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-H12,WF-27,Welfare check outcome,"Role/scope, fields, CTA R06, VI/EN/JA and error states",Care profiles,DESIGNED — prototype QA separate
+AC-Q01,WF-23,Positioning source health,"Role/scope, fields, CTA Q02, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+AC-Q02,WF-23,Position quality & history,"Role/scope, fields, CTA H09, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+AC-Q03,WF-23,Indoor calibration editor,"Role/scope, fields, CTA S15, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+AC-Q04,WF-24,Evacuation optimization,"Role/scope, fields, CTA Q05, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+AC-Q05,WF-24,Route comparison & decision,"Role/scope, fields, CTA O36, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+AC-Q06,WF-25,AI incident copilot,"Role/scope, fields, CTA Q07, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+AC-Q07,WF-25,AI evidence & approval,"Role/scope, fields, CTA Q05, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+AC-Q08,WF-25,AI policies & model evaluation,"Role/scope, fields, CTA Q09, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+AC-Q09,WF-25,AI deployment governance,"Role/scope, fields, CTA Q08, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+AC-Q10,WF-24,Simulation & crowd scenarios,"Role/scope, fields, CTA S16, VI/EN/JA and error states",Intelligence,DESIGNED — prototype QA separate
+PHY-01,WF-28,Unapproved controller firmware/license or unsupported interface,Control remains disabled; identity and evidence mismatch audited; FR-PHY-01,Physical Integration,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-02,WF-28,Point mapped to wrong zone or another tenant,Activation rejected; physical label/zone review required; FR-PHY-02,Physical Integration,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-03,WF-28,Change cause-and-effect from monitor-only to control,Independent capability review and affected reacceptance required; no inherited write authority; FR-PHY-03,Site Engineering,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-04,WF-29,Missing source time/unit or incorrect pressure scaling,Quality and provenance exposed; invalid values quarantined; no discharge inference; FR-PHY-04,Physical Telemetry,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-05,WF-29,Pump/link telemetry stale beyond approved threshold,Unknown quality and coverage gap; responsible owner alerted; never safe by default; FR-PHY-05,Physical Telemetry,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-06,WF-29,Cloud/edge loss with duplicate panel event replay,Local automatic protection continues; one correlated effect; state/restoration history retained; FR-PHY-06,Platform/OT,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-07,WF-30,User requests release through monitor-only gateway or undocumented write,Server and edge reject; no physical output; denial audit; FR-PHY-07,Command/OT,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-08,WF-30,Duplicate request and reconnect after TTL during uncertain delivery,No duplicate or expired actuation; no blind non-idempotent retry; reconciliation retained; FR-PHY-08,Command/Edge,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-09,WF-30,Device ACK without required valve/waterflow feedback,Not succeeded; acceptance separated from physical evidence; UNKNOWN and deadline handling; FR-PHY-09,Command/Field,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-10,WF-30,Conflicting feedback while local operator takes over,UNKNOWN assigned to named reconciler; remote conflict blocked; acknowledged handover and audit; FR-PHY-10,Incident Command,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-11,WF-31,Test request without approved physical isolation or with live credentials,Test blocked; no live actuation; approved impairment and compensating coverage required; FR-PHY-11,Site Safety,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-12,WF-31,Impairment expires without physical restoration evidence,Remains restoration_pending; escalates; no false restored indication; incoming owner required; FR-PHY-12,Maintenance,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-13,WF-32,Certificate from another site/model or unreviewed document revision,Evidence scope mismatch fails gate; provenance/reviewer visible; FR-PHY-13,Commissioning,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-14,WF-32,Simulator PASS but SAT missing; then accepted firmware changes,Production control blocked; affected acceptance invalidated until revalidation; FR-PHY-14,Commissioning/QA,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-15,WF-33,Robot/water-monitor mission lacks operator or supported aiming/discharge capability,Dependent actions denied; observe-only preserved; separate movement/aim/discharge authority; FR-PHY-15,Mission,DESIGNED — NOT EXECUTED ON PRODUCT
+PHY-16,WF-33,Mission loses link with stale position during operator handover,UNKNOWN visible; approved local lost-link policy; no invented stop/return; acknowledged handover/outcome evidence; FR-PHY-16,Mission/Field,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F01,WF-29,Physical systems overview,"FR-F01; role/site/capability scope; required fields; CTA F07; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F02,WF-28,Controller inventory,"FR-F02; role/site/capability scope; required fields; CTA F03; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F03,WF-28,Controller capability detail,"FR-F03; role/site/capability scope; required fields; CTA F04; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F04,WF-28,Signal point mapping,"FR-F04; role/site/capability scope; required fields; CTA F05; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F05,WF-28,Physical zone mapping,"FR-F05; role/site/capability scope; required fields; CTA F06; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F06,WF-28,Cause-and-effect matrix,"FR-F06; role/site/capability scope; required fields; CTA F15; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F07,WF-29,Physical event detail,"FR-F07; role/site/capability scope; required fields; CTA F08; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F08,WF-29,Fire-water status,"FR-F08; role/site/capability scope; required fields; CTA F09; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F09,WF-30,Controlled release review,"FR-F09; role/site/capability scope; required fields; CTA F10; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F10,WF-30,Command authorization,"FR-F10; role/site/capability scope; required fields; CTA F11; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F11,WF-30,Execution feedback,"FR-F11; role/site/capability scope; required fields; CTA F12; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F12,WF-30,Unknown-result reconciliation,"FR-F12; role/site/capability scope; required fields; CTA F13; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F13,WF-30,Local override & handover,"FR-F13; role/site/capability scope; required fields; CTA F01; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F14,WF-31,Impairment & test mode,"FR-F14; role/site/capability scope; required fields; CTA F18; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F15,WF-32,Commissioning plan,"FR-F15; role/site/capability scope; required fields; CTA F16; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F16,WF-32,Test-run evidence,"FR-F16; role/site/capability scope; required fields; CTA F17; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F17,WF-32,Compatibility & certificate dossier,"FR-F17; role/site/capability scope; required fields; CTA F20; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F18,WF-31,Maintenance & restoration,"FR-F18; role/site/capability scope; required fields; CTA F01; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F19,WF-33,Rescue equipment mission,"FR-F19; role/site/capability scope; required fields; CTA F11; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+AC-F20,WF-28,Physical connector onboarding,"FR-F20; role/site/capability scope; required fields; CTA F02; VI/EN/JA; denied, stale, UNKNOWN and error states; no unsupported control",PhysicalSystems,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T01,WF-34,"Rename, type, unit or enum changes",Keep identity for rename; quarantine incompatible semantics and affected commands.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T02,WF-34,Repeated native ID across sites/tenants,"No cross-tenant joins, disclosure or wrong acknowledgement.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T03,WF-35,Alarm returns normal before acknowledgement,Active becomes false; acknowledgement can remain pending; incident stays independent.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T04,WF-35,Alarm recurs while an old ACK is pending,Old receipt cannot acknowledge the new occurrence; refresh and show conflict.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T05,WF-35,Panel direct feed and BMS mirror replay100 times,"One physical lineage; no duplicated incident, dispatch or broadcast.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T06,WF-35,Lost cursor; paged snapshot with concurrent events,Record gaps; do not clear alarms based on absence from a single page.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T07,WF-36,Higher-priority local override,Show rejected request or accepted non-winning demand accurately; no override bypass.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T08,WF-36,Receipt lost after possible command execution,Mark unknown; reconcile without blind resending.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T09,WF-36,Lease expires and slot owner changes during restart,Do not clear another owner; approved relinquishment requires readback.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T10,WF-36,Fan demand accepted but proof false or bad,No physical success; show demand/feedback discrepancy.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T11,WF-37,"Link loss, full buffer and two-node failover",Local protection independent; durable commit and single-writer fencing hold.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T12,WF-37,Alarm burst overlaps historian backfill,Alarm queue remains available and upstream budgets are respected.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T13,WF-34,Expired/revoked certificate or wrong tenant,Privileged operations fail closed; no insecure fallback.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T14,WF-35,Published incident is reflected by BMS,No recursive incident creation; preserve exact receipt evidence.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T15,WF-35,Maintenance ends before restoration,Restoration remains pending and escalates; do not mark ready.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T16,WF-35,Stale door/fan evidence affects route,Re-evaluate or withdraw route and old speech; assistance remains accessible.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T17,WF-35,"AI-derived point, occupancy count or old badge event",Do not present inference as measurement or confirmed occupant safety.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T18,WF-34,"VI/EN/JA, keyboard, zoom and color deficiency",Critical action/source owner readable; raw identifiers remain unchanged.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T19,WF-37,Exercise data reconnects after outage,No exercise leak to actual operations; backfill cannot actuate.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T20,WF-37,Retirement with open commands and leases,"Handover, revoke, verify and retain audit; no orphan remote override.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-01,WF-34,Read-only enforcement — Attempt writes and external ACK with read-only identity,Reject before dispatch; no native write audit entry.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-02,WF-34,Scaling — Known pressure raw600 with scale100 and invalid unit,Decode6.0bar; unapproved mapping never enters rules.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-03,WF-34,Register addressing — Zero/one-based addresses and alternate32-bit word order,Match golden fixtures; mismatches block commissioning.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-04,WF-35,COV expiry — Subscription expiry or BMS restart,Renew and reconcile; report stale during gap.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-05,WF-35,MS/TP contention — Authorized burst on a constrained bus,No polling storm; record actual latency and critical-event handling.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-06,WF-35,Existing active alarms — Connect after alarms are already active,Load current conditions; stay syncing until reconciled.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-07,WF-35,Refresh race — New event arrives between refresh boundaries,Older refresh data cannot overwrite new state.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-08,WF-35,Duplicate delivery — Repeat identical source event,One canonical transition; multiple receipts retained.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-09,WF-35,Dual paths — Direct panel and BMS relay same alarm,Link physical lineage; preserve both paths.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-10,WF-35,Similar unrelated alarms — Equal labels and near timestamps on different devices,No false merge based only on text/time.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-11,WF-35,Late acknowledgement — Occurrence2 starts before ACK1 receipt,ACK1 never clears ACK2 responsibility.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-12,WF-35,Internal acknowledgement — SmartAlarm operator accepts work,Native BMS acknowledgement remains unchanged.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-13,WF-35,Return to normal — Source normal while rescue is unresolved,Incident and occupant safety remain independent.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-14,WF-36,Dispatch timeout — Controller might have acted but receipt is lost,Unknown outcome and reconciliation; no blind retry.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-15,WF-36,Expired offline command — Reconnect after command expiry,Do not replay; require a new authorized intent.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-16,WF-36,Local override — Operator obtains higher priority,Do not report physical success; show ownership conflict.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-17,WF-36,Lost writer — Kill edge between dispatch and receipt persistence,Fence standby and reconcile before writes resume.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-18,WF-36,Retained priority slot — Power loss while edge holds a BACnet priority,Measure controller behavior; require accepted local fallback.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-19,WF-36,Same-slot collision — Another application writes the same priority,Do not assume ownership or clear with NULL automatically.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-20,WF-37,"Certificate rotation — Expired, changed or revoked trust material",Fail closed for privileged actions; no automatic trust.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-21,WF-37,Quality loss — Bad/uncertain point or missing source time,No false normal/safe display; propagate uncertainty.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-22,WF-37,Clock drift — Source clock skew and late delivery,Keep both timestamps; do not overwrite newer occurrence.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-23,WF-37,Alarm flood — Alarm burst plus ordinary telemetry,Preserve transitions; only approved telemetry may coalesce.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-24,WF-37,Disk capacity — Journal near/full capacity,Actionable degradation and explicit gaps; no silent discard.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-25,WF-37,Reflection loop — Summary sent out and reflected back,Preserve origin; no new incident or command loop.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-26,WF-37,Translation — VI/EN/JA status and action terminology,Same operational meaning; preserve native codes.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-27,WF-37,"Isolation — Cross-tenant credential, mapping or command",Reject and audit without topology or health-data disclosure.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-28,WF-37,Emergency independence — Cloud and edge both unavailable,Local protection remains independent under its own accepted design.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-UI-01,WF-34,BMS01 / BMS → edge → SmartAlarm chain; capability matrix beside the identity dossier.,Select Metasys and enter build/license; preview preserves a draft without activating capabilities. Switching to EBO clears that evidence draft. A bms.read-only user cannot create or activate.,UX + BMS integration,DESIGNED — NOT EXECUTED ON PRODUCT; local prototype checks recorded separately in verification/BMS-UI-QA.json
+BMS-UI-02,WF-34,BMS02 / Native point → equipment → served zone → route edge topology with a separate mapping/evidence table.,Change served zone A05→A06; preview reports missing evidence without changing routes. Restoring A05 permits an unpublished candidate. Mapping a read-only point must not grant write authority.,UX + BMS integration,DESIGNED — NOT EXECUTED ON PRODUCT; local prototype checks recorded separately in verification/BMS-UI-QA.json
+BMS-UI-03,WF-35,BMS03 / Native condition and incident comparison with separate receive/link/native-ACK/response-closure timeline states.,Choose generation43 and preview ACK: target43 remains blocked without qualification and INC-2041 stays active. Changing42→43 clears preview42. Both panel and BMS raw provenance remain available.,UX + BMS integration,DESIGNED — NOT EXECUTED ON PRODUCT; local prototype checks recorded separately in verification/BMS-UI-QA.json
+BMS-UI-04,WF-36,"BMS04 / Priority ladder and winning authority, with separate demand/controller-report/physical-feedback blocks and prominent local override.","Toggling local override changes the winner explanation, but execute remains locked without policy/lease. Preview sends no command. Replaying an idempotency key returns its original aggregate; different input under the same key conflicts.",UX + BMS integration,DESIGNED — NOT EXECUTED ON PRODUCT; local prototype checks recorded separately in verification/BMS-UI-QA.json
+BMS-UI-05,WF-37,"BMS05 / Side-by-side before/after diff highlights unit/type changes, with dependent rules and routes below.","A °C→°F change without a transform is blocked. Inspecting the transform shows24.0°C, but publish remains locked pending approval. Changing transform/type/unit invalidates the old review.",UX + BMS integration,DESIGNED — NOT EXECUTED ON PRODUCT; local prototype checks recorded separately in verification/BMS-UI-QA.json
+BMS-UI-06,WF-37,"BMS06 / Zone-quality heatmap with stale hatching, alarm/telemetry/history queues and request-budget calculation.",2401points/40batch/10s yields6.10requests/s. Pausing history sets its sample budget to0 without stopping alarms. N=0 or interval≤0 is invalid. Hatching and labels remain usable without color discrimination.,UX + BMS integration,DESIGNED — NOT EXECUTED ON PRODUCT; local prototype checks recorded separately in verification/BMS-UI-QA.json
+BMS-UI-07,WF-37,"BMS07 / Old edge → journal/cursor → standby edge recovery lane, with separate evidence checklist and writer lock.","Any missing one of4evidence items keeps the writer locked. Completing4items prepares an OT-approval dossier without enabling writes. Epoch17 after epoch18 must be blocked at egress, not only at the API.",UX + BMS integration,DESIGNED — NOT EXECUTED ON PRODUCT; local prototype checks recorded separately in verification/BMS-UI-QA.json
+BMS-UI-08,WF-35,BMS08 / Panel → BMS → SmartAlarm → writeback causation path; the echo leg has its own shape/label while raw receipts are retained.,Quarantining SA-STATUS-41 retains EV-993 in lineage and does not create a new incident from echo. A genuinely new generation is not suppressed merely for sharing a point. Native conditions are not overwritten.,UX + BMS integration,DESIGNED — NOT EXECUTED ON PRODUCT; local prototype checks recorded separately in verification/BMS-UI-QA.json

@@ -1,0 +1,154 @@
+{
+  "$schema": "./bms-connector-profile.schema.json",
+  "profile_id": "bms.jci.metasys-rest",
+  "profile_version": "0.1.0",
+  "status": "design_example",
+  "adapter": {
+    "id": "bms.jci.metasys-rest",
+    "version": "0.1.0",
+    "implementation_status": "not_implemented",
+    "image_digest": null
+  },
+  "product": {
+    "vendor": "Johnson Controls",
+    "name": "Metasys",
+    "version_constraint": "UNVERIFIED_AT_SITE",
+    "license_evidence_ref": null
+  },
+  "protocol": {
+    "kind": "vendor_native",
+    "transport_profile": "Version-pinned REST / SSE",
+    "auth_profile": "exact_version_contract_required"
+  },
+  "secret_refs": [],
+  "capabilities": [
+    {
+      "name": "point.catalog",
+      "support": "unverified",
+      "retry_class": "bounded_read",
+      "evidence_refs": []
+    },
+    {
+      "name": "point.read",
+      "support": "unverified",
+      "retry_class": "bounded_read",
+      "evidence_refs": []
+    },
+    {
+      "name": "point.subscribe",
+      "support": "unverified",
+      "retry_class": "adapter_defined",
+      "evidence_refs": []
+    },
+    {
+      "name": "point.history",
+      "support": "unverified",
+      "retry_class": "bounded_read",
+      "evidence_refs": []
+    },
+    {
+      "name": "alarm.subscribe",
+      "support": "unverified",
+      "retry_class": "adapter_defined",
+      "evidence_refs": []
+    },
+    {
+      "name": "alarm.query",
+      "support": "unverified",
+      "retry_class": "bounded_read",
+      "evidence_refs": []
+    },
+    {
+      "name": "alarm.ack",
+      "support": "unverified",
+      "retry_class": "manual_reconcile",
+      "evidence_refs": []
+    },
+    {
+      "name": "alarm.confirm",
+      "support": "unverified",
+      "retry_class": "manual_reconcile",
+      "evidence_refs": []
+    },
+    {
+      "name": "alarm.reset",
+      "support": "unverified",
+      "retry_class": "manual_reconcile",
+      "evidence_refs": []
+    },
+    {
+      "name": "alarm.shelve",
+      "support": "unverified",
+      "retry_class": "manual_reconcile",
+      "evidence_refs": []
+    },
+    {
+      "name": "alarm.inject",
+      "support": "unverified",
+      "retry_class": "manual_reconcile",
+      "evidence_refs": []
+    },
+    {
+      "name": "point.command",
+      "support": "unverified",
+      "retry_class": "manual_reconcile",
+      "evidence_refs": []
+    },
+    {
+      "name": "point.force",
+      "support": "unverified",
+      "retry_class": "manual_reconcile",
+      "evidence_refs": []
+    },
+    {
+      "name": "point.release",
+      "support": "unverified",
+      "retry_class": "manual_reconcile",
+      "evidence_refs": []
+    }
+  ],
+  "enabled_capabilities": [],
+  "site_acceptance": null,
+  "write_enabled": false,
+  "write_policy": {
+    "command_aggregate_only": true,
+    "allowlist": [],
+    "approval_required": true,
+    "fencing_required": true,
+    "local_override_wins": true,
+    "no_blind_retry": true,
+    "feedback_contract_ref": null
+  },
+  "mapping_revision": null,
+  "source_identity": {
+    "epoch_support": "unknown",
+    "sequence_support": "unknown",
+    "alarm_occurrence_contract_ref": null,
+    "physical_lineage_mapping_ref": null
+  },
+  "limits": {
+    "max_requests_per_second": null,
+    "max_points": null,
+    "history_backfill_per_second": null,
+    "site_validation_required": true
+  },
+  "mode_isolation": true,
+  "research_context": {
+    "retrieved_at": "2026-10-24",
+    "candidate_interfaces": [
+      "Version-pinned REST / SSE"
+    ],
+    "site_requirements": [
+      "Exact product/build and approved interface contract",
+      "License/module entitlement",
+      "Scoped service identity and transport trust",
+      "Approved point/alarm mapping and rate budget",
+      "Capability-specific FAT/SAT and local authority approval"
+    ],
+    "automatic_protocol_failover": false,
+    "tested_product_versions": [],
+    "references": [
+      "https://jci-metasys.github.io/api-landing/api/v6-16"
+    ]
+  }
+}

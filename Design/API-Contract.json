@@ -1,0 +1,7081 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SmartAlarm core API design baseline",
+    "version": "1.0.0",
+    "description": "Typed core design contract. Implementations must add each remaining read model, vendor capability schema and field-level policy test before code generation/release; this is not a deployed API. Baseline 1.0 adds typed physical design contracts; JSON validation is not deployed software or hardware acceptance."
+  },
+  "servers": [
+    {
+      "url": "https://api.example.test/v1",
+      "description": "Documentation-only hostname"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/events": {
+      "post": {
+        "operationId": "events_create",
+        "summary": "Create events",
+        "x-required-permission": "event.ingest",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventIngest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "202": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      }
+    },
+    "/incidents": {
+      "post": {
+        "operationId": "incidents_create",
+        "summary": "Create incidents",
+        "x-required-permission": "incident.create",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncidentCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "201": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      },
+      "get": {
+        "operationId": "get_incidents",
+        "x-required-permission": "incident.read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        }
+      }
+    },
+    "/sos": {
+      "post": {
+        "operationId": "sos_create",
+        "summary": "Create sos",
+        "x-required-permission": "sos.create",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SOSCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "201": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      }
+    },
+    "/safety-reports": {
+      "post": {
+        "operationId": "safety_reports_create",
+        "summary": "Create safety-reports",
+        "x-required-permission": "safety.self_report",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SafetyReportCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "201": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "post": {
+        "operationId": "tasks_create",
+        "summary": "Create tasks",
+        "x-required-permission": "task.assign",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "201": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      },
+      "get": {
+        "operationId": "get_tasks",
+        "x-required-permission": "task.read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        }
+      }
+    },
+    "/warnings": {
+      "post": {
+        "operationId": "warnings_create",
+        "summary": "Create warnings",
+        "x-required-permission": "warning.author",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WarningCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "201": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      }
+    },
+    "/commands": {
+      "post": {
+        "operationId": "commands_create",
+        "summary": "Create commands",
+        "x-required-permission": "command.request",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "202": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        },
+        "x-physical-enforcement": "If the resolved capability is physical, require accepted physical context and apply identical authorization, approval digest, revision, TTL, impairment, local interlock and feedback guards as /physical-commands. This existing route is not a bypass."
+      }
+    },
+    "/guidance/routes": {
+      "post": {
+        "operationId": "guidance_routes_create",
+        "summary": "Create guidance/routes",
+        "x-required-permission": "guidance.request",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RouteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "200": {
+            "description": "Route computed from validated inputs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouteResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      }
+    },
+    "/broadcasts": {
+      "post": {
+        "operationId": "broadcasts_create",
+        "summary": "Create broadcasts",
+        "x-required-permission": "broadcast.author",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BroadcastCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "201": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      },
+      "get": {
+        "operationId": "get_broadcasts",
+        "x-required-permission": "broadcast.read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        }
+      }
+    },
+    "/assistance-profiles": {
+      "post": {
+        "operationId": "assistance_profiles_create",
+        "summary": "Create assistance-profiles",
+        "x-required-permission": "profile.write",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistanceProfileCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "201": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      },
+      "get": {
+        "operationId": "get_assistance_profiles",
+        "x-required-permission": "profile.read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        }
+      }
+    },
+    "/presence-observations": {
+      "post": {
+        "operationId": "presence_observations_create",
+        "summary": "Create presence-observations",
+        "x-required-permission": "presence.ingest",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PresenceObservation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "201": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      }
+    },
+    "/privacy-requests": {
+      "post": {
+        "operationId": "privacy_requests_create",
+        "summary": "Create privacy-requests",
+        "x-required-permission": "privacy.self_request",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrivacyRequestCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Conflict/idempotency mismatch"
+          },
+          "422": {
+            "description": "Domain validation failure"
+          },
+          "503": {
+            "description": "Unavailable; no successful receipt implied"
+          },
+          "202": {
+            "description": "Persisted receipt / resource, not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Insufficient permission"
+          },
+          "429": {
+            "description": "Rate/queue capacity limit; no success receipt implied"
+          }
+        }
+      }
+    },
+    "/deliveries": {
+      "get": {
+        "operationId": "get_deliveries",
+        "x-required-permission": "delivery.read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        }
+      }
+    },
+    "/devices": {
+      "get": {
+        "operationId": "get_devices",
+        "x-required-permission": "device.read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        }
+      }
+    },
+    "/connectors": {
+      "get": {
+        "operationId": "get_connectors",
+        "x-required-permission": "connector.read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        }
+      }
+    },
+    "/incidents/{id}/proactive-cases": {
+      "get": {
+        "operationId": "get_incidents_id_proactive_cases",
+        "x-required-permission": "proactive.read",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        }
+      }
+    },
+    "/audit-entries": {
+      "get": {
+        "operationId": "get_audit_entries",
+        "x-required-permission": "audit.read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        }
+      }
+    },
+    "/incidents/{id}/transitions": {
+      "post": {
+        "operationId": "post_incidents_id_transitions",
+        "x-required-permission": "incident.transition",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sos/{id}/updates": {
+      "post": {
+        "operationId": "post_sos_id_updates",
+        "x-required-permission": "sos.manage",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}/transitions": {
+      "post": {
+        "operationId": "post_tasks_id_transitions",
+        "x-required-permission": "task.update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/proactive-cases/{id}/decisions": {
+      "post": {
+        "operationId": "post_proactive_cases_id_decisions",
+        "x-required-permission": "proactive.decide",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/warnings/{id}/approvals": {
+      "post": {
+        "operationId": "post_warnings_id_approvals",
+        "x-required-permission": "warning.approve",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/commands/{id}/approvals": {
+      "post": {
+        "operationId": "post_commands_id_approvals",
+        "x-required-permission": "command.approve",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalRequest"
+              }
+            }
+          }
+        },
+        "x-physical-enforcement": "If the resolved capability is physical, require accepted physical context and apply identical authorization, approval digest, revision, TTL, impairment, local interlock and feedback guards as /physical-commands. This existing route is not a bypass."
+      }
+    },
+    "/broadcasts/{id}/approvals": {
+      "post": {
+        "operationId": "post_broadcasts_id_approvals",
+        "x-required-permission": "broadcast.approve",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai-analyses": {
+      "post": {
+        "operationId": "post_ai_analyses",
+        "x-required-permission": "ai.request",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Authorized result / durable operation receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "404": {
+            "description": "Not found or outside object scope"
+          },
+          "409": {
+            "description": "Version/state/policy conflict"
+          },
+          "422": {
+            "description": "Invalid domain payload"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AIAnalysisRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-bindings": {
+      "post": {
+        "operationId": "physical_post_physical_bindings",
+        "summary": "physical.binding.author",
+        "x-required-permission": "physical.binding.author",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhysicalBindingCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-bindings/{id}/validate": {
+      "post": {
+        "operationId": "physical_post_physical_bindings_id_validate",
+        "summary": "physical.binding.test",
+        "x-required-permission": "physical.binding.test",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhysicalBindingValidate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-bindings/{id}/activate": {
+      "post": {
+        "operationId": "physical_post_physical_bindings_id_activate",
+        "summary": "physical.binding.activate",
+        "x-required-permission": "physical.binding.activate",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhysicalBindingActivate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-points": {
+      "get": {
+        "operationId": "physical_get_physical_points",
+        "summary": "physical.point.read",
+        "x-required-permission": "physical.point.read",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "query",
+            "name": "controller",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "query",
+            "name": "zone",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "binding_revision",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality",
+            "schema": {
+              "enum": [
+                "GOOD",
+                "BAD",
+                "STALE",
+                "UNKNOWN",
+                "TEST"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalPointPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-points/{id}/observations": {
+      "get": {
+        "operationId": "physical_get_physical_points_id_observations",
+        "summary": "physical.point.read",
+        "x-required-permission": "physical.point.read",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "query",
+            "name": "controller",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "query",
+            "name": "zone",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "query",
+            "name": "from",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "to",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "binding_revision",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "quality",
+            "schema": {
+              "enum": [
+                "GOOD",
+                "BAD",
+                "STALE",
+                "UNKNOWN",
+                "TEST"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalObservationPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-commands": {
+      "post": {
+        "operationId": "physical_post_physical_commands",
+        "summary": "physical.command.request",
+        "x-required-permission": "physical.command.request",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalCommandReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhysicalCommandCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-commands/{id}/approvals": {
+      "post": {
+        "operationId": "physical_post_physical_commands_id_approvals",
+        "summary": "physical.command.approve",
+        "x-required-permission": "physical.command.approve",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-commands/{id}/reconciliations": {
+      "post": {
+        "operationId": "physical_post_physical_commands_id_reconciliations",
+        "summary": "physical.command.reconcile",
+        "x-required-permission": "physical.command.reconcile",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhysicalCommandReconciliation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/impairments": {
+      "post": {
+        "operationId": "physical_post_impairments",
+        "summary": "physical.impairment.manage",
+        "x-required-permission": "physical.impairment.manage",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImpairmentCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/impairments/{id}/restoration-checks": {
+      "post": {
+        "operationId": "physical_post_impairments_id_restoration_checks",
+        "summary": "physical.impairment.restore",
+        "x-required-permission": "physical.impairment.restore",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestorationCheck"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-test-runs": {
+      "post": {
+        "operationId": "physical_post_physical_test_runs",
+        "summary": "physical.test.execute",
+        "x-required-permission": "physical.test.execute",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhysicalTestCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/physical-test-runs/{id}/evidence": {
+      "post": {
+        "operationId": "physical_post_physical_test_runs_id_evidence",
+        "summary": "physical.test.record",
+        "x-required-permission": "physical.test.record",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhysicalTestEvidenceCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/compatibility-assessments": {
+      "post": {
+        "operationId": "physical_post_compatibility_assessments",
+        "summary": "physical.compatibility.author",
+        "x-required-permission": "physical.compatibility.author",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompatibilityAssessmentCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/compatibility-assessments/{id}/acceptance": {
+      "post": {
+        "operationId": "physical_post_compatibility_assessments_id_acceptance",
+        "summary": "physical.compatibility.accept",
+        "x-required-permission": "physical.compatibility.accept",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompatibilityAcceptance"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rescue-equipment-missions": {
+      "post": {
+        "operationId": "physical_post_rescue_equipment_missions",
+        "summary": "rescue.equipment.assign",
+        "x-required-permission": "rescue.equipment.assign",
+        "x-permission-scope": [
+          "tenant",
+          "site",
+          "controller",
+          "capability"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Durable receipt or scoped read; not physical completion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicalReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient object/capability authority",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found or outside scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "IDEMPOTENCY_MISMATCH / BINDING_REVISION_MISMATCH / PHYSICAL_INTERLOCK / IMPAIRMENT_ACTIVE / PHYSICAL_STATE_STALE",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "VERSION_MISMATCH",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "CAPABILITY_NOT_APPROVED or invalid domain payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate/queue limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Unavailable; no success implied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RescueEquipmentMissionCreate"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "code",
+          "message_key",
+          "trace_id"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message_key": {
+            "type": "string"
+          },
+          "trace_id": {
+            "type": "string"
+          },
+          "retryable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Receipt": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "received_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "received_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "LocationReport": {
+        "type": "object",
+        "properties": {
+          "location_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "floor_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "gnss",
+              "qr",
+              "ble",
+              "uwb",
+              "wifi",
+              "manual",
+              "responder",
+              "registry"
+            ]
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "latitude": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          "accuracy_m": {
+            "type": "number",
+            "minimum": 0
+          },
+          "heading_deg": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMaximum": 360
+          },
+          "heading_accuracy_deg": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 180
+          },
+          "floor_confidence": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "estimated",
+              "unknown"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "method",
+          "observed_at"
+        ],
+        "additionalProperties": false
+      },
+      "EventIngest": {
+        "type": "object",
+        "properties": {
+          "specversion": {
+            "const": "1.0"
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "source": {
+            "type": "string",
+            "format": "uri"
+          },
+          "type": {
+            "type": "string",
+            "pattern": "^com\\.smartalarm\\."
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tenantid": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "regionid": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "exercise",
+              "test"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "Validated against registered domain event schema before acceptance."
+          }
+        },
+        "required": [
+          "specversion",
+          "id",
+          "source",
+          "type",
+          "mode",
+          "data"
+        ],
+        "additionalProperties": true
+      },
+      "IncidentCreate": {
+        "type": "object",
+        "properties": {
+          "hazard": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]+$"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "P1",
+              "P2",
+              "P3",
+              "P4"
+            ]
+          },
+          "location_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "signal_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "maxItems": 100
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "exercise",
+              "test"
+            ]
+          }
+        },
+        "required": [
+          "hazard",
+          "severity",
+          "location_ref",
+          "mode"
+        ],
+        "additionalProperties": false
+      },
+      "SOSCreate": {
+        "type": "object",
+        "properties": {
+          "client_request_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "category": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationReport"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "people_count": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000
+          },
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "discreet": {
+            "type": "boolean"
+          },
+          "locale": {
+            "type": "string",
+            "enum": [
+              "vi-VN",
+              "en",
+              "ja-JP"
+            ]
+          },
+          "sharing_policy_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "client_request_id",
+          "category",
+          "location",
+          "locale"
+        ],
+        "additionalProperties": false
+      },
+      "SafetyReportCreate": {
+        "type": "object",
+        "properties": {
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_danger",
+              "help_requested",
+              "self_reported_safe"
+            ]
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationReport"
+          },
+          "sharing_policy_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "incident_ref",
+          "status",
+          "observed_at"
+        ],
+        "additionalProperties": false
+      },
+      "TaskCreate": {
+        "type": "object",
+        "properties": {
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "unit_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "sos_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "proactive_case_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "task_type": {
+            "type": "string",
+            "enum": [
+              "rescue",
+              "welfare_check",
+              "medical_support",
+              "perimeter",
+              "announcement",
+              "handover"
+            ]
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "instruction": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "incident_ref",
+          "unit_ref",
+          "task_type",
+          "deadline"
+        ],
+        "additionalProperties": false
+      },
+      "LocalizedVersionRef": {
+        "type": "object",
+        "properties": {
+          "locale": {
+            "type": "string",
+            "enum": [
+              "vi-VN",
+              "en",
+              "ja-JP"
+            ]
+          },
+          "template_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "locale",
+          "template_id",
+          "version"
+        ],
+        "additionalProperties": false
+      },
+      "Audience": {
+        "type": "object",
+        "properties": {
+          "site_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "zone_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "group_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "agreement_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "snapshot_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "WarningCreate": {
+        "type": "object",
+        "properties": {
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "content_versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizedVersionRef"
+            },
+            "minItems": 1,
+            "maxItems": 3
+          },
+          "audience": {
+            "$ref": "#/components/schemas/Audience"
+          },
+          "channels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "push",
+                "sms",
+                "voice_call",
+                "email",
+                "pa",
+                "webhook"
+              ]
+            },
+            "minItems": 1
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "exercise",
+              "test"
+            ]
+          }
+        },
+        "required": [
+          "incident_ref",
+          "content_versions",
+          "audience",
+          "channels",
+          "expires_at",
+          "mode"
+        ],
+        "additionalProperties": false
+      },
+      "CommandCreate": {
+        "type": "object",
+        "properties": {
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "capability": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]+$"
+          },
+          "params": {
+            "type": "object",
+            "description": "Validated against capability schema from approved connector manifest."
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "exercise",
+              "test"
+            ]
+          },
+          "physical_context": {
+            "$ref": "#/components/schemas/PhysicalCommandContext"
+          }
+        },
+        "required": [
+          "target",
+          "capability",
+          "params",
+          "expires_at",
+          "incident_ref",
+          "reason",
+          "mode"
+        ],
+        "additionalProperties": false
+      },
+      "RouteRequest": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/LocationReport"
+          },
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "mobility_profile": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "no_stairs",
+              "assisted",
+              "custom_reviewed"
+            ]
+          },
+          "locale": {
+            "type": "string",
+            "enum": [
+              "vi-VN",
+              "en",
+              "ja-JP"
+            ]
+          },
+          "profile_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "destination_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "location",
+          "incident_ref",
+          "mobility_profile",
+          "locale"
+        ],
+        "additionalProperties": false
+      },
+      "RouteStep": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "node_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "landmark_key": {
+            "type": "string"
+          },
+          "speech_template_ref": {
+            "$ref": "#/components/schemas/LocalizedVersionRef"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "left",
+              "right",
+              "straight",
+              "up",
+              "down",
+              "landmark_only"
+            ]
+          },
+          "distance_m": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "index",
+          "node_ref",
+          "landmark_key",
+          "speech_template_ref",
+          "direction"
+        ],
+        "additionalProperties": false
+      },
+      "RouteResult": {
+        "type": "object",
+        "properties": {
+          "route_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "graph_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "hazard_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "quality": {
+            "type": "string",
+            "enum": [
+              "verified_inputs",
+              "degraded"
+            ]
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RouteStep"
+            },
+            "minItems": 1
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "route_id",
+          "version",
+          "graph_revision",
+          "hazard_revision",
+          "issued_at",
+          "expires_at",
+          "quality",
+          "steps"
+        ],
+        "additionalProperties": false
+      },
+      "BroadcastCreate": {
+        "type": "object",
+        "properties": {
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "zone_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 1,
+            "maxItems": 1000
+          },
+          "content_versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizedVersionRef"
+            },
+            "minItems": 1,
+            "maxItems": 3
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "routine",
+              "advisory",
+              "rescue",
+              "emergency"
+            ]
+          },
+          "repeat_count": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "exercise",
+              "test"
+            ]
+          }
+        },
+        "required": [
+          "incident_ref",
+          "zone_refs",
+          "content_versions",
+          "priority",
+          "repeat_count",
+          "expires_at",
+          "mode"
+        ],
+        "additionalProperties": false
+      },
+      "FunctionalNeeds": {
+        "type": "object",
+        "properties": {
+          "mobility": {
+            "type": "string",
+            "enum": [
+              "independent",
+              "walking_aid",
+              "wheelchair",
+              "assisted",
+              "unknown"
+            ]
+          },
+          "stairs": {
+            "type": "string",
+            "enum": [
+              "possible",
+              "assistance_required",
+              "not_possible",
+              "unknown"
+            ]
+          },
+          "communication": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "voice",
+                "text",
+                "sign_language",
+                "visual",
+                "caregiver",
+                "unknown"
+              ]
+            }
+          },
+          "evacuation_equipment": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 200
+            }
+          },
+          "emergency_notes_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "mobility",
+          "stairs",
+          "communication"
+        ],
+        "additionalProperties": false
+      },
+      "AssistanceProfileCreate": {
+        "type": "object",
+        "properties": {
+          "person_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "functional_needs": {
+            "$ref": "#/components/schemas/FunctionalNeeds"
+          },
+          "sharing_policy": {
+            "$ref": "#/components/schemas/Audience"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "self",
+              "authorized_caregiver",
+              "authorized_professional",
+              "responder"
+            ]
+          },
+          "source_authority_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "last_reviewed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "review_due": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "age_group": {
+            "type": "string",
+            "enum": [
+              "under_18",
+              "18_64",
+              "65_74",
+              "75_plus",
+              "not_provided"
+            ]
+          }
+        },
+        "required": [
+          "person_ref",
+          "functional_needs",
+          "sharing_policy",
+          "source",
+          "last_reviewed_at"
+        ],
+        "additionalProperties": false
+      },
+      "PresenceObservation": {
+        "type": "object",
+        "properties": {
+          "subject_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationReport"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "observed_present",
+              "expected",
+              "last_seen",
+              "reported_absent",
+              "unknown"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "subject_ref",
+          "location",
+          "observed_at",
+          "source",
+          "kind"
+        ],
+        "additionalProperties": false
+      },
+      "PrivacyRequestCreate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "export",
+              "deletion",
+              "correction",
+              "access_review"
+            ]
+          },
+          "scope": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "profile",
+                "assistance",
+                "location",
+                "messages",
+                "incidents"
+              ]
+            },
+            "minItems": 1
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "type",
+          "scope"
+        ],
+        "additionalProperties": false
+      },
+      "TransitionRequest": {
+        "type": "object",
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "to": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "expected_version",
+          "to",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "ApprovalRequest": {
+        "type": "object",
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "approve",
+              "reject"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "expected_version",
+          "digest",
+          "decision",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "AIAnalysisRequest": {
+        "type": "object",
+        "properties": {
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "purpose": {
+            "type": "string",
+            "enum": [
+              "summary",
+              "sop_comparison",
+              "route_explanation",
+              "warning_draft",
+              "after_action"
+            ]
+          },
+          "locale": {
+            "type": "string",
+            "enum": [
+              "vi-VN",
+              "en",
+              "ja-JP"
+            ]
+          },
+          "context_cutoff": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "incident_ref",
+          "purpose",
+          "locale"
+        ],
+        "additionalProperties": false
+      },
+      "ListPage": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "next_cursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalEvidenceRef": {
+        "type": "object",
+        "properties": {
+          "evidence_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "kind": {
+            "enum": [
+              "manufacturer_permission",
+              "certificate",
+              "cause_effect",
+              "point_map",
+              "fat",
+              "sat",
+              "local_feedback",
+              "operator_observation",
+              "restoration",
+              "authorization",
+              "raw_capture"
+            ]
+          },
+          "recorded_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "recorded_by": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "evidence_ref",
+          "sha256",
+          "kind",
+          "recorded_at",
+          "recorded_by"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalParameter": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "value": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "name",
+          "value",
+          "unit"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalTarget": {
+        "type": "object",
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "zone_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "asset_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "site_id",
+          "controller_id",
+          "zone_id",
+          "asset_id"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalPointBinding": {
+        "type": "object",
+        "properties": {
+          "point_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "zone_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "raw_address": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "semantic": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "access_mode": {
+            "enum": [
+              "read_only",
+              "approved_write"
+            ]
+          },
+          "value_type": {
+            "enum": [
+              "boolean",
+              "number",
+              "string"
+            ]
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "scale": {
+            "type": "number",
+            "not": {
+              "const": 0
+            }
+          },
+          "offset": {
+            "type": "number"
+          },
+          "byte_order": {
+            "enum": [
+              "big",
+              "little",
+              "not_applicable"
+            ]
+          },
+          "word_order": {
+            "enum": [
+              "high_first",
+              "low_first",
+              "not_applicable"
+            ]
+          },
+          "enum_map": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "stale_after_seconds": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "feedback_for": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "point_id",
+          "controller_id",
+          "zone_id",
+          "raw_address",
+          "semantic",
+          "access_mode",
+          "value_type",
+          "unit",
+          "scale",
+          "offset",
+          "byte_order",
+          "word_order",
+          "enum_map",
+          "stale_after_seconds",
+          "feedback_for"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalGatewayBinding": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "firmware": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "protocol": {
+            "enum": [
+              "bacnet",
+              "modbus_tcp",
+              "modbus_rtu",
+              "opc_ua",
+              "supervised_io",
+              "vendor_sdk",
+              "vendor_api",
+              "operator_console"
+            ]
+          },
+          "protocol_revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "license_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "interface_document_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "permission_mode": {
+            "enum": [
+              "observe_only",
+              "approved_control",
+              "operator_console_only"
+            ]
+          }
+        },
+        "required": [
+          "model",
+          "firmware",
+          "protocol",
+          "protocol_revision",
+          "license_ref",
+          "interface_document_ref",
+          "permission_mode"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalBindingCreate": {
+        "type": "object",
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "manufacturer": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "regional_model": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "serial": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "firmware": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "gateway": {
+            "$ref": "#/components/schemas/PhysicalGatewayBinding"
+          },
+          "point_map": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalPointBinding"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "point_map_digest": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "zone_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "cause_effect_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "cause_effect_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "certificate_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "maintenance_owner": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "mode": {
+            "enum": [
+              "actual",
+              "exercise",
+              "test"
+            ]
+          }
+        },
+        "required": [
+          "site_id",
+          "controller_id",
+          "manufacturer",
+          "regional_model",
+          "serial",
+          "firmware",
+          "gateway",
+          "point_map",
+          "point_map_digest",
+          "zone_revision",
+          "cause_effect_revision",
+          "cause_effect_ref",
+          "certificate_refs",
+          "maintenance_owner",
+          "mode"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalBindingValidate": {
+        "type": "object",
+        "properties": {
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "fixture_set": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "revision",
+          "fixture_set"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalBindingActivate": {
+        "type": "object",
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "acceptance_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "expected_version",
+          "revision",
+          "acceptance_ref"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalCommandContext": {
+        "type": "object",
+        "properties": {
+          "binding_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "capability_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "zone_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "cause_effect_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expected_point_versions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "point_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "point_id",
+                "version"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "binding_id",
+          "binding_revision",
+          "capability_revision",
+          "zone_revision",
+          "cause_effect_revision",
+          "expected_point_versions"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalCommandCreate": {
+        "type": "object",
+        "properties": {
+          "binding_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "capability_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "zone_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "cause_effect_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expected_point_versions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "point_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "point_id",
+                "version"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "capability_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "target": {
+            "$ref": "#/components/schemas/PhysicalTarget"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalParameter"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "mode": {
+            "enum": [
+              "actual",
+              "exercise",
+              "test"
+            ]
+          }
+        },
+        "required": [
+          "binding_id",
+          "binding_revision",
+          "capability_revision",
+          "zone_revision",
+          "cause_effect_revision",
+          "expected_point_versions",
+          "capability_id",
+          "target",
+          "parameters",
+          "expires_at",
+          "incident_ref",
+          "reason",
+          "mode"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalCommandReconciliation": {
+        "type": "object",
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalEvidenceRef"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "proposed_outcome": {
+            "enum": [
+              "COMPLETED_VERIFIED",
+              "FAILED",
+              "UNKNOWN"
+            ]
+          }
+        },
+        "required": [
+          "expected_version",
+          "observations",
+          "evidence_refs",
+          "reason",
+          "proposed_outcome"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "proposed_outcome": {
+                  "const": "COMPLETED_VERIFIED"
+                }
+              },
+              "required": [
+                "proposed_outcome"
+              ]
+            },
+            "then": {
+              "properties": {
+                "observations": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PhysicalScopeRef": {
+        "type": "object",
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "zone_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "asset_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "site_id",
+          "controller_id",
+          "zone_ids",
+          "asset_ids"
+        ],
+        "additionalProperties": false
+      },
+      "ImpairmentCreate": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalScopeRef"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "functions_affected": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "planned_until": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notifications": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "compensatory_plan_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "scope",
+          "functions_affected",
+          "reason",
+          "owner",
+          "planned_until",
+          "notifications",
+          "compensatory_plan_ref"
+        ],
+        "additionalProperties": false
+      },
+      "RestorationCheck": {
+        "type": "object",
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "checklist": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "check_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "result": {
+                  "enum": [
+                    "pass",
+                    "fail",
+                    "not_applicable"
+                  ]
+                },
+                "reason": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "check_id",
+                "result",
+                "reason"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalEvidenceRef"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "witness": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "controller_state_verified": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "expected_version",
+          "checklist",
+          "evidence_refs",
+          "witness",
+          "controller_state_verified"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalTestCreate": {
+        "type": "object",
+        "properties": {
+          "binding_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "test_plan_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "mode": {
+            "enum": [
+              "simulator",
+              "bench",
+              "site"
+            ]
+          },
+          "authorization_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "impairment_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "operator": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "witness": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "binding_id",
+          "binding_revision",
+          "test_plan_ref",
+          "mode",
+          "authorization_ref",
+          "operator",
+          "witness"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "site"
+                }
+              },
+              "required": [
+                "mode"
+              ]
+            },
+            "then": {
+              "required": [
+                "impairment_ref"
+              ]
+            }
+          }
+        ]
+      },
+      "PhysicalTestEvidenceCreate": {
+        "type": "object",
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "step_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "expected": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "observed": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "result": {
+            "enum": [
+              "pass",
+              "fail",
+              "blocked"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalEvidenceRef"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "expected_version",
+          "step_id",
+          "expected",
+          "observed",
+          "result",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      },
+      "CompatibilityAssessmentCreate": {
+        "type": "object",
+        "properties": {
+          "binding_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "hardware": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "asset_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "model": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "serial": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                }
+              },
+              "required": [
+                "asset_id",
+                "model",
+                "serial"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "firmware": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "asset_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "version": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                }
+              },
+              "required": [
+                "asset_id",
+                "version"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "licenses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "certificates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "fat_run_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "sat_run_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "binding_id",
+          "binding_revision",
+          "hardware",
+          "firmware",
+          "licenses",
+          "certificates",
+          "fat_run_refs",
+          "sat_run_refs"
+        ],
+        "additionalProperties": false
+      },
+      "CompatibilityAcceptance": {
+        "type": "object",
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "decision": {
+            "enum": [
+              "accept",
+              "reject"
+            ]
+          },
+          "scope": {
+            "enum": [
+              "bench_only",
+              "field_accepted"
+            ]
+          },
+          "signoffs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "actor_ref": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "role": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "evidence_ref": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                }
+              },
+              "required": [
+                "actor_ref",
+                "role",
+                "at",
+                "evidence_ref"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "open_defects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "severity": {
+                  "enum": [
+                    "critical",
+                    "major",
+                    "minor"
+                  ]
+                },
+                "disposition": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "id",
+                "severity",
+                "disposition"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "sat_run_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "expected_version",
+          "decision",
+          "scope",
+          "signoffs",
+          "open_defects",
+          "sat_run_refs",
+          "reason"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "decision": {
+                  "const": "accept"
+                },
+                "scope": {
+                  "const": "field_accepted"
+                }
+              },
+              "required": [
+                "decision",
+                "scope"
+              ]
+            },
+            "then": {
+              "properties": {
+                "sat_run_refs": {
+                  "minItems": 1
+                },
+                "open_defects": {
+                  "items": {
+                    "properties": {
+                      "severity": {
+                        "not": {
+                          "const": "critical"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "RescueEquipmentMissionCreate": {
+        "type": "object",
+        "properties": {
+          "incident_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "dispatch_task_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "equipment_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "operator_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "mission_scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "capability_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "local_console_required": {
+            "type": "boolean"
+          },
+          "interface_mode": {
+            "enum": [
+              "operator_console_only",
+              "verified_sdk"
+            ]
+          },
+          "flight_mission_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "mode": {
+            "enum": [
+              "actual",
+              "exercise",
+              "test"
+            ]
+          }
+        },
+        "required": [
+          "incident_ref",
+          "dispatch_task_ref",
+          "equipment_ref",
+          "operator_ref",
+          "mission_scope",
+          "capability_revision",
+          "local_console_required",
+          "interface_mode",
+          "limitations",
+          "mode"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "interface_mode": {
+                  "const": "operator_console_only"
+                }
+              },
+              "required": [
+                "interface_mode"
+              ]
+            },
+            "then": {
+              "properties": {
+                "local_console_required": {
+                  "const": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PhysicalPointObservation": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          },
+          "aggregate_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "aggregate_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenant_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "point_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "zone_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "semantic": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "value": {
+            "type": [
+              "boolean",
+              "number",
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "received_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "quality": {
+            "enum": [
+              "GOOD",
+              "BAD",
+              "STALE",
+              "UNKNOWN",
+              "TEST"
+            ]
+          },
+          "controller_mode": {
+            "enum": [
+              "AUTO",
+              "MANUAL",
+              "TEST",
+              "INHIBITED",
+              "UNKNOWN"
+            ]
+          },
+          "maintenance_state": {
+            "enum": [
+              "IN_SERVICE",
+              "IMPAIRED",
+              "TEST",
+              "RESTORATION_PENDING",
+              "UNKNOWN"
+            ]
+          },
+          "cause_effect_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source_event_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "raw_evidence_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "schema_version",
+          "aggregate_id",
+          "aggregate_version",
+          "tenant_id",
+          "site_id",
+          "controller_id",
+          "binding_id",
+          "binding_revision",
+          "point_id",
+          "zone_id",
+          "semantic",
+          "value",
+          "unit",
+          "observed_at",
+          "received_at",
+          "quality",
+          "controller_mode",
+          "maintenance_state",
+          "cause_effect_revision",
+          "source_event_id",
+          "raw_evidence_ref"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "quality": {
+                  "const": "GOOD"
+                }
+              },
+              "required": [
+                "quality"
+              ]
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "not": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PhysicalCommandStateChanged": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          },
+          "aggregate_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "aggregate_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenant_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "command_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "capability_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "previous_state": {
+            "enum": [
+              "DRAFT",
+              "PENDING_APPROVAL",
+              "AUTHORIZED",
+              "SENT",
+              "ACCEPTED",
+              "EXECUTING",
+              "COMPLETED_VERIFIED",
+              "REJECTED",
+              "EXPIRED",
+              "FAILED",
+              "UNKNOWN",
+              "RECONCILED"
+            ]
+          },
+          "state": {
+            "enum": [
+              "DRAFT",
+              "PENDING_APPROVAL",
+              "AUTHORIZED",
+              "SENT",
+              "ACCEPTED",
+              "EXECUTING",
+              "COMPLETED_VERIFIED",
+              "REJECTED",
+              "EXPIRED",
+              "FAILED",
+              "UNKNOWN",
+              "RECONCILED"
+            ]
+          },
+          "controller_receipt_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "feedback_observation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "unknown_reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "received_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalEvidenceRef"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "schema_version",
+          "aggregate_id",
+          "aggregate_version",
+          "tenant_id",
+          "site_id",
+          "binding_revision",
+          "command_id",
+          "capability_revision",
+          "previous_state",
+          "state",
+          "feedback_observation_ids",
+          "observed_at",
+          "received_at",
+          "evidence_refs"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "UNKNOWN"
+                }
+              },
+              "required": [
+                "state"
+              ]
+            },
+            "then": {
+              "required": [
+                "unknown_reason"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "COMPLETED_VERIFIED"
+                }
+              },
+              "required": [
+                "state"
+              ]
+            },
+            "then": {
+              "properties": {
+                "feedback_observation_ids": {
+                  "minItems": 1
+                },
+                "evidence_refs": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PhysicalImpairmentChanged": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          },
+          "aggregate_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "aggregate_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenant_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "impairment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "scope": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalScopeRef"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "functions_affected": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "status": {
+            "enum": [
+              "requested",
+              "approved",
+              "active",
+              "restoration_pending",
+              "verified_closed"
+            ]
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "planned_until": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "restoration_evidence_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalEvidenceRef"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "schema_version",
+          "aggregate_id",
+          "aggregate_version",
+          "tenant_id",
+          "site_id",
+          "impairment_id",
+          "scope",
+          "functions_affected",
+          "status",
+          "owner",
+          "planned_until",
+          "restoration_evidence_refs"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "verified_closed"
+                }
+              },
+              "required": [
+                "status"
+              ]
+            },
+            "then": {
+              "properties": {
+                "restoration_evidence_refs": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        ],
+        "description": "Canonical FRD impairment lifecycle. Expiry without verified restoration stays restoration_pending and escalates; approval and restoration evidence are verified at runtime."
+      },
+      "PhysicalTestCompleted": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          },
+          "aggregate_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "aggregate_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenant_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "test_run_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "test_mode": {
+            "enum": [
+              "simulator",
+              "bench",
+              "site"
+            ]
+          },
+          "authorization_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "result": {
+            "enum": [
+              "pass",
+              "fail",
+              "blocked"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalEvidenceRef"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "restoration_status": {
+            "enum": [
+              "not_applicable",
+              "pending",
+              "verified"
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "aggregate_id",
+          "aggregate_version",
+          "tenant_id",
+          "site_id",
+          "test_run_id",
+          "binding_revision",
+          "test_mode",
+          "authorization_ref",
+          "result",
+          "evidence_refs",
+          "restoration_status"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalBindingAccepted": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          },
+          "aggregate_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "aggregate_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenant_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "acceptance_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "scope": {
+            "enum": [
+              "bench_only",
+              "field_accepted"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalEvidenceRef"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "schema_version",
+          "aggregate_id",
+          "aggregate_version",
+          "tenant_id",
+          "site_id",
+          "binding_id",
+          "binding_revision",
+          "acceptance_ref",
+          "scope",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      },
+      "RescueEquipmentMissionUpdated": {
+        "type": "object",
+        "properties": {
+          "schema_version": {
+            "const": "1.0.0"
+          },
+          "aggregate_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "aggregate_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenant_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "site_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "mission_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "operator_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "interface_mode": {
+            "enum": [
+              "operator_console_only",
+              "verified_sdk"
+            ]
+          },
+          "state": {
+            "enum": [
+              "draft",
+              "review",
+              "approved",
+              "locally_accepted",
+              "executing",
+              "completed",
+              "aborted",
+              "unknown"
+            ]
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalEvidenceRef"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "schema_version",
+          "aggregate_id",
+          "aggregate_version",
+          "tenant_id",
+          "site_id",
+          "mission_id",
+          "operator_ref",
+          "interface_mode",
+          "state",
+          "limitations",
+          "evidence_refs"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "completed"
+                }
+              },
+              "required": [
+                "state"
+              ]
+            },
+            "then": {
+              "properties": {
+                "evidence_refs": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        ],
+        "description": "Canonical FRD rescue-equipment mission lifecycle. Local operator acceptance is distinct from approval and physical completion; completed requires outcome evidence."
+      },
+      "PhysicalReceipt": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "received_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "physical_completion": {
+            "const": false
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "received_at",
+          "state",
+          "physical_completion"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalCommandReceipt": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "received_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "state": {
+            "const": "DRAFT"
+          },
+          "physical_completion": {
+            "const": false
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "received_at",
+          "state",
+          "physical_completion"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalPointView": {
+        "type": "object",
+        "properties": {
+          "point_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "zone_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "binding_revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "semantic": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "access_mode": {
+            "enum": [
+              "read_only",
+              "approved_write"
+            ]
+          },
+          "latest_observation": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PhysicalPointObservation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "point_id",
+          "controller_id",
+          "zone_id",
+          "binding_revision",
+          "semantic",
+          "access_mode",
+          "latest_observation"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalPointPage": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalPointView"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "next_cursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "PhysicalObservationPage": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhysicalPointObservation"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "next_cursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "x-physical-runtime-invariants": [
+    "Bind tenant/region/site from verified identity; compare payload and envelope scope.",
+    "Resolve exact accepted model/firmware/gateway/license/point-map/cause-effect; observe-only or console-only bindings cannot actuate.",
+    "Match expected_version and If-Match, active revisions, source freshness and signed target/parameter approval digest.",
+    "Resolve parameters against approved capability schema and units; enforce expires_at against current server time and capability TTL.",
+    "Recheck local mode, impairment, interlocks and feedback at server and edge. Local protection/manual controls remain autonomous.",
+    "No LLM may approve, configure or issue physical commands.",
+    "Timeout after send becomes UNKNOWN absent proof; no blind retry; fence old writer and reconcile ledger.",
+    "Verify evidence ownership, authenticity, signers and physical completion criterion; schema-valid references are not evidence by themselves.",
+    "FAT/SAT must bind actual exact configuration; simulator cannot establish field_accepted.",
+    "Point-map IDs/raw addresses must be unique within binding and match accepted unit/type semantics."
+  ]
+}

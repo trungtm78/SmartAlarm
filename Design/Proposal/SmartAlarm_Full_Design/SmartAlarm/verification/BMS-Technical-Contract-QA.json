@@ -1,0 +1,1602 @@
+{
+  "status": "PASS",
+  "checks": 397,
+  "passed": 397,
+  "baseline_operations": 44,
+  "added_bms_operations": 23,
+  "added_bms_events": 7,
+  "limitations": [
+    "Schema tests do not authenticate users, resolve evidence, enforce wall-clock expiry or prove vendor/physical effect.",
+    "No BMS drivers implemented, no native vendor API or hardware FAT/SAT executed."
+  ],
+  "results": [
+    {
+      "name": "all44legacyoperationspreserved",
+      "pass": true
+    },
+    {
+      "name": "alllegacyschemaspreserved",
+      "pass": true
+    },
+    {
+      "name": "operationIDsunique",
+      "pass": true
+    },
+    {
+      "name": "BMSProblem validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSProblem missing code rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSProblem missing message rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSProblem missing correlation_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSProblem missing retryable rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSProblem undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSProblem invalidenum code rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing profile_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing profile_version rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing vendor_product rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing vendor_build rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing endpoint_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing credential_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing network_policy_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing mode rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing point_budget rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing request_rate_budget rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing poll_interval_seconds rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate missing owner_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionCreate undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing region_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing profile_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing profile_version rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing capabilities rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing last_success_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing quality rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing mode rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView missing reconciliation_required rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView invalidenum state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView invalidenum quality rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionView invalidenum mode rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionPage validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionPage missing items rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionPage missing next_cursor rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSConnectionPage undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing region_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing job_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing kind rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing status rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing submitted_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing result_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob missing problem rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob invalidenum kind rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSJob invalidenum status rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSDiscoveryRequest validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSDiscoveryRequest missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSDiscoveryRequest missing scope_allowlist rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSDiscoveryRequest missing max_points rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSDiscoveryRequest missing include_history_metadata rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSDiscoveryRequest missing dry_run rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSDiscoveryRequest undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAddress validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSAddress missing protocol rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAddress missing native_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAddress undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAddress invalidenum protocol rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing point_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing asset_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing space_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing zone_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing source_address rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing value_type rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing source_unit rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing canonical_unit rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing scale rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing offset rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing semantic_role rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing stale_after_seconds rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing quality_policy_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing read_allowed rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping missing proposed_write_capability rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointMapping invalidenum value_type rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapDraftCreate validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSMapDraftCreate missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapDraftCreate missing base_map_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapDraftCreate missing points rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapDraftCreate missing import_digest rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapDraftCreate missing change_reason rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapDraftCreate undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing region_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing map_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing mapping_digest rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing point_count rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing created_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision missing validation_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMapRevision invalidenum state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSValidationRequest validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSValidationRequest missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSValidationRequest missing map_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSValidationRequest missing checks rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSValidationRequest missing allow_write_probe rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSValidationRequest undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSEvidenceRef validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSEvidenceRef missing evidence_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSEvidenceRef missing sha256 rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSEvidenceRef missing kind rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSEvidenceRef missing version rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSEvidenceRef missing approved_by rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSEvidenceRef missing approved_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSEvidenceRef undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSEvidenceRef invalidenum kind rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSQualificationCreate validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSQualificationCreate missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSQualificationCreate missing map_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSQualificationCreate missing adapter_build_digest rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSQualificationCreate missing vendor_build rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSQualificationCreate missing proposed_capabilities rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSQualificationCreate missing evidence rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSQualificationCreate missing expires_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSQualificationCreate undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest missing map_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest missing qualification_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest missing approval_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest missing requested_mode rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest missing expected_adapter_digest rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest missing activate_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSActivationRequest invalidenum requested_mode rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing region_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing point_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing map_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing value rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing unit rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing quality rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing source_time rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing received_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing source_address rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView missing provenance_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointView invalidenum quality rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointPage validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSPointPage missing items rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointPage missing next_cursor rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSPointPage undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing region_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing alarm_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing native_alarm_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing occurrence_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing branch_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing point_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing map_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing active_state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing native_ack_state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing smartalarm_reviewed rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing severity rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing source_time rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing received_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing quality rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing incident_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing snapshot_generation rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView missing revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView invalidenum active_state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView invalidenum native_ack_state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView invalidenum severity rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmView invalidenum quality rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmPage validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmPage missing items rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmPage missing next_cursor rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSAlarmPage undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest missing occurrence_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest missing branch_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest missing native_transition_token rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest missing approval_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest missing qualification_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest missing comment rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest missing expires_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSNativeAckRequest undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing region_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing operation_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing resource_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing accepted_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing effect_confirmed rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing feedback_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing operation_kind rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt missing physical_command_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt invalidenum state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSMutationReceipt invalidenum operation_kind rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing map_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing point_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing capability_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing value rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing unit rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing priority rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing qualification_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing cause_effect_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview missing expires_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreview undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing region_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing preview_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing approval_digest rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing effective_owner rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing current_value rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing quality rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing interlock_result rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing required_approvers rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing affected_zone_ids rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult missing expires_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult invalidenum quality rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandPreviewResult invalidenum interlock_result rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandSubmit validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandSubmit missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandSubmit missing preview_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandSubmit missing approval_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandSubmit missing approval_digest rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandSubmit missing qualification_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandSubmit missing expires_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandSubmit undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandReconcile validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandReconcile missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandReconcile missing reason rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandReconcile missing observation_refs rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandReconcile missing action rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandReconcile missing physical_effect rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandReconcile undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandReconcile invalidenum action rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSCommandReconcile invalidenum physical_effect rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSReconciliationRequest validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSReconciliationRequest missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSReconciliationRequest missing scope rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSReconciliationRequest missing cursor_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSReconciliationRequest missing allow_side_effect_replay rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSReconciliationRequest undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSReconciliationRequest invalidenum scope rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest missing action rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest missing reason rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest missing target_adapter_digest rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest missing qualification_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest missing approval_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest missing local_handback_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSLifecycleRequest invalidenum action rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing region_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing heartbeat_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing last_upstream_success_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing backlog_events rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing oldest_backlog_seconds rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing stale_point_count rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing native_subscription_state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing write_authority rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth missing epoch rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth invalidenum state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth invalidenum native_subscription_state rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSHealth invalidenum write_authority rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate missing approval_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate missing qualification_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate missing requests_per_second rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate missing max_inflight_requests rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate missing poll_interval_seconds rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate missing history_backfill_paused rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate missing burst_capacity rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetUpdate undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing applied_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing requests_per_second rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing max_inflight_requests rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing poll_interval_seconds rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing history_backfill_paused rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView missing burst_capacity rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSRequestBudgetView undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing expected_revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing approval_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing qualification_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing enabled rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing quarantined rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing namespace rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing projection_fields rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing echo_marker_required rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing quarantine_on_echo rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate missing target_binding_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportUpdate undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView validexample",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing tenant_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing site_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing connection_id rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing revision rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing applied_at rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing enabled rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing quarantined rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing namespace rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing projection_fields rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing echo_marker_required rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing quarantine_on_echo rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView missing target_binding_ref rejected",
+      "pass": true
+    },
+    {
+      "name": "BMSIncidentExportView undeclaredfield rejected",
+      "pass": true
+    },
+    {
+      "name": "unknown cannot claimconfirmed",
+      "pass": true
+    },
+    {
+      "name": "confirmed withfeedback accepted structurally",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.point_observed.v1 valid",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.point_observed.v1 missingtime rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.point_observed.v1 extra rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.alarm_changed.v1 valid",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.alarm_changed.v1 missingtime rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.alarm_changed.v1 extra rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.command_changed.v1 valid",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.command_changed.v1 missingtime rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.command_changed.v1 extra rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.connection_changed.v1 valid",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.connection_changed.v1 missingtime rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.connection_changed.v1 extra rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.health_changed.v1 valid",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.health_changed.v1 missingtime rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.health_changed.v1 extra rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.map_published.v1 valid",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.map_published.v1 missingtime rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.map_published.v1 extra rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.reconciliation_completed.v1 valid",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.reconciliation_completed.v1 missingtime rejected",
+      "pass": true
+    },
+    {
+      "name": "com.smartalarm.bms.reconciliation_completed.v1 extra rejected",
+      "pass": true
+    },
+    {
+      "name": "unknownBMS eventtype rejected",
+      "pass": true
+    },
+    {
+      "name": "qualifiedread deploymentshape",
+      "pass": true
+    },
+    {
+      "name": "readonly denies ack_alarm",
+      "pass": true
+    },
+    {
+      "name": "readonly denies write_point",
+      "pass": true
+    },
+    {
+      "name": "readonly denies relinquish",
+      "pass": true
+    },
+    {
+      "name": "writeprobe denied",
+      "pass": true
+    },
+    {
+      "name": "autofallback denied",
+      "pass": true
+    },
+    {
+      "name": "disabled manifest valid",
+      "pass": true
+    },
+    {
+      "name": "disabled topcapability denied",
+      "pass": true
+    },
+    {
+      "name": "plaintextcredential field denied",
+      "pass": true
+    },
+    {
+      "name": "readonly safetyclass denies ack_alarm",
+      "pass": true
+    },
+    {
+      "name": "qualifiednotification shape ack_alarm",
+      "pass": true
+    },
+    {
+      "name": "readonly safetyclass denies export_incident",
+      "pass": true
+    },
+    {
+      "name": "qualifiednotification shape export_incident",
+      "pass": true
+    },
+    {
+      "name": "legacyreadonly remainsvalid",
+      "pass": true
+    },
+    {
+      "name": "legacyemptycapabilities stilldenied",
+      "pass": true
+    },
+    {
+      "name": "quarantine preventsactiveexport",
+      "pass": true
+    },
+    {
+      "name": "quarantineddisabled valid",
+      "pass": true
+    },
+    {
+      "name": "healthdata export denied",
+      "pass": true
+    },
+    {
+      "name": "runtimeguard Idempotency",
+      "pass": true
+    },
+    {
+      "name": "runtimeguard BACnet",
+      "pass": true
+    },
+    {
+      "name": "runtimeguard LLM",
+      "pass": true
+    }
+  ]
+}

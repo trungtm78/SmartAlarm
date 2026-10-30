@@ -1,0 +1,528 @@
+﻿ID,Function,Workflow,Screens,Proposal slide
+WF-01,"Provision tenant/region, SSO/MFA, invitations and workspace access without account enumeration.",WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",42
+WF-02,"Manage site/floor/zone, approved plan revisions and location quality.",WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",42
+WF-03,"Durably ingest multi-source events with source/tenant validation, deduplication and quarantine.",WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",42
+WF-04,Review evidence and create/link/split incidents while retaining audit and ownership.,WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",42
+WF-05,"Submit need-specific SOS with manual location, offline pending and reviewed cancellation.",WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",42
+WF-06,Check possible falls with a server timer and escalate non-response without diagnosis.,WF-06,"['C24', 'C25']",43
+WF-07,"Report and dispatch road incidents using location, road direction and unknown injury status.",WF-07,['C26'],43
+WF-08,"Process CAP/disaster advisories with issuer, mode, polygon, lineage and expiry validation.",WF-08,"['C14', 'C15', 'O28', 'O29']",43
+WF-09,"Author and approve exact warning content, audience and locale versions.",WF-09,"['O13', 'O14', 'O15', 'T06']",43
+WF-10,"Track per-channel delivery, authenticated callbacks, bounded retries/fallback and escalation.",WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",43
+WF-11,"Dispatch capable teams, accept tasks atomically, update progress and hand over ownership.",WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",44
+WF-12,Record sourced personal status and share with circles/contacts under consent.,WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",44
+WF-13,"Maintain shelters and approved guidance with versioned, expiring offline packs.",WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",44
+WF-14,"Enroll devices, manage certificates/health, maintain/calibrate and expose coverage gaps.",WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",44
+WF-15,Control devices only within capability/interlock/TTL rules and verified outcome evidence.,WF-15,"['O18', 'O19']",44
+WF-16,"Plan/review drone missions with pilot authority, telemetry and local lost-link policy.",WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",45
+WF-17,"Manage connector lifecycle from manifest/sandbox to activation, rotation and deprecation.",WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",45
+WF-18,"Provide locale/timezone support, residency and verified site/country emergency contacts.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",45
+WF-19,"Apply retention/legal holds, scoped export/deletion and immutable audit.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",45
+WF-20,"Close incidents, analyze/improve response, isolate drills and acknowledge shift handovers.",WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",45
+WF-21,"Reach people without phones through approved PA zones/content, playback, live speech and fallback.",WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",46
+WF-22,"Guide step-by-step using graph/hazard/accessibility constraints, replanning and SOS fallback.",WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",46
+WF-23,Fuse uncertain position evidence and distinguish observed presence from registration.,WF-23,"['H10', 'Q01', 'Q02', 'Q03']",46
+WF-24,"Optimize feasible routes under hard constraints, capacity and cohort balancing.",WF-24,"['Q04', 'Q05', 'Q10']",46
+WF-25,"Ground AI summaries/SOP checks/drafts in evidence; human review, no autonomous actuation.",WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",46
+WF-26,"Manage care profiles, caregiver authority, emergency subsets and audited access.",WF-26,"['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07']",47
+WF-27,Proactively identify/prioritize assistance before SOS using presence and evidence.,WF-27,"['H08', 'H09', 'H12']",47
+WF-28,"Bind model/firmware/capability, point/zone mappings and approved cause-and-effect.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",47
+WF-29,Supervise physical signals with provenance/freshness and independent local protection.,WF-29,"['F01', 'F07', 'F08']",47
+WF-30,"Authorize/execute permitted commands, reconcile UNKNOWN and support local takeover.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",47
+WF-31,"Isolate impairment/tests, assign compensating measures and verify restoration.",WF-31,"['F14', 'F18']",48
+WF-32,"Maintain compatibility/certification, FAT/SAT and configuration-specific capability gates.",WF-32,"['F15', 'F16', 'F17']",48
+WF-33,"Dispatch robot/water-monitor missions with operators, limits and verified outcomes.",WF-33,['F19'],48
+FR-A01,Welcome & region: Choose your safety region; continue.,WF-01,['A01'],49
+FR-A02,"Sign in: Your workspace, securely connected; sign in.",WF-01,['A02'],49
+FR-A03,Verify identity: Confirm this sign-in; verify.,WF-01,['A03'],49
+FR-A04,Workspace switcher: Choose an organization; enter workspace.,WF-01,['A04'],49
+FR-A05,Recover access: Restore access without exposing account existence; send recovery link.,WF-01,['A05'],49
+FR-A06,Accept invitation: Review your organization invitation; accept invitation.,WF-01,['A06'],50
+FR-A07,Permissions & consent: Choose how SmartAlarm supports you; save choices.,WF-01,['A07'],50
+FR-A08,Session & device security: Review devices with access; review session.,WF-01,['A08'],50
+FR-A09,Revoke session: End access on the selected device; revoke selected session.,WF-01,['A09'],50
+FR-A10,Profile & accessibility: Make the interface work for you; save profile.,WF-01,['A10'],50
+FR-C01,"Safety home: A clear next step, when it matters; view active alert.",WF-13,['C01'],51
+FR-C02,Alert detail: Fire reported in Building A; view guidance.,WF-13,['C02'],51
+FR-C03,Evacuation guidance: Use the published evacuation plan; i need assistance.,WF-13,['C03'],51
+FR-C04,Voice & accessible guidance: Read or listen to the same instruction; return to plan.,WF-13,['C04'],51
+FR-C05,SOS type: What kind of help do you need?; continue with selected need.,WF-05,['C05'],51
+FR-C06,SOS location & details: Tell responders where to find you; review SOS.,WF-05,['C06'],52
+FR-C07,Confirm SOS: Send this request to campus command?; send SOS.,WF-05,['C07'],52
+FR-C08,SOS tracking: Your request has been received; contact assigned team.,WF-05,['C08'],52
+FR-C09,Incident conversation: Stay connected to the response team; send message.,WF-05,['C09'],52
+FR-C10,Update or cancel SOS: Update your situation; submit update.,WF-05,['C10'],52
+FR-C11,Confirm personal safety: Let your circle know your status; confirm my safety.,WF-12,['C11'],53
+FR-C12,Safety receipt: Your safety update was saved; view delivery details.,WF-12,['C12'],53
+FR-C13,Notification inbox: Updates that need your attention; open alert.,WF-10,['C13'],53
+FR-C14,Nearby hazards: Know what is happening nearby; view hazard.,WF-08,['C14'],53
+FR-C15,Disaster advisory: Flood watch for Riverside district; view shelter information.,WF-08,['C15'],53
+FR-C16,Shelters & assembly points: Find a designated assistance point; open shelter details.,WF-13,['C16'],54
+FR-C17,Shelter details: North shelter; save shelter offline.,WF-13,['C17'],54
+FR-C18,Offline safety pack: Essential information on your device; review cached plan.,WF-13,['C18'],54
+FR-C19,My circles: The people who should hear from you; open family.,WF-12,['C19'],54
+FR-C20,Circle conversation: Family; view member status.,WF-12,['C20'],54
+FR-C21,Create or edit circle: Choose members and sharing rules; save circle.,WF-12,['C21'],55
+FR-C22,"Circle member status: A status is a report, not a guarantee; send check-in request.",WF-12,['C22'],55
+FR-C23,Emergency contacts: Who should receive your updates?; save contacts.,WF-12,['C23'],55
+FR-C24,Care & fall detection: Configure a supported fall detector; review test alert.,WF-06,['C24'],55
+FR-C25,Possible fall check-in: A possible fall was detected; i need help now.,WF-06,['C25'],55
+FR-C26,Road incident report: Report a road incident safely; review SOS.,WF-07,['C26'],56
+FR-C27,Discreet assistance: Request help with a quiet interface; send discreet request.,WF-05,['C27'],56
+FR-C28,My reports & history: Your previous requests; view request.,WF-05,['C28'],56
+FR-C29,Privacy & data requests: Control optional sharing; review data request.,WF-19,['C29'],56
+FR-C30,Data request receipt: Request DR-202 received; back to privacy.,WF-19,['C30'],56
+FR-R01,Shift & readiness: Ready for your next assignment; view assignments.,WF-11,['R01'],59
+FR-R02,Assignment inbox: Assignments for Rescue 02; open assignment.,WF-11,['R02'],59
+FR-R03,Accept or decline task: Assist person at Room 505; accept assignment.,WF-11,['R03'],59
+FR-R04,Navigation & arrival: Building A · East access; report arrival.,WF-11,['R04'],59
+FR-R05,Field situation: Floor 05 response context; open assistance record.,WF-11,['R05'],59
+FR-R06,"Assistance & triage record: Record observations, not diagnosis; save observation.",WF-11,['R06'],60
+FR-R07,Task status & handover: Hand over with a clear record; submit handover.,WF-11,['R07'],60
+FR-R08,Task completion: Assignment completed; back to shift.,WF-11,['R08'],60
+FR-R09,Team communications: Incident channel · INC-2041; send message.,WF-11,['R09'],60
+FR-R10,Evidence capture: Attach a field observation; queue attachment.,WF-11,['R10'],60
+FR-R11,Offline outbox: Updates waiting to sync; resolve sync conflict.,WF-11,['R11'],61
+FR-R12,Resolve field conflict: A newer assignment state exists; keep note and refresh.,WF-11,['R12'],61
+FR-O01,Command overview: Every signal. One coordinated response; open priority incident.,WF-20,['O01'],62
+FR-O02,Live situation map: See incidents across your authorized region; open incident.,WF-20,['O02'],62
+FR-O03,Signal triage queue: Separate evidence from assumptions; inspect signal.,WF-03,['O03'],62
+FR-O04,Incident workspace: Fire · Building A / Floor 05; open dispatch.,WF-20,['O04'],62
+FR-O05,Signal evidence review: Camera and sensor evidence; create incident from signal.,WF-04,['O05'],62
+FR-O06,Create incident: Establish the incident record; create incident.,WF-04,['O06'],63
+FR-O07,Correlate or split incidents: Review possible duplicate reports; save correlation.,WF-04,['O07'],63
+FR-O08,Dispatch board: Match the task to a capable team; review assignment.,WF-11,['O08'],63
+FR-O09,Assign responder: Confirm ownership of the task; assign team.,WF-11,['O09'],63
+FR-O10,Response timeline: A shared record of decisions; review people status.,WF-11,['O10'],63
+FR-O11,People accountability: Know what is reported and what is unknown; open person.,WF-12,['O11'],64
+FR-O12,Person assistance detail: Alex Morgan · SOS-041; assign assistance.,WF-12,['O12'],64
+FR-O13,Compose warning: Prepare a targeted warning; preview audience.,WF-09,['O13'],64
+FR-O14,Warning preview & audience: Review message and recipients; submit for approval.,WF-09,['O14'],64
+FR-O15,Approve warning: Independent approval before broadcast; approve warning.,WF-09,['O15'],64
+FR-O16,Delivery & escalation: Sending does not mean received; review failed deliveries.,WF-10,['O16'],65
+FR-O17,Delivery failure review: Resolve notification gaps; queue fallback.,WF-10,['O17'],65
+FR-O18,Physical command approval: Review a proposed equipment action; approve command.,WF-15,['O18'],65
+FR-O19,Physical command status: Track controller evidence; refresh command evidence.,WF-15,['O19'],65
+FR-O20,Incident closure review: Resolve outstanding obligations; close incident.,WF-20,['O20'],65
+FR-O21,After-action review: Learn from the response; create improvement action.,WF-20,['O21'],66
+FR-O22,Improvement action: Give follow-up work an owner; save action.,WF-20,['O22'],66
+FR-O23,Drill scheduler: Practice without contacting live recipients; open drill control.,WF-20,['O23'],66
+FR-O24,Drill control room: EXERCISE · Building A evacuation; review drill report.,WF-20,['O24'],66
+FR-O25,Shift handover: Transfer active operational responsibility; record handover.,WF-20,['O25'],66
+FR-O26,Shelter operations: Publish fresh shelter information; edit shelter.,WF-13,['O26'],67
+FR-O27,Edit shelter status: Update a designated shelter; publish update.,WF-13,['O27'],67
+FR-O28,Regional disaster feed: Review trusted public advisories; inspect advisory.,WF-08,['O28'],67
+FR-O29,CAP advisory review: Preserve the issuing authority's context; create local response.,WF-08,['O29'],67
+FR-O30,Search & audit timeline: Find an event without changing history; inspect audit entry.,WF-19,['O30'],67
+FR-S01,Site directory: One location model across industries; open site.,WF-02,['S01'],70
+FR-S02,Site structure: Harbor Campus / Building A; edit location.,WF-02,['S02'],70
+FR-S03,Location editor: Link physical and geographic context; save location.,WF-02,['S03'],70
+FR-S04,Floor plan editor: Publish a reviewed evacuation map; review plan publication.,WF-02,['S04'],70
+FR-S05,Plan approval & versions: Keep published guidance traceable; publish reviewed draft.,WF-02,['S05'],70
+FR-S06,Device inventory: Know which devices can be trusted; open device.,WF-14,['S06'],71
+FR-S07,Device detail & health: CAM-A05-03; review device configuration.,WF-14,['S07'],71
+FR-S08,Provision device: Bind a device to an authorized tenant; enroll device.,WF-14,['S08'],71
+FR-S09,Camera wall: Review selected camera sources; open detection evidence.,WF-14,['S09'],71
+FR-S10,Maintenance & calibration: Keep suppression visible during maintenance; schedule maintenance.,WF-14,['S10'],71
+FR-S11,Rule library: Detection policies by hazard and site; edit rule.,WF-04,['S11'],72
+FR-S12,Rule editor & simulation: Test a rule against recorded events; view simulation results.,WF-04,['S12'],72
+FR-S13,Rule test & approval: Review behavioral changes before release; return rule for changes.,WF-04,['S13'],72
+FR-S14,AI model monitoring: Track detector behavior by site; open review queue.,WF-04,['S14'],72
+FR-I01,Connector catalog: Connect systems through declared capabilities; configure connector.,WF-17,['I01'],74
+FR-I02,Connector setup: Create a scoped connection; test connection.,WF-17,['I02'],74
+FR-I03,Schema mapping: Map source data into a versioned event; run contract tests.,WF-03,['I03'],74
+FR-I04,Connector test console: Prove behavior before enabling traffic; enable connector.,WF-17,['I04'],74
+FR-I05,Connector health: Monitor transport and processing separately; inspect dead letters.,WF-17,['I05'],74
+FR-I06,Dead-letter & replay: Replay only after inspecting the failure; replay event.,WF-17,['I06'],75
+FR-I07,API clients & scopes: Grant only required API access; save client.,WF-17,['I07'],75
+FR-I08,Webhook subscriptions: Deliver filtered incident updates; send test payload.,WF-17,['I08'],75
+FR-I09,Partner exchange agreements: Define cross-organization sharing; save agreement draft.,WF-17,['I09'],75
+FR-I10,IOC exchange history: Verify what a partner actually received; inspect payload.,WF-17,['I10'],75
+FR-I11,Drone fleet: Mission readiness at a glance; plan mission.,WF-16,['I11'],76
+FR-I12,Drone mission planning: Observe the perimeter of Building A; review mission approval.,WF-16,['I12'],76
+FR-I13,Drone preflight & approval: Local authority remains with the pilot; approve mission.,WF-16,['I13'],76
+FR-I14,Drone mission telemetry: DR-01 · observation mission; review mission record.,WF-16,['I14'],76
+FR-I15,Drone mission record: Preserve mission evidence; return to fleet.,WF-16,['I15'],76
+FR-T01,Tenant overview: Operate across regions with clear boundaries; manage organization.,WF-20,['T01'],77
+FR-T02,Organization & regions: Choose residency and local defaults; save settings.,WF-18,['T02'],77
+FR-T03,Users & invitations: Review access across the organization; edit membership.,WF-01,['T03'],77
+FR-T04,Role & scope editor: Separate operational duties; save role.,WF-01,['T04'],77
+FR-T05,On-call & escalation: Escalate when acknowledgment is missing; save escalation.,WF-10,['T05'],77
+FR-T06,Message templates & languages: Publish reviewed instructions per locale; preview template.,WF-09,['T06'],78
+FR-T07,Hazard taxonomy & playbooks: Extend categories without changing the core; save draft playbook.,WF-20,['T07'],78
+FR-T08,Playbook approval: Approve the operational sequence; publish playbook.,WF-20,['T08'],78
+FR-T09,Retention & legal holds: Apply policies by data class and region; save policy draft.,WF-19,['T09'],78
+FR-T10,Privacy request review: Review request DR-202; approve export.,WF-19,['T10'],78
+FR-T11,Audit record: Immutable decision evidence; return to audit search.,WF-19,['T11'],79
+FR-T12,Service health & recovery: Separate degraded service from silent failure; open recovery runbook.,WF-20,['T12'],79
+FR-T13,Recovery runbook: Regional incident data recovery; record drill outcome.,WF-20,['T13'],79
+FR-T14,Usage & subscription: Capacity and commercial visibility; review capacity policy.,WF-20,['T14'],79
+FR-T15,Capacity & quota policy: Protect emergency traffic during bursts; save capacity draft.,WF-20,['T15'],79
+FR-T16,Analytics & export: Measure response without hiding gaps; prepare report.,WF-20,['T16'],80
+FR-T17,Report schedule: Deliver an authorized operational report; save schedule draft.,WF-20,['T17'],80
+FR-X01,No connection / SOS pending: Your SOS has not reached the server; view offline outbox.,WF-05,['X01'],81
+FR-X02,Permission unavailable: Location permission is off; enter location manually.,WF-05,['X02'],81
+FR-X03,No active incidents: No active incidents in this view; review device health.,WF-20,['X03'],81
+FR-X04,Access denied: This record is outside your access scope; choose workspace.,WF-01,['X04'],81
+FR-X05,Service unavailable: This service is temporarily unavailable; open offline pack.,WF-20,['X05'],81
+FR-X06,Unsaved changes & conflict: A newer version was published; review latest version.,WF-02,['X06'],82
+FR-X07,Empty search & filter reset: No matches for these filters; reset search.,WF-20,['X07'],82
+FR-X08,Expired session: Sign in again to continue; sign in.,WF-01,['X08'],82
+FR-X09,Loading & stale data: Refreshing the situation view; return to command.,WF-20,['X09'],82
+FR-X10,Attachment rejected: This attachment could not be accepted; choose another attachment.,WF-11,['X10'],82
+FR-G01,"Regional operations: Production cells, independently operated; inspect regional cell.",WF-20,['G01'],83
+FR-G02,Regional cell detail: EU cell · operational readiness; review recovery readiness.,WF-20,['G02'],83
+FR-G03,Disaster recovery drill: Validate recovery with recorded evidence; record drill evidence.,WF-20,['G03'],83
+FR-G04,Recovery verification: Verify data and ownership before routing; review regional operations.,WF-20,['G04'],83
+FR-G05,Tenant provisioning: Provision a production tenant boundary; review provisioning plan.,WF-18,['G05'],83
+FR-G06,Tenant lifecycle: Northstar · lifecycle controls; request support access.,WF-18,['G06'],84
+FR-G07,Time-bound support access: Request the smallest support scope; submit access request.,WF-19,['G07'],84
+FR-G08,Support access approval: Approve a scoped support session; approve scoped access.,WF-19,['G08'],84
+FR-G09,Release & schema compatibility: Release only compatible contracts; review release gate.,WF-20,['G09'],84
+FR-G10,Release gate & rollback: Verify behavior before promotion; record release decision.,WF-20,['G10'],84
+FR-G11,Security incidents: Respond to platform threats; open security case.,WF-19,['G11'],85
+FR-G12,Security case & containment: Contain the source without hiding coverage gaps; record containment.,WF-19,['G12'],85
+FR-D01,Developer workspace: Build against explicit contracts; open API explorer.,WF-17,['D01'],86
+FR-D02,API explorer: POST /v1/events; run sandbox request.,WF-03,['D02'],86
+FR-D03,Sandbox request results: Inspect the complete receipt; open schema registry.,WF-03,['D03'],86
+FR-D04,Schema registry: Track compatibility before upgrading; view schema contract.,WF-03,['D04'],86
+FR-D05,Connector manifest editor: Declare capabilities explicitly; submit for conformance.,WF-17,['D05'],86
+FR-D06,Conformance certification: Review adapter behavior under failure; approve adapter version.,WF-17,['D06'],87
+FR-D07,Webhook delivery trace: Understand every delivery attempt; review subscription.,WF-10,['D07'],87
+FR-D08,Credential rotation: Rotate credentials without exposing secrets; create rotation request.,WF-17,['D08'],87
+FR-L01,"Language coverage: Three languages, one product meaning; open translation workspace.",WF-18,['L01'],88
+FR-L02,Translation editor: Translate a versioned message; submit translation review.,WF-18,['L02'],88
+FR-L03,Translation review: Review terminology and emergency meaning; approve translation version.,WF-18,['L03'],88
+FR-L04,Voice & pronunciation: Keep speech aligned with reviewed text; save voice configuration.,WF-18,['L04'],88
+FR-L05,Locale fallback policy: Make missing translations visible; save language policy.,WF-18,['L05'],88
+FR-L06,Emergency terminology: Keep terms consistent across channels; review translation editor.,WF-18,['L06'],89
+FR-C31,Circle membership & invitations: Control who receives your updates; manage invitation.,WF-12,['C31'],57
+FR-C32,Invite circle member: Invite someone you trust; create invitation.,WF-12,['C32'],57
+FR-C33,Report or block conversation: Control unwanted social contact; submit report.,WF-12,['C33'],57
+FR-C34,Notification preferences: Choose channels and quiet hours; save preferences.,WF-10,['C34'],57
+FR-O31,Incident archive & reopen: Review closed incidents with full history; review reopening.,WF-20,['O31'],68
+FR-O32,Reopen incident: Record why response needs to resume; reopen incident.,WF-20,['O32'],68
+FR-O33,Federated incident sharing: Share a controlled incident projection; review partner exchange.,WF-17,['O33'],68
+FR-O34,Accessibility assistance queue: Assign support based on reported needs; assign capable unit.,WF-11,['O34'],68
+FR-C35,Voice evacuation navigation: Follow reviewed steps away from the danger area; show next instruction.,WF-22,['C35'],57
+FR-C36,Navigation step & orientation: Use the WEST STAIR sign as your landmark; repeat voice instruction.,WF-22,['C36'],58
+FR-C37,Route change notification: The previous route is no longer recommended; review updated route.,WF-22,['C37'],58
+FR-C38,Position uncertain / no route: We cannot verify a route from your position; request assistance.,WF-22,['C38'],58
+FR-C39,Outdoor hazard avoidance: Leave the affected area using reviewed guidance; view next route step.,WF-22,['C39'],58
+FR-C40,Voice language & guidance settings: Choose how guidance reaches you; save guidance preferences.,WF-22,['C40'],58
+FR-P01,Speaker zones & coverage: Reach people without a smartphone; select broadcast zones.,WF-21,['P01'],90
+FR-P02,Compose rescue announcement: Prepare an announcement for the right area; preview announcement.,WF-21,['P02'],90
+FR-P03,"Preview & approve announcement: Check message, zones and playback behavior; approve sample playback.",WF-21,['P03'],90
+FR-P04,Speaker playback monitoring: Track playback separately from command receipt; inspect speaker health.,WF-21,['P04'],90
+FR-P05,Speaker device & self-test: SPK-A05-08 · playback unknown; open coverage fallback.,WF-21,['P05'],90
+FR-P06,Live rescue microphone: Announce live to approved rescue zones; review live session.,WF-21,['P06'],91
+FR-P07,Drone / vehicle speaker mission: Coordinate mobile public-address support; review mission.,WF-21,['P07'],91
+FR-P08,Audio library & TTS review: Use approved speech in every supported language; edit voice content.,WF-21,['P08'],91
+FR-P09,PA priority & arbitration: Avoid competing announcements; save arbitration policy.,WF-21,['P09'],91
+FR-S15,Evacuation graph editor: Build a versioned indoor and outdoor route graph; review route validation.,WF-22,['S15'],72
+FR-S16,"Route simulation & approval: Test hazards, accessibility and uncertainty; publish reviewed graph.",WF-22,['S16'],73
+FR-O35,Hazard zones & route restrictions: Publish time-bounded movement restrictions; review guidance impact.,WF-22,['O35'],68
+FR-O36,Guidance distribution & receipts: Keep app and speaker instructions consistent; open speaker operations.,WF-22,['O36'],69
+FR-H01,My rescue assistance profile: Tell responders what support you may need; review emergency sharing.,WF-26,['H01'],92
+FR-H02,Health & assistance sharing: Share only what the response team needs; save sharing preferences.,WF-26,['H02'],92
+FR-H03,Caregiver relationships: Review who can help manage your profile; review caregiver authority.,WF-26,['H03'],92
+FR-H04,Caregiver authorization: Verify authority before granting access; approve scoped relationship.,WF-26,['H04'],92
+FR-H05,Dependent person profile: Review the assistance plan with the person; request profile update.,WF-26,['H05'],92
+FR-H06,Profile update & review: Keep assistance information current; submit profile update.,WF-26,['H06'],93
+FR-H07,People & assistance registry: Find people who may need proactive help; open assistance case.,WF-26,['H07'],93
+FR-H08,Proactive rescue queue: No SOS does not mean no need for help; review priority reasons.,WF-27,['H08'],93
+FR-H09,Priority evidence & decision: Review why assistance was recommended; assign proactive assistance.,WF-27,['H09'],93
+FR-H10,Presence & accountability: Distinguish presence from registration; open proactive queue.,WF-23,['H10'],93
+FR-H11,Restricted medical record: Emergency medical subset · audited access; return to assistance.,WF-19,['H11'],94
+FR-H12,Welfare check outcome: Record contact even without an SOS; save welfare observation.,WF-27,['H12'],94
+FR-Q01,Positioning source health: Know where location can be trusted; inspect location quality.,WF-23,['Q01'],95
+FR-Q02,"Position quality & history: Alex · position is evidence, not certainty; open assistance context.",WF-23,['Q02'],95
+FR-Q03,Indoor calibration editor: Align anchors to a versioned floor plan; review route graph.,WF-23,['Q03'],95
+FR-Q04,Evacuation optimization: Compare feasible evacuation strategies; review route comparison.,WF-24,['Q04'],95
+FR-Q05,Route comparison & decision: Understand the trade-offs before publishing; publish guidance version.,WF-24,['Q05'],95
+FR-Q06,AI incident copilot: A grounded summary with visible uncertainty; review AI recommendation.,WF-25,['Q06'],96
+FR-Q07,"AI evidence & approval: Approve an action, not a fluent paragraph; review route decision.",WF-25,['Q07'],96
+FR-Q08,AI policies & model evaluation: Keep model behavior measurable; open model governance.,WF-25,['Q08'],96
+FR-Q09,AI deployment governance: Publish a reviewed model and prompt version; save deployment draft.,WF-25,['Q09'],96
+FR-Q10,Simulation & crowd scenarios: Test strategy without asserting real-world certainty; review route validation.,WF-24,['Q10'],96
+FR-F01,Physical systems overview: Never aggregate stale or impaired systems into a green all-clear; each zone retains its controller and observation time,WF-29,['F01'],97
+FR-F02,"Controller inventory: Inventory discovery grants no write rights; bind exact model, firmware, site and interface evidence before enrollment",WF-28,['F02'],97
+FR-F03,Controller capability detail: Unknown or undocumented capability is read-only; certification and API compatibility are separate evidence,WF-28,['F03'],97
+FR-F04,Signal point mapping: Verify point polarity and meaning against wiring and witnessed tests; a valve contact is not proof of water flow,WF-28,['F04'],97
+FR-F05,Physical zone mapping: Reject ambiguous floor or cross-tenant zone mappings; require signed plan revision and site walkdown,WF-28,['F05'],97
+FR-F06,Cause-and-effect matrix: Only the locally approved cause-and-effect matrix governs physical effects; cloud edits cannot silently rewrite controller logic,WF-28,['F06'],98
+FR-F07,"Physical event detail: Deduplicate source sequence; retain raw evidence and distinguish alarm, supervisory, trouble, test and inferred incident",WF-29,['F07'],98
+FR-F08,"Fire-water status: Pump-running, pressure, valve position and flow are independent signals; unknown water availability blocks readiness claims",WF-29,['F08'],98
+FR-F09,"Controlled release review: Release is blocked without documented allowed operation, installed certification, fresh prerequisites, local permit and controller interlocks",WF-30,['F09'],98
+FR-F10,"Command authorization: Bind distinct requester/approver to exact equipment, operation, parameters, zone, version and expiry; any change invalidates approval",WF-30,['F10'],98
+FR-F11,Execution feedback: Controller acceptance is not physical completion; missing independent feedback becomes unknown with no blind retry,WF-30,['F11'],99
+FR-F12,Unknown-result reconciliation: Reconcile through supported readback and qualified observation; never resend a non-idempotent release to discover the outcome,WF-30,['F12'],99
+FR-F13,Local override & handover: Local override revokes remote authority; reconnection cannot replay commands or restore a revoked lease,WF-30,['F13'],99
+FR-F14,Impairment & test mode: Test mode requires bounded isolation and compensating measures; permit expiry escalates but does not assert restoration,WF-31,['F14'],99
+FR-F15,"Commissioning plan: Freeze BOM, firmware, mappings and matrix; physical tests require site permit, witnesses, isolation and local abort",WF-32,['F15'],99
+FR-F16,Test-run evidence: Expected results cannot populate observed results; failed or unexecuted tests block release and preserve attachments,WF-32,['F16'],100
+FR-F17,"Compatibility & certificate dossier: A product certificate does not certify the installation or cloud adapter; exact scope, revisions and acceptance evidence must match",WF-32,['F17'],100
+FR-F18,Maintenance & restoration: Only witnessed restoration and site approval clear impairment; time elapsed or technician closure alone cannot restore availability,WF-31,['F18'],100
+FR-F19,"Rescue equipment mission: Colossus control API is unverified: dispatch to trained vendor-console operator; no cloud movement, nozzle or casualty actuation",WF-33,['F19'],100
+FR-F20,Physical connector onboarding: Connector activation starts read-only; credentials stay in vault and only signed capability policy can enable an approved write operation,WF-28,['F20'],100
+APP-SYS-001,"Signal/Event: an immutable observation from a source, with observed_at and received_at.",ALL,[],101
+APP-SYS-002,"Incident: an operational record collecting evidence, with severity and an owner.",ALL,[],101
+APP-SYS-003,"SOS: a request for assistance for a person/group, with its own state and an optional incident link.",ALL,[],101
+APP-SYS-004,Warning: a message issued by version and audience.,ALL,[],101
+APP-SYS-005,Delivery: one sending attempt through one channel.,ALL,[],102
+APP-SYS-006,Task: an assignment for a unit.,ALL,[],102
+APP-SYS-007,"Personal status: a sourced statement/status, not an inference of absolute safety.",ALL,[],102
+APP-SYS-008,"Command: an instruction to a device, separate from an event.",ALL,[],102
+APP-SYS-009,Signal — received → validated → correlated / quarantined / rejected — Gateway validates schema/source/tenant; invalid signals do not enter live workflows,ALL,[],103
+APP-SYS-010,Incident — new → triaging → active → contained → resolved → closed — Operator triage; supervisor closes after checklist completion; reopening requires a reason,ALL,[],103
+APP-SYS-011,Incident exception — new/triaging → dismissed; any incident not yet closed → linked — Dismissal requires a reason; linking does not delete IDs or evidence,ALL,[],103
+APP-SYS-012,SOS — submitted → acknowledged → assigned → assisting → resolved — Server receipt differs from operator ACK; responders update only assigned tasks,ALL,[],103
+APP-SYS-013,"SOS cancel — submitted/acknowledged/assigned → cancellation_requested → canceled or continued processing — After dispatch, an operator decision is required; citizens cannot delete the record",ALL,[],104
+APP-SYS-014,"Person status — unknown, in_danger, help_requested, self_reported_safe, responder_confirmed_assisted — Append observations with timestamp/source; may return to danger; safe does not close the incident",ALL,[],104
+APP-SYS-015,Warning — draft → review → approved → sending → active → expired / canceled — New versions require reapproval; authors cannot approve their own work when policy requires separation,ALL,[],104
+APP-SYS-016,Task — offered → accepted → en_route → on_scene → completed — Offer deadline → expired → reassign; decline requires a reason; a task has one current owner,ALL,[],104
+APP-SYS-017,Command — requested → approved → dispatched → accepted → executing → succeeded / failed / unknown / expired — Device acceptance does not prove success; a timeout does not automatically mean physical failure,ALL,[],105
+APP-SYS-018,"Physical asset: an installed, configuration-bound controller, pump, valve, releasing system, or rescue device.",ALL,[],105
+APP-SYS-019,Capability: independently approved observe/control permission for an exact operation.,ALL,[],105
+APP-SYS-020,Physical feedback: observed evidence distinct from transport/device acknowledgment.,ALL,[],105
+APP-SYS-021,Impairment: an authorized reduction in protection requiring compensating measures and verified restoration.,ALL,[],106
+APP-SYS-022,Mission: a supervised equipment operation with local authority and handover.,ALL,[],106
+APP-SYS-023,UI label UNKNOWN maps to the existing machine state unknown; it is not a new terminal success/failure state.,ALL,[],106
+APP-SYS-024,Impairment lifecycle: requested → approved → active → restoration_pending → verified_closed; expiry without restoration stays restoration_pending and escalates.,ALL,[],106
+APP-SYS-025,Mission lifecycle: draft → review → approved → locally_accepted → executing → completed / aborted / unknown; completion requires outcome evidence.,ALL,[],107
+APP-SYS-026,"Every endpoint checks the principal, tenant membership, region, site scope, object ownership, and action permission on the server.",ALL,[],107
+APP-SYS-027,Hiding frontend buttons is not a security control.,ALL,[],107
+APP-SYS-028,Family members see only shared fields; operators see information needed for the incident; platform admins have no automatic data access.,ALL,[],107
+APP-SYS-029,Warning approvers and command approvers have separate permissions.,ALL,[],108
+APP-SYS-030,"Break-glass access requires a reason, expiry, audit, and supervisor notification; it does not bypass tenant boundaries.",ALL,[],108
+APP-SYS-031,Access to out-of-scope objects returns 404 or an error that does not disclose their existence.,ALL,[],108
+APP-SYS-032,"Lists use cursor pagination, stable sorting (created_at,id), and a maximum of 100 records/page.",ALL,[],108
+APP-SYS-033,"All mutations require validation, idempotency when creating effects, and optimistic concurrency on updates.",ALL,[],109
+APP-SYS-034,List screens provide search/filter for appropriate fields and loading/empty/error/denied states; forms provide required/invalid/conflict/unsaved states; details provide stale/not-found states.,ALL,[],109
+APP-SYS-035,Prototype data is not real telemetry.,ALL,[],109
+APP-SYS-036,"Physical control additionally checks the site/controller capability, vendor permission, OT access policy, current impairment/lockout, local authority, and operation-specific approval.",ALL,[],109
+APP-SYS-037,"The UI must show monitor-only, control eligible, inhibited, stale, and UNKNOWN distinctly.",ALL,[],110
+APP-SYS-038,Engineering access does not imply incident command authority.,ALL,[],110
+APP-SYS-039,"Segment OT from public networks; allowlist supported endpoints and operations, use controlled maintenance access, and retain credential/change audit.",ALL,[],110
+APP-SYS-040,"Local automatic detection, pump starting, and releasing protection must not depend on cloud approval or connectivity.",ALL,[],110
+APP-SYS-041,"An admin creates a tenant with an immutable home_region; selects locale/timezone, configures SSO/MFA, and invites memberships by site.",WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",111
+APP-SYS-042,Users select a workspace before entering the console.,WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",111
+APP-SYS-043,Recovery returns the same message for existing and nonexistent emails to reduce enumeration.,WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",111
+APP-SYS-044,"Invitations are single-use, have a TTL, and enforce email/domain policy.",WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",111
+APP-SYS-045,"When SSO is unavailable, a controlled break-glass account is available within the appropriate tenant; MFA is not automatically bypassed.",WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",112
+APP-SYS-046,AC: expired invitations are rejected; revoked roles cannot use old tokens after the proposed 60 s revocation propagation limit; switching workspaces does not display the previous tenant's cache.,WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",112
+APP-SYS-047,Site admins create a country/region/site/building/floor/zone/road-segment/geofence graph.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",112
+APP-SYS-048,Not every site must have floors.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",112
+APP-SYS-049,Device binding checks that the device belongs to the same tenant.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",113
+APP-SYS-050,"Floor plans have revisions, scale, exits, accessibility, and an approver.",WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",113
+APP-SYS-051,Each incident stores the plan revision used.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",113
+APP-SYS-052,"Locations carry method, accuracy, and age; GPS does not automatically infer a floor.",WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",113
+APP-SYS-053,"Without positioning, users can enter a location manually and send an SOS.",WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",114
+APP-SYS-054,AC: plans without a reviewer cannot be published; zones with active incidents cannot be hard-deleted; routes without freshness information show “not verified” and are not presented as certainly safe.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",114
+APP-SYS-055,"Adapters check credentials, tenant binding, schema, clock skew, and payload limits, then durably store the event before issuing a receipt.",WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",114
+APP-SYS-056,"A duplicate key (tenant,source,event_id) returns the previous receipt.",WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",114
+APP-SYS-057,"Late events are retained for audit, but live rules evaluate TTL by hazard.",WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",115
+APP-SYS-058,Unknown sources/permissions/units/locations are quarantined.,WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",115
+APP-SYS-059,"Inputs support HTTPS/CloudEvents, MQTT adapters, CAP, camera metadata, wearables, telematics, and manual entry.",WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",115
+APP-SYS-060,AC: replaying the same ID 100 times creates one event; two tenants using the same event ID do not collide; sources spoofing a tenant are blocked; stale events do not initiate commands.,WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",115
+APP-SYS-061,"Versioned rules provide candidate incidents by time window, zone, hazard, and source.",WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",116
+APP-SYS-062,"Operators review evidence and confidence, then create or link incidents; splitting preserves audit records and source links.",WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",116
+APP-SYS-063,Different hazards are not combined merely because they are nearby; cross-hazard relationships have a type (caused_by/nearby/possible_duplicate).,WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",116
+APP-SYS-064,Camera detection is labeled “possible fire”; fire panel policy may immediately initiate a response through a site-approved workflow without waiting for AI.,WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",116
+APP-SYS-065,AC: merging does not lose SOS/tasks; splitting does not duplicate dispatch; rule changes do not rewrite history; dismissal requires a reason.,WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",117
+APP-SYS-066,"Users select a category or Other/Unknown; enter/update location, notes, and the number of people.",WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",117
+APP-SYS-067,The emergency flow does not require a complete profile.,WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",117
+APP-SYS-068,The server returns an SOS ID and received_at after commit.,WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",117
+APP-SYS-069,The client displays pending when the request is only stored locally.,WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",118
+APP-SYS-070,"Resending uses client_request_id, TTL, and reconciled state.",WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",118
+APP-SYS-071,Threat/discreet requests default to no sound and no group fan-out; ordinary assistance uses rule-based severity rather than treating every SOS as P1.,WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",118
+APP-SYS-072,AC: network loss does not show “received”; resending does not create a second SOS; users who deny GPS can still enter location manually; changing category does not lose the ID.,WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",118
+APP-SYS-073,An approved detector emits possible_fall; the app displays a proposed 30 s check-in with “I'm OK” and “Get help now”.,WF-06,"['C24', 'C25']",119
+APP-SYS-074,"Without a response, the server timer continues even if the app closes, creating an operator/caregiver request according to consent.",WF-06,"['C24', 'C25']",119
+APP-SYS-075,"An offline device produces unknown status, not a conclusion that the person fell.",WF-06,"['C24', 'C25']",119
+APP-SYS-076,"Check-in duration is configurable by service/group, with an accessible alternative; it is not automatically used as a diagnosis.",WF-06,"['C24', 'C25']",119
+APP-SYS-077,AC: escalation continues after the app is killed; a late “I'm OK” updates the record without silently withdrawing an ongoing task; false positives retain a review reason.,WF-06,"['C24', 'C25']",120
+APP-SYS-078,"Reports/telematics provide position, heading if available, road segment, vehicle count, and injuries=unknown.",WF-07,['C26'],120
+APP-SYS-079,Correlation distinguishes opposite traffic directions and bridge levels.,WF-07,['C26'],120
+APP-SYS-080,Users can submit a minimal quick report and add details later.,WF-07,['C26'],120
+APP-SYS-081,"Dispatch targets configured units; without an agreement, the system does not automatically call a public emergency endpoint.",WF-07,['C26'],121
+APP-SYS-082,AC: missing injury data is accepted as unknown; one acceleration sample does not auto-confirm a collision; sensitive data goes only to the assigned team.,WF-07,['C26'],121
+APP-SYS-083,"Connectors allowlist issuers and validate XML/schema, identifiers, sent, status, scope, info/area, and expiry.",WF-08,"['C14', 'C15', 'O28', 'O29']",121
+APP-SYS-084,Deduplicate sender+identifier; Update/Cancel references the previous version and must preserve lineage.,WF-08,"['C14', 'C15', 'O28', 'O29']",121
+APP-SYS-085,Official warnings and local responses are separate objects.,WF-08,"['C14', 'C15', 'O28', 'O29']",122
+APP-SYS-086,Expired warnings do not continue live broadcast; cancellation does not delete previously sent versions.,WF-08,"['C14', 'C15', 'O28', 'O29']",122
+APP-SYS-087,Polygons use CAP's coordinate order and are explicitly converted to GeoJSON; lat/lon must not be implicitly swapped.,WF-08,"['C14', 'C15', 'O28', 'O29']",122
+APP-SYS-088,AC: Test/Exercise does not enter the Actual flow; unauthorized issuers are quarantined; Update replaces the active version while retaining the previous one; users outside the polygon are not selected because of coordinate errors.,WF-08,"['C14', 'C15', 'O28', 'O29']",122
+APP-SYS-089,"Authors select the incident, area/site/group, severity, languages, content, and expiry.",WF-09,"['O13', 'O14', 'O15', 'T06']",123
+APP-SYS-090,Audience preview is a snapshot of eligible recipients and exclusion reasons; an independent approver signs the version.,WF-09,"['O13', 'O14', 'O15', 'T06']",123
+APP-SYS-091,Changing content/audience after approval requires reapproval.,WF-09,"['O13', 'O14', 'O15', 'T06']",123
+APP-SYS-092,Rapid break-glass issuance requires special permission and audit; not every P1 must wait for approval if the site playbook permits preapproved templates.,WF-09,"['O13', 'O14', 'O15', 'T06']",123
+APP-SYS-093,Machine translation is draft-only; safety content must be reviewed.,WF-09,"['O13', 'O14', 'O15', 'T06']",124
+APP-SYS-094,AC: approval of v3 does not permit sending v4; an audience ID targeting the wrong tenant is blocked; scheduled warnings recheck expiry and permissions at issuance.,WF-09,"['O13', 'O14', 'O15', 'T06']",124
+APP-SYS-095,Notifications create individual delivery attempts by recipient/channel/version; queued/submitted/provider_accepted/delivered/read/human_ack/failed/unknown remain distinct states.,WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",124
+APP-SYS-096,Provider callbacks are authenticated and replay-protected.,WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",124
+APP-SYS-097,An ACK deadline triggers durable escalation with an owner and maximum steps.,WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",125
+APP-SYS-098,Channel fallback does not automatically send private content by SMS; SMS templates are minimal and use authenticated links when needed.,WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",125
+APP-SYS-099,Push notifications cannot guarantee bypassing the operating system's silent mode.,WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",125
+APP-SYS-100,"AC: provider acceptance does not increase the human ACK count; duplicate callbacks do not duplicate escalation; provider failures use bounded retries and alternate providers, and 429 respects retry_after.",WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",125
+APP-SYS-101,"Dispatchers filter units by capability, availability, site authorization, and latest location.",WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",126
+APP-SYS-102,ETA is only a timestamped estimate.,WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",126
+APP-SYS-103,Offers have a deadline; units accept atomically using a version.,WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",126
+APP-SYS-104,"If nobody accepts, escalate; do not automatically mark dispatch as completed.",WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",126
+APP-SYS-105,"Responders transition through en_route/on_scene, record observations and handover, and complete tasks; task completion does not close the incident.",WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",127
+APP-SYS-106,AC: two dispatchers cannot assign two owners to one task; offline acceptance must remain pending until server confirmation; reassignment retains the previous responder's notes as observations.,WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",127
+APP-SYS-107,"Safety reports store status, person, incident scope, observed_at, reporter, and location precision.",WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",127
+APP-SYS-108,"Fan-out reaches all eligible subscribed groups at report time, plus verified contacts; recipients are deduplicated.",WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",127
+APP-SYS-109,Each group receives status; detailed location requires specific consent.,WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",128
+APP-SYS-110,Revoked memberships/consent are rechecked before delivery.,WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",128
+APP-SYS-111,"Group chat includes membership, abuse reporting, and individual blocking for social interaction; blocking cannot disable mandatory site warnings under the published policy.",WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",128
+APP-SYS-112,AC: one contact in 3 groups does not receive 3 identical SMS messages; location consent off does not leak coordinates; a safe report does not close a building incident; unknown is not counted as safe.,WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",128
+APP-SYS-113,"Operators maintain shelter status, estimated capacity, timestamp, accessibility, and valid_until.",WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",129
+APP-SYS-114,"Offline packs store versioned, expiring plans/guidance/contacts and do not guarantee live routes.",WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",129
+APP-SYS-115,Voice uses the same approved text with a transcript and pause/replay; autoplay must not expose discreet mode.,WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",129
+APP-SYS-116,"Without a verified route, display only the plan and approved guidance rather than automatically drawing an optimized fire-avoidance route.",WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",129
+APP-SYS-117,AC: a shelter past valid_until becomes unknown; missing capacity data is not shown as 0; offline plans display their age.,WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",130
+APP-SYS-118,Enrollment tokens are single-use; device certificates support rotation/revocation.,WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",130
+APP-SYS-119,Heartbeat thresholds depend on device class; stale/disconnected is distinct from the area's safety status.,WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",130
+APP-SYS-120,"Maintenance suppression has a start/end, reason, approver, and replacement coverage; blind spots are always visible.",WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",130
+APP-SYS-121,"When maintenance ends, monitoring automatically resumes and is logged.",WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",131
+APP-SYS-122,AC: revoked certificates cannot ingest; suppression does not continue after maintenance ends; firmware upgrades do not automatically run fleet-wide during an active incident.,WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",131
+APP-SYS-123,Physical maintenance additionally follows WF-31: ending a software suppression window does not prove that physical protection has been restored; required local checks and acknowledgment remain mandatory.,WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",131
+APP-SYS-124,"Commands are limited to declared capabilities; parameter schema, zone, expiry, interlock, authorized approver, and local controller policy are all mandatory.",WF-15,"['O18', 'O19']",131
+APP-SYS-125,The web interface cannot send arbitrary raw commands.,WF-15,"['O18', 'O19']",132
+APP-SYS-126,"Gateway receipt, device accepted, executing, and verified result are separate.",WF-15,"['O18', 'O19']",132
+APP-SYS-127,An unknown timeout does not blindly retry a non-idempotent command.,WF-15,"['O18', 'O19']",132
+APP-SYS-128,Cloud actuation does not replace certified local protection loops.,WF-15,"['O18', 'O19']",132
+APP-SYS-129,Closed-head sprinklers typically activate thermally; the prototype does not assume software can open individual sprinkler heads.,WF-15,"['O18', 'O19']",133
+APP-SYS-130,AC: commands past TTL do not execute after reconnect; zone mismatches are rejected; acceptance without feedback remains unknown/awaiting confirmation; simulators have no live credentials.,WF-15,"['O18', 'O19']",133
+APP-SYS-131,WF-30 refines this command workflow for installed suppression and rescue equipment.,WF-15,"['O18', 'O19']",133
+APP-SYS-132,"Wet-pipe monitoring, releasing-controller requests, pump requests, and mobile equipment actions remain separate capabilities; use WF-28 binding and WF-32 acceptance before enabling any control.",WF-15,"['O18', 'O19']",133
+APP-SYS-133,Fleet adapters primarily provide telemetry/media and health.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",134
+APP-SYS-134,"A mission draft includes purpose, incident, route/geofence, altitude reference, pilot, clearance, weather check, and lost-link policy.",WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",134
+APP-SYS-135,The local pilot decides deployment according to the integrated system's capabilities.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",134
+APP-SYS-136,Approval does not mean takeoff has occurred.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",134
+APP-SYS-137,AI detectors do not automatically issue TAKEOFF.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",135
+APP-SYS-138,Abort/return commands require capability support and flight-stack confirmation; the UI does not promise universal cancellation.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",135
+APP-SYS-139,AC: no approval without pilot/clearance; stale telemetry disables position-dependent commands; link loss shows unknown while local policy continues; mission evidence has hash/provenance.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",135
+APP-SYS-140,Install manifest → configure secret reference → map → sandbox test → approve → activate → monitor → rotate/deprecate.,WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",135
+APP-SYS-141,"Connectors run with least privilege, outbound allowlists, quota/backpressure, and a kill switch.",WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",136
+APP-SYS-142,"DLQ replay requires a reason, a valid schema, and retention of the original ID; command replay is blocked by default.",WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",136
+APP-SYS-143,Cross-tenant exchange requires an agreement and payload allowlist.,WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",136
+APP-SYS-144,AC: adapter failures do not block direct SOS; oversized payloads return 413; incompatible major schemas are quarantined; secrets do not appear in logs/exports.,WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",136
+APP-SYS-145,"Use UTC for storage, IANA timezones for display/schedules, BCP47 locales, Unicode, and E.164 phone numbers according to country.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",137
+APP-SYS-146,"The UI includes RTL layout tests, pluralization, and pseudo-localization.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",137
+APP-SYS-147,Do not hardcode one worldwide emergency number; the emergency contact registry is verified by country/site.,WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",137
+APP-SYS-148,"Residency covers databases, object storage, backups, logs, support, and exports; global routing does not carry raw SOS data.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",137
+APP-SYS-149,"AC: schedules crossing DST do not send twice, using a schedule occurrence ID; long locales do not obscure CTAs; changing region is a reviewed migration, not merely editing a dropdown.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",138
+APP-SYS-150,"Data classes have retention policies, legal holds, and deletion jobs with reports.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",138
+APP-SYS-151,"Export/deletion verifies the requester, scope, and exceptions; held evidence is not deleted.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",138
+APP-SYS-152,"Audit is append-only with actor, action, object/version, reason, time, correlation, and before/after digests.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",138
+APP-SYS-153,"Do not embed tokens, raw secrets, or complete medical notes in audit records.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",139
+APP-SYS-154,AC: precise-location access is logged; deletion does not remove held records; exports exclude other tenants; break-glass access automatically revokes at TTL expiry.,WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",139
+APP-SYS-155,"Closure requires an open SOS/task check, disposition of people with unknown status, partner handover, a reason, and a supervisor.",WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",139
+APP-SYS-156,An “All clear” warning is a separate action.,WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",139
+APP-SYS-157,"Drills require environment+mode isolation in the broker, credentials, and recipient directory; a banner alone is insufficient.",WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",140
+APP-SYS-158,"Reports separate transport latency, operator latency, and response latency; samples with missing data explicitly state their denominator.",WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",140
+APP-SYS-159,AC: safety check-ins do not close incidents; drills do not call live webhooks/actuators; shift handovers have incoming acknowledgment; reports are deidentified when the user lacks PII permission.,WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",140
+APP-SYS-160,"Bind the installed regional model, serial number, firmware, gateway, license, vendor permission, and compatibility dossier before activating an adapter.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",140
+APP-SYS-161,"Import and independently review point addresses, semantic states, units/scaling, site/zone associations, and cause-and-effect revisions.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",141
+APP-SYS-162,"Distinguish wet-pipe, pre-action/deluge, pump, and mobile rescue assets.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",141
+APP-SYS-163,Unknown capability defaults to monitor-only; onboarding cannot create control authority.,WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",141
+FR-PHY-01,FR-PHY-01: retain the exact equipment/interface identity and approved evidence revision.,WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",141
+FR-PHY-02,"FR-PHY-02: validate point and zone mapping against physical labels and reject cross-tenant, duplicate, or unresolved mappings.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",142
+FR-PHY-03,FR-PHY-03: version the cause-and-effect and read/control capability contracts; changes require impact review and reacceptance where affected.,WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",142
+APP-SYS-167,AC: an unbound firmware or license change suspends dependent control; a wrong-zone mapping cannot be activated; wet-pipe heads are not offered as individually controllable outputs.,WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",142
+APP-SYS-168,"Ingest manufacturer-supported panel, pump, valve, release, waterflow, power, and link states with provenance and quality.",WF-29,"['F01', 'F07', 'F08']",142
+APP-SYS-169,Preserve controller alarm priority and local protection when cloud/edge is unavailable.,WF-29,"['F01', 'F07', 'F08']",143
+APP-SYS-170,"Separate demand, motor running, release output, valve position, waterflow, and confirmed field observations.",WF-29,"['F01', 'F07', 'F08']",143
+APP-SYS-171,Missing or stale values remain unknown; do not turn a link fault into a safe indication.,WF-29,"['F01', 'F07', 'F08']",143
+FR-PHY-04,"FR-PHY-04: store source/receive time, source address, unit, quality, mapping revision, and raw evidence reference for each observation.",WF-29,"['F01', 'F07', 'F08']",143
+FR-PHY-05,FR-PHY-05: supervise freshness/link health using approved device/site thresholds and expose coverage gaps and compensating measures.,WF-29,"['F01', 'F07', 'F08']",144
+FR-PHY-06,FR-PHY-06: correlate without suppressing local protective actions; deduplicate transport replay while retaining state transitions and restoration evidence.,WF-29,"['F01', 'F07', 'F08']",144
+APP-SYS-175,AC: stale pump-running data is visibly uncertain; pressure alone does not confirm discharge; loss of cloud leaves local automatic protection available; duplicate telemetry does not create duplicate incidents.,WF-29,"['F01', 'F07', 'F08']",144
+APP-SYS-176,"Only a site-accepted, explicitly control-capable operation may create a physical request.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",144
+APP-SYS-177,"Validate actor authority, incident/site/zone, approved parameter envelope, current physical readiness, local interlocks, command expiry, and the policy's independent approval requirements.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",145
+APP-SYS-178,Site/controller authority prevails.,WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",145
+APP-SYS-179,"The system never assumes that BACnet/Modbus writes, a relay, or a network ACK authorizes or proves suppression.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",145
+APP-SYS-180,AI cannot originate autonomous release/start/motion actions.,WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",145
+FR-PHY-07,FR-PHY-07: reject monitor-only or undocumented operations server-side and at the edge; preserve the approved request and command-policy version.,WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",146
+FR-PHY-08,"FR-PHY-08: enforce TTL, unique request ID, duplicate-effect prevention, and bounded delivery; do not replay expired requests after reconnect or blindly retry non-idempotent actions.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",146
+FR-PHY-09,"FR-PHY-09: distinguish transport receipt, device acceptance, execution, and physical feedback; evaluate success only against operation-specific approved evidence.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",146
+FR-PHY-10,FR-PHY-10: display UNKNOWN for missing/conflicting outcomes; assign reconciliation to a named operator and support local override and acknowledged manual handover without erasing history.,WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",146
+APP-SYS-185,AC: ACK without required feedback cannot become succeeded; duplicate/expired requests produce no new effect; loss of feedback opens reconciliation; local override blocks conflicting remote control.,WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",147
+APP-SYS-186,"An authorized impairment identifies equipment, affected zones, time window, reason, owner, compensating protection, and the local test/lockout arrangement.",WF-31,"['F14', 'F18']",147
+APP-SYS-187,"Keep test and production credentials, routes, and outputs distinct; a UI banner is insufficient.",WF-31,"['F14', 'F18']",147
+APP-SYS-188,Expiry prompts restoration verification and escalation rather than claiming protection has returned.,WF-31,"['F14', 'F18']",147
+APP-SYS-189,Local safety ownership remains explicit during shift handover.,WF-31,"['F14', 'F18']",148
+FR-PHY-11,FR-PHY-11: require approved impairment and physical isolation/lockout evidence before relevant tests; block unauthorized production commands while preserving agreed local protection arrangements.,WF-31,"['F14', 'F18']",148
+FR-PHY-12,"FR-PHY-12: close an impairment only after required physical state checks, restoration evidence, and responsible-person acknowledgment; track overdue restoration and residual gaps.",WF-31,"['F14', 'F18']",148
+APP-SYS-192,AC: a simulated test cannot reach a live output; expiration without verification remains impaired/awaiting restoration; maintenance handover has an incoming owner.,WF-31,"['F14', 'F18']",148
+APP-SYS-193,"Maintain a configuration-specific dossier of manufacturer documents, interface permissions, regional listings/limitations, point maps, electrical/hydraulic dependencies, approved cause-and-effect, FAT, SAT, commissioning, calibration, and operator training.",WF-32,"['F15', 'F16', 'F17']",149
+APP-SYS-194,Manufacturer research and simulator results are not field acceptance.,WF-32,"['F15', 'F16', 'F17']",149
+APP-SYS-195,No whole-system certification is inferred from a component listing.,WF-32,"['F15', 'F16', 'F17']",149
+FR-PHY-13,"FR-PHY-13: track document revision, provenance, reviewer, expiry where applicable, and acceptance scope per model/firmware/site/capability.",WF-32,"['F15', 'F16', 'F17']",149
+FR-PHY-14,"FR-PHY-14: gate production capability activation on signed required tests and approvals; equipment, firmware, mapping, or policy changes trigger impact assessment and invalidate affected acceptance until revalidated.",WF-32,"['F15', 'F16', 'F17']",150
+APP-SYS-198,AC: missing SAT blocks production control even after simulator PASS; an unrelated site's certificate cannot satisfy the gate; changed firmware leaves unaffected read capabilities available only if their contract remains valid.,WF-32,"['F15', 'F16', 'F17']",150
+APP-SYS-199,"A mission binds the actual supported robot or water-monitor interface, purpose, incident, qualified operator, operating area, route/no-go zones, water/energy supply, telemetry freshness, and lost-link/local-emergency policy.",WF-33,['F19'],150
+APP-SYS-200,Observe-only equipment remains observe-only.,WF-33,['F19'],150
+APP-SYS-201,Approval is not movement or discharge.,WF-33,['F19'],151
+APP-SYS-202,The local operator determines deployment and remains able to take over according to the vendor-supported design; no universal stop/return function is promised.,WF-33,['F19'],151
+FR-PHY-15,"FR-PHY-15: require mission-specific authority, capability evidence, operating envelope, and readiness checks; separate movement, aiming, and water discharge permissions.",WF-33,['F19'],151
+FR-PHY-16,"FR-PHY-16: record telemetry and action feedback, enforce approved lost-link behavior locally, and provide acknowledged manual handover and outcome evidence; never infer rescue completion from command acceptance.",WF-33,['F19'],151
+APP-SYS-205,AC: missing vendor-supported control or operator blocks dispatch of physical actions; stale position blocks dependent aiming/motion; link loss shows UNKNOWN and the approved local policy; a handover retains responsibility and evidence.,WF-33,['F19'],152
+NFR-01,NFR-01 — Production regional core 99.95% monthly — Synthetic + server metrics; include dependency failures affecting users,ALL,[],152
+NFR-02,"NFR-02 — Ingest p95 ≤ 2 s; fan-out enqueue p95 ≤ 5 s — Load of 100 event/s steady, 1,000 event/s for 60 s; 10,000 recipients/incident; metadata payload ≤ 64 KB",ALL,[],152
+NFR-03,NFR-03 — Priority fairness — P1 reserved queues; tenant noisy-neighbor test; bulk telemetry must not block SOS,ALL,[],152
+NFR-04,"NFR-04 — Multi-AZ target RPO 0 for committed records, RTO ≤ 15 minutes — Kill primary, verify durable commit and failover; commit only after testing",ALL,[],153
+NFR-05,"NFR-05 — Regional disaster RPO ≤ 5 minutes, RTO ≤ 60 minutes — Restore/cold-region drill within residency policy; immutable backup restore",ALL,[],153
+NFR-06,"NFR-06 — WCAG 2.2 AA target — Keyboard, screen reader, zoom, contrast, and error announcements; no certification claim yet",ALL,[],153
+NFR-07,"NFR-07 — Web interactive p95 ≤ 3 s on the reference network — 4G simulation, representative low-end device; map loads separate from core content",ALL,[],153
+NFR-08,"NFR-08 — Offline durable outbox and stale visibility — Airplane mode, app kill, reconnect, clock skew, and reassignment conflict",ALL,[],154
+NFR-09,"NFR-09 — Security isolation — Tenant/object permission tests, upload validation, credential revocation, audit coverage",ALL,[],154
+NFR-10,NFR-10 — Backward compatibility — API/event contract tests; additive minor changes; parallel major versions with sunset,ALL,[],154
+APP-SYS-216,"Reference loads are engineering targets, not measured benchmarks.",ALL,[],154
+APP-SYS-217,Media uploads use object storage separately from the critical event pipeline.,ALL,[],155
+APP-SYS-218,NFRs apply to the product to be built; the static prototype does not demonstrate that these requirements are met.,ALL,[],155
+NFR-11,NFR-11 — Local automatic protection independent of cloud/edge availability — Witness cloud/link/adapter failure without inhibiting the approved local protection sequence,ALL,[],155
+NFR-12,"NFR-12 — Configuration-specific telemetry/feedback timing and quality — Signed freshness, delivery, and feedback deadlines per device/site; measure separately; UNKNOWN on deadline violation",ALL,[],155
+NFR-13,"NFR-13 — OT and command isolation — Prove monitor-only enforcement, denied writes, least privilege, maintenance access control, and no test-to-live path",ALL,[],156
+NFR-14,NFR-14 — Configuration-specific physical assurance — Complete provenance and signed required FAT/SAT; changes invalidate affected capability acceptance,ALL,[],156
+APP-SYS-223,These physical NFRs do not substitute software latency targets for physical response or hydraulic performance.,ALL,[],156
+APP-SYS-224,"Device/site timing and pass criteria must be approved before tests, and results must identify firmware, hardware, and operating conditions.",ALL,[],156
+APP-SYS-225,"Run complete Fire, Disaster, Fall, Road, discreet SOS, and generic assistance flows; test duplicates, late data, out-of-order data, expiry, network partitions, unauthorized tenants, quota saturation, provider failures, and restore.",ALL,[],157
+APP-SYS-226,"For physical/drone integrations, simulator PASS does not replace on-site acceptance.",ALL,[],157
+APP-SYS-227,The detailed matrix is in Acceptance-Matrix.csv.,ALL,[],157
+APP-SYS-228,Screen-level acceptance is in Screen-Specifications.md and linked to each mockup ID.,ALL,[],157
+APP-SYS-229,"The physical gate additionally executes PHY-01–PHY-16 and AC-F01–AC-F20, checks every FR-PHY-01–FR-PHY-16 requirement, and requires the approved physical test arrangement and authorized site team.",ALL,[],158
+APP-SYS-230,Acceptance-Matrix.csv contains 65 cross-system and 233 screen cases (298 total).,ALL,[],158
+APP-SYS-231,Designed cases are not execution evidence.,ALL,[],158
+APP-SYS-232,"Supplier support, physical permits, local operator readiness, and signed FAT/SAT are dependencies for enabling production control; missing evidence leaves the relevant capability unavailable or monitor-only.",ALL,[],158
+APP-SUP-01,"Orchestrate PA using exact message/zone digest, priority, repeat and expiry; arbitrate competing zone leases.",WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",159
+APP-SUP-02,"Separate controller ACK, buffering/playing/completed and acoustic evidence; faults create coverage gaps/fallback.",WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",159
+APP-SUP-03,"Live mic needs explicit action, approved zones, short-lived tokens, indicators, heartbeat and timeout stop.",WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",159
+APP-SUP-04,Media gateway bridges WebRTC to supported vendor protocols; isolate OT and cache checksummed/versioned audio.,WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",159
+APP-SUP-05,Preserve local fire priority; scope stop to one broadcast; never replay expired messages after reconnect.,WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",160
+APP-SUP-06,"Validate floor/heading quality; uncertain position uses landmarks/SOS, never invented left/right guidance.",WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",160
+APP-SUP-07,Exclude forbidden/blocked/unknown-critical edges and expired destinations; accessibility is a hard constraint.,WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",160
+APP-SUP-08,Dijkstra/A* selects feasible routes only; penalties never bypass exclusions; no path means assistance/refuge.,WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",160
+APP-SUP-09,"Withdraw hazard-cut routes immediately; replan with hysteresis, cancel old TTS; stale cache uses approved procedures.",WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",161
+APP-SUP-10,"Align vi/en/ja text/voice, lexicon, pronunciation, transcript and visual/haptic alternatives.",WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",161
+APP-SUP-11,Route API returns LOCATION_UNCERTAIN/NO_VERIFIED_ROUTE when unverified; arrival never automatically marks safe.,WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",161
+APP-SUP-12,"Ingest GNSS/QR/NFC/BLE/UWB/Wi-Fi/manual by capability/permission, calibration and coordinate frame.",WF-23,"['H10', 'Q01', 'Q02', 'Q03']",161
+APP-SUP-13,Fuse floor hypotheses/outliers/motion/quality; never average floors or discard provenance on correction.,WF-23,"['H10', 'Q01', 'Q02', 'Q03']",162
+APP-SUP-14,Separate registered/expected/observed/last-seen/absent/unknown presence; beacon loss never means absent/safe.,WF-23,"['H10', 'Q01', 'Q02', 'Q03']",162
+APP-SUP-15,Produce one primary and up to two alternatives with reasons/assumptions/validity; diversify bottlenecks where feasible.,WF-24,"['Q04', 'Q05', 'Q10']",162
+APP-SUP-16,Balance cohorts/capacity using uncertain occupancy/throughput; regional strategy changes need operator approval.,WF-24,"['Q04', 'Q05', 'Q10']",162
+APP-SUP-17,"Keep simulations separate from observed hazards; show assumptions and ETA intervals/confidence, not false precision.",WF-24,"['Q04', 'Q05', 'Q10']",163
+APP-SUP-18,AI retrieves approved SOPs and returns structured evidence/cutoff/uncertainty; unsupported claims cannot instruct.,WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",163
+APP-SUP-19,"AI only compares planner routes read-only; no graph edits, warning approval, commands, diagnosis or incident closure.",WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",163
+APP-SUP-20,"Policy proxy blocks injection/excess scope; regional models use minimal health data and redacted logs, no chain-of-thought.",WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",163
+APP-SUP-21,Evaluate grounding/injection/leakage/unsafe action/locale/abstention before promotion; review feedback before training.,WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",164
+APP-SUP-22,AI timeouts cannot block alarms/SOS/dispatch; streaming text cannot reach PA before validation/approval.,WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",164
+APP-SUP-23,Separate identity from functional-needs profiles; preserve source/review/consent; self-report is not medically verified.,WF-26,"['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07']",164
+APP-SUP-24,Verify guardians/caregivers with revocable field scopes; dispatchers/responders receive only necessary emergency subsets.,WF-26,"['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07']",164
+APP-SUP-25,Audit health access and scoped/time-bound/reasoned break-glass; social circles cannot see medical notes/impairments.,WF-26,"['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07']",165
+APP-SUP-26,"Build candidates from presence/impact/needs/no confirmation; uncertain presence triggers welfare checks, not asserted location.",WF-27,"['H08', 'H09', 'H12']",165
+APP-SUP-27,Explain priority by exposure/ability/isolation/route/contact/confidence; exclude wealth/nationality and age alone.,WF-27,"['H08', 'H09', 'H12']",165
+APP-SUP-28,Deduplicate ProactiveCase by incident/person/policyVersion; later SOS links the case without duplicate dispatch.,WF-27,"['H08', 'H09', 'H12']",165
+APP-SUP-29,Escalate non-response without confirming injury; location corrections retain evidence/audit and trigger reevaluation.,WF-27,"['H08', 'H09', 'H12']",166

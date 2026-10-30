@@ -1,0 +1,259 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physical-Device-Catalog · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="index.html">SmartAlarm / Design Library</a><a href="English/Physical-Device-Catalog.html">English</a><button onclick="window.print()">In / Lưu PDF</button></header><main><div class="document-meta">BASELINE 2.0 · 23/10/2026 · THIẾT KẾ ĐỂ REVIEW</div><h1 id="smartalarm-danh-muc-tuong-thich-thiet-bi-vat-ly">SmartAlarm — Danh mục tương thích thiết bị vật lý</h1><figure class="physical-figure"><img src="assets/proposal-v3/physical.png" alt="Physical firefighting and rescue integration"><figcaption>Hình khái niệm — tích hợp đề xuất, không phải hệ thống đã lắp đặt.</figcaption></figure>
+
+<p>Ngày nghiên cứu: <strong>2026-10-23</strong>. Trạng thái: <strong>ứng viên đã đối chiếu tài liệu; chưa tích hợp phần cứng, mua sắm hoặc nghiệm thu hiện trường</strong>. Danh mục bổ sung WF-03, WF-14, WF-15 và WF-17. Bản tiếng Việt và tiếng Anh có cùng phạm vi và kết luận.</p>
+
+<h2 id="1-quyet-đinh-trien-khai">1. Quyết định triển khai</h2>
+
+<p>Dùng giao diện được nhà sản xuất hỗ trợ để giám sát tủ báo cháy, bộ điều khiển bơm và tủ điều khiển xả hiện có. Giữ chức năng bảo vệ tự động cục bộ hoạt động độc lập với SmartAlarm. Kết nối giao thức, thuộc tính BACnet cho phép ghi, tín hiệu bơm chạy và xác nhận nước xả là bốn năng lực khác nhau. Không năng lực riêng lẻ nào chứng minh SmartAlarm được phép kích hoạt chữa cháy an toàn hoặc nước đã tới vùng nguy hiểm được bảo vệ.</p>
+
+<p>Sáu ứng viên dưới đây là phương án thay thế hoặc thành phần bổ trợ, không phải một tổ hợp đã được chứng nhận. Tình trạng cung ứng, firmware chính xác, phê duyệt theo khu vực, phụ kiện và thao tác được phép cần hãng xác nhận theo dự án. Chứng nhận thành phần của hãng không chứng nhận toàn bộ hệ thống SmartAlarm lắp đặt.</p>
+
+<h2 id="2-sau-ung-vien-cu-the">2. Sáu ứng viên cụ thể</h2>
+
+<table>
+<thead>
+<tr>
+  <th>ID / cấu hình sản phẩm</th>
+  <th>Giao diện và phản hồi có tài liệu</th>
+  <th>Ranh giới lệnh và điểm chưa xác nhận</th>
+  <th>Cách dùng SmartAlarm đề xuất</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>PHY-01 — Siemens Cerberus PRO FC922 / FC924; FCA2034-A1 S2 hoặc FCA2035-A1 S3</td>
+  <td>FC922/FC924 được xác định trong <a href="https://sid.siemens.com/v/u/A6V10349710">datasheet A6V10349710</a>. <a href="https://support.industry.siemens.com/cs/attachments/109789153/A6V10349679.pdf">Datasheet phụ kiện Mỹ A6V10349679</a> mô tả S2 BACnet chỉ giám sát; S3 vẫn chỉ giám sát BACnet, thêm điều khiển qua remote viewer riêng.</td>
+  <td>Không đồng nhất điều khiển remote viewer với điều khiển BACnet. Cần SKU khu vực, firmware, phạm vi license, PICS/export object và trạng thái hỗ trợ. Chưa chứng minh năng lực kích hoạt xả chữa cháy.</td>
+  <td>Đọc sự kiện/trạng thái qua edge adapter tại site; giữ ID tủ/điểm và chất lượng truyền thông.</td>
+</tr>
+<tr>
+  <td>PHY-02 — Honeywell NOTIFIER BACNET-GW-3 với NFS-320 / NFS2-640 / NFS2-3030 và giao diện NFN phù hợp</td>
+  <td><a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/literature-and-specs/datasheets/notifier-us/hon-ba-fire-dn-6877.pdf?download=false">DN-6877:C, 2014-08-04</a>: object sự kiện BACnet/IP; tối đa 14 node NFN, 15,000 object; kết nối NCM/HS-NCM và cấu hình trình duyệt.</td>
+  <td><a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/regulatory-documents/fire-listings/notifier-us/ba-fire-LS10014-051NF-E.pdf">Listing C6, 2019-02-21</a> giới hạn chức năng bổ trợ, không dùng kích hoạt thông báo đại chúng. Xác nhận cung ứng/hỗ trợ hiện tại, firmware, chassis, nguồn và tủ tương thích chính xác.</td>
+  <td>Giám sát bổ trợ; không thay báo cháy chính hoặc coi đây là đường lệnh chữa cháy đã kiểm chứng.</td>
+</tr>
+<tr>
+  <td>PHY-03 — Simplex BACpac 4100-6111 với 4100ES / 4100U</td>
+  <td><a href="https://docs.johnsoncontrols.com/simplex/api/khub/documents/c9ua0rLXB39jxpiKI54Hsw/content">S4100-0051 Rev.6, 10/2020, trang 1–4</a>: bản 15,000 điểm; module RS-232 4100-6038 mua riêng; BACnet IP/MS/TP hoặc Modbus TCP/RTU. Giao diện trạng thái bổ trợ.</td>
+  <td>PICS có WriteProperty; không chứng minh quyền ra lệnh xả tại tủ. Cần mapping điểm thực tế và ý nghĩa thao tác ghi được phép. Xác nhận phần mềm và phần cứng mua riêng.</td>
+  <td>Adapter chỉ đọc trạng thái cho cấu hình tủ đã ràng buộc cụ thể.</td>
+</tr>
+<tr>
+  <td>PHY-04 — Tornatech GPX điều khiển bơm chữa cháy điện, profile truyền thông V2</td>
+  <td><a href="https://www.tornatech.com/wp-content/uploads/2018/08/GPx-V2.pdf">Bulletin Modbus GPx-V2</a> có phản hồi motor chạy, điện áp/dòng điện, áp suất và lỗi; cũng có mục mang tên khởi động từ xa/thủ công và tự động.</td>
+  <td>Map ngắn chưa mô tả đủ hàm ghi, điều kiện bật, tính lưu giữ hoặc retry. Không tự áp map V2 cho V2.1/firmware hiện tại. Cần hậu tố model, tùy chọn và hợp đồng register hiện hành.</td>
+  <td>Giám sát sức khỏe và nhu cầu bơm; tắt năng lực ra lệnh tới khi được hãng hỗ trợ và dự án duyệt kiểm chứng.</td>
+</tr>
+<tr>
+  <td>PHY-05 — Tornatech GPD điều khiển bơm chữa cháy diesel, profile truyền thông V2</td>
+  <td><a href="https://www.tornatech.com/wp-content/uploads/2018/08/GPD-V2.pdf">Bulletin Modbus GPD-V2</a> riêng có động cơ chạy, ắc quy, áp suất, lỗi diesel và mục khởi động.</td>
+  <td>Không hoán đổi map GPX/GPD. Xác nhận firmware, giao diện động cơ, cảm biến lắp thực tế, register ghi và hành vi chế độ tự động/thủ công. Cảm biến thiếu phải giữ unknown.</td>
+  <td>Giám sát mức sẵn sàng diesel và trạng thái bơm bằng profile adapter riêng.</td>
+</tr>
+<tr>
+  <td>PHY-06 — Potter PFC-4410G3, mã hàng 3006735</td>
+  <td><a href="https://www.pottersignal.com/product/datasheet/5401600_PFC-4410G3.pdf">5401600 Rev.B, 4/23</a>: tủ xả pre-action/deluge; relay alarm, trouble, supervisory và xác nhận waterflow/discharge; lập trình Ethernet; P-Link RS-485 độc quyền.</td>
+  <td>Ethernet/P-Link không chứng minh API xả công khai. Xác nhận định mức output, chương trình chọn, solenoid tương thích, dây phản hồi và module relay tùy chọn. Không coi output xả là xác nhận nước chảy.</td>
+  <td>Đọc chỉ thị relay được duyệt qua giao diện có giám sát; tủ xả cục bộ làm chủ trình tự chữa cháy.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Nghiên cứu chưa xác lập license giao diện bổ sung cho PHY-02–06; điều này không có nghĩa mọi cấu hình hoặc công cụ kỹ thuật đều miễn phí hay đã bao gồm. Cần BOM và xác nhận license đầy đủ.</p>
+
+<h2 id="3-phat-hien-ve-phien-ban-va-vong-đoi-anh-huong-trien-khai">3. Phát hiện về phiên bản và vòng đời ảnh hưởng triển khai</h2>
+
+<p><strong>Khác biệt khu vực Siemens.</strong> <a href="https://sid.siemens.com/api/khub/documents/IFS6rQE0Z_N43rKnuiSpCg/content">Catalog Siemens FC72x năm 2018</a> mô tả FCA2034-A1 có lệnh BACnet bên thứ ba cơ bản và FCA2035-A1 có lệnh mở rộng. Khác cách diễn đạt phụ kiện Mỹ phía trên. Vì vậy khóa adapter phải gồm họ tủ theo khu vực và firmware, không chỉ “Cerberus PRO” hoặc nhãn license. Chưa xác minh lệnh chính xác tại một site cụ thể.</p>
+
+<p><strong>Ràng buộc mạng NOTIFIER.</strong> <a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/manuals-and-guides/installation-guides/notifier-us/ba-fire-LS10014-000NF-E.pdf">Manual LS10014-000NF-E:D2, 2019-04-30, trang 9</a> yêu cầu IP tĩnh, không hỗ trợ NAT. Topology đề xuất: đặt BACnet client trong mạng site được phép, xuất sự kiện chuẩn hóa ra ngoài; không giả định cấu hình cloud VPN/NAT được hỗ trợ.</p>
+
+<p><strong>Có giao diện khởi động bơm vật lý thật.</strong> <a href="https://www.tornatech.com/pdf/Manuals/en/GPX-EN.pdf">Manual GPX V2026.09 r0, trang 16</a> của Tornatech mô tả đóng tiếp điểm khởi động thủ công từ xa và mở tiếp điểm khởi động tự động/deluge từ xa. Đây là đầu vào vật lý của controller, không chứng minh API cloud. <a href="https://www.tornatech.com/product/gpx-series-electric-fire-pump-controllers-3/">Trang GPX</a> cũng nêu tiếp điểm cảnh báo từ xa. Cần bản vẽ đấu dây của công trình, định mức tiếp điểm, giám sát và hành vi khi lỗi trước khi thiết kế I/O.</p>
+
+<p><a href="https://www.tornatech.com/pdf/Manuals/en/GPD-EN.pdf">Manual GPD V2026.09 r0, trang 13–15</a> riêng cũng mô tả khởi động từ xa bằng tiếp điểm. Dừng tự động mặc định không bật và cần cơ quan có thẩm quyền cho phép; commissioning phải do đơn vị được ủy quyền thực hiện. SmartAlarm không được thêm chức năng dừng từ xa chưa kiểm chứng.</p>
+
+<p><strong>Chọn đúng thế hệ tủ xả.</strong> <a href="https://www.pottersignal.com/special-hazard/releasing-panels">Catalog tủ xả chính thức Potter</a> đánh dấu PFC-4410RC ngừng vòng đời sản phẩm. G3 là ứng viên mua mới, cần hãng xác nhận. <a href="https://www.pottersignal.com/sprinkler/4410-conventional-releasing-panel">Trang sản phẩm</a> nêu giám sát email là tính năng không thuộc UL listing; không dùng làm đường truyền sự kiện an toàn. Dùng <a href="https://www.pottersignal.com/product/manual/5403751_PFC-4410G3.pdf">manual G3 5403751 Rev.G, 11/25</a> và <a href="https://www.pottersignal.com/product/manual/5403615_Compatible_Releasing_Device_List.pdf">danh sách thiết bị xả tương thích</a> để yêu cầu xác nhận tổ hợp tủ/solenoid/van chính xác. Danh mục này không phê duyệt cặp van nào.</p>
+
+<h2 id="4-hop-đong-tich-hop-đe-xuat-thiet-ke-smartalarm-khong-phai-tuyen-bo-hang">4. Hợp đồng tích hợp đề xuất — thiết kế SmartAlarm, không phải tuyên bố hãng</h2>
+
+<p>Mỗi lắp đặt ràng buộc <code>manufacturer + regional_model + controller_serial + firmware + gateway_model + gateway_firmware + license + point_map_revision</code>. Mỗi điểm quan sát lưu địa chỉ nguồn, loại ngữ nghĩa, đơn vị kỹ thuật, timestamp nguồn nếu có, timestamp nhận, chất lượng và trạng thái truyền thông. Revision point map phải review và rollback được.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Ngữ nghĩa đề xuất</th>
+  <th>Bằng chứng cần có</th>
+  <th>Không được suy ra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>fire_alarm_active</code></td>
+  <td>Mapping điểm/trạng thái tủ hợp lệ</td>
+  <td>Confidence camera riêng lẻ không phải báo động của tủ</td>
+</tr>
+<tr>
+  <td><code>pump_start_demand</code></td>
+  <td>Tiếp điểm/register nhu cầu có tài liệu</td>
+  <td>Motor thực sự đang chạy</td>
+</tr>
+<tr>
+  <td><code>pump_running</code></td>
+  <td>Phản hồi chạy hợp lệ của controller</td>
+  <td>Đủ áp suất, lưu lượng hoặc đã dập cháy</td>
+</tr>
+<tr>
+  <td><code>system_pressure</code></td>
+  <td>Transducer lắp thực tế, đơn vị/scaling, hiệu chuẩn</td>
+  <td>Lưu lượng tại một vùng bảo vệ cụ thể</td>
+</tr>
+<tr>
+  <td><code>release_output_active</code></td>
+  <td>Phản hồi mạch/output xả có tài liệu</td>
+  <td>Van đã chuyển động hoặc nước đã xả</td>
+</tr>
+<tr>
+  <td><code>waterflow_confirmed</code></td>
+  <td>Phản hồi waterflow/áp suất đã commissioning và gắn zone</td>
+  <td>Đã dập cháy hoặc mọi vòi phun đều hoạt động</td>
+</tr>
+<tr>
+  <td><code>communication_lost</code></td>
+  <td>Giám sát link và timeout</td>
+  <td>Normal, safe, bơm dừng hoặc tác động vật lý thất bại</td>
+</tr>
+</tbody>
+</table>
+
+<p>Năng lực adapter mặc định là <code>observe</code>. Khả năng <code>request_start</code> hoặc lệnh khác cần hồ sơ capability ký duyệt riêng, mô tả thẩm quyền, thao tác chính xác, điều kiện, interlock cục bộ, TTL, chống trùng, phản hồi và khôi phục. Phản hồi chưa chắc chắn giữ <code>unknown</code>; reconnect không phát lại yêu cầu vật lý hết hạn. Không thêm reset/silence/disable/stop chỉ vì giao thức cho phép ghi.</p>
+
+<h2 id="5-rfi-gui-hang-truoc-mua-sam">5. RFI gửi hãng trước mua sắm</h2>
+
+<table>
+<thead>
+<tr>
+  <th>RFI</th>
+  <th>Trả lời/bằng chứng bằng văn bản cần có</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RFI-01 — Định danh và vòng đời</td>
+  <td>SKU khu vực, còn đặt hàng được không, ngày hết hỗ trợ, ma trận firmware, thay thế và phụ tùng</td>
+</tr>
+<tr>
+  <td>RFI-02 — Bộ cung cấp đầy đủ</td>
+  <td>Gateway/module, license, công cụ kỹ thuật, nguồn/backup, tủ, cách ly, bảo vệ và phạm vi commissioning được ủy quyền</td>
+</tr>
+<tr>
+  <td>RFI-03 — Hợp đồng đọc</td>
+  <td>PICS/register map hiện hành, loại sự kiện/trạng thái, giới hạn polling/subscription, quy ước địa chỉ, scaling, thứ tự/thời gian và ngữ nghĩa mất kết nối</td>
+</tr>
+<tr>
+  <td>RFI-04 — Hợp đồng lệnh</td>
+  <td>Thao tác cho phép/cấm rõ ràng; hàm/thuộc tính ghi; cấu hình bật; ngữ nghĩa đầu vào vật lý; ưu tiên cục bộ; TTL/replay; xác nhận và giới hạn rollback</td>
+</tr>
+<tr>
+  <td>RFI-05 — Tổ hợp vật lý</td>
+  <td>Tổ hợp van/solenoid/controller được duyệt, tải điện, trách nhiệm thiết kế thủy lực, vị trí cảm biến áp/lưu lượng, ma trận cause-and-effect và giám sát</td>
+</tr>
+<tr>
+  <td>RFI-06 — Nghiệm thu theo khu vực</td>
+  <td>Quy chuẩn/tiêu chuẩn và phiên bản được áp dụng, listing thành phần và giới hạn, phê duyệt của đơn vị thiết kế, yêu cầu AHJ/site; không tuyên bố tuân thủ quốc tế chung</td>
+</tr>
+<tr>
+  <td>RFI-07 — An ninh mạng/hỗ trợ</td>
+  <td>Phân đoạn mạng, credential, cập nhật được hỗ trợ, xử lý lỗ hổng, truy cập bảo trì, logging, hành vi khi gián đoạn và quy trình khôi phục</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="6-bang-chung-commissioning-va-cong-đua-vao-su-dung">6. Bằng chứng commissioning và cổng đưa vào sử dụng</h2>
+
+<p>Dưới đây là yêu cầu nghiệm thu SmartAlarm đề xuất, không thay kiểm thử bắt buộc của hãng hoặc địa phương.</p>
+
+<ol>
+<li>Ghi serial, firmware, bằng chứng license, bản vẽ được duyệt, point map và cấu hình controller baseline. Phê duyệt toàn bộ ma trận cause-and-effect.</li>
+<li>Trong bố trí thử được kiểm soát, xác minh từng chỉ thị alarm, supervisory, fault, nhu cầu/bơm chạy, áp suất, output xả và waterflow với hệ thống vật lý. Ghi trạng thái dự kiến/thực tế và timestamp.</li>
+<li>Thử đứt link, restart adapter, dữ liệu cũ, sự kiện trùng, thay đổi nguồn/backup và reconnect. Xác minh bảo vệ tự động cục bộ vẫn hoạt động, sự kiện cũ không tạo lệnh ngoài ý muốn.</li>
+<li>Nếu có lệnh được phép, kiểm tra điều kiện, đường từ chối, quyền ưu tiên cục bộ, mất phản hồi và khôi phục đã duyệt với đội hiện trường đủ năng lực. Không xả thật chỉ để kiểm tra kết nối phần mềm.</li>
+<li>Có biên bản nghiệm thu nhà máy/site ký duyệt, hồ sơ hiệu chuẩn, đào tạo vận hành, chủ bảo trì và quy trình suy giảm/khôi phục bảo vệ được duyệt. Chỉ đánh dấu adapter <code>field_accepted</code> cho cấu hình chính xác đó.</li>
+</ol>
+
+<p>Khuyến nghị mua sắm: trước hết ràng buộc với họ tủ/controller đang lắp, rồi mua giao diện được hỗ trợ và tùy chọn cần thiết. Với hệ thống chữa cháy nước xây mới, đơn vị thiết kế PCCC phải đặc tả hệ thủy lực và điều khiển xả trước khi chọn adapter SmartAlarm. Chưa mua hàng hoặc liên hệ hãng.</p>
+
+<h2 id="7-so-bang-chung-va-gioi-han-truy-cap">7. Sổ bằng chứng và giới hạn truy cập</h2>
+
+<p>Tất cả nguồn dưới đây được xem ngày <strong>2026-10-23</strong>. Ngày tài liệu là ngày revision của nhà xuất bản, không phải ngày truy cập. Có tài liệu trực tuyến không chứng minh còn hàng hoặc còn hỗ trợ. Chỉ nguồn nhà sản xuất hỗ trợ các tuyên bố sản phẩm; không dùng tuyên bố đại lý.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Bằng chứng</th>
+  <th>Tài liệu / ngày của hãng</th>
+  <th>Truy cập và phạm vi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>E01</td>
+  <td><a href="https://sid.siemens.com/v/u/A6V10349710">Siemens A6V10349710</a>; <a href="https://support.industry.siemens.com/cs/attachments/109789153/A6V10349679.pdf">A6V10349679</a></td>
+  <td>Tiêu đề/đoạn phụ kiện chính thức được lập chỉ mục; tải PDF trực tiếp bị chặn. Cần lấy revision cùng báo giá.</td>
+</tr>
+<tr>
+  <td>E02</td>
+  <td><a href="https://sid.siemens.com/api/khub/documents/IFS6rQE0Z_N43rKnuiSpCg/content">Catalog Siemens FC72x</a>, ©2018</td>
+  <td>Đoạn license chính thức được lập chỉ mục; toàn bộ file vượt giới hạn trình duyệt. Chỉ chứng minh khác biệt khu vực, không phải hợp đồng lệnh hiện hành.</td>
+</tr>
+<tr>
+  <td>E03</td>
+  <td><a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/literature-and-specs/datasheets/notifier-us/hon-ba-fire-dn-6877.pdf?download=false">NOTIFIER DN-6877:C</a>, 2014-08-04</td>
+  <td>Các đoạn datasheet chính thức được lập chỉ mục.</td>
+</tr>
+<tr>
+  <td>E04</td>
+  <td><a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/regulatory-documents/fire-listings/notifier-us/ba-fire-LS10014-051NF-E.pdf">NOTIFIER listing C6</a>, 2019-02-21; <a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/manuals-and-guides/installation-guides/notifier-us/ba-fire-LS10014-000NF-E.pdf">manual D2</a>, 2019-04-30</td>
+  <td>Đoạn giới hạn/cấu hình chính thức được lập chỉ mục; không tải trực tiếp được. Yêu cầu bản kiểm soát và revision hiện hành.</td>
+</tr>
+<tr>
+  <td>E05</td>
+  <td><a href="https://docs.johnsoncontrols.com/simplex/api/khub/documents/c9ua0rLXB39jxpiKI54Hsw/content">Simplex S4100-0051 Rev.6</a>, 10/2020</td>
+  <td>Đọc PDF chính thức sáu trang; kiểm tra bảng lựa chọn và PICS.</td>
+</tr>
+<tr>
+  <td>E06</td>
+  <td><a href="https://www.tornatech.com/wp-content/uploads/2018/08/GPx-V2.pdf">Tornatech GPx-V2</a>; <a href="https://www.tornatech.com/wp-content/uploads/2018/08/GPD-V2.pdf">GPD-V2</a></td>
+  <td>Đọc map chính thức hai trang; xác minh V2, chưa xác lập ngày revision in trên tài liệu. Thư mục upload trong URL không bảo đảm revision.</td>
+</tr>
+<tr>
+  <td>E07</td>
+  <td><a href="https://www.tornatech.com/pdf/Manuals/en/GPX-EN.pdf">Tornatech GPX</a>; <a href="https://www.tornatech.com/pdf/Manuals/en/GPD-EN.pdf">GPD</a>, cùng V2026.09 r0</td>
+  <td>Đọc manual chính thức, đặc biệt khởi động/dừng và commissioning; manual hiện tại tự nó không xác nhận map V2 cũ.</td>
+</tr>
+<tr>
+  <td>E08</td>
+  <td><a href="https://www.pottersignal.com/product/datasheet/5401600_PFC-4410G3.pdf">Potter 5401600 Rev.B</a>, 4/23; <a href="https://www.pottersignal.com/product/manual/5403751_PFC-4410G3.pdf">5403751 Rev.G</a>, 11/25</td>
+  <td>Truy xuất datasheet/manual chính thức; xác minh giao diện và revision.</td>
+</tr>
+<tr>
+  <td>E09</td>
+  <td><a href="https://www.pottersignal.com/sprinkler/4410-conventional-releasing-panel">Trang Potter G3</a>; <a href="https://www.pottersignal.com/special-hazard/releasing-panels">catalog tủ xả</a>; <a href="https://www.pottersignal.com/product/manual/5403615_Compatible_Releasing_Device_List.pdf">danh sách tương thích</a></td>
+  <td>Đọc trang hãng hiện hành; link danh sách tương thích đã truy xuất nhưng lần tải tiếp bị timeout, nên không khẳng định cặp van/solenoid cụ thể.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Khoảng trống bằng chứng là cổng mua sắm, không phải chứng minh không tương thích. Nghiên cứu xác định đường tích hợp khả thi và giới hạn cụ thể; không báo cáo đã hoàn thành interoperability hoặc chứng nhận triển khai.</p>
+
+<h2 id="ux2-physical-giam-sat-truc-quan-va-phan-hoi-vat-ly">UX2-PHYSICAL · Giám sát trực quan và phản hồi vật lý</h2>
+
+<p>Console v2 dùng sơ đồ đường ống, van, bơm, vùng phủ và trạng thái thiết bị có nhãn. Yêu cầu lệnh, gateway tiếp nhận và hiệu ứng vật lý quan sát được là ba trạng thái riêng. Phản hồi chưa rõ hoặc đã cũ phải có ký hiệu, thời điểm; không hiển thị thành công màu xanh. Thao tác xem xét trong prototype không vận hành thiết bị. Quyền ưu tiên tại chỗ, liên động và điều kiện nghiệm thu thiết bị trong tài liệu này tiếp tục áp dụng.</p>
+
+<p>Kiểm tra F08–F20 khi mất liên lạc, trạng thái tại chỗ xung đột hoặc phản hồi trễ. Truy cập sơ đồ không được bỏ qua quyền điều khiển. Loa báo phát không chứng minh mọi người đã nghe. Drone/robot nhận nhiệm vụ không chứng minh đã đến hoặc cứu được người.</p>
+
+<p>Tham chiếu <a href="UIUX-Design.html">thiết kế UI/UX</a>, <a href="Screen-Specifications.html">đặc tả màn hình</a> và <a href="UX-Redesign-Audit.html">rà soát thiết kế</a>.</p>
+</main></body></html>

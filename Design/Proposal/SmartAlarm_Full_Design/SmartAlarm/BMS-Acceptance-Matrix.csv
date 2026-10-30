@@ -1,0 +1,49 @@
+﻿Test ID,Workflow,Trigger,Expected evidence,Owner,Status
+BMS-T01,WF-34,Đổi tên/type/unit/enum point,Giữ ID khi rename; cách ly semantics sai và lệnh bị ảnh hưởng.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T02,WF-34,ID native trùng giữa site/tenant,"Không ghép, lộ dữ liệu hoặc ACK nhầm.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T03,WF-35,Alarm normal trước ACK,Active=false nhưng ACK có thể còn pending; incident độc lập.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T04,WF-35,Alarm tái phát khi ACK cũ còn pending,ACK cũ không tác động occurrence mới; refresh và báo conflict.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T05,WF-35,Panel trực tiếp và BMS mirror phát lại100 lần,"Một physical lineage; không nhân incident, dispatch, broadcast.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T06,WF-35,Mất cursor; snapshot phân trang có event xen,Ghi gap; không clear alarm vì vắng trong một trang.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T07,WF-36,Local override ưu tiên cao hơn,Hiện đúng bị từ chối hoặc demand chưa thắng; không vượt local.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T08,WF-36,Mất receipt sau khi có thể đã ghi,"Đánh dấu unknown và đối soát, không blind retry.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T09,WF-36,Lease hết hạn và slot đổi owner,Không xóa slot chưa chứng minh ownership; relinquish được duyệt và readback.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T10,WF-36,Fan được yêu cầu chạy nhưng proof=false/bad,Không báo physical success; hiện demand/feedback mismatch.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T11,WF-37,"Mất link, buffer đầy và failover2 node",Protection độc lập; durable commit và writer fencing giữ đúng.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T12,WF-37,Alarm burst cùng historian backfill,Alarm không bị nghẽn; source budget không vượt.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T13,WF-34,Cert hết hạn/revoke hoặc sai tenant,Chặn privileged action; không fallback insecure.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T14,WF-35,BMS phản chiếu incident SmartAlarm,Không loop incident; giữ receipt evidence.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T15,WF-35,Hết lịch bảo trì nhưng chưa khôi phục,"Restoration pending và escalation, chưa ready.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T16,WF-35,Door/fan stale ảnh hưởng route,Đánh giá/thu hồi tuyến và voice cũ; vẫn truy cập trợ giúp.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T17,WF-35,Point AI/count/badge cũ,Không coi suy luận là đo thực hoặc người an toàn.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T18,WF-34,"VI/EN/JA, bàn phím, zoom, mù màu",Hành động/nguồn đọc rõ; native ID không bị dịch.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T19,WF-37,Dữ liệu exercise reconnect,Exercise không vào actual; backfill không actuation.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T20,WF-37,Retire còn command/lease mở,"Bàn giao, revoke, verify, giữ audit; không orphan override.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-01,WF-34,"Dùng account read-only, gửi write/ACK",Bị chặn trước dispatch; BMS audit không có write; UI chỉ rõ capability,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-02,WF-34,Sensor known 6.0 bar với raw600/scale100; thử sai unit,Giá trị đúng; map chưa duyệt không vào routing/rules,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-03,WF-34,Fixture register0/1 và 32-bit word order khác,Parser cho kết quả golden; mismatch chặn commissioning,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-04,WF-35,Để subscription hết hạn hoặc BMS restart,"Renew/reconcile; điểm stale trong gap, không falsely healthy",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-05,WF-35,Burst trong budget được phép,Critical events ưu tiên; không gây polling storm; latency ghi thực tế,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-06,WF-35,Connect khi alarm đã active,Current-alarm scan/ConditionRefresh nạp đủ; trạng thái syncing trước khi đủ,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-07,WF-35,Event mới tới giữa RefreshStart/End,Không bị snapshot cũ ghi đè; retain/branch xử lý đúng,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-08,WF-35,Gửi lại cùng source event nhiều lần,"Một transition canonical, nhiều receipt audit; không tạo nhiều dispatch",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-09,WF-35,Direct panel và BMS relay cùng physical alarm,Một incident liên kết hai nguồn khi map chắc chắn; không xóa provenance,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-10,WF-35,Hai thiết bị cùng tên/tầng và gần thời gian,Không gộp sai chỉ vì text/time giống,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-11,WF-35,"Occurrence1 clear, occurrence2 active trước ACK1 về",ACK1 chỉ tác động occurrence1; occurrence2 vẫn chưa ACK,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-12,WF-35,Operator nhận việc SmartAlarm,BMS chưa ACK giữ nguyên cho đến thao tác được phép và receipt,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-13,WF-35,Source NORMAL nhưng còn người cần cứu,Incident rescue không tự đóng; occupant state không tự safe,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-14,WF-36,Controller có thể đã nhận nhưng ACK bị mất,Outcome unknown; không blind retry; operator có reconcile evidence,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-15,WF-36,"WAN đứt, command hết hạn, WAN trở lại",Không phát lại; explicit reauthorization nếu còn cần,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-16,WF-36,Local operator chiếm quyền cao hơn,SmartAlarm không báo physical success; hiển thị override và chặn write theo policy,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-17,WF-36,Kill active edge giữa dispatch và record receipt,Standby fenced; readback trước tiếp tục; không hai writer,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-18,WF-36,Edge mất điện khi đang giữ priority,Đo hành vi local controller; nghiệm thu chỉ khi fallback/ownership được site chấp thuận,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-19,WF-36,BMS khác ghi cùng priority,Phát hiện cấu hình nguy hiểm/không chứng minh owner; không NULL tùy tiện,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-20,WF-37,Hết hạn/revoke/change certificate,"Fail closed cho write, cảnh báo health; read recovery theo trust policy; không auto trust",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-21,WF-37,Native bad/uncertain hoặc source time thiếu,Không hiển thị safe/normal giả; ảnh hưởng routing/proactive rescue có uncertainty,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-22,WF-37,Source clock lệch và event tới muộn,"Giữ source time + received time, flag clock; không xóa occurrence đang mới",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-23,WF-37,Burst P1/P2 cùng telemetry thường,Critical transition không mất; coalescing chỉ telemetry đủ policy; queue/gap rõ,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-24,WF-37,Spool gần đầy/full,Alarm vận hành rõ; evidence gap có phạm vi; không âm thầm discard,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-25,WF-37,SmartAlarm summary→BMS→SmartAlarm,Không tạo incident mới/loop command; origin và namespace bảo toàn,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-26,WF-37,VI/EN/JA severity/action/unknown,Ý nghĩa giống nhau; raw native code vẫn truy xuất; không dịch ID/tag,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-27,WF-37,Credential/mapping/command từ tenant khác,Denied và audit; không lộ topology/sức khỏe người khác,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-28,WF-37,Cloud/edge hoàn toàn mất,Chức năng bảo vệ tại chỗ vẫn vận hành theo thiết kế đã nghiệm thu riêng; không cần SmartAlarm để kích hoạt chuỗi gốc,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT

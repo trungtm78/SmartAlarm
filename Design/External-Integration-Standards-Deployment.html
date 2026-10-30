@@ -1,0 +1,428 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>External-Integration-Standards-Deployment · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="index.html">SmartAlarm / Design Library</a><a href="English/External-Integration-Standards-Deployment.html">English</a><button onclick="window.print()">In / Lưu PDF</button></header><main><div class="document-meta">BASELINE 2.0 · 23/10/2026 · THIẾT KẾ ĐỂ REVIEW</div><h1 id="smartalarm-tieu-chuan-tich-hop-ben-ngoai-va-trien-khai">SmartAlarm — Tiêu chuẩn tích hợp bên ngoài và triển khai</h1><figure class="physical-figure"><img src="assets/proposal-v3/physical.png" alt="Physical firefighting and rescue integration"><figcaption>Hình khái niệm — tích hợp đề xuất, không phải hệ thống đã lắp đặt.</figcaption></figure>
+
+<p>Baseline 1.0 nghiên cứu/thiết kế · 23/10/2026 · Tiếng Việt. Phạm vi: tích hợp hệ thống PCCC vật lý, kỹ thuật triển khai và nghiệm thu. Đây là thiết kế tích hợp đề xuất, không phải chứng nhận, phê duyệt lắp đặt hoặc tài liệu thay thế thiết kế PCCC của cơ sở. Nghiên cứu hãng/model nằm trong tài liệu riêng. Kiến trúc dưới đây là đề xuất của SmartAlarm; phần tóm tắt tiêu chuẩn có nguồn dẫn mô tả phạm vi công khai đã xác minh, không suy diễn điều khoản chưa đọc.</p>
+
+<h2 id="1-quyet-đinh-va-ranh-gioi">1. Quyết định và ranh giới</h2>
+
+<p>SmartAlarm phải hỗ trợ hệ thống PCCC vật lý thật qua giao diện được chấp thuận, đồng thời giữ khả năng bảo vệ tự động độc lập tại chỗ. Hệ thống có thể nhận trạng thái cháy/giám sát/sự cố, điều phối lực lượng, phát hướng dẫn sơ tán đã duyệt và yêu cầu hành động được cấp quyền cụ thể. Cloud, Internet, ứng dụng di động hoặc LLM không được trở thành điều kiện để chuỗi bảo vệ tự động tại chỗ hoàn thành.</p>
+
+<p>Không xây dựng API phổ quát “bật sprinkler”. Đầu sprinkler tác động bằng nhiệt thông thường hoạt động tại chỗ và riêng lẻ; có giao diện với tủ báo cháy không có nghĩa các đầu này điều khiển được bằng địa chỉ điện. Hệ deluge, preaction, chữa cháy khí, bơm, kiểm soát khói và monitor robot có bộ điều khiển, điều kiện tiên quyết và hậu quả khác nhau. Phải xác định hành động được phép theo loại hệ thống và cấu hình chính xác của hãng. Sự khác biệt giữa tác động nhiệt riêng lẻ và điều khiển phần mềm được giải thích bởi <a href="https://www.pa.gov/agencies/osfc/communities/home-sprinklers">Cơ quan Phòng cháy bang Pennsylvania</a>.</p>
+
+<p>Ba loại phê duyệt phải tách biệt: quy chuẩn/phiên bản áp dụng tại địa phương và cơ quan có thẩm quyền (AHJ); chứng nhận/listing thiết bị và giới hạn tương thích của hãng; nghiệm thu tổ hợp tích hợp đã lắp đặt. Một giao thức, linh kiện phù hợp hoặc bài test cloud không chứng minh cả ba. Ghi rõ phiên bản địa phương áp dụng: <a href="https://www.poudre-fire.org/home/showpublisheddocument/9013/639063278557630000">thông báo chính thức năm 2026 của Poudre Fire Authority</a> viện dẫn các phiên bản cũ hơn cho công việc kiểm tra cụ thể, minh họa vì sao bản mới nhất không tự động là bản áp dụng cho dự án.</p>
+
+<h2 id="2-ma-tran-tieu-chuan-va-giao-dien-đa-xac-minh">2. Ma trận tiêu chuẩn và giao diện đã xác minh</h2>
+
+<p>Các phiên bản xuất bản dưới đây được kiểm tra ngày 23/10/2026. Dự án phải chốt riêng phiên bản được áp dụng, sửa đổi, phê duyệt thiết bị và yêu cầu hợp đồng. Không suy diễn điều khoản đầy đủ sau paywall, kích thước lắp đặt, tính toán thủy lực hoặc chu kỳ thử nghiệm từ tóm tắt công khai.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Tham chiếu / phiên bản xác minh</th>
+  <th>Phạm vi đã xác minh</th>
+  <th>Cách dùng và giới hạn đề xuất cho SmartAlarm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>NFPA 72, 2025</td>
+  <td>Báo cháy, tín hiệu, thông tin khẩn cấp và thông báo đại chúng</td>
+  <td>Ánh xạ alarm/supervisory/trouble và giao diện thông tin được duyệt; không tuyên bố SmartAlarm là tủ báo cháy có listing. <a href="https://www.nfpa.org/codes-and-standards/nfpa-72-standard-development/72">NFPA</a></td>
+</tr>
+<tr>
+  <td>NFPA 13, 2025</td>
+  <td>Thiết kế và lắp đặt hệ thống sprinkler tự động</td>
+  <td>Giữ thiết kế sprinkler chuyên ngành; nhận waterflow/giám sát van qua giao diện được duyệt. Phần mềm không thay thiết kế sprinkler. <a href="https://www.nfpa.org/codes-and-standards/nfpa-standard-development-process/13">NFPA</a></td>
+</tr>
+<tr>
+  <td>NFPA 20, 2025</td>
+  <td>Lựa chọn và lắp đặt bơm PCCC cố định</td>
+  <td>Tích hợp trạng thái bộ điều khiển được phép; yêu cầu từ xa nếu được cho phép vẫn chịu thiết kế bộ điều khiển đã duyệt. <a href="https://www.nfpa.org/codes-and-standards/nfpa-13-standard-development/20">NFPA</a></td>
+</tr>
+<tr>
+  <td>NFPA 25, 2026</td>
+  <td>Kiểm tra, thử nghiệm và bảo trì hệ thống PCCC dùng nước</td>
+  <td>Theo dõi khiếm khuyết, suy giảm chức năng, khôi phục và chứng cứ; lịch phải lấy từ văn bản áp dụng và hướng dẫn thiết bị. Phiên bản được đối chiếu qua <a href="https://www.nfpa.org/sitecore/content/Storefront/Catalog/home/products/p/0/0/P0025HB">handbook 2026 của NFPA</a> và <a href="https://webstore.ansi.org/standards/nfpa/NFPA252026">hồ sơ NFPA 25 của ANSI</a>.</td>
+</tr>
+<tr>
+  <td>EN 54-2 / -4 / -13</td>
+  <td>Thiết bị điều khiển/hiển thị; nguồn điện; tương thích thành phần</td>
+  <td>Yêu cầu chứng chỉ, cấu hình và phiên bản quốc gia chính xác; không dùng nhãn chung “toàn hệ thống đạt EN 54”. Phạm vi công khai: <a href="https://www.bsigroup.com/Documents/product-certification/BSI-fire-standards-brochure-UK-EN.pdf?epslanguage=az">hướng dẫn BSI</a>. Chốt phiên bản/sửa đổi của các phần này là đầu việc mua sắm.</td>
+</tr>
+<tr>
+  <td>EN 54-16:2008 / EN 54-24:2008</td>
+  <td>Thiết bị điều khiển/hiển thị báo động bằng giọng nói; loa báo động bằng giọng nói</td>
+  <td>Dùng chuỗi voice alarm được duyệt, có ánh xạ vùng, ưu tiên, giám sát nguồn/lỗi và kiểm chứng hiệu năng khi chạy thử; loa IP thông thường không tự động tương đương. <a href="https://www.bsigroup.com/globalassets/localfiles/it-it/PRODUCT%20SERVICES/Product%20Certification%20Interactive%20Guide.pdf">Hướng dẫn chứng nhận BSI</a></td>
+</tr>
+<tr>
+  <td>ISO 7240-5:2018</td>
+  <td>Yêu cầu và thử nghiệm đầu báo nhiệt điểm</td>
+  <td>Lưu loại đầu báo và môi trường ứng dụng được duyệt; không suy ra phù hợp với mọi môi trường. <a href="https://www.iso.org/standard/67759.html">ISO</a></td>
+</tr>
+<tr>
+  <td>ISO 7240-16:2007 / -19:2007, đều được xác nhận lại năm 2025</td>
+  <td>Thiết bị điều khiển âm thanh khẩn cấp; thiết kế, lắp đặt, chạy thử và bảo dưỡng hệ thống âm thanh khẩn cấp</td>
+  <td>Tách chứng cứ thành phần khỏi độ nghe rõ/hiểu rõ sau lắp đặt và quy trình vận hành. <a href="https://www.iso.org/standard/42978.html">ISO phần 16</a>, <a href="https://www.iso.org/standard/42979.html">ISO phần 19</a></td>
+</tr>
+<tr>
+  <td>BACnet / ISO 16484-5:2026, lần xuất bản 8, tháng 8/2026</td>
+  <td>Truyền thông dữ liệu và biểu diễn hướng đối tượng cho hệ thống tòa nhà</td>
+  <td>Yêu cầu objects/services được hỗ trợ, revision, allowlist thuộc tính ghi, priority và ngữ nghĩa quality. Tương tác được không đồng nghĩa được phép tác động an toàn sinh mạng. <a href="https://www.iso.org/standard/92057.html">ISO</a>, <a href="https://bacnet.org/about-bacnet-standard/">Ủy ban BACnet</a></td>
+</tr>
+<tr>
+  <td>Modbus Application Protocol V1.1b3; Modbus Security</td>
+  <td>Transaction/function code; xác thực và toàn vẹn qua TLS cho security profile</td>
+  <td>Cần register map, scaling, byte/word order, quyền truy cập và security profile thực sự hỗ trợ. Không mặc định Modbus/TCP thông thường đã có Modbus Security. <a href="https://www.modbus.org/modbus-specifications">Modbus Organization</a></td>
+</tr>
+<tr>
+  <td>OPC UA / IEC 62541; phần 2:2026 đã xác minh</td>
+  <td>Mô hình bảo mật OPC UA</td>
+  <td>Cần namespace, node ID, profile, chứng thư, security policy, quyền người dùng và ngữ nghĩa status/timestamp. Dùng OPC UA thông thường không chứng minh đường điều khiển có chứng nhận an toàn. <a href="https://webstore.iec.ch/en/publication/81514">IEC</a></td>
+</tr>
+<tr>
+  <td>IEC 62443-3-2:2020; bộ ISA/IEC 62443</td>
+  <td>Đánh giá rủi ro IACS, zones/conduits, mức an ninh mục tiêu; bảo mật vòng đời</td>
+  <td>Lập đánh giá rủi ro và kiểm soát zones/conduits cho cơ sở. Không gán security level hoặc tuyên bố chứng nhận chỉ vì gateway dùng TLS. <a href="https://webstore.iec.ch/en/publication/30727">IEC</a>, <a href="https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards">ISA</a></td>
+</tr>
+<tr>
+  <td>MQTT 5.0, OASIS Standard 07/03/2019</td>
+  <td>Messaging publish/subscribe</td>
+  <td>Transport telemetry edge có xác thực, ACL, expiry, dedupe và queue giới hạn; QoS không phải hoàn thành vật lý. <a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">OASIS</a></td>
+</tr>
+<tr>
+  <td>CloudEvents; phải chốt schema version triển khai</td>
+  <td>Mô tả/envelope sự kiện chung</td>
+  <td>Mang source, type, event ID, time và payload domain có version; không chứng nhận phát hiện hoặc chấp hành. <a href="https://cloudevents.io/">CloudEvents</a></td>
+</tr>
+<tr>
+  <td>CAP 1.2, OASIS Standard 01/07/2010</td>
+  <td>Trao đổi cảnh báo chung</td>
+  <td>Public advisory có xử lý nguồn/update/cancel/area/expiry; không dùng làm giao thức trực tiếp kích hoạt chữa cháy. <a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html">OASIS</a></td>
+</tr>
+<tr>
+  <td>MAVLink Command Protocol; chốt version hãng/flight stack cho từng tàu bay</td>
+  <td>Truyền lệnh và xác nhận lệnh</td>
+  <td>Gateway theo capability, giữ quyền phi công; ACK khác kết quả vật lý. Hỗ trợ giao thức không cấp phép bay. <a href="https://mavlink.io/en/services/command.html">MAVLink</a></td>
+</tr>
+<tr>
+  <td>Quy định hàng không tại nơi hoạt động</td>
+  <td>Quyền của đơn vị vận hành, tàu bay, vùng trời và nhiệm vụ</td>
+  <td>Lưu quốc gia/thẩm quyền, giấy phép, phi công, giới hạn bay và quy trình khẩn cấp. <a href="https://www.faa.gov/uas/public_safety_gov/drone_program">Hướng dẫn public safety của FAA</a> là ví dụ Hoa Kỳ, không phải giấy phép toàn cầu.</td>
+</tr>
+<tr>
+  <td>WCAG 2.2</td>
+  <td>Khả năng tiếp cận nội dung web</td>
+  <td>Mục tiêu thiết kế AA; keyboard, focus, contrast, target, status và text alternative phải kiểm tra độc lập; không chứng minh vùng phủ âm thanh. <a href="https://www.w3.org/TR/WCAG22/">W3C</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>Chất chữa cháy, nguy cơ đặc biệt, thiết bị áp lực, điện, kiểm soát khói và luật PCCC/xây dựng địa phương có thể bổ sung tiêu chuẩn khác. Người thiết kế cơ sở phải xác định theo hệ thống thật; ma trận này không phải danh sách quy chuẩn đầy đủ.</p>
+
+<h2 id="3-kien-truc-trien-khai-đe-xuat">3. Kiến trúc triển khai đề xuất</h2>
+
+<pre><code>flowchart TB
+  CLOUD[SmartAlarm regional cloud: incident / policy / approval / audit]
+  DMZ[OT DMZ: broker hoặc kết nối ngược có xác thực / firewall / monitoring]
+  EDGE[Site edge: sự kiện bền vững / policy ký số / sổ lệnh / fencing]
+  VG[Gateway hãng được chấp thuận: API hỗ trợ hoặc giao diện có giám sát]
+  LOCAL[Bộ điều khiển báo cháy / releasing / bơm / voice tại chỗ được duyệt]
+  DEV[Đầu báo / van / bơm / thiết bị chữa cháy / loa]
+  MAN[Điều khiển tại chỗ được phép / nút thủ công / phi công]
+  CLOUD &lt;--&gt;|sự kiện và intent giới hạn đã duyệt| DMZ
+  DMZ &lt;--&gt; EDGE
+  EDGE &lt;--&gt; VG
+  VG &lt;--&gt; LOCAL
+  LOCAL &lt;--&gt; DEV
+  MAN --&gt; LOCAL
+  DEV --&gt;|tín hiệu khởi phát tại chỗ| LOCAL
+</code></pre>
+
+<p>Đường bộ điều khiển/thiết bị tại chỗ chạy độc lập với cloud, DMZ, edge, dịch vụ định danh và LLM. Các đường hardwired/thủ công đã được duyệt giữ quyền quyết định. Edge SmartAlarm là thành phần tích hợp trừ khi được đánh giá và phê duyệt riêng cho vai trò khác; tên gọi “edge” không có nghĩa là safety controller.</p>
+
+<p>Đặt dịch vụ hướng cloud trong OT DMZ, có conduits tường minh tới hệ thống cơ sở. Ưu tiên kết nối do site chủ động mở và có xác thực khi được hỗ trợ; cấm public Internet truy cập bus tủ và remote desktop đa dụng vào bộ điều khiển PCCC. Tách nhận telemetry khỏi cấp quyền lệnh. Broker ACL, firewall, service identity, cấu hình ký số, xoay chứng thư và truy cập bảo trì có giới hạn thực thi sự phân tách. Đây là biện pháp đề xuất từ cách tiếp cận zone/conduit, không phải tuyên bố đạt IEC 62443.</p>
+
+<p>Chỉ dùng gateway hãng chấp thuận hoặc I/O có giám sát khi thiết kế cụ thể cho phép. Tài liệu lắp đặt đã duyệt phải nêu supervision đầu vào, phát hiện lỗi, cách ly, dây dẫn, định mức điện, feedback và chứng cứ chạy thử. Không dùng relay board đa dụng để bỏ qua tủ releasing, bộ điều khiển bơm, interlock hoặc bộ quản lý ưu tiên sơ tán. Không gắn thao tác ghi không được tài liệu hóa vào cổng bảo trì. Nếu chỉ có tiếp điểm báo cháy chung, báo đúng trạng thái chung, không bịa địa chỉ đầu báo hoặc vùng.</p>
+
+<h2 id="4-cac-cap-quyen-tich-hop">4. Các cấp quyền tích hợp</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Cấp</th>
+  <th>Hành vi được phép</th>
+  <th>Chứng cứ cần trước khi bật</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>T0 Inventory</td>
+  <td>Đăng ký tài sản/tài liệu; chưa kết nối trực tiếp</td>
+  <td>Chủ cơ sở, model chính xác, vị trí và người sở hữu</td>
+</tr>
+<tr>
+  <td>T1 Observe</td>
+  <td>Đọc alarm, supervisory, trouble, flow, pressure, health và status khi có</td>
+  <td>Đường đọc được duyệt, danh sách point, ánh xạ ngữ nghĩa, FAT/SAT</td>
+</tr>
+<tr>
+  <td>T2 Operational coordination</td>
+  <td>Tạo incident/task; phát thông tin được duyệt qua giao diện voice được phép</td>
+  <td>Policy thông điệp/vùng/ưu tiên được duyệt và feedback delivery đã kiểm chứng</td>
+</tr>
+<tr>
+  <td>T3 Restricted control request</td>
+  <td>Chỉ cặp target/capability được duyệt cụ thể</td>
+  <td>Hãng cho phép, thiết kế cơ sở, nghiệm thu AHJ/bên khác khi áp dụng, revision cause-and-effect đã ký, interlock tại chỗ, chứng cứ hoàn thành</td>
+</tr>
+<tr>
+  <td>T4 Local automatic protection</td>
+  <td>Thực thi trong hệ thống bảo vệ tại chỗ đã được duyệt</td>
+  <td>Thiết kế và nghiệm thu hệ thống tại chỗ/hiện hữu; không cấp cho cloud bằng entitlement phần mềm</td>
+</tr>
+</tbody>
+</table>
+
+<p>Connector mới mặc định T1 hoặc thấp hơn. Acknowledge, silence, reset, disable/isolate, yêu cầu bơm và kích hoạt chữa cháy là capability khác nhau. Không để một quyền “control” chung bật tất cả. Một số chỉ được thực hiện tại chỗ. Incident commander có thể điều phối incident mà không có thẩm quyền reset hoặc vô hiệu chức năng bảo vệ.</p>
+
+<h2 id="5-hop-đong-asset-point-zone-va-cause-and-effect">5. Hợp đồng asset, point, zone và cause-and-effect</h2>
+
+<p>Mỗi binding có version và được review trước khi kích hoạt. Các trường tối thiểu:</p>
+
+<table>
+<thead>
+<tr>
+  <th>Đối tượng</th>
+  <th>Thông tin bắt buộc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Asset</td>
+  <td>tenant_id, site_id, asset_id, controller_id, manufacturer, exact model, firmware, serial, quan hệ controller/gateway, protocol revision, certificate/listing reference và scope, maintenance owner, maintenance_state, impairment_ref</td>
+</tr>
+<tr>
+  <td>Point</td>
+  <td>point_id, controller_id, zone_id, raw address/object/node/register, type, quyền read/write, unit, scale, byte/word order khi áp dụng, enumeration, ánh xạ normal/alarm/trouble/supervisory, validity, observed_at, received_at, timestamp source, quality, stale_after</td>
+</tr>
+<tr>
+  <td>Zone</td>
+  <td>zone_id, ranh giới vật lý/tầng, tham chiếu khoang cháy, loại vùng detection/suppression/voice, point membership, exclusions, revision và approver</td>
+</tr>
+<tr>
+  <td>Capability</td>
+  <td>capability_id, loại target cho phép, parameter schema/ranges, preconditions/interlocks tại chỗ, thẩm quyền manual/automatic, authorization_policy, command_ttl, expiry, idempotency_key, retry class, feedback_point_ids, tiêu chí hoàn thành, unknown_outcome_policy</td>
+</tr>
+<tr>
+  <td>Cause and effect</td>
+  <td>revision, điều kiện khởi phát, xác nhận tại chỗ bắt buộc, effect, vùng tác động, priority, delay nếu được duyệt, interlocks/inhibits, thẩm quyền reset, phản ứng lỗi, test case và signoff</td>
+</tr>
+<tr>
+  <td>Evidence</td>
+  <td>source time, receive time, source quality, raw payload reference/hash, version connector/firmware/config, operator và approval, liên kết command/result</td>
+</tr>
+</tbody>
+</table>
+
+<p>Không tự động coi location zone là suppression zone. Một tầng có thể có nhiều vùng điều khiển; một vùng điều khiển có thể vượt ranh giới UI. Đổi địa chỉ thiết bị hoặc phân vùng làm mất hiệu lực mapping liên quan và phải review/test trước khi khôi phục khả năng ghi. Quality gồm GOOD, BAD, STALE, UNKNOWN, TEST; thiếu dữ liệu không phải NORMAL.</p>
+
+<p>Cause-and-effect là tài liệu đã duyệt của kỹ sư/hãng/cơ sở được phản ánh vào phần mềm, không phải rule do LLM tự tạo. Ví dụ chuỗi releasing đã duyệt tại chỗ có thể báo trạng thái khởi phát, đang chờ, interlock và feedback xả về SmartAlarm. SmartAlarm ghi nhận và điều phối; không suy ra quyền xả từ confidence camera hoặc tự silence alarm khi đóng incident.</p>
+
+<h2 id="6-vong-đoi-lenh-va-chung-cu-vat-ly">6. Vòng đời lệnh và chứng cứ vật lý</h2>
+
+<p>Trạng thái đề xuất: DRAFT → PENDING_APPROVAL → AUTHORIZED → SENT → ACCEPTED → EXECUTING → COMPLETED_VERIFIED; nhánh REJECTED, EXPIRED, FAILED, UNKNOWN, RECONCILED. Bộ điều khiển có thể không cung cấp EXECUTING; adapter phải công bố trạng thái nào quan sát được. UNKNOWN bắt buộc khi lệnh có thể đã tới nhưng chưa kiểm chứng kết quả vật lý.</p>
+
+<p>Approval gắn với command_id, target, capability, parameter digest, zone revision, cause-and-effect revision, requester, approver, writer_epoch, nonce, issued_at, expires_at. Edge và gateway hãng kiểm tra allowlist, freshness, authorization và việc bộ điều khiển tại chỗ chấp nhận. Bảo vệ/interlock tại chỗ có ưu tiên. Thay parameter hoặc zone revision làm mất approval. Failover fence writer cũ; không lặp mù tác động vật lý chưa rõ kết quả.</p>
+
+<p>Ghi riêng transport receipt, controller acceptance và physical feedback. ACK yêu cầu bơm không phải bằng chứng áp suất/lưu lượng; ACK đã buffer voice không phải xác nhận phát âm thanh hoặc nghe hiểu; lệnh van không phải xác nhận vị trí van. Tiêu chí hoàn thành theo capability và có thể cần nhiều cảm biến. Timeout mạng sau khi gửi tạo UNKNOWN, chặn tự retry hành động không idempotent và mở reconciliation với nhân sự tại chỗ/trạng thái controller. Hủy phần mềm không được hứa đảo ngược chất đã xả hoặc hành động vật lý hoàn tất. Reset và khôi phục theo quy trình cấp quyền riêng.</p>
+
+<h2 id="7-phan-tich-dang-loi-va-van-hanh-suy-giam">7. Phân tích dạng lỗi và vận hành suy giảm</h2>
+
+<p>Đây là FMEA định tính ban đầu; đội site gán severity, likelihood, detectability, residual risk và owner theo chứng cứ tại cơ sở. Không đưa điểm rủi ro số phổ quát.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Lỗi / hậu quả</th>
+  <th>Phát hiện</th>
+  <th>Cô lập và chứng cứ nghiệm thu đề xuất</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Mất cloud/Internet / mất quan sát từ xa</td>
+  <td>Tuổi heartbeat và trạng thái kết nối</td>
+  <td>Bảo vệ tự động tại chỗ tiếp tục; edge buffer sự kiện; UI hiện stale; chứng minh bằng ngắt kết nối</td>
+</tr>
+<tr>
+  <td>Mất edge / tích hợp không sẵn sàng</td>
+  <td>Heartbeat edge và quan sát tủ độc lập</td>
+  <td>Chuỗi tại chỗ tự vận hành; cloud hiện unavailable; khôi phục từ ledger bền vững, không replay lệnh ghi chưa rõ; test tắt nguồn edge</td>
+</tr>
+<tr>
+  <td>Gateway restart hoặc split brain / lặp tác động</td>
+  <td>Epoch/lease, command ledger bền vững</td>
+  <td>Một writer được fence; reconcile lệnh chưa rõ, không replay; test reboot/failover</td>
+</tr>
+<tr>
+  <td>Sai point hoặc zone map / tác động sai vị trí</td>
+  <td>Walkdown point độc lập và revision digest</td>
+  <td>Tắt write binding liên quan; kiểm mọi target được bật và negative case chéo vùng</td>
+</tr>
+<tr>
+  <td>Relay kẹt hoặc mất feedback / hoàn thành giả</td>
+  <td>Supervision và feedback controller độc lập khi được duyệt</td>
+  <td>Không suy ra thành công; xử lý lỗi tại chỗ và kiểm tra vật lý theo quy trình đã duyệt</td>
+</tr>
+<tr>
+  <td>Mất điện hoặc cạn nguồn dự phòng / thiếu phủ bảo vệ</td>
+  <td>Trouble controller/nguồn và chứng cứ bảo trì</td>
+  <td>Giữ thiết kế nguồn dự phòng đã duyệt; kiểm trạng thái lỗi và khôi phục theo site</td>
+</tr>
+<tr>
+  <td>Alarm storm / trễ sự kiện khẩn</td>
+  <td>Tuổi queue, source rate, priority metrics</td>
+  <td>Dành tài nguyên xử lý khẩn, giới hạn queue, báo mất dữ liệu; chuỗi tại chỗ không chờ broker</td>
+</tr>
+<tr>
+  <td>Gateway bị xâm nhập / lệnh trái phép</td>
+  <td>Identity, allowlist, audit, anomaly monitoring</td>
+  <td>Thu hồi conduit/credential, cô lập tích hợp nhưng không tắt bảo vệ tại chỗ</td>
+</tr>
+<tr>
+  <td>Nhầm maintenance với actual / tác động ngoài ý muốn hoặc bỏ qua báo cháy</td>
+  <td>Mode tường minh và trạng thái tủ tại chỗ</td>
+  <td>Tách identity/route test, quy trình vật lý, cửa sổ test có quyền, kiểm tra khôi phục</td>
+</tr>
+<tr>
+  <td>Clock skew hoặc observation cũ / tiền đề không an toàn</td>
+  <td>Source/receive time và quality flag</td>
+  <td>Chặn yêu cầu từ xa dựa trên dữ liệu cũ; giữ bảo vệ tại chỗ; không sửa timestamp che bất định</td>
+</tr>
+<tr>
+  <td>Controller ACCEPTED nhưng không có kết quả / operator tưởng thành công</td>
+  <td>Deadline feedback và thiếu chứng cứ độc lập</td>
+  <td>UNKNOWN, xác minh tại chỗ, phương án phản ứng thay thế; không retry mù</td>
+</tr>
+<tr>
+  <td>Vùng voice mất khả dụng / người trong vùng không được cảnh báo</td>
+  <td>Fault theo vùng/controller và kiểm tra đã chạy thử</td>
+  <td>Hiện khoảng trống vùng phủ; thực hiện quy trình thông tin thay thế đã duyệt</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="8-quan-tri-impairment-thu-nghiem-va-thay-đoi">8. Quản trị impairment, thử nghiệm và thay đổi</h2>
+
+<p>Hồ sơ impairment chứa tài sản/vùng/chức năng bị ảnh hưởng, lý do, kế hoạch bắt đầu/kết thúc, người chịu trách nhiệm, thông báo cần thực hiện, biện pháp bù trừ do thẩm quyền site xác định, kiểm soát truy cập và chứng cứ khôi phục. SmartAlarm không kết luận hệ PCCC suy giảm đã an toàn chỉ vì cảnh báo được acknowledge. Impairment ngoài kế hoạch phải escalation đến người phụ trách cơ sở đã chỉ định.</p>
+
+<p>Test mode phải có ranh giới rõ. Nhãn exercise phần mềm đơn thuần không ngăn output vật lý hoạt động. Chỉ dùng phương án cô lập/test được duyệt, kỹ thuật viên chịu trách nhiệm tại chỗ, kịch bản được review, thông báo site và quyền bắt buộc. Kết quả simulator không cấp quyền xả chất thật, chạy bơm hoặc phát broadcast khẩn. Test thật theo tiêu chuẩn áp dụng, phương pháp hãng và kế hoạch của cơ sở/cơ quan có thẩm quyền.</p>
+
+<p>Đổi cấu hình/firmware cần đánh giá ảnh hưởng, version ký số, kế hoạch rollback/recovery và regression các đường cause-and-effect bị ảnh hưởng. Không mặc định rollback phần mềm từ xa khôi phục được trạng thái vật lý. Chỉ đóng impairment sau phục hồi tại chỗ, trạng thái supervision bình thường, xác minh target, review lỗi còn mở và bàn giao có ký. Tần suất test và biện pháp bù trừ theo từng cơ sở; tài liệu này không tự đặt các giá trị đó.</p>
+
+<h2 id="9-rfi-khao-sat-fat-sat-va-ban-giao">9. RFI, khảo sát, FAT, SAT và bàn giao</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Gate</th>
+  <th>Sản phẩm bắt buộc</th>
+  <th>Chứng cứ qua gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RFI / mua sắm</td>
+  <td>Model tủ/controller/thiết bị chính xác, firmware, biến thể vùng, API/register hỗ trợ, quyền read/write, license gateway, listing/chứng chỉ, phụ kiện tương thích, vòng đời và hỗ trợ bảo trì</td>
+  <td>Hãng xác nhận bằng văn bản từng capability đề xuất; mục chưa rõ giữ disabled</td>
+</tr>
+<tr>
+  <td>Khảo sát site</td>
+  <td>Bản vẽ hoàn công, chiến lược PCCC, ranh giới thủy lực/hệ thống, cause-and-effect, danh sách zone/point, truyền thông/nguồn, AHJ/phiên bản áp dụng, vai trò vận hành và quy trình impairment</td>
+  <td>Người thiết kế/chủ cơ sở review mapping và xác định hồ sơ thiếu</td>
+</tr>
+<tr>
+  <td>Thiết kế binding chi tiết</td>
+  <td>Network zones/conduits, point contract, trạng thái/feedback lệnh, điều khiển local-only, interface/dây dẫn được duyệt, migration và rollback</td>
+  <td>Kỹ thuật/hãng/site phê duyệt; thẩm quyền nghiệm thu khi áp dụng</td>
+</tr>
+<tr>
+  <td>FAT</td>
+  <td>Phần cứng/firmware đúng hoặc simulator ghi rõ giới hạn; mapping đúng/sai, quyền, bad quality, clock skew, duplicate, mất ACK, timeout, expiry, restart, failover, hoạt động không Internet</td>
+  <td>Kết quả ký, dữ liệu chứng cứ gốc, lỗi được xử lý; nêu rõ giới hạn simulator</td>
+</tr>
+<tr>
+  <td>SAT</td>
+  <td>Kiểm point-to-point sau lắp, xác nhận vùng vật lý, test cause-and-effect đã duyệt, tự vận hành khi mất cloud/edge, lỗi supervision, vùng phủ/hiệu năng voice theo kế hoạch duyệt, khôi phục</td>
+  <td>Chứng cứ có chứng kiến tại site; mọi lệnh được bật có ngữ nghĩa kết quả đã xác minh; không còn lỗi nghiêm trọng chưa xử lý</td>
+</tr>
+<tr>
+  <td>Bàn giao / vận hành</td>
+  <td>Cấu hình hoàn công, chủ credential, backup/restore, đào tạo, runbook, lịch bảo trì, liên hệ impairment, ranh giới hỗ trợ</td>
+  <td>Chủ cơ sở nghiệm thu; hồ sơ kiểm tra/thẩm quyền khi bắt buộc; quản lý thay đổi liên tục</td>
+</tr>
+</tbody>
+</table>
+
+<p>Nghiệm thu không chỉ là dashboard màu xanh. Với từng capability vật lý được bật, phải chứng minh yêu cầu bị từ chối không gây tác động, yêu cầu cũ/hết hạn không gây tác động, kết quả bất định hiển thị UNKNOWN, điều khiển tại chỗ giữ ưu tiên và lỗi cloud không dừng chuỗi tự động độc lập. Ghi thời gian phản hồi đo trong test đã duyệt; không tuyên bố latency phổ quát khi chưa có tiêu chí nghiệm thu site/controller.</p>
+
+<h2 id="10-so-chung-cu-va-quyet-đinh-ky-thuat-con-mo">10. Sổ chứng cứ và quyết định kỹ thuật còn mở</h2>
+
+<p>Mọi liên kết ở mục 2 và sổ này được tra cứu ngày <strong>2026-10-23</strong>. Loại chứng cứ: phạm vi/catalog/hướng dẫn kỹ thuật công khai chính thức; không nguồn nào là đánh giá phù hợp đầy đủ cho công trình lắp đặt.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Nhóm chứng cứ</th>
+  <th>Nguồn chính thức</th>
+  <th>Đã xác minh / giới hạn còn lại</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>E01 Báo cháy và chữa cháy</td>
+  <td><a href="https://www.nfpa.org/codes-and-standards/nfpa-72-standard-development/72">NFPA 72</a>, <a href="https://www.nfpa.org/codes-and-standards/nfpa-standard-development-process/13">NFPA 13</a>, <a href="https://www.nfpa.org/codes-and-standards/nfpa-13-standard-development/20">NFPA 20</a>, <a href="https://www.nfpa.org/sitecore/content/Storefront/Catalog/home/products/p/0/0/P0025HB">Handbook NFPA 25</a>, <a href="https://webstore.ansi.org/standards/nfpa/NFPA252026">ANSI NFPA 25</a></td>
+  <td>Xác minh tên/phiên bản/phạm vi; kiểm điều khoản/sửa đổi áp dụng cho dự án. Phạm vi NFPA 13 đọc được từ nội dung chính thức được lập chỉ mục; truy cập trực tiếp có lúc không thành công.</td>
+</tr>
+<tr>
+  <td>E02 Detection/voice</td>
+  <td><a href="https://www.bsigroup.com/Documents/product-certification/BSI-fire-standards-brochure-UK-EN.pdf?epslanguage=az">BSI thành phần</a>, <a href="https://www.bsigroup.com/globalassets/localfiles/it-it/PRODUCT%20SERVICES/Product%20Certification%20Interactive%20Guide.pdf">BSI voice</a>, <a href="https://www.iso.org/standard/67759.html">ISO 7240-5</a>, <a href="https://www.iso.org/standard/42978.html">ISO 7240-16</a>, <a href="https://www.iso.org/standard/42979.html">ISO 7240-19</a></td>
+  <td>Phạm vi từng phần công khai; phiên bản/sửa đổi EN quốc gia và chứng chỉ model chính xác cần xác minh khi mua sắm.</td>
+</tr>
+<tr>
+  <td>E03 Dữ liệu tòa nhà/OT</td>
+  <td><a href="https://www.iso.org/standard/92057.html">ISO BACnet</a>, <a href="https://bacnet.org/about-bacnet-standard/">Ủy ban BACnet</a>, <a href="https://www.modbus.org/modbus-specifications">Modbus</a>, <a href="https://webstore.iec.ch/en/publication/81514">IEC OPC UA</a></td>
+  <td>Phạm vi/version giao thức; không phải tương thích hãng hoặc phê duyệt an toàn.</td>
+</tr>
+<tr>
+  <td>E04 An ninh OT</td>
+  <td><a href="https://webstore.iec.ch/en/publication/30727">IEC 62443-3-2</a>, <a href="https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards">Bộ ISA</a></td>
+  <td>Khung rủi ro/vòng đời; mức mục tiêu và chứng cứ site phải thiết kế tiếp.</td>
+</tr>
+<tr>
+  <td>E05 Sự kiện và cảnh báo</td>
+  <td><a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">MQTT</a>, <a href="https://cloudevents.io/">CloudEvents</a>, <a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html">CAP</a></td>
+  <td>Phạm vi messaging; không bảo đảm hoàn thành vật lý.</td>
+</tr>
+<tr>
+  <td>E06 Drone/accessibility/bối cảnh địa phương</td>
+  <td><a href="https://mavlink.io/en/services/command.html">MAVLink</a>, <a href="https://www.faa.gov/uas/public_safety_gov/drone_program">FAA</a>, <a href="https://www.w3.org/TR/WCAG22/">WCAG</a>, <a href="https://www.pa.gov/agencies/osfc/communities/home-sprinklers">Giải thích sprinkler Pennsylvania</a>, <a href="https://www.poudre-fire.org/home/showpublisheddocument/9013/639063278557630000">Ví dụ phiên bản áp dụng Poudre</a></td>
+  <td>Giao diện, ví dụ thẩm quyền, mục tiêu accessibility và bối cảnh vật lý tại chỗ; không phải tuân thủ toàn cầu.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Quyết định cần chốt trước triển khai: quốc gia/cơ quan có thẩm quyền; loại hệ thống và biến thể chính xác đã lắp; quyền đọc/ghi từng point; gateway hãng và phạm vi chứng chỉ; cause-and-effect đã duyệt; thao tác local-only; feedback hoàn thành vật lý; đánh giá rủi ro an ninh; tiêu chí nghiệm thu và người ký chịu trách nhiệm từng site. Đây là đầu vào kỹ thuật bắt buộc, không phải lý do thay phạm vi tích hợp vật lý đầy đủ bằng demo.</p>
+
+<h2 id="ux2-physical-giam-sat-truc-quan-va-phan-hoi-vat-ly">UX2-PHYSICAL · Giám sát trực quan và phản hồi vật lý</h2>
+
+<p>Console v2 dùng sơ đồ đường ống, van, bơm, vùng phủ và trạng thái thiết bị có nhãn. Yêu cầu lệnh, gateway tiếp nhận và hiệu ứng vật lý quan sát được là ba trạng thái riêng. Phản hồi chưa rõ hoặc đã cũ phải có ký hiệu, thời điểm; không hiển thị thành công màu xanh. Thao tác xem xét trong prototype không vận hành thiết bị. Quyền ưu tiên tại chỗ, liên động và điều kiện nghiệm thu thiết bị trong tài liệu này tiếp tục áp dụng.</p>
+
+<p>Kiểm tra F08–F20 khi mất liên lạc, trạng thái tại chỗ xung đột hoặc phản hồi trễ. Truy cập sơ đồ không được bỏ qua quyền điều khiển. Loa báo phát không chứng minh mọi người đã nghe. Drone/robot nhận nhiệm vụ không chứng minh đã đến hoặc cứu được người.</p>
+
+<p>Tham chiếu <a href="UIUX-Design.html">thiết kế UI/UX</a>, <a href="Screen-Specifications.html">đặc tả màn hình</a> và <a href="UX-Redesign-Audit.html">rà soát thiết kế</a>.</p>
+</main></body></html>

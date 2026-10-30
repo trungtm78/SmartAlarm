@@ -1,0 +1,2681 @@
+{
+  "baseline": "1.0.0",
+  "status": "complete",
+  "existing_operations_preserved": true,
+  "existing_schemas_preserved_except_optional_physical_context": true,
+  "new_operations": 15,
+  "new_schema_names": [
+    "PhysicalEvidenceRef",
+    "PhysicalParameter",
+    "PhysicalTarget",
+    "PhysicalPointBinding",
+    "PhysicalGatewayBinding",
+    "PhysicalBindingCreate",
+    "PhysicalBindingValidate",
+    "PhysicalBindingActivate",
+    "PhysicalCommandContext",
+    "PhysicalCommandCreate",
+    "PhysicalCommandReconciliation",
+    "PhysicalScopeRef",
+    "ImpairmentCreate",
+    "RestorationCheck",
+    "PhysicalTestCreate",
+    "PhysicalTestEvidenceCreate",
+    "CompatibilityAssessmentCreate",
+    "CompatibilityAcceptance",
+    "RescueEquipmentMissionCreate",
+    "PhysicalPointObservation",
+    "PhysicalCommandStateChanged",
+    "PhysicalImpairmentChanged",
+    "PhysicalTestCompleted",
+    "PhysicalBindingAccepted",
+    "RescueEquipmentMissionUpdated",
+    "PhysicalReceipt",
+    "PhysicalCommandReceipt",
+    "PhysicalPointView",
+    "PhysicalPointPage",
+    "PhysicalObservationPage"
+  ],
+  "scope": "Design-only schemas; no backend/hardware/FAT/SAT/certification tested.",
+  "legacy_event_envelope_preserved": true,
+  "legacy_manifest_properties_preserved": true,
+  "typed_event_types": [
+    "com.smartalarm.physical.point.observed.v1",
+    "com.smartalarm.physical.command.state_changed.v1",
+    "com.smartalarm.physical.impairment.changed.v1",
+    "com.smartalarm.physical.test.completed.v1",
+    "com.smartalarm.physical.binding.accepted.v1",
+    "com.smartalarm.rescue.equipment_mission.updated.v1"
+  ],
+  "passed": true,
+  "checks": [
+    {
+      "instance": {
+        "capability_id": "request_start",
+        "target": {
+          "site_id": "s",
+          "controller_id": "c",
+          "zone_id": "z",
+          "asset_id": "a"
+        },
+        "binding_id": "b",
+        "binding_revision": 1,
+        "capability_revision": 1,
+        "zone_revision": 1,
+        "cause_effect_revision": 1,
+        "expected_point_versions": [
+          {
+            "point_id": "p",
+            "version": 1
+          }
+        ],
+        "parameters": [],
+        "expires_at": "2026-10-23T08:40:12Z",
+        "incident_ref": "i",
+        "reason": "Design fixture",
+        "mode": "test"
+      },
+      "schema_reference": "#/components/schemas/PhysicalCommandCreate",
+      "name": "typed request",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "capability_id": "request_start",
+        "target": {
+          "site_id": "s",
+          "controller_id": "c",
+          "zone_id": "z",
+          "asset_id": "a"
+        },
+        "binding_id": "b",
+        "capability_revision": 1,
+        "zone_revision": 1,
+        "cause_effect_revision": 1,
+        "expected_point_versions": [
+          {
+            "point_id": "p",
+            "version": 1
+          }
+        ],
+        "parameters": [],
+        "expires_at": "2026-10-23T08:40:12Z",
+        "incident_ref": "i",
+        "reason": "Design fixture",
+        "mode": "test"
+      },
+      "schema_reference": "#/components/schemas/PhysicalCommandCreate",
+      "name": "missing binding",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'binding_revision' is a required property"
+      ]
+    },
+    {
+      "instance": {
+        "capability_id": "request_start",
+        "target": {
+          "site_id": "s",
+          "controller_id": "c",
+          "zone_id": "z",
+          "asset_id": "a"
+        },
+        "binding_id": "b",
+        "binding_revision": 1,
+        "capability_revision": 1,
+        "zone_revision": 0,
+        "cause_effect_revision": 1,
+        "expected_point_versions": [
+          {
+            "point_id": "p",
+            "version": 1
+          }
+        ],
+        "parameters": [],
+        "expires_at": "2026-10-23T08:40:12Z",
+        "incident_ref": "i",
+        "reason": "Design fixture",
+        "mode": "test"
+      },
+      "schema_reference": "#/components/schemas/PhysicalCommandCreate",
+      "name": "zero revision",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "0 is less than the minimum of 1"
+      ]
+    },
+    {
+      "instance": {
+        "capability_id": "request_start",
+        "target": {
+          "site_id": "s",
+          "controller_id": "c",
+          "zone_id": "z",
+          "asset_id": "a"
+        },
+        "binding_id": "b",
+        "binding_revision": 1,
+        "capability_revision": 1,
+        "zone_revision": 1,
+        "cause_effect_revision": 1,
+        "expected_point_versions": [
+          {
+            "point_id": "p",
+            "version": 1
+          }
+        ],
+        "parameters": [],
+        "expires_at": "tomorrow",
+        "incident_ref": "i",
+        "reason": "Design fixture",
+        "mode": "test"
+      },
+      "schema_reference": "#/components/schemas/PhysicalCommandCreate",
+      "name": "bad timestamp",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'tomorrow' is not a 'date-time'"
+      ]
+    },
+    {
+      "instance": {
+        "capability_id": "request_start",
+        "target": {
+          "site_id": "s",
+          "controller_id": "c",
+          "zone_id": "z",
+          "asset_id": "a"
+        },
+        "binding_id": "b",
+        "binding_revision": 1,
+        "capability_revision": 1,
+        "zone_revision": 1,
+        "cause_effect_revision": 1,
+        "expected_point_versions": [
+          {
+            "point_id": "p",
+            "version": 1
+          }
+        ],
+        "parameters": [],
+        "expires_at": "2026-10-23T08:40:12Z",
+        "incident_ref": "i",
+        "reason": "Design fixture",
+        "mode": "test",
+        "bypass_interlocks": true
+      },
+      "schema_reference": "#/components/schemas/PhysicalCommandCreate",
+      "name": "bypass field",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "Additional properties are not allowed ('bypass_interlocks' was unexpected)"
+      ]
+    },
+    {
+      "instance": {
+        "id": "c",
+        "version": 1,
+        "received_at": "2026-10-23T08:40:12Z",
+        "state": "DRAFT",
+        "physical_completion": true
+      },
+      "schema_reference": "#/components/schemas/PhysicalCommandReceipt",
+      "name": "receipt cannot assert completion",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    {
+      "instance": {
+        "expected_version": 1,
+        "observations": [],
+        "evidence_refs": [
+          {
+            "evidence_ref": "ev",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "kind": "local_feedback",
+            "recorded_at": "2026-10-23T08:40:12Z",
+            "recorded_by": "operator"
+          }
+        ],
+        "reason": "No feedback observed",
+        "proposed_outcome": "UNKNOWN"
+      },
+      "schema_reference": "#/components/schemas/PhysicalCommandReconciliation",
+      "name": "unresolved reconciliation can preserve UNKNOWN",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "expected_version": 1,
+        "observations": [],
+        "evidence_refs": [
+          {
+            "evidence_ref": "ev",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "kind": "local_feedback",
+            "recorded_at": "2026-10-23T08:40:12Z",
+            "recorded_by": "operator"
+          }
+        ],
+        "reason": "No feedback observed",
+        "proposed_outcome": "COMPLETED_VERIFIED"
+      },
+      "schema_reference": "#/components/schemas/PhysicalCommandReconciliation",
+      "name": "verified reconciliation requires observations",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "[] should be non-empty"
+      ]
+    },
+    {
+      "instance": {
+        "binding_id": "b",
+        "binding_revision": 1,
+        "test_plan_ref": "plan",
+        "mode": "site",
+        "authorization_ref": "auth",
+        "operator": "o",
+        "witness": "w"
+      },
+      "schema_reference": "#/components/schemas/PhysicalTestCreate",
+      "name": "site test requires impairment",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'impairment_ref' is a required property"
+      ]
+    },
+    {
+      "instance": {
+        "binding_id": "b",
+        "binding_revision": 1,
+        "test_plan_ref": "plan",
+        "mode": "site",
+        "authorization_ref": "auth",
+        "operator": "o",
+        "witness": "w",
+        "impairment_ref": "imp"
+      },
+      "schema_reference": "#/components/schemas/PhysicalTestCreate",
+      "name": "site test structural fixture",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "incident_ref": "i",
+        "dispatch_task_ref": "t",
+        "equipment_ref": "e",
+        "operator_ref": "o",
+        "mission_scope": "Console fixture",
+        "capability_revision": 1,
+        "local_console_required": true,
+        "interface_mode": "operator_console_only",
+        "limitations": [
+          "No drive API"
+        ],
+        "mode": "test"
+      },
+      "schema_reference": "#/components/schemas/RescueEquipmentMissionCreate",
+      "name": "console mission",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "incident_ref": "i",
+        "dispatch_task_ref": "t",
+        "equipment_ref": "e",
+        "operator_ref": "o",
+        "mission_scope": "Console fixture",
+        "capability_revision": 1,
+        "local_console_required": false,
+        "interface_mode": "operator_console_only",
+        "limitations": [
+          "No drive API"
+        ],
+        "mode": "test"
+      },
+      "schema_reference": "#/components/schemas/RescueEquipmentMissionCreate",
+      "name": "console-only cannot imply SDK",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "True was expected"
+      ]
+    },
+    {
+      "instance": {
+        "expected_version": 1,
+        "decision": "accept",
+        "scope": "field_accepted",
+        "signoffs": [
+          {
+            "actor_ref": "a",
+            "role": "integrator",
+            "at": "2026-10-23T08:40:12Z",
+            "evidence_ref": "e"
+          }
+        ],
+        "open_defects": [],
+        "sat_run_refs": [
+          "sat"
+        ],
+        "reason": "Fixture, not actual acceptance"
+      },
+      "schema_reference": "#/components/schemas/CompatibilityAcceptance",
+      "name": "acceptance structural fixture",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "expected_version": 1,
+        "decision": "accept",
+        "scope": "field_accepted",
+        "signoffs": [
+          {
+            "actor_ref": "a",
+            "role": "integrator",
+            "at": "2026-10-23T08:40:12Z",
+            "evidence_ref": "e"
+          }
+        ],
+        "open_defects": [],
+        "sat_run_refs": [],
+        "reason": "Fixture, not actual acceptance"
+      },
+      "schema_reference": "#/components/schemas/CompatibilityAcceptance",
+      "name": "missing SAT",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "[] should be non-empty"
+      ]
+    },
+    {
+      "instance": {
+        "expected_version": 1,
+        "decision": "accept",
+        "scope": "field_accepted",
+        "signoffs": [
+          {
+            "actor_ref": "a",
+            "role": "integrator",
+            "at": "2026-10-23T08:40:12Z",
+            "evidence_ref": "e"
+          }
+        ],
+        "open_defects": [
+          {
+            "id": "d",
+            "severity": "critical",
+            "disposition": "unresolved"
+          }
+        ],
+        "sat_run_refs": [
+          "sat"
+        ],
+        "reason": "Fixture, not actual acceptance"
+      },
+      "schema_reference": "#/components/schemas/CompatibilityAcceptance",
+      "name": "critical defect",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'critical' should not be valid under {'const': 'critical'}"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.point.observed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "controller_id": "c",
+          "binding_id": "b",
+          "binding_revision": 1,
+          "point_id": "p",
+          "zone_id": "z",
+          "semantic": "pump_running",
+          "value": true,
+          "unit": "boolean",
+          "observed_at": "2026-10-23T08:40:12Z",
+          "received_at": "2026-10-23T08:40:12Z",
+          "quality": "GOOD",
+          "controller_mode": "AUTO",
+          "maintenance_state": "IN_SERVICE",
+          "cause_effect_revision": 1,
+          "source_event_id": "src",
+          "raw_evidence_ref": "ev"
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "point event",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.point.observed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "controller_id": "c",
+          "binding_id": "b",
+          "binding_revision": 1,
+          "point_id": "p",
+          "zone_id": "z",
+          "semantic": "pump_running",
+          "value": true,
+          "unit": "boolean",
+          "observed_at": "2026-10-23T08:40:12Z",
+          "received_at": "2026-10-23T08:40:12Z",
+          "quality": "SAFE",
+          "controller_mode": "AUTO",
+          "maintenance_state": "IN_SERVICE",
+          "cause_effect_revision": 1,
+          "source_event_id": "src",
+          "raw_evidence_ref": "ev"
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "bad quality",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'SAFE' is not one of ['GOOD', 'BAD', 'STALE', 'UNKNOWN', 'TEST']"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.point.observed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "controller_id": "c",
+          "binding_id": "b",
+          "binding_revision": 1,
+          "point_id": "p",
+          "zone_id": "z",
+          "semantic": "pump_running",
+          "value": null,
+          "unit": "boolean",
+          "observed_at": "2026-10-23T08:40:12Z",
+          "received_at": "2026-10-23T08:40:12Z",
+          "quality": "GOOD",
+          "controller_mode": "AUTO",
+          "maintenance_state": "IN_SERVICE",
+          "cause_effect_revision": 1,
+          "source_event_id": "src",
+          "raw_evidence_ref": "ev"
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "null GOOD",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "None should not be valid under {'type': 'null'}"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.point.observed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "controller_id": "c",
+          "binding_id": "b",
+          "binding_revision": 1,
+          "point_id": "p",
+          "zone_id": "z",
+          "semantic": "pump_running",
+          "value": null,
+          "unit": "boolean",
+          "observed_at": "2026-10-23T08:40:12Z",
+          "received_at": "2026-10-23T08:40:12Z",
+          "quality": "UNKNOWN",
+          "controller_mode": "AUTO",
+          "maintenance_state": "IN_SERVICE",
+          "cause_effect_revision": 1,
+          "source_event_id": "src",
+          "raw_evidence_ref": "ev"
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "UNKNOWN missing value",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.point.observed.v9",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "controller_id": "c",
+          "binding_id": "b",
+          "binding_revision": 1,
+          "point_id": "p",
+          "zone_id": "z",
+          "semantic": "pump_running",
+          "value": true,
+          "unit": "boolean",
+          "observed_at": "2026-10-23T08:40:12Z",
+          "received_at": "2026-10-23T08:40:12Z",
+          "quality": "GOOD",
+          "controller_mode": "AUTO",
+          "maintenance_state": "IN_SERVICE",
+          "cause_effect_revision": 1,
+          "source_event_id": "src",
+          "raw_evidence_ref": "ev"
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "unsupported physical event",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'com.smartalarm.physical.point.observed.v9' is not one of ['com.smartalarm.physical.point.observed.v1', 'com.smartalarm.physical.command.state_changed.v1', 'com.smartalarm.physical.impairment.changed.v1', 'com.smartalarm.physical.test.completed.v1', 'com.smartalarm.physical.binding.accepted.v1', 'com.smartalarm.rescue.equipment_mission.updated.v1']"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.incident.created.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "id": "i"
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "legacy event",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.command.state_changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "binding_revision": 1,
+          "command_id": "cmd",
+          "capability_revision": 1,
+          "previous_state": "SENT",
+          "state": "UNKNOWN",
+          "feedback_observation_ids": [],
+          "unknown_reason": "No feedback",
+          "observed_at": "2026-10-23T08:40:12Z",
+          "received_at": "2026-10-23T08:40:12Z",
+          "evidence_refs": []
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "UNKNOWN explicit reason",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.command.state_changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "binding_revision": 1,
+          "command_id": "cmd",
+          "capability_revision": 1,
+          "previous_state": "SENT",
+          "state": "UNKNOWN",
+          "feedback_observation_ids": [],
+          "observed_at": "2026-10-23T08:40:12Z",
+          "received_at": "2026-10-23T08:40:12Z",
+          "evidence_refs": []
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "UNKNOWN reason mandatory",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'unknown_reason' is a required property"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.command.state_changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "binding_revision": 1,
+          "command_id": "cmd",
+          "capability_revision": 1,
+          "previous_state": "SENT",
+          "state": "COMPLETED_VERIFIED",
+          "feedback_observation_ids": [],
+          "unknown_reason": "No feedback",
+          "observed_at": "2026-10-23T08:40:12Z",
+          "received_at": "2026-10-23T08:40:12Z",
+          "evidence_refs": []
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "completion evidence mandatory",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "[] should be non-empty",
+        "[] should be non-empty"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.command.state_changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "binding_revision": 1,
+          "command_id": "cmd",
+          "capability_revision": 1,
+          "previous_state": "SENT",
+          "state": "COMPLETED_VERIFIED",
+          "feedback_observation_ids": [
+            "obs"
+          ],
+          "unknown_reason": "No feedback",
+          "observed_at": "2026-10-23T08:40:12Z",
+          "received_at": "2026-10-23T08:40:12Z",
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "completion structural evidence fixture",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "observe"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "idempotent",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "read_only"
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "legacy manifest",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "observe"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "idempotent",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "read_only",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "observe_only",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "document_candidate",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "observe",
+              "kind": "observe",
+              "operation": "read",
+              "enabled": true
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "observation candidate",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "observe"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "idempotent",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "read_only",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "observe_only",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "document_candidate",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": true,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "observe",
+              "kind": "observe",
+              "operation": "read",
+              "enabled": true
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "llm_actuation_allowed forbidden",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "observe"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "idempotent",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "read_only",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "observe_only",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "document_candidate",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": true,
+          "capability_contracts": [
+            {
+              "capability_id": "observe",
+              "kind": "observe",
+              "operation": "read",
+              "enabled": true
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "generic_relay_bypass_allowed forbidden",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "observe"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "idempotent",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "read_only",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "observe_only",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "document_candidate",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "request_start",
+              "kind": "physical_request",
+              "operation": "request_start",
+              "enabled": false,
+              "parameter_schema_ref": "https://schemas.example.test/capability",
+              "authorization_policy_ref": "policy",
+              "local_interlocks": [
+                "local"
+              ],
+              "command_ttl_seconds": 30,
+              "retry_class": "reconcile_before_retry",
+              "feedback_point_ids": [
+                "p"
+              ],
+              "completion_criterion_ref": "criterion",
+              "unknown_outcome_policy": "reconcile_no_blind_retry",
+              "manufacturer_permission_ref": "manufacturer",
+              "site_approval_ref": "site",
+              "fat_evidence_refs": [
+                "fat"
+              ],
+              "sat_evidence_refs": [
+                "sat"
+              ]
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "monitor cannot actuate",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'physical_request' should not be valid under {'const': 'physical_request'}",
+        "'physical_control' was expected"
+      ]
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "request_start"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "reconcile_before_retry",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "physical_control",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "approved_control",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "document_candidate",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "request_start",
+              "kind": "physical_request",
+              "operation": "request_start",
+              "enabled": false,
+              "parameter_schema_ref": "https://schemas.example.test/capability",
+              "authorization_policy_ref": "policy",
+              "local_interlocks": [
+                "local"
+              ],
+              "command_ttl_seconds": 30,
+              "retry_class": "reconcile_before_retry",
+              "feedback_point_ids": [
+                "p"
+              ],
+              "completion_criterion_ref": "criterion",
+              "unknown_outcome_policy": "reconcile_no_blind_retry",
+              "manufacturer_permission_ref": "manufacturer",
+              "site_approval_ref": "site",
+              "fat_evidence_refs": [
+                "fat"
+              ],
+              "sat_evidence_refs": [
+                "sat"
+              ]
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "disabled physical candidate",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "request_start"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "reconcile_before_retry",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "physical_control",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "approved_control",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "document_candidate",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "request_start",
+              "kind": "physical_request",
+              "operation": "request_start",
+              "enabled": true,
+              "parameter_schema_ref": "https://schemas.example.test/capability",
+              "authorization_policy_ref": "policy",
+              "local_interlocks": [
+                "local"
+              ],
+              "command_ttl_seconds": 30,
+              "retry_class": "reconcile_before_retry",
+              "feedback_point_ids": [
+                "p"
+              ],
+              "completion_criterion_ref": "criterion",
+              "unknown_outcome_policy": "reconcile_no_blind_retry",
+              "manufacturer_permission_ref": "manufacturer",
+              "site_approval_ref": "site",
+              "fat_evidence_refs": [
+                "fat"
+              ],
+              "sat_evidence_refs": [
+                "sat"
+              ]
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "candidate cannot enable",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "False was expected"
+      ]
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "request_start"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "reconcile_before_retry",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "physical_control",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "approved_control",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "field_accepted",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "request_start",
+              "kind": "physical_request",
+              "operation": "request_start",
+              "enabled": true,
+              "parameter_schema_ref": "https://schemas.example.test/capability",
+              "authorization_policy_ref": "policy",
+              "local_interlocks": [
+                "local"
+              ],
+              "command_ttl_seconds": 30,
+              "retry_class": "reconcile_before_retry",
+              "feedback_point_ids": [
+                "p"
+              ],
+              "completion_criterion_ref": "criterion",
+              "unknown_outcome_policy": "reconcile_no_blind_retry",
+              "manufacturer_permission_ref": "manufacturer",
+              "site_approval_ref": "site",
+              "fat_evidence_refs": [
+                "fat"
+              ],
+              "sat_evidence_refs": [
+                "sat"
+              ]
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "accepted structural fixture",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "request_start"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "reconcile_before_retry",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "physical_control",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "approved_control",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "field_accepted",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "request_start",
+              "kind": "physical_request",
+              "operation": "request_start",
+              "enabled": true,
+              "parameter_schema_ref": "https://schemas.example.test/capability",
+              "authorization_policy_ref": "policy",
+              "local_interlocks": [
+                "local"
+              ],
+              "command_ttl_seconds": 30,
+              "retry_class": "reconcile_before_retry",
+              "feedback_point_ids": [
+                "p"
+              ],
+              "completion_criterion_ref": "criterion",
+              "unknown_outcome_policy": "reconcile_no_blind_retry",
+              "manufacturer_permission_ref": "manufacturer",
+              "site_approval_ref": "site",
+              "fat_evidence_refs": [
+                "fat"
+              ],
+              "sat_evidence_refs": []
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "SAT required",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "[] should be non-empty"
+      ]
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "request_start"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "reconcile_before_retry",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "physical_control",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "approved_control",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "field_accepted",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "request_start",
+              "kind": "physical_request",
+              "operation": "request_start",
+              "enabled": true,
+              "parameter_schema_ref": "https://schemas.example.test/capability",
+              "authorization_policy_ref": "policy",
+              "local_interlocks": [
+                "local"
+              ],
+              "command_ttl_seconds": 30,
+              "retry_class": "idempotent",
+              "feedback_point_ids": [
+                "p"
+              ],
+              "completion_criterion_ref": "criterion",
+              "unknown_outcome_policy": "reconcile_no_blind_retry",
+              "manufacturer_permission_ref": "manufacturer",
+              "site_approval_ref": "site",
+              "fat_evidence_refs": [
+                "fat"
+              ],
+              "sat_evidence_refs": [
+                "sat"
+              ]
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "no blind retry",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'idempotent' is not one of ['reconcile_before_retry', 'never_automatic']"
+      ]
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "request_start"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "reconcile_before_retry",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "physical_control",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "approved_control",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "field_accepted",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "request_start",
+              "kind": "physical_request",
+              "operation": "request_start",
+              "enabled": true,
+              "parameter_schema_ref": "https://schemas.example.test/capability",
+              "authorization_policy_ref": "policy",
+              "local_interlocks": [
+                "local"
+              ],
+              "command_ttl_seconds": 0,
+              "retry_class": "reconcile_before_retry",
+              "feedback_point_ids": [
+                "p"
+              ],
+              "completion_criterion_ref": "criterion",
+              "unknown_outcome_policy": "reconcile_no_blind_retry",
+              "manufacturer_permission_ref": "manufacturer",
+              "site_approval_ref": "site",
+              "fat_evidence_refs": [
+                "fat"
+              ],
+              "sat_evidence_refs": [
+                "sat"
+              ]
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "TTL positive",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "0 is less than the minimum of 1"
+      ]
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "request_start"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "reconcile_before_retry",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "physical_control",
+        "physical_profile": {
+          "manufacturer": "fixture",
+          "regional_model": "regional",
+          "controller_firmware": "1",
+          "gateway_model": "fixture",
+          "gateway_firmware": "1",
+          "license_refs": [],
+          "interface_document_refs": [
+            "doc"
+          ],
+          "permission_mode": "approved_control",
+          "binding_revision": 1,
+          "point_map_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "zone_revision": 1,
+          "cause_effect_revision": 1,
+          "acceptance_scope": "field_accepted",
+          "local_automatic_protection_independent": true,
+          "llm_actuation_allowed": false,
+          "generic_relay_bypass_allowed": false,
+          "capability_contracts": [
+            {
+              "capability_id": "request_start",
+              "kind": "physical_request",
+              "operation": "request_start",
+              "enabled": true,
+              "parameter_schema_ref": "https://schemas.example.test/capability",
+              "authorization_policy_ref": "policy",
+              "local_interlocks": [
+                "local"
+              ],
+              "command_ttl_seconds": 30,
+              "retry_class": "reconcile_before_retry",
+              "feedback_point_ids": [],
+              "completion_criterion_ref": "criterion",
+              "unknown_outcome_policy": "reconcile_no_blind_retry",
+              "manufacturer_permission_ref": "manufacturer",
+              "site_approval_ref": "site",
+              "fat_evidence_refs": [
+                "fat"
+              ],
+              "sat_evidence_refs": [
+                "sat"
+              ]
+            }
+          ]
+        }
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "feedback required",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "[] should be non-empty"
+      ]
+    },
+    {
+      "instance": {
+        "id": "fixture",
+        "version": "1.0.0",
+        "protocol": "ot_gateway",
+        "capabilities": [
+          "request_start"
+        ],
+        "authentication": "gateway_managed",
+        "region_scope": [
+          "test"
+        ],
+        "retry_class": "reconcile_before_retry",
+        "schemas": [
+          "https://schemas.example.test/fixture"
+        ],
+        "safety_class": "physical_control"
+      },
+      "schema_reference": "SmartAlarm connector manifest",
+      "name": "physical profile mandatory",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'physical_profile' is a required property"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.impairment.changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "impairment_id": "imp",
+          "scope": [
+            {
+              "site_id": "s",
+              "controller_id": "c",
+              "zone_ids": [
+                "z"
+              ],
+              "asset_ids": []
+            }
+          ],
+          "functions_affected": [
+            "voice"
+          ],
+          "status": "verified_closed",
+          "owner": "o",
+          "planned_until": "2026-10-23T08:40:12Z",
+          "restoration_evidence_refs": []
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "restoration proof mandatory",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "[] should be non-empty"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.impairment.changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "impairment_id": "imp",
+          "scope": [
+            {
+              "site_id": "s",
+              "controller_id": "c",
+              "zone_ids": [
+                "z"
+              ],
+              "asset_ids": []
+            }
+          ],
+          "functions_affected": [
+            "voice"
+          ],
+          "status": "verified_closed",
+          "owner": "o",
+          "planned_until": "2026-10-23T08:40:12Z",
+          "restoration_evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "restoration fixture",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.test.completed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "test_run_id": "test",
+          "binding_revision": 1,
+          "test_mode": "simulator",
+          "authorization_ref": "auth",
+          "result": "pass",
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ],
+          "restoration_status": "not_applicable"
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "test event",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.binding.accepted.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "binding_id": "b",
+          "binding_revision": 1,
+          "acceptance_ref": "acc",
+          "scope": "bench_only",
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "binding event",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "locally_accepted",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": []
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "mission event",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.impairment.changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "impairment_id": "imp",
+          "scope": [
+            {
+              "site_id": "s",
+              "controller_id": "c",
+              "zone_ids": [
+                "z"
+              ],
+              "asset_ids": []
+            }
+          ],
+          "functions_affected": [
+            "voice"
+          ],
+          "status": "requested",
+          "owner": "o",
+          "planned_until": "2026-10-23T08:40:12Z",
+          "restoration_evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical impairment requested",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.impairment.changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "impairment_id": "imp",
+          "scope": [
+            {
+              "site_id": "s",
+              "controller_id": "c",
+              "zone_ids": [
+                "z"
+              ],
+              "asset_ids": []
+            }
+          ],
+          "functions_affected": [
+            "voice"
+          ],
+          "status": "approved",
+          "owner": "o",
+          "planned_until": "2026-10-23T08:40:12Z",
+          "restoration_evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical impairment approved",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.impairment.changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "impairment_id": "imp",
+          "scope": [
+            {
+              "site_id": "s",
+              "controller_id": "c",
+              "zone_ids": [
+                "z"
+              ],
+              "asset_ids": []
+            }
+          ],
+          "functions_affected": [
+            "voice"
+          ],
+          "status": "active",
+          "owner": "o",
+          "planned_until": "2026-10-23T08:40:12Z",
+          "restoration_evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical impairment active",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.impairment.changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "impairment_id": "imp",
+          "scope": [
+            {
+              "site_id": "s",
+              "controller_id": "c",
+              "zone_ids": [
+                "z"
+              ],
+              "asset_ids": []
+            }
+          ],
+          "functions_affected": [
+            "voice"
+          ],
+          "status": "restoration_pending",
+          "owner": "o",
+          "planned_until": "2026-10-23T08:40:12Z",
+          "restoration_evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical impairment restoration_pending",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.impairment.changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "impairment_id": "imp",
+          "scope": [
+            {
+              "site_id": "s",
+              "controller_id": "c",
+              "zone_ids": [
+                "z"
+              ],
+              "asset_ids": []
+            }
+          ],
+          "functions_affected": [
+            "voice"
+          ],
+          "status": "verified_closed",
+          "owner": "o",
+          "planned_until": "2026-10-23T08:40:12Z",
+          "restoration_evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical impairment verified_closed",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.physical.impairment.changed.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "impairment_id": "imp",
+          "scope": [
+            {
+              "site_id": "s",
+              "controller_id": "c",
+              "zone_ids": [
+                "z"
+              ],
+              "asset_ids": []
+            }
+          ],
+          "functions_affected": [
+            "voice"
+          ],
+          "status": "RESTORED",
+          "owner": "o",
+          "planned_until": "2026-10-23T08:40:12Z",
+          "restoration_evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "obsolete impairment RESTORED rejected",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'RESTORED' is not one of ['requested', 'approved', 'active', 'restoration_pending', 'verified_closed']"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "draft",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical mission draft",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "review",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical mission review",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "approved",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical mission approved",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "locally_accepted",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical mission locally_accepted",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "executing",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical mission executing",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "completed",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical mission completed",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "aborted",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical mission aborted",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "unknown",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical mission unknown",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "COMPLETED_VERIFIED",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": [
+            {
+              "evidence_ref": "ev",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "kind": "local_feedback",
+              "recorded_at": "2026-10-23T08:40:12Z",
+              "recorded_by": "operator"
+            }
+          ]
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "obsolete mission COMPLETED_VERIFIED rejected",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "'COMPLETED_VERIFIED' is not one of ['draft', 'review', 'approved', 'locally_accepted', 'executing', 'completed', 'aborted', 'unknown']"
+      ]
+    },
+    {
+      "instance": {
+        "specversion": "1.0",
+        "id": "event",
+        "source": "urn:smartalarm:fixture",
+        "type": "com.smartalarm.rescue.equipment_mission.updated.v1",
+        "time": "2026-10-23T08:40:12Z",
+        "tenantid": "tenant",
+        "regionid": "test",
+        "mode": "test",
+        "data": {
+          "schema_version": "1.0.0",
+          "aggregate_id": "p",
+          "aggregate_version": 1,
+          "tenant_id": "tenant",
+          "site_id": "s",
+          "mission_id": "m",
+          "operator_ref": "o",
+          "interface_mode": "operator_console_only",
+          "state": "completed",
+          "limitations": [
+            "No remote actuation"
+          ],
+          "evidence_refs": []
+        }
+      },
+      "schema_reference": "https://schemas.example.test/smartalarm/event-v1.json",
+      "name": "canonical completed mission requires evidence",
+      "expected_valid": false,
+      "actual_valid": false,
+      "passed": true,
+      "errors": [
+        "[] should be non-empty"
+      ]
+    },
+    {
+      "instance": {
+        "schema_version": "1.0.0",
+        "aggregate_id": "point-example",
+        "aggregate_version": 1,
+        "tenant_id": "tenant-example",
+        "site_id": "site-example",
+        "controller_id": "controller-example",
+        "binding_id": "binding-example",
+        "binding_revision": 1,
+        "point_id": "point-example",
+        "zone_id": "zone-example",
+        "semantic": "pump_running",
+        "value": true,
+        "unit": "boolean",
+        "observed_at": "2026-10-23T08:40:11Z",
+        "received_at": "2026-10-23T08:40:12Z",
+        "quality": "GOOD",
+        "controller_mode": "AUTO",
+        "maintenance_state": "IN_SERVICE",
+        "cause_effect_revision": 1,
+        "source_event_id": "source-example-1",
+        "raw_evidence_ref": "evidence-example"
+      },
+      "schema_reference": "#/components/schemas/PhysicalPointObservation",
+      "name": "outputs\\SmartAlarm doc example",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "instance": {
+        "schema_version": "1.0.0",
+        "aggregate_id": "point-example",
+        "aggregate_version": 1,
+        "tenant_id": "tenant-example",
+        "site_id": "site-example",
+        "controller_id": "controller-example",
+        "binding_id": "binding-example",
+        "binding_revision": 1,
+        "point_id": "point-example",
+        "zone_id": "zone-example",
+        "semantic": "pump_running",
+        "value": true,
+        "unit": "boolean",
+        "observed_at": "2026-10-23T08:40:11Z",
+        "received_at": "2026-10-23T08:40:12Z",
+        "quality": "GOOD",
+        "controller_mode": "AUTO",
+        "maintenance_state": "IN_SERVICE",
+        "cause_effect_revision": 1,
+        "source_event_id": "source-example-1",
+        "raw_evidence_ref": "evidence-example"
+      },
+      "schema_reference": "#/components/schemas/PhysicalPointObservation",
+      "name": "outputs\\SmartAlarm\\English doc example",
+      "expected_valid": true,
+      "actual_valid": true,
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "checks_count": 61,
+  "reference_counts": {
+    "API": 226,
+    "Events": 23,
+    "Manifest": 0
+  },
+  "operation_ids_unique": true,
+  "format_validation": "Explicit RFC3339 date-time checker used; default optional library dependency was unavailable.",
+  "runtime_enforcement_not_tested": [
+    "Bind tenant/region/site from verified identity; compare payload and envelope scope.",
+    "Resolve exact accepted model/firmware/gateway/license/point-map/cause-effect; observe-only or console-only bindings cannot actuate.",
+    "Match expected_version and If-Match, active revisions, source freshness and signed target/parameter approval digest.",
+    "Resolve parameters against approved capability schema and units; enforce expires_at against current server time and capability TTL.",
+    "Recheck local mode, impairment, interlocks and feedback at server and edge. Local protection/manual controls remain autonomous.",
+    "No LLM may approve, configure or issue physical commands.",
+    "Timeout after send becomes UNKNOWN absent proof; no blind retry; fence old writer and reconcile ledger.",
+    "Verify evidence ownership, authenticity, signers and physical completion criterion; schema-valid references are not evidence by themselves.",
+    "FAT/SAT must bind actual exact configuration; simulator cannot establish field_accepted.",
+    "Point-map IDs/raw addresses must be unique within binding and match accepted unit/type semantics."
+  ],
+  "canonical_lifecycle_alignment": {
+    "states": {
+      "PhysicalImpairmentChanged": [
+        "requested",
+        "approved",
+        "active",
+        "restoration_pending",
+        "verified_closed"
+      ],
+      "RescueEquipmentMissionUpdated": [
+        "draft",
+        "review",
+        "approved",
+        "locally_accepted",
+        "executing",
+        "completed",
+        "aborted",
+        "unknown"
+      ]
+    },
+    "api_event_schemas_equal_after_ref_normalization": true,
+    "detail_design_checked": "Detail Design defines separate rich physical-command states; it does not define conflicting impairment or rescue-equipment mission enums. No Markdown changes needed.",
+    "checks_count": 61
+  }
+}

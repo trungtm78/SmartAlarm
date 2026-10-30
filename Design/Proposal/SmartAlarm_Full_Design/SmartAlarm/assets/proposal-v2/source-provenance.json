@@ -1,0 +1,8 @@
+{
+  "source": "C:\\Users\\Than Minh Trung\\Desktop\\FireEscape_Proposal_Expanded_EN.pptx",
+  "source_sha256": "ef57416fda0a178330a7371077d716a2da246280997eafd386b005b7a68fe118",
+  "method": "python-pptx opened original 34-slide deck; retained source masters, cover picture/logo and original header/footer styling; reauthored content in native editable shapes; generated pictorial illustrations",
+  "native_editable": "Titles, captions, process flows, architecture, tables and proposed UI",
+  "raster": "Four explanatory images generated using built-in imagegen; source photograph and logo",
+  "slides": 34
+}

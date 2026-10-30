@@ -1,0 +1,32 @@
+{
+  "BRD.md": {
+    "headings_vi": 13,
+    "headings_en": 13,
+    "table_lines_vi": 60,
+    "table_lines_en": 60,
+    "id_parity": true,
+    "numbers_parity": true,
+    "english_vietnamese_diacritics": 0,
+    "version_1_0": true
+  },
+  "FRD.md": {
+    "headings_vi": 33,
+    "headings_en": 33,
+    "table_lines_vi": 29,
+    "table_lines_en": 29,
+    "id_parity": true,
+    "numbers_parity": true,
+    "english_vietnamese_diacritics": 0,
+    "version_1_0": true,
+    "physical_requirement_definitions_unique_16": true
+  },
+  "Acceptance-Matrix.csv": {
+    "vi_rows": 298,
+    "en_rows": 298,
+    "cross_system": 65,
+    "screen": 233,
+    "machine_columns_match": true,
+    "new_status_exact": true,
+    "F_catalog_titles_workflow_next_match": true
+  }
+}

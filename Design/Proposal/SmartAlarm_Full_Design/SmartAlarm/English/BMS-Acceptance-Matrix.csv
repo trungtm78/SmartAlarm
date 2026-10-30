@@ -1,0 +1,49 @@
+﻿Test ID,Workflow,Trigger,Expected evidence,Owner,Status
+BMS-T01,WF-34,"Rename, type, unit or enum changes",Keep identity for rename; quarantine incompatible semantics and affected commands.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T02,WF-34,Repeated native ID across sites/tenants,"No cross-tenant joins, disclosure or wrong acknowledgement.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T03,WF-35,Alarm returns normal before acknowledgement,Active becomes false; acknowledgement can remain pending; incident stays independent.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T04,WF-35,Alarm recurs while an old ACK is pending,Old receipt cannot acknowledge the new occurrence; refresh and show conflict.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T05,WF-35,Panel direct feed and BMS mirror replay100 times,"One physical lineage; no duplicated incident, dispatch or broadcast.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T06,WF-35,Lost cursor; paged snapshot with concurrent events,Record gaps; do not clear alarms based on absence from a single page.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T07,WF-36,Higher-priority local override,Show rejected request or accepted non-winning demand accurately; no override bypass.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T08,WF-36,Receipt lost after possible command execution,Mark unknown; reconcile without blind resending.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T09,WF-36,Lease expires and slot owner changes during restart,Do not clear another owner; approved relinquishment requires readback.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T10,WF-36,Fan demand accepted but proof false or bad,No physical success; show demand/feedback discrepancy.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T11,WF-37,"Link loss, full buffer and two-node failover",Local protection independent; durable commit and single-writer fencing hold.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T12,WF-37,Alarm burst overlaps historian backfill,Alarm queue remains available and upstream budgets are respected.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T13,WF-34,Expired/revoked certificate or wrong tenant,Privileged operations fail closed; no insecure fallback.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T14,WF-35,Published incident is reflected by BMS,No recursive incident creation; preserve exact receipt evidence.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T15,WF-35,Maintenance ends before restoration,Restoration remains pending and escalates; do not mark ready.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T16,WF-35,Stale door/fan evidence affects route,Re-evaluate or withdraw route and old speech; assistance remains accessible.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T17,WF-35,"AI-derived point, occupancy count or old badge event",Do not present inference as measurement or confirmed occupant safety.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T18,WF-34,"VI/EN/JA, keyboard, zoom and color deficiency",Critical action/source owner readable; raw identifiers remain unchanged.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T19,WF-37,Exercise data reconnects after outage,No exercise leak to actual operations; backfill cannot actuate.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-T20,WF-37,Retirement with open commands and leases,"Handover, revoke, verify and retain audit; no orphan remote override.",BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-01,WF-34,Read-only enforcement — Attempt writes and external ACK with read-only identity,Reject before dispatch; no native write audit entry.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-02,WF-34,Scaling — Known pressure raw600 with scale100 and invalid unit,Decode6.0bar; unapproved mapping never enters rules.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-03,WF-34,Register addressing — Zero/one-based addresses and alternate32-bit word order,Match golden fixtures; mismatches block commissioning.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-04,WF-35,COV expiry — Subscription expiry or BMS restart,Renew and reconcile; report stale during gap.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-05,WF-35,MS/TP contention — Authorized burst on a constrained bus,No polling storm; record actual latency and critical-event handling.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-06,WF-35,Existing active alarms — Connect after alarms are already active,Load current conditions; stay syncing until reconciled.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-07,WF-35,Refresh race — New event arrives between refresh boundaries,Older refresh data cannot overwrite new state.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-08,WF-35,Duplicate delivery — Repeat identical source event,One canonical transition; multiple receipts retained.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-09,WF-35,Dual paths — Direct panel and BMS relay same alarm,Link physical lineage; preserve both paths.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-10,WF-35,Similar unrelated alarms — Equal labels and near timestamps on different devices,No false merge based only on text/time.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-11,WF-35,Late acknowledgement — Occurrence2 starts before ACK1 receipt,ACK1 never clears ACK2 responsibility.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-12,WF-35,Internal acknowledgement — SmartAlarm operator accepts work,Native BMS acknowledgement remains unchanged.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-13,WF-35,Return to normal — Source normal while rescue is unresolved,Incident and occupant safety remain independent.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-14,WF-36,Dispatch timeout — Controller might have acted but receipt is lost,Unknown outcome and reconciliation; no blind retry.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-15,WF-36,Expired offline command — Reconnect after command expiry,Do not replay; require a new authorized intent.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-16,WF-36,Local override — Operator obtains higher priority,Do not report physical success; show ownership conflict.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-17,WF-36,Lost writer — Kill edge between dispatch and receipt persistence,Fence standby and reconcile before writes resume.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-18,WF-36,Retained priority slot — Power loss while edge holds a BACnet priority,Measure controller behavior; require accepted local fallback.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-19,WF-36,Same-slot collision — Another application writes the same priority,Do not assume ownership or clear with NULL automatically.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-20,WF-37,"Certificate rotation — Expired, changed or revoked trust material",Fail closed for privileged actions; no automatic trust.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-21,WF-37,Quality loss — Bad/uncertain point or missing source time,No false normal/safe display; propagate uncertainty.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-22,WF-37,Clock drift — Source clock skew and late delivery,Keep both timestamps; do not overwrite newer occurrence.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-23,WF-37,Alarm flood — Alarm burst plus ordinary telemetry,Preserve transitions; only approved telemetry may coalesce.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-24,WF-37,Disk capacity — Journal near/full capacity,Actionable degradation and explicit gaps; no silent discard.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-25,WF-37,Reflection loop — Summary sent out and reflected back,Preserve origin; no new incident or command loop.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-26,WF-37,Translation — VI/EN/JA status and action terminology,Same operational meaning; preserve native codes.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-27,WF-37,"Isolation — Cross-tenant credential, mapping or command",Reject and audit without topology or health-data disclosure.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT
+BMS-P-28,WF-37,Emergency independence — Cloud and edge both unavailable,Local protection remains independent under its own accepted design.,BMS integration / Site FAT-SAT,DESIGNED — NOT EXECUTED ON PRODUCT

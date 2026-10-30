@@ -1,0 +1,13 @@
+{
+  "revision": "2.0",
+  "date": "2026-10-24",
+  "screen_count": 233,
+  "locale_views": 699,
+  "pdf_count": 28,
+  "proposal_slides": 166,
+  "missing_links": [],
+  "ui_qa": "QA-v2-results.json",
+  "interaction_qa": "verification/ux-v2-interactions.json",
+  "scope": "Design package and local prototype; human usability and operational acceptance pending",
+  "targeted_supplement": "QA-v2-flood-supplement.json"
+}

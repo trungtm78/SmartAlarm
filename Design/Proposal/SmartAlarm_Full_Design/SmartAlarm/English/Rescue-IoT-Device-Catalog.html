@@ -1,0 +1,197 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rescue-IoT-Device-Catalog · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="../index.html">SmartAlarm / Design Library</a><a href="../Rescue-IoT-Device-Catalog.html">Tiếng Việt</a><button onclick="window.print()">Print / Save PDF</button></header><main><div class="document-meta">BASELINE 3.0 · 24 OCT 2026 · DESIGN FOR REVIEW</div><h1 id="smartalarm-rescue-firefighting-and-iot-device-catalog">SmartAlarm — Rescue, firefighting and IoT device catalog</h1><figure class="physical-figure"><img src="../assets/proposal-v3/physical.png" alt="Physical firefighting and rescue integration"><figcaption>Concept illustration — proposed integration, not an installed system.</figcaption></figure>
+
+<p>Research snapshot: <strong>2026-10-23</strong>. Six deployment candidates researched against official manufacturer documentation. Published capability is not proof of integration with SmartAlarm; all adapters remain proposed until bench and site acceptance. This catalog adds physical intervention to sensing, warning, positioning and dispatch. No equipment has been purchased or commissioned.</p>
+
+<p><strong>Current design baseline: 3.0 · BMS integration: 24 October 2026. Original research/requirement dates above are preserved.</strong></p>
+
+<h2 id="1-evidence-and-deployment-decision">1. Evidence and deployment decision</h2>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Exact candidate</th>
+  <th>Physical role</th>
+  <th>Integration evidence</th>
+  <th>Proposed pilot disposition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>DEV-01</td>
+  <td>AXIS C1310-E Mk II Network Horn Speaker</td>
+  <td>Fixed-site audible instructions</td>
+  <td>Published VAPIX and SIP interfaces</td>
+  <td>Bench adapter, then acoustic site test</td>
+</tr>
+<tr>
+  <td>DEV-02</td>
+  <td>Bosch PRAESENSA with PRA-SCL system controller</td>
+  <td>Supervised public address / emergency voice system</td>
+  <td>Published Open Interface</td>
+  <td>Accredited integrator review before any emergency control</td>
+</tr>
+<tr>
+  <td>DEV-03</td>
+  <td>DJI Matrice 4T + DJI AS1 Speaker</td>
+  <td>Mobile aerial instructions and search support</td>
+  <td>Operator features verified; exact AS1 command API unverified</td>
+  <td>Operator-assisted workflow initially</td>
+</tr>
+<tr>
+  <td>DEV-04</td>
+  <td>DJI Matrice 400 + Zenmuse V1</td>
+  <td>Aerial voice delivery with developer integration path</td>
+  <td>Official PSDK V1 widget control and MSDK product statement</td>
+  <td>SDK proof of concept, then flight exercise</td>
+</tr>
+<tr>
+  <td>DEV-05</td>
+  <td>Shark Robotics Colossus, water/foam monitor and casualty-evacuation configuration</td>
+  <td>Physical suppression, reconnaissance and casualty transport</td>
+  <td>Vendor remote control; public integration API unknown</td>
+  <td>Task dispatch with trained vendor-console operator</td>
+</tr>
+<tr>
+  <td>DEV-06</td>
+  <td>FLIR A700 with Smart Sensor configuration</td>
+  <td>Thermal observation and early-warning evidence</td>
+  <td>Published MQTT, Modbus TCP and REST</td>
+  <td>Read-only sensor gateway pilot</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="2-dev-01-fixed-network-horn">2. DEV-01 — Fixed network horn</h2>
+
+<p><strong>Verified:</strong> The C1310-E Mk II datasheet lists VAPIX, SIP, SRTP/SIPS, speaker-test results and audio-clip-playing events. These are device capabilities, not evidence that people heard the message. <a href="https://www.axis.com/dam/public/b5/cd/f9/datasheet-axis-c1310-e-mk-ii-network-horn-speaker-en-US-470491.pdf">Official datasheet</a>.</p>
+
+<p><strong>Proposed integration:</strong> Edge adapter maps approved message/zone intent to the pinned VAPIX API and routes live audio through a tested SIP media gateway. Maintain a speaker-to-zone inventory; distinguish command receipt, playback evidence and human acknowledgment. Never infer coverage from network-online status alone.</p>
+
+<p><strong>RFI / limits:</strong> Request exact firmware and API versions, audio upload/play/stop methods, authentication, clip capacity, feedback semantics, management licensing and lifecycle/support dates. Confirm whether the purchased package needs separate audio-manager or third-party integration licenses; no free entitlement is assumed. Do not specify this network horn as a certified replacement for the site's mandatory fire voice alarm without an applicable certificate and approved design.</p>
+
+<p><strong>SAT-01:</strong> Play an approved recording only in the selected zone; test wrong-zone rejection, amplifier/acoustic fault, certificate failure, power loss, WAN loss and expired-command reconnection. Measure intelligibility under actual noise and occupancy, including Vietnamese/English/Japanese recordings.</p>
+
+<h2 id="3-dev-02-supervised-emergency-pa">3. DEV-02 — Supervised emergency PA</h2>
+
+<p><strong>Verified:</strong> PRA-SCL exposes an Open Interface and supervises stored messages; its official product record identifies the controller. <a href="https://commerce.keenfinity.tech/nlexp/en/System-controller-large/p/F.01U.325.042/">PRA-SCL product</a>. The vendor publishes native and C#/.NET Open Interface documentation. <a href="https://software-download.keenfinity-group.com/publicaddress/praesensa/manuals/PRAESENSA%20open%20interface%20programming%20intructions.pdf">Programming manual</a>. Configuration documentation includes TLS and an option to disable emergency control through the interface. <a href="https://resources.keenfinity.tech/public/documents/PRAESENSA_Configurat_Configuration_Manual_enUS_18014473303379595.pdf">Configuration manual</a>.</p>
+
+<p><strong>Certification boundary:</strong> The vendor describes PRAESENSA's EN 54-16 capability; applicability depends on the installed system. <a href="https://www.keenfinity-group.com/it/it/soluzioni/soluzioni-per-la-comunicazione-pubblica/sistemi-di-comunicazione-al-pubblico-e-allarme-vocale/sistema-di-comunicazione-al-pubblico-basato-su-ip-praesensa/">Official system page</a>. Earlier official configuration instructions explicitly warn that Open Interface use can compromise evacuation-standard compliance. <a href="https://resources.keenfinity.tech/public/documents/PRAESENSA_2.20_Configuration_Manual_enUS_100857072779.pdf">Integration restrictions</a>.</p>
+
+<p><strong>Proposed integration:</strong> Regional SmartAlarm command policy → local approved adapter → controller; start with health/events and authorized general announcements. The local certified alarm path retains priority. Emergency initiation, acknowledgment or reset requires the integrator's documented permitted design; a generic API acknowledgment is not acoustic completion.</p>
+
+<p><strong>RFI / limits:</strong> Obtain the exact current firmware/manual/certificate set, permitted interface commands, zone/priority arbitration, failure supervision, redundancy, power backup and approved fire-panel interface. Confirm required controller, amplifier, PSU, call station, loudspeaker and optional subsystem/software licenses in a complete bill of materials. A controller alone is not a complete certified installation. Older Bosch download links may redirect; use the current vendor documentation portal and pin downloaded revisions at procurement.</p>
+
+<p><strong>SAT-02:</strong> Test local fire priority during SmartAlarm announcements, loss of adapter/network/controller, supervised circuit faults, message expiry, redundant failover, and prohibited emergency-reset requests. The integrator and site authority must accept the complete installed configuration.</p>
+
+<h2 id="4-dev-03-compact-drone-and-as1">4. DEV-03 — Compact drone and AS1</h2>
+
+<p><strong>Verified:</strong> DJI identifies AS1 compatibility with Matrice 4 Series and supports recording, imported media, TTS and live broadcasting. Its FAQ currently lists Mandarin and English for AS1 TTS and lists aircraft SDK support. These statements do not establish a supported SmartAlarm API for each AS1 action. <a href="https://www.dji.com/support/product/matrice-4-series">Official Matrice 4 support</a>.</p>
+
+<p><strong>Proposed integration:</strong> SmartAlarm prepares an approved mission and audio asset; the pilot uses DJI's supported operator workflow, then records the operational result. Treat SDK-based speaker start/stop/upload/status and live-audio injection as <strong>UNKNOWN pending exact model/firmware documentation and demonstration</strong>. Do not reuse a generic PSDK or Dock speaker command solely because its name resembles the required operation.</p>
+
+<p><strong>RFI / limits:</strong> Obtain an AS1-specific SDK capability matrix, SDK licensing/access conditions, supported firmware, stream/codec/file limits, cancellation behavior and feedback states. For Vietnamese/Japanese, validate approved imported recordings; do not claim native TTS support. Confirm payload-dependent flight endurance, legal operating conditions, maintenance and operator training.</p>
+
+<p><strong>SAT-03:</strong> Demonstrate correct-language playback, intelligibility under rotor noise, operator abort, lost radio link, depleted battery, duplicated mission requests and stale queued content. Verify no automatic takeoff follows an alert. Demonstrate manual fallback if integration is unavailable.</p>
+
+<h2 id="5-dev-04-matrice-400-and-zenmuse-v1">5. DEV-04 — Matrice 400 and Zenmuse V1</h2>
+
+<p><strong>Verified:</strong> DJI documents V1 compatibility with Matrice 400, live broadcasting through Pilot 2 and an MSDK integration route. <a href="https://enterprise.dji.com/zenmuse-v1">Official V1 product</a>. Its PSDK documentation explicitly describes controlling the V1 on Matrice 400 through widget values. <a href="https://developer.dji.com/doc/payload-sdk-tutorial/en/function-overview/basic-function/custom-widget.html">PSDK custom-widget interface</a>. V1 support lists Japanese among Matrice 400 TTS languages, but not Vietnamese. <a href="https://www.dji.com/support/product/zenmuse-v1">Official V1 support</a>.</p>
+
+<p><strong>Proposed integration:</strong> A version-pinned mobile or onboard adapter translates approved voice commands into only the documented supported SDK operations. Separate mission/flight authorization from payload playback authorization. SDK availability does not establish parity with all Pilot 2 or FlightHub 2 functions, and does not prove unrestricted cloud-to-speaker live streaming.</p>
+
+<p><strong>RFI / limits:</strong> Require exact SDK versions, keys/activation, compatible host hardware, widget definitions, command/status schema, media transport, permissions and callback semantics. Confirm any FlightHub 2 subscriptions separately if that route is selected. Test approved Vietnamese recordings; confirm Japanese pronunciation and firmware-specific TTS. Request a complete airframe/payload/mount/controller/battery bill of materials.</p>
+
+<p><strong>SAT-04:</strong> On the purchased combination, exercise upload/play/stop/repeat/volume and reported state only where officially exposed. Test concurrent operators, cancellation, link loss and pilot takeover. A callback success must not be shown as “people heard”. Conduct a permitted outdoor exercise before operational use.</p>
+
+<h2 id="6-dev-05-physical-firefighting-and-casualty-rescue-robot">6. DEV-05 — Physical firefighting and casualty rescue robot</h2>
+
+<p><strong>Verified:</strong> Colossus is remotely controlled and offers water/foam, thermal/video and stretcher configurations. The current page advertises flow up to 3,000 L/min; actual suppression requires the appropriate water supply and equipment. The page does not establish a public third-party control API. <a href="https://www.shark-robotics.com/colossus-firefighting-robot/">Official Colossus</a>.</p>
+
+<p><strong>Proposed integration:</strong> SmartAlarm dispatches a robot mission to a trained team, tracks operator acceptance and evidence, and imports video/telemetry only through a vendor-supported interface after verification. Keep driving, monitor aiming, water discharge and casualty movement under the qualified operator's control. <strong>API, ROS, MQTT, ONVIF, remote E-stop and autonomous navigation compatibility are UNKNOWN unless the supplier publishes or supplies applicable documentation.</strong> No protocol is inferred from a camera or radio being present.</p>
+
+<p><strong>RFI / limits:</strong> Request exact robot generation, module SKUs, supplied console, API/SDK availability and commercial terms, video export, telemetry, loss-link behavior, independent emergency stop, safety interlocks, heat-exposure limits, hose pressure/flow requirements, foam compatibility, transport and maintenance. Confirm payload/stretcher constraints and patient-handling procedure. Reconcile differing module counts and slope figures on vendor materials before contracting; this catalog makes no operational commitment from those figures.</p>
+
+<p><strong>SAT-05:</strong> With the fire/rescue authority, test access width, floor loading, ramps/debris, hose drag, water-supply failure, nozzle reaction, loss link, stop distance, thermal limits and battery reserve. Perform casualty loading/transport using a training manikin and approved crew procedure. Confirm that SmartAlarm duplicates or outages cannot initiate movement or discharge.</p>
+
+<h2 id="7-dev-06-thermal-iot-sensor">7. DEV-06 — Thermal IoT sensor</h2>
+
+<p><strong>Verified:</strong> The official Axxx table lists MQTT, Modbus TCP and REST alarm/readout paths for the A700 Smart Sensor family. A500 rows differ, so A500 must not be substituted based on the family name. <a href="https://www.flir.com/en-eu/products/axxx-series-smart-sensor/">Official product/configuration table</a>. FLIR lists optional Advanced Smart Sensor configuration and separately purchased Wi-Fi/visual-camera options. <a href="https://flir.custhelp.com/app/answers/detail/a_id/6493/~/flir---a50%252F-a70-%2526-a400%252F-a500%252F-a700--series---smart-sensor">Official configuration support</a>.</p>
+
+<p><strong>Proposed integration:</strong> Start read-only: edge gateway reads ROI temperatures/alarms and emits source-bound observations with device time, receipt time, calibration/configuration version and quality. A threshold event is evidence requiring the relevant alarm policy, not automatic proof of a confirmed fire or authority to release suppression.</p>
+
+<p><strong>RFI / limits:</strong> Require exact A700 SKU, Smart Sensor edition, lens, firmware and the relevant MQTT payload schema, Modbus register map and REST manual. Confirm authentication/TLS availability per selected interface; do not assume Modbus is encrypted. Confirm ROI/analysis limits, calibration, environmental enclosure and optional licenses. Source values are not site accuracy guarantees.</p>
+
+<p><strong>SAT-06:</strong> Use a controlled reference target; test emissivity/reflection effects, occlusion, dirty optics, temperature threshold/hysteresis, timestamp drift, network interruption, duplicate/replayed observations and faulty-sensor states. Verify degraded sensor data cannot silently become a clear/no-hazard assertion.</p>
+
+<h2 id="8-cross-device-procurement-and-release-gate">8. Cross-device procurement and release gate</h2>
+
+<p>For each purchased configuration, record model/serial, firmware, licenses, interface revision, credential owner, network zone, allowed commands, approval role, local override, expiry, receipt semantics, maintenance owner and support end date. Attach vendor evidence and bench/SAT results. No candidate is “production integrated” until these records and negative tests pass.</p>
+
+<p>Physical action follows <strong>approved incident task → qualified operator/authority → device interlocks → execution evidence → reconciliation</strong>. SmartAlarm coordinates the response; the certified fire system, pilot and rescue operator retain their respective local control responsibilities. An API success, a hot pixel, a location estimate or an AI recommendation must never independently establish that a person is safe or that a rescue action succeeded.</p>
+
+<h2 id="ux2-physical-visual-supervision-and-physical-feedback">UX2-PHYSICAL · Visual supervision and physical feedback</h2>
+
+<p>The v2 console uses a pipe/valve/pump mimic, zone coverage and explicit device state. A requested command, gateway acknowledgement and observed physical effect are separate states. Unknown or stale feedback must use a labeled pattern and timestamp, never a green success state. Review-only actions in the prototype do not operate equipment. Local fire protection authority, interlocks and commissioning requirements in this document remain binding.</p>
+
+<p>Verify F08–F20 with communication loss, conflicting local state and delayed feedback. Operator access to the schematic must not bypass command authorization. PA playback feedback is not proof of audibility to every occupant. Drone/robot task acceptance is not proof of arrival or rescue.</p>
+
+<p>See <a href="UIUX-Design.html">UI/UX design</a>, <a href="Screen-Specifications.html">screen specifications</a> and <a href="UX-Redesign-Audit.html">redesign audit</a>.</p>
+
+<!-- BMS-INTEGRATED-3.0-BEGIN -->
+
+<h2 id="9-rescue-equipment-through-bms-information-routing-and-ownership">9. Rescue equipment through BMS — information routing and ownership</h2>
+
+<p>Equipment may be visible through a direct PA API, BMS mirror, drone gateway or vendor console. EquipmentRegistry retains one equipment identity with multiple source endpoints, each with separate capability evidence. A BMS mirror of speakers, robots or water monitors cannot inherit direct-connector command authority. Actual/exercise mode propagates end-to-end; exercise data cannot create real equipment tasks.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Equipment</th>
+  <th>BMS data role</th>
+  <th>Required integration</th>
+  <th>Acceptance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Emergency PA</td>
+  <td>Ready/fault, zone, emergency priority and available playback reports</td>
+  <td>Map site groups; the direct PA adapter owns sessions; BMS provides qualified triggers/evidence</td>
+  <td>Echo/replay cannot rebroadcast; local override wins; playback does not prove audibility</td>
+</tr>
+<tr>
+  <td>Ordinary IP speaker</td>
+  <td>Model-dependent connectivity/playback</td>
+  <td>Classify separately from life-safety PA; do not replace supervised power/wiring design</td>
+  <td>Power loss/offline is unknown/unavailable, never evidence of PA certification</td>
+</tr>
+<tr>
+  <td>Drone</td>
+  <td>Alarm/site coordinates/zone and task context</td>
+  <td>BMS does not fly drones; route tasks through the drone gateway and pilot authority with geofence/no-fly/permits</td>
+  <td>Accepted is not arrived; BMS loss does not change drone lost-link behavior</td>
+</tr>
+<tr>
+  <td>Robot / water monitor</td>
+  <td>Access constraints, water-supply observations and target zone</td>
+  <td>Commands use qualified interfaces or operator tasks at vendor consoles; separate readback</td>
+  <td>BMS pump-run does not establish water at the robot; telemetry cannot trigger arbitrary suppression</td>
+</tr>
+<tr>
+  <td>IoT / wearable</td>
+  <td>Point observations and aggregate presence</td>
+  <td>Normalize source time/quality/provenance; avoid direct-plus-mirror double counts</td>
+  <td>Occupancy/wearable silence does not establish personal safety</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Coordination runbook.</strong> BMS alarms first enter incident/correlation processing, then capability-based task/team selection. Task context includes location uncertainty, related equipment/cause-and-effect and source age. Responders confirm local access and observed state before effects. Handover preserves task owner/time/evidence and cannot complete automatically on BMS alarm clear. Test with FR-BMS-13/19/20/21/25/27 and WF-33/35/36; signed site permits remain deployment prerequisites.
+<!-- BMS-INTEGRATED-3.0-END --></p>
+</main></body></html>

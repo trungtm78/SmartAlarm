@@ -1,0 +1,10 @@
+{
+  "created": "2026-10-23",
+  "tool": "imagegen",
+  "style_reference": "FireEscape_Proposal_Expanded_EN.pptx",
+  "artifacts": {
+    "overview.png": "exec-6a0b749a-9113-4325-bd47-4871087209df.png",
+    "physical.png": "exec-094f1bb9-204e-4114-afc6-fcfd80acf564.png"
+  },
+  "purpose": "Conceptual illustrations; not installation drawings, equipment model photographs or accepted deployment evidence."
+}

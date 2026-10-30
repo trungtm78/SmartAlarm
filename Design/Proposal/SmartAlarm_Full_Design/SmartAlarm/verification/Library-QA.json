@@ -1,0 +1,22 @@
+{
+  "checks": [
+    {
+      "locale": "vi",
+      "rows": 527,
+      "screen_filter": 233,
+      "system_filter": 261,
+      "id_search": 1,
+      "mobile_overflow": false
+    },
+    {
+      "locale": "en",
+      "rows": 527,
+      "screen_filter": 233,
+      "system_filter": 261,
+      "id_search": 1,
+      "mobile_overflow": false
+    }
+  ],
+  "js_errors": [],
+  "scope": "Local design library and functional inventory only."
+}

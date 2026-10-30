@@ -1,0 +1,122 @@
+# SmartAlarm — Rescue loudspeakers, voice navigation and hazard avoidance
+
+![SmartAlarm — explanatory diagram](../assets/04-Voice-Route-AI.svg)
+
+Production baseline 3.0 · additional requirements dated 23/10/2026. This document is a mandatory extension of the BRD/FRD/Basic/Detail Design, not an idea for a later phase.
+
+**Current design baseline: 3.0 · BMS integration: 24 October 2026. Original research/requirement dates above are preserved.**
+
+## 1. Business requirement BR-09
+
+Support people without smartphones through loudspeakers, and support smartphone users with step-by-step voice navigation. The same incident must produce consistent content across the app, area loudspeakers, displays and response teams. The objective is to deliver approved guidance to the right people and zones while making data limitations visible. Never describe a route as “absolutely safe”; devices and data cannot observe every hazard on the ground.
+
+## 2. WF-21 — Public address / rescue loudspeakers
+
+Actors: PA author, approver, live announcer, device admin and local controller. Devices: PA amplifier/controller, IP speaker, SIP audio endpoint where a supporting adapter exists, site gateway loudspeakers, and drone and vehicle loudspeaker payloads. Each device declares its zone coverage polygon/indoor zone, priority capabilities, audio formats, playback feedback, mic streaming support, local override, battery/power/network and health.
+
+Standard flow: select incident → select zones → preview coverage gaps → select approved vi/en/ja recording/TTS → priority/repetition/expiry → approve exact message+zone digest → dispatch → controller ACK → per-speaker playback state → reconcile failures. Selecting “entire area” must display the speaker count and zones before approval. Preapproved emergency templates may be used for rapid response under local policy, while retaining actor/audit and scope.
+
+Playback model: queued → accepted_by_controller → buffering → playing → completed, or rejected/failed/unknown/preempted/expired. “Completed” means the device reported playing the entire content; it does not mean everyone heard or understood it. Acoustic feedback, if equipped, must be separate evidence and cannot be inferred from a network heartbeat. A failed speaker creates a coverage gap and a fallback task for patrol/mobile loudspeaker/app/SMS according to policy.
+
+Priority arbitration prioritizes the local alarm path approved by the site authority; the cloud must not disable or override mandatory fire alarm systems. Routine audio may be preempted; equivalent emergency content requires an arbiter/zone lease to avoid overlapping messages. A stop command stops only the specified broadcast instance if the capability supports it; it does not automatically disable the entire fire alarm. Reconnection does not replay expired announcements. Recording/microphone/live speech have separate permissions, push-to-talk or explicit start/stop; opening the screen alone does not activate the microphone.
+
+Live rescue: request microphone permission after an explicit action; approve session zones; short-lived media token; local + remote indicators; maximum duration; lease heartbeat; timeout automatically stops the live channel under controller policy. Do not assume every PA supports two-way audio. The proposed audio transport is WebRTC between the announcer and regional media gateway; the gateway converts to SIP/RTP/vendor protocol according to capability, with TLS/SRTP where supported and an isolated OT network. Recorded/TTS assets are cached at the edge with checksum/version so an approved local procedure remains playable during WAN loss.
+
+## 3. WF-22 — Smartphone voice navigation
+
+Actors: citizen/responder; inputs include location report, floor anchor, heading quality, route graph version, hazard restrictions, accessibility profile, destination capacity and instruction template locale. Outputs: ordered steps with landmark, direction when reliable, distance estimate, expected node, voice text, expiry, route version and reason for replan. The app provides play/pause/repeat, text transcript, speech rate, haptic cues and offline fallback. Voice must not automatically activate and reveal a user's location in discreet mode.
+
+Flow: receive alert → confirm floor/location (outdoor GPS; indoor QR/BLE/UWB/manual depending on deployment) → select mobility needs → request route → check freshness/authorization → display route and selection rationale → play each step → update location → advance/replan → reach assembly point → user self-reports safety. Entering a geofence does not automatically confirm safety. Phone orientation does not equal travel direction; when heading quality is low, use landmarks such as “go to the WEST STAIR sign”, not left/right. If the floor is unknown or map registration is incorrect, do not provide turn-by-turn guidance; instruct the user to find a location code or use SOS.
+
+The app avoids hazards using a constrained route graph, rather than simply choosing a vector away from a polygon's center. A route farther from a fire may still enter a dead end, flooded area or unsuitable floor. Outdoor routes check network walkability, closures, polygon/hazard evolution and destination status; indoor routes use site-reviewed doors, stairs, refuge areas, exits and directional constraints. Elevators are not available by default, only when an approved evacuation plan explicitly permits the specific capability. An accessibility profile excludes stairs if the user cannot use them; if no suitable path exists, propose assistance/a refuge area under the site plan rather than inventing a route.
+
+## 4. Additional services and ownership
+
+| Service | Owner data | API/events |
+|---|---|---|
+| Hazard & route guidance | Hazard polygons/restrictions, route request, route version, graph validation | POST /guidance/routes; guidance.updated/withdrawn |
+| PA orchestration | Broadcast instance, zone lease, language sequence, repetition, device receipts | POST /broadcasts; broadcast.playback.changed |
+| Speech content | Reviewed audio/TTS text, voice config, pronunciation lexicon, locale versions | POST /speech/previews; speech.asset.approved |
+| Real-time media gateway | Short-lived live session/transport state, no business authority | POST /broadcasts/{id}/live-session; media.session.closed |
+
+Mapping owns the graph/plan, Incident owns restriction approval references, and Command service executes approved PA intent through adapters. PA cannot bypass command policy; Guidance cannot independently change incident severity. These service additions use production cell deployment, HA and observability like the core services.
+
+## 5. Data design and route algorithm
+
+RouteNode(id,tenant,plan_revision,level,geometry,type,landmark_i18n); RouteEdge(id,from,to,direction,width_m,stairs,accessible,door_state,approval_ref). HazardRestriction(id,incident_ref,geometry/zone,level_range,source,certainty,severity,observed_at,valid_until,approved_by,version). RoutePlan(id,person_session,graph_revision,hazard_version,profile,destination,steps,issued_at,expires_at,state). Broadcast(id,incident,scope_digest,content_version,locale_order,priority,repeat_count,expires_at,state). PlaybackReceipt(broadcast,device,sequence,state,device_at,received_at,evidence_type).
+
+Algorithm baseline: validate location/floor confidence → snapshot graph+restrictions+profile → remove forbidden/blocked/unknown-critical edges and expired/closed destinations → apply accessibility constraints → find feasible paths using Dijkstra/A* with distance, congestion estimates and exposure penalties → choose a path only if hard safety constraints pass → produce landmark steps with localized templates → sign/cache route version with expiry. An exposure penalty cannot allow a hard exclusion to be crossed because a route is “shorter”. Unknown edges are handled conservatively under policy; unknown is not clear. Dynamic predictive hazard models are advisory for operators unless separately validated; do not automatically treat fire-spread forecasts as certain evidence.
+
+Replan triggers: hazard version changes, new closure, destination closes, deviation exceeds threshold, location/heading quality degrades, route TTL expires. Debounce and hysteresis prevent continual direction changes; a new hazard cutting the route triggers immediate withdrawal without waiting for debounce. The client must cancel queued TTS from the old route before playing new guidance. Until a valid new route exists, announce that the route cannot be verified and display SOS/approved local instructions; do not replay an old turn because the app is offline.
+
+Thresholds such as location age ≤ 10 s for step guidance, hazard recheck ≤ 30 s and route TTL ≤ 60 s are design assumptions requiring site trials; they do not apply uniformly to every hazard/indoor technology. Hazard-specific rules define approved maximum age, source reliability and fallback.
+
+## 6. I18n, audio and intelligibility
+
+The three locales vi-VN/en/ja-JP have separate text and voice versions with identical semantics and variables. The app uses the individual's language; loudspeakers use a language order based on audience/site policy. Avoid cycles so long that they delay the main instruction: design an immediate primary-language message and bounded subsequent versions, with operator preview of total duration. Critical TTS phrases undergo pronunciation review; place names have a lexicon and approved recordings where TTS is unstable. Sentence breaks, units and floor pronunciation must suit each language. Maximum volume is not the default solution: coverage/intelligibility require acoustic surveys and site acceptance.
+
+Offline: cached graph/audio/instructions carry revision and expiry. When hazard data is too old, use only an approved offline site procedure with a stale-data label; do not continue claiming a dynamic hazard-avoiding route. Bluetooth/headphones, silent mode, permission and OS interruptions make audio delivery uncertain; the UI provides visual/haptic alternatives. Voice starts according to interaction/permission and consented policy; OS critical-alert entitlement is a separate integration task, and the app cannot be assumed always able to activate the speaker.
+
+## 7. API details
+
+POST /v1/guidance/routes: location{method,accuracy_m,observed_at,floor_ref,heading,heading_accuracy}, incident_id, mobility_profile, locale; response route_id/version, graph_revision,hazard_revision,expires_at,quality,steps[]. Each step has landmark_i18n_key, optional direction enum, optional distance_m, speech_template_ref and prohibited-actions. Insufficient data returns 422 LOCATION_UNCERTAIN or 409 NO_VERIFIED_ROUTE with a safe fallback object, not HTTP success with an empty route.
+
+POST /v1/broadcasts: incident_id,zone_refs[],content_versions[],priority,repeat_count,expires_at,idempotency_key; 201 draft. POST /{id}/approve: exact digest + version; POST /{id}/start: command intent after policy checks, 202 does not yet mean playback. GET /{id}/receipts: per-device accepted/playing/completed/unknown. POST /{id}/stop: instance-scoped, permission, controller capability. POST /{id}/live-session: session TTL, approved zones, media endpoint token; the UI does not display credentials. Device telemetry ingestion is source-bound and monotonically sequenced so late receipts cannot roll state back.
+
+## 8. Mandatory acceptance scenarios
+
+### V2 addition: visuals, speech and validity form one decision
+
+C35/C36 put a verified landmark and one next action before technical fields. C03 is a floor plan, not automatically a usable route. C37 shows withdrawal; C38 shows insufficient position/floor/heading evidence; C39 must switch to the correct outdoor context. Unknown heading removes turn arrows. Recognizing a landmark must not be expressed as a promise that a route segment is safe.
+
+| Test scenario | Required result |
+|---|---|
+| Withdraw a route while C35 is speaking | Stop audio and clear queued speech for the old revision; remove the overlay and directions in the same update. C37 opens a replacement only with a newly approved revision; otherwise offer assistance. |
+| QR confirms floor but provides no heading | Show position source, landmark and unknown heading; do not speak “turn left/right.” C38 offers manual entry or assistance. |
+| Stop / change locale / navigate away | Old audio stops; replay uses only the currently valid instruction. Equivalent text is available without relying on TTS or a speaker icon. |
+| Discreet mode C27 | No automatic sound/vibration; quick exit never triggers speech; returning does not resume previous audio. |
+| P04/P09 receive gateway ACK without playback | Separately show command receipt, playback state, unknown zones and local audibility verification; never report that everyone heard it. |
+
+The prototype provides user-triggered Web Speech play/stop controls and sample wording, not an approved live emergency message. Playback on a reviewer's device does not establish the correct voice, place-name pronunciation, field intelligibility or speaker coverage. Production acceptance checks revision-bound text/audio, template variables, VI/EN/JA, local-panel priority and disconnection. Public-address alarm policy and discreet phone audio policy are separate; one toggle must not control both.
+
+
+PA-01 broadcasts to exactly the 8 selected speakers, never another site. PA-02 a network-online speaker with an amplifier fault still reports a coverage gap. PA-03 controller ACK does not display “everyone has heard”. PA-04 reconnection after expiry does not play old messages. PA-05 cloud cannot override local fire-controller priority. PA-06 two announcers competing for a zone have only one valid lease; the other sees a conflict. PA-07 the mic opens only after user action and closes when the session expires. PA-08 a drone payload without feedback displays unknown, never a fabricated complete state.
+
+NAV-01 an unknown floor produces no left/right turn instruction. NAV-02 a hazard cutting an active route withdraws the route and cancels old TTS. NAV-03 wheelchair users are not routed through stairs. NAV-04 no feasible path switches to assistance/a refuge area under the approved plan. NAV-05 network loss and expired hazard TTL do not retain a current-route label. NAV-06 vi/en/ja pronounce landmarks, units and directions correctly; text/audio parity. NAV-07 the app route and PA use the same guidance version or display a mismatch requiring operator resolution. NAV-08 arrival does not automatically mark safe. NAV-09 emergency navigation requires no lengthy data-entry task. NAV-10 unreliable heading uses landmarks, not relative directions.
+
+## 9. Mockup coverage
+
+C35–C40: step-by-step navigation, uncertainty, reroute, outdoor, voice settings. P01–P09: zone/coverage, author/approve, playback, health, live mic, mobile speaker, content and priority. S15–S16: graph editor/test/approval. O35–O36: hazard restriction and consistency/receipt. Offline/error/accessibility states share X01–X10 and the state selector. All are mandatory baseline screens of the full product.
+
+<!-- PHYSICAL_DESIGN_1_0 -->
+
+## 10. Baseline 1.0 — coordinating voice with physical firefighting and rescue
+
+WF-28–WF-33 add physical equipment to the same incident, but PA, suppression release and vehicle control remain separate capability domains. PA receives approved hazard/guidance versions and site status; flow-switch, pump-run or valve-open signals are not proof that a fire is extinguished and cannot automatically trigger an all-clear message. Controller cause-and-effect changes require engineering review/FAT/SAT, not generation by TTS or AI.
+
+The certified voice alarm and local fire-alarm path retain priority; SmartAlarm adapters must respect the certification scope of the installed configuration. Unknown/failed PA receipts create coverage gaps and field-team tasks. Speaker test/impairment exposes scope, compensating measures and expiry; fire watch does not end merely because the cloud reconnects. Local takeover revokes the live lease, retains recording/audit under policy and never automatically reopens the microphone.
+
+Drone audio uses verified equipment combinations: Matrice 4T+AS1 remains an operator workflow while its exact API is unverified; Matrice 400+V1 has a vendor-documented SDK path, still requiring operation-by-operation verification on the selected firmware. English/Japanese support does not imply native Vietnamese TTS; use reviewed recordings when necessary. F19 records pilot, mission authority, broadcast scope, expiry, local abort and audio state; speaker playback does not grant autonomous flight permission. Colossus supports suppression/transport missions but its public API is unverified: dispatch only to a qualified vendor-console operator, never convert a message into movement/discharge.
+
+Additional acceptance: PA-PHY-01 cloud live audio cannot preempt local fire priority; PA-PHY-02 unverified suppression telemetry does not produce all-clear content; PA-PHY-03 local override ends remote authority and reconnect does not replay; PA-PHY-04 test zones do not broadcast to actual audiences; PA-PHY-05 expired drone messages do not play after recovery; PA-PHY-06 absent SDK playback feedback remains unknown and requires operator evidence. Tests include witnessed on-site intelligibility; a prototype does not replace acceptance. See [device catalog](Rescue-IoT-Device-Catalog.md) and F09–F19 in [screen specifications](Screen-Specifications.md).
+
+
+<!-- BMS-INTEGRATED-3.0-BEGIN -->
+## 11. BMS to warnings and voice — execution contract
+
+WF-35 connects FR-BMS-11/13/19/21 with WF-21/22. Source alarms pass normalization, occurrence deduplication and approved zone mapping before creating WarningIntent. The anti-repeat key includes tenant/site, incident occurrence, approved response-rule revision, message revision and actual/exercise mode; received text/timestamps alone are insufficient. Native ACK, historical replay, state refresh and writeback echoes cannot create new broadcasts. Semantically changed alarms produce policy-approved updates/cancellations rather than blindly repeating old content.
+
+| Step | Required conditions and behavior | Output / failure |
+|---|---|---|
+| Resolve scope | Map BMS point → equipment → fire compartment/affected zone → audience/PA group; keep zone types separate | Missing/quarantined mapping creates an operator task, never a guessed site-wide broadcast |
+| Select content | Use site-approved VI/EN/JA templates, priority and emergency authority; LLM only analyzes evidence | Missing approved translation uses a reviewed fallback and records the fallback locale; no automatic unreviewed translation broadcast |
+| Select route | Door/fan/lift states are evidence for the route engine; check quality/freshness/uncertainty/accessibility | Stale/conflicting evidence withdraws the route or requires human assistance; no relative turns with unknown heading |
+| Deliver | Bind message revision, audience snapshot and mode before fan-out; local PA controller retains priority | Separate queued/sent/device accepted/playback reported/human acknowledgement; never claim everyone heard it |
+| Update / withdraw | Atomically invalidate old map/voice/haptics within the guidance session; online clients acknowledge the new revision | Offline clients show cached information and age; reconcile before new guidance after reconnect |
+| End | BMS normal/ACK cannot automatically end guidance or the incident | Incident commanders verify rescue and closure criteria separately |
+
+**Transaction boundary.** Incident service decides response intents; warning service owns message/audience revisions and idempotency; PA adapters execute only qualified capabilities; apps receive guidance session/route revision/expiry/source quality. Commit an outbox before external delivery; transport retries follow channel contracts without creating new WarningIntents. BMS link-loss escalation and occupant messages are separate flows to avoid alarm floods.
+
+**Integrated acceptance.** Inject the same alarm through direct panel and BMS: only one approved response is created. Replay a day of history without broadcasting. Native BMS ACK must not stop still-needed voice guidance. Door-constraint changes withdraw map and voice together. PA local override blocks remote delivery while retaining the operator task. LLM failure must not delay predetermined warnings. Site intelligibility is measured independently of an API playback report.
+<!-- BMS-INTEGRATED-3.0-END -->
+

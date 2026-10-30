@@ -1,0 +1,354 @@
+{
+  "views": [
+    {
+      "id": "BMS01",
+      "lang": "vi",
+      "overflow": [],
+      "heading": "Hồ sơ và khả năng BMS"
+    },
+    {
+      "id": "BMS02",
+      "lang": "vi",
+      "overflow": [],
+      "heading": "Topology ngữ nghĩa"
+    },
+    {
+      "id": "BMS03",
+      "lang": "vi",
+      "overflow": [],
+      "heading": "Đối soát alarm hai hệ thống"
+    },
+    {
+      "id": "BMS04",
+      "lang": "vi",
+      "overflow": [],
+      "heading": "Quyền điều khiển và priority"
+    },
+    {
+      "id": "BMS05",
+      "lang": "vi",
+      "overflow": [],
+      "heading": "Thay đổi point và ảnh hưởng"
+    },
+    {
+      "id": "BMS06",
+      "lang": "vi",
+      "overflow": [],
+      "heading": "Budget và độ mới dữ liệu"
+    },
+    {
+      "id": "BMS07",
+      "lang": "vi",
+      "overflow": [],
+      "heading": "Khôi phục edge và bàn giao"
+    },
+    {
+      "id": "BMS08",
+      "lang": "vi",
+      "overflow": [],
+      "heading": "Theo dõi trao đổi và vòng lặp"
+    },
+    {
+      "id": "BMS01",
+      "lang": "en",
+      "overflow": [],
+      "heading": "BMS identity and capabilities"
+    },
+    {
+      "id": "BMS02",
+      "lang": "en",
+      "overflow": [],
+      "heading": "Semantic topology"
+    },
+    {
+      "id": "BMS03",
+      "lang": "en",
+      "overflow": [],
+      "heading": "Cross-system alarm reconciliation"
+    },
+    {
+      "id": "BMS04",
+      "lang": "en",
+      "overflow": [],
+      "heading": "Control authority and priority"
+    },
+    {
+      "id": "BMS05",
+      "lang": "en",
+      "overflow": [],
+      "heading": "Point drift and impact"
+    },
+    {
+      "id": "BMS06",
+      "lang": "en",
+      "overflow": [],
+      "heading": "Budgets and data freshness"
+    },
+    {
+      "id": "BMS07",
+      "lang": "en",
+      "overflow": [],
+      "heading": "Edge recovery and handover"
+    },
+    {
+      "id": "BMS08",
+      "lang": "en",
+      "overflow": [],
+      "heading": "Exchange tracing and loop control"
+    },
+    {
+      "id": "BMS01",
+      "lang": "ja",
+      "overflow": [],
+      "heading": "BMS識別情報と機能"
+    },
+    {
+      "id": "BMS02",
+      "lang": "ja",
+      "overflow": [],
+      "heading": "意味的トポロジー"
+    },
+    {
+      "id": "BMS03",
+      "lang": "ja",
+      "overflow": [],
+      "heading": "システム間警報照合"
+    },
+    {
+      "id": "BMS04",
+      "lang": "ja",
+      "overflow": [],
+      "heading": "制御権と優先順位"
+    },
+    {
+      "id": "BMS05",
+      "lang": "ja",
+      "overflow": [],
+      "heading": "ポイント変更と影響"
+    },
+    {
+      "id": "BMS06",
+      "lang": "ja",
+      "overflow": [],
+      "heading": "通信予算とデータ鮮度"
+    },
+    {
+      "id": "BMS07",
+      "lang": "ja",
+      "overflow": [],
+      "heading": "エッジ復旧と引継ぎ"
+    },
+    {
+      "id": "BMS08",
+      "lang": "ja",
+      "overflow": [],
+      "heading": "交換追跡とループ制御"
+    }
+  ],
+  "mobile": [
+    {
+      "id": "BMS01",
+      "lang": "vi",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS02",
+      "lang": "vi",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS03",
+      "lang": "vi",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS04",
+      "lang": "vi",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS05",
+      "lang": "vi",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS06",
+      "lang": "vi",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS07",
+      "lang": "vi",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS08",
+      "lang": "vi",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS01",
+      "lang": "en",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS02",
+      "lang": "en",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS03",
+      "lang": "en",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS04",
+      "lang": "en",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS05",
+      "lang": "en",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS06",
+      "lang": "en",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS07",
+      "lang": "en",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS08",
+      "lang": "en",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS01",
+      "lang": "ja",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS02",
+      "lang": "ja",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS03",
+      "lang": "ja",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS04",
+      "lang": "ja",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS05",
+      "lang": "ja",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS06",
+      "lang": "ja",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS07",
+      "lang": "ja",
+      "horizontal_overflow": false
+    },
+    {
+      "id": "BMS08",
+      "lang": "ja",
+      "horizontal_overflow": false
+    }
+  ],
+  "errors": [],
+  "interactions": [
+    {
+      "name": "profile catalog has11",
+      "pass": true
+    },
+    {
+      "name": "profile change is reviewed withnoactivation",
+      "pass": true
+    },
+    {
+      "name": "unprovenzone blocked",
+      "pass": true
+    },
+    {
+      "name": "mapping candidate notpublished",
+      "pass": true
+    },
+    {
+      "name": "ACK generation43previewblocked",
+      "pass": true
+    },
+    {
+      "name": "localoverrideblocks",
+      "pass": true
+    },
+    {
+      "name": "absenceoverrideisnotpermission",
+      "pass": true
+    },
+    {
+      "name": "unitdriftblocked",
+      "pass": true
+    },
+    {
+      "name": "conversionpreviewrequiresapproval",
+      "pass": true
+    },
+    {
+      "name": "backfillpause",
+      "pass": true
+    },
+    {
+      "name": "budgetcalculationroundsupbatches",
+      "pass": true
+    },
+    {
+      "name": "recoverymissingchecksclear",
+      "pass": true
+    },
+    {
+      "name": "handoverdoesnotunlockwriter",
+      "pass": true
+    },
+    {
+      "name": "loopquarantinepreservesevidence",
+      "pass": true
+    },
+    {
+      "name": "previewreceiveskeyboardfocus",
+      "pass": true
+    }
+  ],
+  "gallery": [
+    {
+      "lang": "vi",
+      "all": 241,
+      "inside_grid": 241
+    },
+    {
+      "lang": "en",
+      "all": 241,
+      "inside_grid": 241
+    }
+  ],
+  "summary": {
+    "views": 24,
+    "mobile": 24,
+    "interactions": 15,
+    "failed_interactions": 0,
+    "overflow": 0,
+    "mobile_overflow": 0,
+    "errors": 0
+  }
+}

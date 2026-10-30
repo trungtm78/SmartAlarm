@@ -1,0 +1,1051 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Detail-Design · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="../index.html">SmartAlarm / Design Library</a><a href="../Detail-Design.html">Tiếng Việt</a><button onclick="window.print()">Print / Save PDF</button></header><main><div class="document-meta">BASELINE 3.0 · 24 OCT 2026 · DESIGN FOR REVIEW</div><h1 id="smartalarm-detail-design-detailed-technical-design">SmartAlarm — Detail Design / Detailed Technical Design</h1>
+
+<p><img src="../assets/proposal-v3/physical.png" alt="SmartAlarm — explanatory diagram" /></p>
+
+<p>Version 3.0 · production architecture design baseline, not deployed · 24/10/2026. This document is used together with API-Contract.json, Event-Schemas.json, Screen-Specifications.md, and Acceptance-Matrix.csv. The attached API contract is a machine-readable core baseline; vendor integrations require their own binding specifications once actual devices are available.</p>
+
+<h2 id="1-domain-data-model">1. Domain data model</h2>
+
+<p>IDs use UUIDv7 or an equivalent UUID with uniqueness; external IDs exist only within their source namespace. All tenant-data tables include tenant_id, region_id, created_at in UTC, updated_at, and version bigint. Internal foreign keys use composite tenant_id+id within the same DB; cross-service references use IDs and snapshot versions, without cross-database foreign keys.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Entity</th>
+  <th>Main fields and constraints</th>
+  <th>Proposed retention / owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Tenant</td>
+  <td>id, home_region, status, policy_version, default_locale; region immutable through normal APIs</td>
+  <td>Contract end + policy / Tenant</td>
+</tr>
+<tr>
+  <td>Membership</td>
+  <td>tenant,user,role,site_scope,valid_from,valid_until,revoked_at; unique tenant,user,role,scope</td>
+  <td>Audit retains history / IAM</td>
+</tr>
+<tr>
+  <td>Location</td>
+  <td>id,parent_id,type,name_i18n,geometry,timezone,version; parent in same tenant; cycle forbidden</td>
+  <td>Versions retained long term / Location</td>
+</tr>
+<tr>
+  <td>PlanRevision</td>
+  <td>plan_id,revision,asset_id,scale,exit_graph,reviewer,published_at; unique plan,revision</td>
+  <td>Based on incident references / Location</td>
+</tr>
+<tr>
+  <td>Device</td>
+  <td>id,external_id,connector_id,location_id,cert_thumbprint,capabilities,health; unique tenant,connector,external_id</td>
+  <td>Device lifetime + audit / Registry</td>
+</tr>
+<tr>
+  <td>Signal</td>
+  <td>id,source,event_id,type,observed_at,received_at,schema_version,payload_ref,location_snapshot,mode</td>
+  <td>30 days hot + archive policy / Ingestion</td>
+</tr>
+<tr>
+  <td>Incident</td>
+  <td>id,hazard,severity,state,home_region,writer_epoch,owner,location_ref,version,opened_at,closed_at</td>
+  <td>Proposed default of 365 days / Incident</td>
+</tr>
+<tr>
+  <td>IncidentSignal</td>
+  <td>incident_id,signal_id,relation,actor,reason; unique incident,signal</td>
+  <td>Based on incident / Incident</td>
+</tr>
+<tr>
+  <td>SOS</td>
+  <td>id,client_request_id,person_ref,incident_ref,category,state,location_report,sharing_policy,version</td>
+  <td>365 days, precise location separate / Assistance</td>
+</tr>
+<tr>
+  <td>PersonObservation</td>
+  <td>id,person_ref,incident_ref,status,reporter_type,observed_at,received_at,location_ref</td>
+  <td>Append-only; precise location 30 days / Assistance</td>
+</tr>
+<tr>
+  <td>Task</td>
+  <td>id,incident_ref,unit_ref,state,offer_deadline,version,assignment_epoch,completed_at</td>
+  <td>365 days / Dispatch</td>
+</tr>
+<tr>
+  <td>WarningVersion</td>
+  <td>warning_id,version,content_i18n,area,audience_snapshot,expiry,status,approvals</td>
+  <td>365 days / Warning</td>
+</tr>
+<tr>
+  <td>DeliveryAttempt</td>
+  <td>id,warning_ref,recipient_ref,channel,attempt_no,provider_id,state,receipt_at; effect_key unique</td>
+  <td>90 days metadata / Delivery</td>
+</tr>
+<tr>
+  <td>Command</td>
+  <td>id,target,capability,params_digest,nonce,expires_at,approval,state,device_receipt,writer_epoch</td>
+  <td>365 days / Command</td>
+</tr>
+<tr>
+  <td>Mission</td>
+  <td>id,drone_ref,incident_ref,pilot_ref,plan_version,clearance_ref,state,flight_log_ref</td>
+  <td>365 days by policy / Command</td>
+</tr>
+<tr>
+  <td>Evidence</td>
+  <td>id,tenant,object_key,sha256,mime,size,scan_state,classification,hold_id</td>
+  <td>90 days, legal hold override / Evidence</td>
+</tr>
+<tr>
+  <td>Consent</td>
+  <td>subject,purpose,recipient_scope,fields,policy_version,granted_at,revoked_at</td>
+  <td>Version history / Privacy</td>
+</tr>
+<tr>
+  <td>AuditEntry</td>
+  <td>id,actor,action,object_ref,object_version,reason,trace_id,at,digest,previous_digest</td>
+  <td>365+ according to policy / Audit</td>
+</tr>
+<tr>
+  <td>Outbox / Inbox</td>
+  <td>outbox: event_id,payload,attempt,next_attempt; inbox: consumer,event_id,processed_at</td>
+  <td>Replay horizon + margin / each service</td>
+</tr>
+<tr>
+  <td>PhysicalBindingRevision</td>
+  <td>binding_id,revision,controller_id,regional_model,firmware,gateway_model,gateway_firmware,license_ref,point_map_digest,zone_revision,cause_effect_revision,status,acceptance_ref; unique tenant,binding_id,revision</td>
+  <td>Referenced configuration history; approved policy / Physical integration</td>
+</tr>
+<tr>
+  <td>PhysicalPoint</td>
+  <td>id,binding_id,binding_revision,controller_id,zone_id,raw_address,semantic,access_mode,unit,scale,offset,byte_order,word_order,enum_map,stale_after,feedback_for; unique tenant,binding_id,binding_revision,raw_address</td>
+  <td>Binding lifetime + incident/test references / Physical integration</td>
+</tr>
+<tr>
+  <td>PhysicalObservation</td>
+  <td>id,binding_id,point_id,binding_revision,source_event_id,observed_at,received_at,value,quality,controller_mode,maintenance_state,raw_evidence_ref; append-only</td>
+  <td>Proposed 30 days hot; archive by incident/test policy / Physical integration</td>
+</tr>
+<tr>
+  <td>PhysicalCapability</td>
+  <td>id,binding_id,revision,operation,parameter_schema,allowed_targets,authorization_policy,local_interlocks,command_ttl,retry_class,feedback_point_ids,completion_criterion,unknown_outcome_policy,approval_evidence_ref</td>
+  <td>Versioned approval history / Command</td>
+</tr>
+<tr>
+  <td>PhysicalCommandDetail</td>
+  <td>command_id,binding_revision,capability_revision,zone_revision,cause_effect_revision,expected_point_versions,feedback_deadline,physical_state,evidence_refs; one-to-one Command</td>
+  <td>Inherits Command retention / Command</td>
+</tr>
+<tr>
+  <td>Impairment</td>
+  <td>id,scope_refs,functions_affected,reason,owner,planned_until,notifications,compensatory_plan_ref,status,restoration_evidence_refs,version</td>
+  <td>Site inspection policy; legal hold applies / Physical readiness</td>
+</tr>
+<tr>
+  <td>PhysicalTestRun</td>
+  <td>id,binding_revision,test_plan_ref,mode,authorization_ref,impairment_ref,operator,witness,started_at,ended_at,result,evidence_refs</td>
+  <td>Site inspection/acceptance policy / Physical readiness</td>
+</tr>
+<tr>
+  <td>CompatibilityAssessment</td>
+  <td>id,binding_revision,hardware_serials,firmware_versions,license_refs,certificate_refs,fat_run_refs,sat_run_refs,open_defects,signoffs,status</td>
+  <td>Configuration lifecycle and site policy / Physical readiness</td>
+</tr>
+<tr>
+  <td>RescueEquipmentMission</td>
+  <td>id,incident_ref,dispatch_task_ref,equipment_ref,operator_ref,capability_revision,mission_scope,local_console_required,flight_mission_ref,state,limitations,result_evidence_refs</td>
+  <td>Proposed 365 days; sensitive evidence separately / Rescue equipment operations</td>
+</tr>
+</tbody>
+</table>
+
+<p>Retention values are proposed design defaults, not legal conclusions. Legal holds prevent purging related objects. Deletion retains reference tombstones to preserve audit integrity, without retaining PII beyond its purpose. Search/indexes/backups require deletion propagation and an expiration strategy; deleting from OLTP alone is insufficient.</p>
+
+<h3 id="indexes-and-concurrency">Indexes and concurrency</h3>
+
+<p>Signal unique(tenant_id,source,event_id); index(tenant_id,observed_at DESC), partition by received_at month. Incident index(tenant_id,state,severity,opened_at DESC), spatial index on geometry; partial index for active records. SOS unique(tenant_id,client_request_id), index(tenant_id,incident_ref,state). Task updates use <code>WHERE version=:expected AND assignment_epoch=:epoch</code>; affected_rows=0 returns 409. Delivery unique(effect_key); provider callback unique(provider,event_id). Outbox index(status,next_attempt_at) and worker leasing prevent concurrent processing of the same row.</p>
+
+<p>RLS uses tenant context bound from the verified principal within a transaction, not directly trusted headers. Connection pools must reset context. A tenant ID in the URL is insufficient authorization. Region routing checks the membership directory and signed region mapping; wrong-region requests receive safe redirect metadata or 409 REGION_MISMATCH.</p>
+
+<h3 id="physical-storage-and-revision-invariants">Physical storage and revision invariants</h3>
+
+<p>Every physical entity also carries the common tenant_id, region_id, created_at, updated_at and version fields above. Use composite references within a service; cross-service references retain the accepted snapshot digest. PhysicalObservation deduplication is unique(tenant_id,binding_id,source_event_id,point_id) when a stable source event ID exists; otherwise the adapter generates a stable receipt ID and documents that it cannot prove source-level deduplication. Index observations by tenant_id,point_id,observed_at and partition by received_at. A point's latest view uses source sequence/time and quality, not arrival order alone.</p>
+
+<p>Binding revisions are immutable after acceptance. Activation atomically changes the active revision only after compatibility acceptance and readiness checks; outstanding command approvals pin their original revisions and are invalidated for dispatch when these no longer match the active binding. physical_state cannot become COMPLETED_VERIFIED without the declared evidence criterion. Impairment restoration and capability re-enable are different transactions; clearing a dashboard alarm cannot restore a device or authorize writes. Snapshot reconciliation compares software maintenance_state with controller mode and reports conflict.</p>
+
+<h2 id="2-api-conventions">2. API conventions</h2>
+
+<p>Base <code>/v1</code>; JSON UTF-8, RFC3339 timestamps, cursor pagination. Bearer authorization + verified tenant context; optional X-Tenant-ID is only a selector, checked against token membership by the server. <code>Idempotency-Key</code> is mandatory for POST requests creating SOS, sending warnings, offering dispatch tasks, and issuing commands; scope is principal+tenant+route+key, with a request-body hash. Same key with different payload → 409 IDEMPOTENCY_MISMATCH; same key with same payload → previous response. Receipt only after durable commit. Proposed key retention is 7 days for human mutations; source-event deduplication follows an archive replay horizon proposed at a minimum of 90 days, with older replay through a controlled path. Command expiry is independent of deduplication retention.</p>
+
+<p><code>If-Match</code> version/ETag for updates; 412 VERSION_MISMATCH or domain 409 according to API schema. Error envelope: code, message_key, params, trace_id, retryable, field_errors; no exposed stack. 400 malformed, 401 authentication, 403 permission, 404 inaccessible/not found, 409 domain conflict, 412 precondition, 413 payload, 422 validation, 429 quota, 503 unavailable. GET retries are bounded; mutations retry only with an idempotency key.</p>
+
+<table>
+<thead>
+<tr>
+  <th>API</th>
+  <th>Permission</th>
+  <th>Request/response and side effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>POST /events</td>
+  <td>event.ingest + source binding</td>
+  <td>CloudEvent; 202 durable receipt, not incident success</td>
+</tr>
+<tr>
+  <td>GET /incidents</td>
+  <td>incident.read scope</td>
+  <td>Filters severity/state/site/from; cursor result</td>
+</tr>
+<tr>
+  <td>POST /incidents</td>
+  <td>incident.create</td>
+  <td>hazard,severity,location,signal_refs; 201 aggregate + outbox</td>
+</tr>
+<tr>
+  <td>POST /incidents/{id}/transitions</td>
+  <td>incident.transition</td>
+  <td>expected version,to,reason; validate state guard</td>
+</tr>
+<tr>
+  <td>POST /sos</td>
+  <td>sos.create</td>
+  <td>client_request_id,category,location,note; 201 server receipt</td>
+</tr>
+<tr>
+  <td>POST /sos/{id}/updates</td>
+  <td>sos.self_update or sos.manage</td>
+  <td>append note/location/cancellation request; no deletion</td>
+</tr>
+<tr>
+  <td>POST /safety-reports</td>
+  <td>safety.self_report</td>
+  <td>incident_ref,status,sharing preference; save observation + fan-out event</td>
+</tr>
+<tr>
+  <td>POST /tasks</td>
+  <td>task.assign</td>
+  <td>unit,incident,scope,deadline; offer + workflow timer</td>
+</tr>
+<tr>
+  <td>POST /tasks/{id}/accept</td>
+  <td>task.accept + assigned unit</td>
+  <td>expected version; atomic owner confirmation</td>
+</tr>
+<tr>
+  <td>POST /warnings</td>
+  <td>warning.author</td>
+  <td>localized content,audience,expires; create draft version</td>
+</tr>
+<tr>
+  <td>POST /warnings/{id}/approvals</td>
+  <td>warning.approve</td>
+  <td>version,digest,decision,reason; separate actor guard</td>
+</tr>
+<tr>
+  <td>POST /warnings/{id}/send</td>
+  <td>warning.send</td>
+  <td>approved version; effect key, immutable audience snapshot</td>
+</tr>
+<tr>
+  <td>GET /deliveries</td>
+  <td>delivery.read</td>
+  <td>warning,channel,state; no private address returned without scope</td>
+</tr>
+<tr>
+  <td>POST /commands</td>
+  <td>command.request</td>
+  <td>capability,target,parameters,expiry; 202 requested, not yet actuated</td>
+</tr>
+<tr>
+  <td>POST /commands/{id}/approve</td>
+  <td>command.approve</td>
+  <td>digest,version; publish intent after interlock checks</td>
+</tr>
+<tr>
+  <td>POST /connectors/{id}/tests</td>
+  <td>connector.test</td>
+  <td>fixture_set,manifest_version; sandbox results</td>
+</tr>
+<tr>
+  <td>POST /connectors/{id}/replay</td>
+  <td>connector.replay</td>
+  <td>event IDs,reason; forbid command replay</td>
+</tr>
+<tr>
+  <td>POST /evidence/upload-sessions</td>
+  <td>evidence.write</td>
+  <td>mime,size,classification; short-lived scoped URL</td>
+</tr>
+<tr>
+  <td>POST /privacy-requests</td>
+  <td>privacy.self_request</td>
+  <td>type,scope; identity verification workflow</td>
+</tr>
+<tr>
+  <td>GET /stream</td>
+  <td>authenticated subscriptions</td>
+  <td>event cursor + projection changes; no mutation through socket</td>
+</tr>
+<tr>
+  <td>POST /physical-bindings</td>
+  <td>physical.binding.author</td>
+  <td>controller_id,regional_model,firmware,gateway,point_map,zone_revision,cause_effect_revision; create immutable candidate revision</td>
+</tr>
+<tr>
+  <td>POST /physical-bindings/{id}/validate</td>
+  <td>physical.binding.test</td>
+  <td>revision,fixture_set; schema/point/capability validation, no live actuation</td>
+</tr>
+<tr>
+  <td>POST /physical-bindings/{id}/activate</td>
+  <td>physical.binding.activate</td>
+  <td>expected_version,revision,acceptance_ref; reject absent signoff or incompatible readiness</td>
+</tr>
+<tr>
+  <td>GET /physical-points</td>
+  <td>physical.point.read</td>
+  <td>controller,zone,binding_revision,quality; scoped point projection</td>
+</tr>
+<tr>
+  <td>GET /physical-points/{id}/observations</td>
+  <td>physical.point.read</td>
+  <td>from,to,cursor; values, units, source/receive time, quality and revisions</td>
+</tr>
+<tr>
+  <td>POST /physical-commands</td>
+  <td>physical.command.request</td>
+  <td>capability_id,target,binding_revision,zone_revision,cause_effect_revision,parameters,expires_at; create Command + PhysicalCommandDetail, not actuation</td>
+</tr>
+<tr>
+  <td>POST /physical-commands/{id}/approvals</td>
+  <td>physical.command.approve</td>
+  <td>expected_version,digest,decision; separate actor where policy requires, local guards still apply</td>
+</tr>
+<tr>
+  <td>POST /physical-commands/{id}/reconciliations</td>
+  <td>physical.command.reconcile</td>
+  <td>expected_version,observations,evidence_refs,reason; no automatic resend; preserve UNKNOWN history</td>
+</tr>
+<tr>
+  <td>POST /impairments</td>
+  <td>physical.impairment.manage</td>
+  <td>scope,functions_affected,reason,owner,planned_until,compensatory_plan_ref; create tracked impairment</td>
+</tr>
+<tr>
+  <td>POST /impairments/{id}/restoration-checks</td>
+  <td>physical.impairment.restore</td>
+  <td>expected_version,checklist,evidence_refs,witness; verify before closure; no implicit command</td>
+</tr>
+<tr>
+  <td>POST /physical-test-runs</td>
+  <td>physical.test.execute</td>
+  <td>binding_revision,test_plan_ref,mode,authorization_ref,impairment_ref; approved test lifecycle</td>
+</tr>
+<tr>
+  <td>POST /physical-test-runs/{id}/evidence</td>
+  <td>physical.test.record</td>
+  <td>expected_version,step_id,expected,observed,evidence_refs; append evidence</td>
+</tr>
+<tr>
+  <td>POST /compatibility-assessments</td>
+  <td>physical.compatibility.author</td>
+  <td>binding_revision,hardware,firmware,licenses,certificates,fat_run_refs,sat_run_refs; create review record</td>
+</tr>
+<tr>
+  <td>POST /compatibility-assessments/{id}/acceptance</td>
+  <td>physical.compatibility.accept</td>
+  <td>expected_version,decision,signoffs,open_defects; reject unresolved critical defects</td>
+</tr>
+<tr>
+  <td>POST /rescue-equipment-missions</td>
+  <td>rescue.equipment.assign</td>
+  <td>incident_ref,dispatch_task_ref,equipment_ref,operator_ref,mission_scope,capability_revision; qualified operator workflow, not motion</td>
+</tr>
+</tbody>
+</table>
+
+<p>All physical POST mutations require Idempotency-Key; applicable updates also require expected_version/If-Match. Existing <code>/commands</code> routes remain the common command interface; <code>/physical-commands</code> is a specialized facade over the same Command aggregate, not a second actuator queue. Unknown/unapproved capabilities return 422 CAPABILITY_NOT_APPROVED; revision drift returns 409 BINDING_REVISION_MISMATCH; active impairment/local inhibit returns 409 PHYSICAL_INTERLOCK or IMPAIRMENT_ACTIVE; stale prerequisites return 409 PHYSICAL_STATE_STALE. Reconciliation cannot claim a result without supporting evidence. Permissions are site/controller/capability scoped, not tenant-wide by default.</p>
+
+<h2 id="3-canonical-event-envelope-and-semantics">3. Canonical event envelope and semantics</h2>
+
+<div class="codehilite">
+<pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;specversion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;019a0000-0000-7000-8000-000000000041&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:smartalarm:connector:gw-12&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;com.smartalarm.signal.fire.observed.v1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;subject&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;devices/cam-a05-03&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-10-23T08:40:12Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;datacontenttype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenantid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tenant-northstar&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;regionid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eu-cell-1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;actual&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;schema_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;observed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-10-23T08:40:11Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hazard&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fire.possible_flame&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;zone-a05-03&quot;</span><span class="p">,</span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;registry&quot;</span><span class="p">,</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.82</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;model_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flame-v3&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;evidence_refs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;evidence-31&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>The gateway verifies tenantid against credentials; the payload is not the source of truth. source is a registered identity namespace. Event schemas have a version-specific additional-property policy; invalid fields are quarantined with a reason. Detector confidence does not map directly to severity; severity follows policy and impact. observed_at may be delayed or affected by clock errors; server received_at is always present; a skew flag is stored separately. Location geometry uses GeoJSON longitude,latitude; inbound CAP explicitly converts from lat,lon and has polygon tests.</p>
+
+<p>Proposed topics: <code>sa.&lt;region&gt;.&lt;mode&gt;.signals.v1</code>, <code>incidents.v1</code>, <code>assistance.v1</code>, <code>dispatch.v1</code>, <code>warnings.v1</code>, <code>delivery.v1</code>, <code>commands.v1</code>, <code>audit.v1</code>, <code>deadletters.v1</code>. Do not create a topic per user. Broker ACLs are service-specific, with actual/exercise mode isolation. Partition keys use aggregate ID with tenant; telemetry keys use device ID. DLQs contain no secrets; they include an encrypted payload reference, reason, and replay policy.</p>
+
+<h3 id="physical-event-contract">Physical event contract</h3>
+
+<p>Use the same CloudEvents envelope, verified source binding and actual/exercise isolation. Proposed types are <code>com.smartalarm.physical.point.observed.v1</code>, <code>com.smartalarm.physical.command.state_changed.v1</code>, <code>com.smartalarm.physical.impairment.changed.v1</code>, <code>com.smartalarm.physical.test.completed.v1</code>, <code>com.smartalarm.physical.binding.accepted.v1</code>, and <code>com.smartalarm.rescue.equipment_mission.updated.v1</code>. Event data includes schema_version, aggregate_id, aggregate_version, binding_revision where relevant, source provenance and evidence references. The canonical point payload example is a design fixture, not a live observation:</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;schema_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;aggregate_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;point-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;aggregate_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tenant-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;site_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;site-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;controller_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;controller-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;binding_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binding-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;binding_revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;point_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;point-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;zone_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zone-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;semantic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pump_running&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;observed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-10-23T08:40:11Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;received_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-10-23T08:40:12Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;quality&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GOOD&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;controller_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;maintenance_state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IN_SERVICE&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cause_effect_revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;source_event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source-example-1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;raw_evidence_ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;evidence-example&quot;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><code>pump_running</code> is not <code>waterflow_confirmed</code> and neither means fire extinguished. Units/scaling are defined by the accepted point contract; missing sensors remain UNKNOWN. Command events carry command_id, capability_revision, previous_state, state, controller_receipt_ref, feedback_observation_ids, unknown_reason and source/receive times as applicable. Impairment events carry scope/functions and restoration status; test events carry authorization and evidence references; mission events carry operator and supported-interface mode. Do not publish raw medical notes in equipment events.</p>
+
+<h2 id="4-sequence-signal-incident-warning">4. Sequence: signal → incident → warning</h2>
+
+<pre><code>sequenceDiagram
+  participant E as Edge
+  participant I as Ingestion
+  participant B as Broker
+  participant C as Correlation
+  participant S as Incident
+  participant W as Workflow
+  participant D as Delivery
+  E-&gt;&gt;I: event + source credential + stable ID
+  I-&gt;&gt;I: verify / durable store + outbox
+  I--&gt;&gt;E: received (not incident confirmed)
+  I-&gt;&gt;B: signal.accepted (retryable publish)
+  B-&gt;&gt;C: at-least-once delivery
+  C-&gt;&gt;S: create candidate (idempotency key)
+  S-&gt;&gt;S: commit aggregate + outbox
+  S-&gt;&gt;B: incident.created
+  B-&gt;&gt;W: start versioned playbook
+  W-&gt;&gt;W: approved template or human approval
+  W-&gt;&gt;D: enqueue warning version + audience
+  D-&gt;&gt;D: channel attempts + feedback tracking
+</code></pre>
+
+<p>If the Incident API times out after commit, the caller retries with the same key and receives the existing incident. If the broker is down, the outbox persists; ingestion still has bounded durable capacity and a degraded state, and does not ACK before commit. If correlation fails, queue-lag alerts and raw-signal triage remain available to operators; manual SOS is not blocked.</p>
+
+<p>For physical alarms, the source is the approved local controller/gateway and preserves alarm/supervisory/trouble distinctions. Local automatic suppression operates on its own approved inputs and cause-and-effect; this cloud sequence only creates the incident and response workflow. Closing the incident does not silence/reset the panel, stop a fire pump, close a valve, or cancel local protection. Such actions require distinct permitted capabilities and site authority.</p>
+
+<h2 id="5-sequence-offline-sos-and-reconciliation">5. Sequence: offline SOS and reconciliation</h2>
+
+<p>The client creates a UUID request, saves it in an encrypted local outbox, and displays “not sent”. When online, it POSTs with the same request ID; the server commits before returning a receipt. If the response is lost, the client retries and the server returns the existing SOS ID. Only then does the client display received; human ACK arrives as a separate event. Offline location updates always include observed_at; the server retains history without overwriting a newer location simply because an update arrived late. Offline cancellation is a queued request, not a promise to stop dispatch. For a lost device or revoked account, the app purges secure cache according to policy when possible; it does not promise remote wipe while a device remains offline.</p>
+
+<h2 id="6-workflows-and-deadlines">6. Workflows and deadlines</h2>
+
+<p>Workflow ID = tenant:aggregate:playbook_version. Timers run server-side; client cron polling is not a safety mechanism. Each step has an input schema, activity idempotency key, deadline, retry policy, compensation policy, and manual fallback. Retries use exponential backoff+jitter with maximum attempts/time; business rejections are not retried. An escalation step key of workflow+step+recipient prevents unbounded duplicate sends. Warning expiry cancels unsent jobs; sent jobs require a cancellation/update message and cannot be recalled by deleting DB records.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Situation</th>
+  <th>Proposed baseline timer</th>
+  <th>On expiry</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>P1 incident without operator ACK</td>
+  <td>60 s</td>
+  <td>Shift supervisor, then regional backup at 120 s</td>
+</tr>
+<tr>
+  <td>Unaccepted task offer</td>
+  <td>60 s</td>
+  <td>Expire offer; dispatcher selects another unit</td>
+</tr>
+<tr>
+  <td>Possible fall check-in</td>
+  <td>Configurable 30 s</td>
+  <td>Create care request; do not make a diagnosis</td>
+</tr>
+<tr>
+  <td>Physical command</td>
+  <td>TTL 30 s or capability-specific</td>
+  <td>Expire before dispatch; reconcile unknown after dispatch</td>
+</tr>
+<tr>
+  <td>Webhook delivery</td>
+  <td>Backoff for up to 24 h or shorter event expiry</td>
+  <td>DLQ + owner alert</td>
+</tr>
+</tbody>
+</table>
+
+<p>These product defaults require site validation; policy includes min/max and an approver, preventing administrators from arbitrarily changing timeouts during an incident without recording a version.</p>
+
+<p>Physical workflows in baseline 1.0 are WF-28 point/zone onboarding; WF-29 physical supervision; WF-30 authorized actuation, feedback and UNKNOWN reconciliation; WF-31 impairment/test/restoration; WF-32 FAT/SAT compatibility; WF-33 rescue-equipment mission. Their human deadlines and command TTL are capability/site configuration with approvers. No universal software timeout authorizes release, reset, silence or automatic pump stopping. The 30 s command default above is only a proposal and must be overridden or rejected when inconsistent with the approved equipment design.</p>
+
+<h2 id="7-correlation-algorithm-and-hazard-expansion">7. Correlation algorithm and hazard expansion</h2>
+
+<p>Exact deduplication precedes fuzzy correlation. Candidate queries use tenant, mode, hazard compatibility, location graph, and event window; scoring uses time distance, same zone, source diversity, and semantic match. Scores are suggestions unless an automation rule is approved. Rule inputs include source confidence/quality; two cameras using the same model are not counted as two wholly independent pieces of evidence. When several incident candidates exist, the operator chooses; source corrections append correction events instead of editing original events.</p>
+
+<p>The hazard registry contains key, localized labels, severity policy, required fields, playbook binding, sensitivity, default audience, detector schema, and retention class. Add “gas leak”, “industrial spill”, “lone worker”, “missing person”, or “infrastructure outage” through registry/schema/plugins after domain review, without changing hard-coded enums in every service. A new category does not automatically acquire physical-command permissions.</p>
+
+<h2 id="8-command-safety-protocol">8. Command safety protocol</h2>
+
+<p>Requests contain command_id, device_id, capability, canonical params digest, tenant, writer_epoch, nonce, issued_at, expires_at, requester, and approval evidence. Approval signs the digest, so parameter changes invalidate it. The gateway checks credentials, epoch, TTL, capability, zone, local interlocks, and used nonces. Non-idempotent capabilities return retry_class=manual_reconcile; they are not automatically resent when ACK is lost. Local controller results record source time and observed physical state when available. Success requires the capability-specific completion criterion; accepted/executing/unknown must appear separately in the UI.</p>
+
+<p>HA command workers use distributed fencing; failover does not reissue expired commands. Local safety interlocks may reject commands even after cloud approval. Emergency stop appears only when the device supports the correct semantics; a stop-request receipt does not prove the device has stopped. The drone gateway includes flight-stack capability negotiation, altitude frame, link health, pilot override, and lost-link policy; video streaming is separate from the command channel. MAVLink command cancel is not treated as a universal guarantee when unsupported by the flight stack.</p>
+
+<h3 id="physical-command-execution-sequence">Physical command execution sequence</h3>
+
+<p>Cloud policy/approval → OT DMZ authenticated conduit → site edge durable command ledger/fencing → approved vendor gateway → local controller → physical device → independent feedback where available. The local protection sequence and manual controls do not depend on this cloud path. The adapter's access profile is observe-only unless exact model/firmware/license and site approval establish a specific write capability; a BACnet WriteProperty advertisement alone is insufficient. Use the restrictions in <a href="Physical-Device-Catalog.html">Physical Device Catalog</a> and <a href="Rescue-IoT-Device-Catalog.html">Rescue/IoT Device Catalog</a>.</p>
+
+<p>Physical states are DRAFT, PENDING_APPROVAL, AUTHORIZED, SENT, ACCEPTED, EXECUTING, COMPLETED_VERIFIED, REJECTED, EXPIRED, FAILED, UNKNOWN and RECONCILED. Map legacy Command <code>succeeded</code> only when its physical completion criterion is verified; retain the richer physical_state in PhysicalCommandDetail. Bind approval to target, capability revision, point/zone/cause-and-effect revisions, parameter digest, TTL and writer epoch. Edge checks freshness, local mode, impairment, allowed operation and feedback availability before sending; the local controller retains final interlocks. After send, a timeout is UNKNOWN unless trustworthy evidence proves failure. Reconciliation appends evidence and a reason; it never silently replays the command.</p>
+
+<p>Wet-pipe thermal sprinkler heads are not generic addressable actuators. Controlled-release assemblies keep their approved local releasing logic; no generic relay bypass, AI-confidence trigger or LLM-generated cause-and-effect is allowed. Approved supervised I/O follows exact electrical, supervision and feedback design. <code>release_output_active</code>, valve position, pump running, pressure and waterflow are different observations. Manual-console-only rescue equipment receives a mission assignment, not invented drive/aim/discharge API calls. An unverified remote emergency-stop interface cannot be presented as guaranteed physical stop.</p>
+
+<h2 id="9-localization-vi-en-ja">9. Localization vi / en / ja</h2>
+
+<p>UI keys use forms such as <code>incident.status.active</code>; versioned resource bundles and ICU MessageFormat handle plural/select without concatenated fragments. User locale priority: explicit choice → profile → supported OS locale → tenant default → reviewed English. Language selection does not change region or authorization. Font stack: system UI + Noto Sans when deploying a font bundle; Japanese uses Noto Sans JP/system CJK; no forced uppercase for Japanese; minimum body line height 1.5, with 40% text expansion for testing. Dates/numbers/units follow locale, with timezone shown alongside commands/incidents spanning countries.</p>
+
+<p>Content templates are entities with <code>template_id</code>, <code>version</code>, <code>locale</code>, <code>text</code>, <code>variables_schema</code>, <code>reviewer</code>, <code>approved_at</code>, and <code>voice_asset_ref</code>. Warning approval references exact locale versions. If an approved translation is missing, clearly show the fallback language and require the publisher to confirm policy; do not generate and automatically publish an AI translation. Do not block all P1 communication when an emergency fallback template is preapproved. Original messages/user chat retain their language; assistive translations are labeled machine translated and do not replace original evidence. TTS voices follow locale and always have transcripts; text remains readable if TTS fails. Critical translations require native-speaker/domain-reviewer checks before release.</p>
+
+<p>Physical terminology must consistently distinguish “request authorized”, “controller accepted”, “physical outcome verified”, “outcome unknown”, “test”, “impaired” and “restored” in vi/en/ja. Preserve manufacturer point labels alongside reviewed localized semantics. Translations never change register semantics, control polarity, parameter units or authority. Speaker TTS/language support is model-specific; use reviewed recordings where the researched payload lacks a verified locale or API.</p>
+
+<h2 id="10-evidence-chat-and-privacy">10. Evidence, chat, and privacy</h2>
+
+<p>Baseline upload policy: 20 MB/file for images/documents/short clips; MIME sniffing + extension allowlist + antivirus + decompression limits; quarantine before scanning. Signed upload URLs are scoped to object keys with short expiry; download URLs check policy and TTL, with no public bucket. Video session tokens are incident-scoped, with audited access and region-resident relays. Webhook payloads do not send raw medical notes by default. Chat retention follows incident/social class, with abuse reporting/restricted threads and a shared attachment policy. Safety fan-out snapshots include group membership versions, but revocation is rechecked at send time.</p>
+
+<p>Precise location has field-level protection; generalized site status is the family default. Retention purges include DB, object store, search index, caches, and export links; backups expire and restores reapply tombstones. Conflicts between legal holds and data-subject deletion go to privacy review; requests are not silently ignored. Audit hash chains/tamper-evident storage support modification detection, without claiming absolute immutability if all authority is compromised.</p>
+
+<p>FAT/SAT records include exact serial/firmware/license/configuration, expected and observed point states, timestamps, witnesses, approved test authorization, deviations and signed restoration. Store raw captures separately with hashes and access controls; redact secrets without discarding traceable source references. A product brochure or component certificate cannot set field_accepted. Acceptance references the specific installed binding and approved scope; firmware, point-map or cause-and-effect changes reopen affected review.</p>
+
+<h2 id="11-frontend-runtime-and-state-design">11. Frontend runtime and state design</h2>
+
+<h3 id="v2-presentation-contract-and-transition-tests">V2 presentation contract and transition tests</h3>
+
+<p><code>getContent()</code> selects a renderer by group; <code>SAEnterprise.render(s,c)</code> selects composition by screen ID; <code>SAVisual.scene()</code> draws schematics using locale and state. A generic <code>type</code> property must not determine every layout. <code>data-go</code> means navigation and <code>data-demo</code> means illustrative interaction; neither is API or actuator success. Existing FRs and <code>Screen-Registry.json</code> remain the source contract.</p>
+
+<p>Production applies the following rules before rendering and speech. These are implementation rules, not new API schemas:</p>
+
+<table>
+<thead>
+<tr>
+  <th>Input / transition</th>
+  <th>Required result and assertion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Heading unknown, floor known</td>
+  <td>Retain valid plan/landmarks; remove relative arrows and “turn left/right.” A QR position fix does not establish heading.</td>
+</tr>
+<tr>
+  <td>Floor unknown / route withdrawn / evidence stale</td>
+  <td>Cancel active and queued speech; remove old route overlay and instructions in the same update; retain warning, reported-location entry and assistance. Back/history cannot restore the old route.</td>
+</tr>
+<tr>
+  <td>Late snapshot older than a withdrawn revision</td>
+  <td>Reject the obsolete update by revision; HTTP response time does not establish route freshness.</td>
+</tr>
+<tr>
+  <td>SOS local pending → durable receipt → human ACK</td>
+  <td>Advance only on evidence for the correct request ID; clicks or hash navigation never create receipts.</td>
+</tr>
+<tr>
+  <td>Command accepted, readback absent</td>
+  <td>F11/F12 remain UNKNOWN; no physical retry action appears. Identify missing evidence and reconciliation.</td>
+</tr>
+<tr>
+  <td>Enter C27 / change language / leave guidance</td>
+  <td>Cancel old audio; C27 remains silent after return, reload, state changes or new notifications.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Component tests assert text and accessibility properties alongside SVG, rather than image snapshots alone. Integration tests change revisions during speech, interrupt connectivity between send and receipt, delay ACK and assert local override. E2E tests measure focus, targets, reflow, keyboard access and equivalent map text in VI/EN/JA. The current prototype has fixed sample speech, local state and illustrative data; it does not contain production mechanisms proving these assertions.</p>
+
+<p>Server-state caches are keyed by tenant+region+user scope+resource; workspace switching purges or fully partitions them. Client stores hold only drafts/UI preferences and are not the source of incident truth. A server-rendered shell or static app + BFF is selected per deployment; strict CSP, no tokens in localStorage, secure cookies for web/session BFF. Native secure keystores hold tokens, with an encrypted offline database. Websocket sequence gap → snapshot refresh; stale banners show age. Command buttons are disabled when capability/location/policy staleness exceeds thresholds, with a reason and manual channel.</p>
+
+<p>Form pattern: labels always visible; required/error indicators per field; pending submission state; receipt after server ACK; conflicts show server version and draft without automatic overwrite. List pattern: shareable filters without PII in URLs; accessible tables, keyboard focus, selectable rows with context. Maps always have list alternatives; floor controls support keyboards; safety information is never conveyed solely by color. SOS does not depend solely on a hold gesture; an explicit button + confirmation provides a fast path according to accessibility/site policy.</p>
+
+<p>F01–F20 extend the coordinated screen set to 233 screens. Physical views include point/zone inventory, quality and freshness, accepted capability evidence, target review, approval, separate receipt/feedback timeline, UNKNOWN reconciliation, impairment/test/restoration and FAT/SAT acceptance, plus rescue-equipment assignment. FR-PHY-01–FR-PHY-16 governs these behaviors. Do not enable an action from a stale projection; server/edge recheck. A local-only or unsupported action shows its reason and authorized manual workflow. No AI response can submit an actuator command or alter controller configuration.</p>
+
+<h2 id="12-test-architecture">12. Test architecture</h2>
+
+<p>Unit tests for state guards/rules/unit conversion. Contract tests for OpenAPI/events/adapters. Integration tests for outbox/inbox, workflow restart, DB tenant isolation, provider callbacks, and replay. E2E tests by actor and vi/en/ja, offline/reconnect, accessibility, and role changes. Performance tests for steady/burst/fan-out, soak, noisy neighbors, and media overload. Chaos tests for broker failure, DB failover, workflow-worker termination, provider timeouts, region partition, and clock skew. Security tests for BOLA, source spoofing, SSRF URL validation, upload malware fixtures, replay nonces, key revocation, and support break-glass. Separate hardware-in-loop tests for each actuator/drone vendor in an authorized environment.</p>
+
+<p>Synthetic test data, deterministic clocks for deadlines, and mock providers represent accepted/delivered/unknown separately. Passing prototype navigation is not equivalent to passing production E2E. The acceptance matrix includes actor, trigger, expected evidence, and architecture owner so independent QA can design tests rather than merely mirror implementation.</p>
+
+<p>Physical acceptance adds exact-configuration FAT and installed SAT. Test every enabled point/zone mapping and capability, negative cross-tenant/site/zone authorization, wrong revision, expired approval, duplicate event, missing feedback, and accepted-without-completion. Disconnect cloud, power off edge, restart gateway, isolate a partial point group, skew clocks and restore connectivity; verify local automatic protection continues and old intents do not actuate. Test hardware under an approved impairment plan with qualified local staff; simulator success is not authority for live discharge. FMEA assigns site owners and residual-risk decisions for wrong-zone actuation, lost feedback, supply failure, relay fault, test/actual confusion and compromised gateway. The detailed test/governance gates are in <a href="External-Integration-Standards-Deployment.html">Standards and Deployment</a>.</p>
+
+<h2 id="13-key-runbooks">13. Key runbooks</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Failure</th>
+  <th>Detection</th>
+  <th>Containment / recovery</th>
+  <th>Verify</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Ingestion lag</td>
+  <td>oldest event age + p95</td>
+  <td>Reserve SOS lane; scale consumers; quarantine faulty source</td>
+  <td>No lost receipts, replay preserved IDs</td>
+</tr>
+<tr>
+  <td>Provider outage</td>
+  <td>failed/unknown attempts + callback age</td>
+  <td>Circuit break; alternate channel; operator visibility</td>
+  <td>Human ACK tracked separately; no duplicate flood</td>
+</tr>
+<tr>
+  <td>DB primary loss</td>
+  <td>health + write errors</td>
+  <td>Fence; promote verified replica; refresh service connections</td>
+  <td>Committed SOS present; no dual writer</td>
+</tr>
+<tr>
+  <td>Region unavailable</td>
+  <td>multi-vantage synthetic</td>
+  <td>Approved DR routing; epoch increase; outbox reconcile</td>
+  <td>Residency unchanged or explicitly approved; RPO/RTO measured</td>
+</tr>
+<tr>
+  <td>False detector storm</td>
+  <td>incident rate + operator feedback</td>
+  <td>Disable specific rule/model deployment; retain raw signals</td>
+  <td>Manual SOS unaffected; rollback version audited</td>
+</tr>
+<tr>
+  <td>Lost drone link</td>
+  <td>telemetry age</td>
+  <td>Expose unknown; local pilot/lost-link procedure</td>
+  <td>Receipt and physical state reconciled; no blind command replay</td>
+</tr>
+<tr>
+  <td>Compromised device</td>
+  <td>abnormal source behavior</td>
+  <td>Revoke cert; quarantine; rotate binding; coverage warning</td>
+  <td>Denied traffic; replacement device validated</td>
+</tr>
+<tr>
+  <td>Translation error</td>
+  <td>report/locale review</td>
+  <td>Withdraw affected template version; reviewed correction</td>
+  <td>Version lineage and recipients of correction visible</td>
+</tr>
+<tr>
+  <td>Cloud or edge loss at site</td>
+  <td>heartbeat/quality age, local panel observation</td>
+  <td>Mark remote integration unavailable; preserve local protection; buffer/reconcile supported observations</td>
+  <td>Independent automatic sequence verified; no stale write replay</td>
+</tr>
+<tr>
+  <td>Wrong zone or binding revision</td>
+  <td>point walkdown, digest mismatch</td>
+  <td>Suspend affected remote capability; retain local operation; correct/reaccept mapping</td>
+  <td>Point-to-point and negative cross-zone tests signed</td>
+</tr>
+<tr>
+  <td>Physical outcome unknown</td>
+  <td>accepted/sent without required feedback</td>
+  <td>UNKNOWN; qualified local verification; alternative response; no blind retry</td>
+  <td>Evidence-linked reconciliation with unchanged command history</td>
+</tr>
+<tr>
+  <td>Impairment or test overrun</td>
+  <td>planned_until, controller mode mismatch</td>
+  <td>Notify site responsible person; follow approved compensatory plan and restoration procedure</td>
+  <td>Local restored state, witness and signoff before closure</td>
+</tr>
+<tr>
+  <td>Rescue equipment link/console unavailable</td>
+  <td>operator report, supported telemetry age</td>
+  <td>Operator follows vendor lost-link/stop procedure; mission shows unknown/unavailable</td>
+  <td>Local physical condition and operator handback recorded</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="14-delivery-decomposition-for-the-full-build">14. Delivery decomposition for the full build</h2>
+
+<p>Concurrent workstreams belong to the same complete scope: platform/IAM/regions; events/connectors/devices; incident/workflow/dispatch; Companion/Field; Command/admin; content/i18n; media/privacy/audit; observability/DR/security; hardware integration. Dependency order: contracts/domain invariants → platform foundations → vertical flows → complete role surfaces → integrations + resilience → independent acceptance. Administrative UI and error states are not omitted merely because they rarely appear in demos.</p>
+
+<p>Definition of Ready: approved actors/permissions, state transitions, API/event schemas, error cases, translated copy, test fixtures. Definition of Done: code + migrations + contract tests + UI in three locales + accessible errors + dashboards/runbook + rollback + security/tenant tests + reviewer signoff. Production go-live requires domain/site authority validation; this document is a detailed review baseline, not acceptance signoff.</p>
+
+<p>Full-build workstreams now explicitly include physical point/zone integration, OT DMZ/site edge, approved vendor gateways, capability/feedback contracts, impairment/test governance, FAT/SAT, and rescue-equipment operations. Definition of Ready for a physical write includes documented manufacturer permission, site cause-and-effect and observable completion; Definition of Done includes exact-configuration acceptance and a local restoration runbook. Unsupported actions remain visibly unavailable while the full designed scope is retained. The proposed operations/events above must be kept aligned with the separate JSON contracts during implementation.</p>
+
+<h2 id="15-bms-implementation-detail-design">15. BMS implementation detail design</h2>
+
+<p>This is the implementation contract for WF-34–37 and FR-BMS-01–40. Canonical endpoints are /bms/connections/... in API-Contract.json 1.1. Draft research names such as bms-systems/bms-release-intents are conceptual and do not create public aliases. No public API accepts arbitrary vendor methods or raw endpoints. The JSON contract adds23 operations and 7 BMS event types while preserving all 44 existing operations.</p>
+
+<h3 id="151-storage-schema-and-transactions">15.1 Storage schema and transactions</h3>
+
+<p>The following tables extend regional PostgreSQL. Large raw payloads and evidence live in same-region object storage with hashes/references in tables. Business foreign keys include tenant/site in composite keys to prevent cross-tenant joins. Use UTC timestamptz and a transactionally monotonic bigint revision. RLS supplements service authorization rather than replacing scope checks.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Table / key</th>
+  <th>Columns and implementation constraints</th>
+  <th>Index / proposed retention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>bms_connection PK(tenant_id,site_id,connection_id)</td>
+  <td>region_id, profile_id/version, vendor_build, adapter_digest, endpoint_ref, credential_ref, state, revision; UNIQUE(tenant_id,site_id,connection_id); endpoint refs are registry FK</td>
+  <td>(tenant_id,site_id,state); metadata through lifecycle plus approved audit retention</td>
+</tr>
+<tr>
+  <td>bms_map_revision PK(scope,map_revision)</td>
+  <td>connection_id, mapping_digest, base_revision, state, approved_by, approved_at; immutable after approval; one active via partial UNIQUE(scope) WHERE state=active</td>
+  <td>(scope,state,created_at); retain every revision referenced by an incident/command</td>
+</tr>
+<tr>
+  <td>bms_point_binding PK(scope,map_revision,point_id)</td>
+  <td>native_address_hash, asset_id, space_id, zone_id, type, units, scale, offset, quality_policy, stale_after; UNIQUE(scope,map_revision,native_address_hash); scale finite/nonzero when conversion needs inversion</td>
+  <td>(scope,asset_id); (scope,zone_id); no hard delete of referenced bindings</td>
+</tr>
+<tr>
+  <td>bms_qualification PK(scope,qualification_id)</td>
+  <td>adapter_digest, vendor_build, map_revision, license_ref, capabilities, expires_at, signature_ref, status; admission verifies all evidence references</td>
+  <td>(scope,status,expires_at); expiry never deletes history</td>
+</tr>
+<tr>
+  <td>bms_observation PK(scope,observation_id)</td>
+  <td>point_id, source_time nullable, received_at, value_json, unit, quality, map_revision, raw_ref/hash, source_seq nullable; append-only</td>
+  <td>partition received_at; (scope,point_id,received_at DESC); hot 30 days is an approval-required assumption; incident hold overrides</td>
+</tr>
+<tr>
+  <td>bms_alarm_occurrence PK(scope,alarm_id)</td>
+  <td>native_id, occurrence_id, branch_id nullable, active_state, native_ack_state, reviewed_at, source_time, quality, revision, incident_id; UNIQUE(scope,native_id,occurrence_id,normalized_branch)</td>
+  <td>(scope,active_state,severity); never purge active/unknown alarms; policy-based archive</td>
+</tr>
+<tr>
+  <td>bms_alarm_receipt PK(scope,receipt_id)</td>
+  <td>source_event_id/cursor, raw_hash, received_at, alarm_id, mapping_revision, replay_mode; duplicate receipts retain audit link</td>
+  <td>UNIQUE(scope,source_stream,source_event_id) if source ID stable; otherwise deterministic fingerprint plus collision evidence</td>
+</tr>
+<tr>
+  <td>bms_snapshot_generation PK(scope,generation_id)</td>
+  <td>kind, started_at, ended_at, complete, gap_detected, cursor_ref, expected_count nullable, actual_count; only complete scoped generation can reconcile absence</td>
+  <td>(scope,kind,started_at DESC); retain incident-relevant gaps</td>
+</tr>
+<tr>
+  <td>bms_command_link PK(scope,operation_id)</td>
+  <td>operation_kind, physical_command_id nullable, alarm_id nullable, preview_id, approval_digest, idempotency_key, request_hash, state, expires_at, revision; physical_command_id FK existing command</td>
+  <td>UNIQUE(scope,operation_kind,idempotency_key); no deletion while outcome unknown</td>
+</tr>
+<tr>
+  <td>bms_writer_lease PK(scope)</td>
+  <td>epoch bigint, owner_instance, lease_until, egress_fencing_ref; epoch advances atomically; egress validates current epoch</td>
+  <td>UNIQUE(scope); lease/epoch history to audit</td>
+</tr>
+<tr>
+  <td>bms_inbox / bms_outbox</td>
+  <td>inbox UNIQUE(tenant_id,event_source,event_id); outbox aggregate_id/revision/type/body/created_at/published_at; projection+inbox and state+outbox each atomic</td>
+  <td>outbox unpublished index; receipt retention &gt;= upstream retry/replay horizon; proposed 90 days requires approval</td>
+</tr>
+<tr>
+  <td>bms_lifecycle_job PK(scope,job_id)</td>
+  <td>kind,state,from_revision,to_digest,steps_json,approval_id,rollback_ref,started_at,finished_at; resumable steps have idempotency markers</td>
+  <td>(scope,state,submitted_at); lifecycle audit survives restart</td>
+</tr>
+</tbody>
+</table>
+
+<p>Never use a time-window dedupe key as an alarm occurrence identity. Without a stable source occurrence ID/sequence, an adapter derives occurrences from observed active→inactive→active cycles and records generation/uncertainty across gaps; it does not invent missed cycles. Direct panel and BMS feeds create two receipts/provenance records. Correlation may link one incident but must not merge native ACK identities.</p>
+
+<h3 id="152-adapter-sdk-and-scheduler">15.2 Adapter SDK and scheduler</h3>
+
+<div class="codehilite">
+<pre><span></span><code>AdapterContext = {scope, workload_identity, approved_endpoint, secret_provider,
+  profile_revision, map_revision, capability_snapshot, request_budget, journal, clock}
+probe(context) -&gt; ProductIdentity + SupportedInterfaces + Diagnostics
+discover(context, allowlist, cursor) -&gt; Page&lt;NativePointDescriptor&gt;
+readPoints(context, native_ids, cursor) -&gt; Page&lt;NativeObservation&gt;
+subscribePoints(context, approved_filter, resume_token) -&gt; SubscriptionHandle
+readActiveAlarms(context, cursor, generation) -&gt; Page&lt;NativeAlarm&gt;
+subscribeAlarms(context, approved_filter, resume_token) -&gt; SubscriptionHandle
+readHistory(context, native_id, interval, cursor) -&gt; Page&lt;HistoricalObservation&gt;
+acknowledge(context, validated_native_ack, egress_epoch) -&gt; NativeReceipt
+execute(context, validated_physical_command, egress_epoch) -&gt; NativeReceipt
+readback(context, accepted_target, predicate) -&gt; Evidence
+relinquish(context, validated_release, egress_epoch) -&gt; NativeReceipt
+drain(context) -&gt; OutstandingWork + RetainedAuthority
+close(context) -&gt; CloseEvidence
+</code></pre>
+</div>
+
+<p>Mutation methods are never callable directly from UI/API controllers. Runtime supplies ValidatedNativeAck/ValidatedPhysicalCommand objects minted by the policy executor, not arbitrary JSON. Adapter support is distinct from admission; missing or unverified methods return unsupported errors, never fabricated success. Plugins pin immutable image digests. Windows/Java vendor SDKs run in OS-specific sidecars rather than in the shared API process.</p>
+
+<p>Priority queues separate command receipts/local overrides/critical alarms, active snapshots, point refresh, and discovery/history. Unknown alarm severity is not silently downgraded. COV leases renew with jitter and token budgets. Polling fallback is an approved strategy within the same contract, never an automatic new protocol/account. Retry is limited to proven idempotent/read operations within budget. Reconnect uses capped exponential backoff with jitter; deadlines include queue time. An open circuit marks stale/unknown by evidence age; it never substitutes zero for missing data.</p>
+
+<h3 id="153-ingestion-and-alarm-reconciliation">15.3 Ingestion and alarm reconciliation</h3>
+
+<ol>
+<li>Authenticate source and journal raw receipt/hash/cursor before transport ACK where supported. Validate scope, mapping revision, type/unit/status. Decode/scale failures are quarantined and excluded from routing; retain a privacy-limited raw reference.</li>
+<li>Regional ingest uses an inbox unique key and atomic observation/alarm-mirror plus outbox transaction. Same event ID and digest returns the previous receipt; reused ID with changed digest is an auditable conflict.</li>
+<li>Active state and native_ack_state are independent axes. SmartAlarm reviewed is a third axis and does not send ACK. Native ACK binds the current occurrence_id, branch_id and native_transition_token, valid expiry, authority and approval.</li>
+<li>Lost subscriptions mark the generation incomplete and retain active/unknown alarms. Reconnect establishes the stream and obtains an active snapshot/ConditionRefresh according to the vendor contract, buffering/reconciling interleaved events and recording gaps where ordering is unproven.</li>
+<li>Only a demonstrably complete snapshot within its exact scope may reconcile absence. Sources without completeness guarantees cannot auto-clear missing alarms; readback or review is required. Historical backfill carries replay mode and never re-triggers PA, dispatch or commands.</li>
+<li>Return-to-normal updates native inactive state; incident closure still follows rescue workflow. Source suppression/disable/maintenance has an owner and expiry and never deletes evidence.</li>
+</ol>
+
+<h3 id="154-commands-approvals-and-fencing">15.4 Commands, approvals and fencing</h3>
+
+<p>Connection states are draft→validating→qualified→active_read; active_control requires control qualification and approved handback. Degraded/suspended/draining deny new commands; retired is terminal. Resume_read never automatically restores control. Adapter upgrades, map publication or entitlement changes invalidate old qualification.</p>
+
+<p>The BMS operation receipt is a transport projection: persisted→dispatch_pending→accepted_by_gateway→accepted_by_controller→feedback_confirmed, with rejected/expired/unknown/superseded branches. The existing Physical Command aggregate remains authoritative; the projection does not independently decide physical state. effect_confirmed=true requires feedback_confirmed and valid feedback_ref. For native_ack, feedback is readback of the correct occurrence acknowledgment, not a plant effect. physical_command_id is required for physical_command and null for native_ack.</p>
+
+<div class="codehilite">
+<pre><span></span><code>BEGIN
+  lock connection revision; verify If-Match == expected_revision
+  verify token scope + current qualification + immutable preview/approval digest
+  insert operation using UNIQUE(scope,operation_kind,idempotency_key)
+  on duplicate: same request_hash =&gt; return prior receipt; else409
+  insert transactional outbox(operation_id, deadline, approved envelope)
+COMMIT  -- only now 202 persisted
+edge consumes -&gt; journal + check current epoch at egress
+recheck expiry/map/adapter/interlocks/local mode -&gt; execute once if admissible
+transport timeout after possible send -&gt; UNKNOWN -&gt; readback/reconcile; no blind replay
+feedback predicate + stable period + evidence identity -&gt; Physical Command transition
+regional projection follows authoritative command event
+</code></pre>
+</div>
+
+<p>Approval digests bind tenant/site, connection/point/native address, unit/value, priority, adapter digest, map/qualification/cause-effect revision, feedback predicate and expiry. Approvers cannot edit the payload; edits require a new preview. Target/capability allowlists and approval levels are site policy rather than generic protocol enums. Requester/approver separation applies when required; an LLM cannot approve or establish qualification.</p>
+
+<p>BACnet priority arrays provide no owner ID or application TTL. Do not relinquish by writing NULL into a slot that might be owned by another actor. Check effective ownership, reserved-priority policy, local mode and handback. Where ownership is unproven, stop for local reconciliation. Cloud TTL prevents new dispatch but does not guarantee release after edge power loss. Automatic fail-safe requires a qualified local controller/watchdog. Otherwise admission must reject an auto-relinquish promise and require the manual runbook.</p>
+
+<h3 id="155-canonical-api-errors-and-pagination">15.5 Canonical API, errors and pagination</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Method / path</th>
+  <th>Request → response</th>
+  <th>Permission</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>GET /bms/connections</td>
+  <td>— → BMSConnectionPage</td>
+  <td>bms.connection.read</td>
+</tr>
+<tr>
+  <td>POST /bms/connections</td>
+  <td>BMSConnectionCreate → BMSConnectionView</td>
+  <td>bms.connection.create</td>
+</tr>
+<tr>
+  <td>GET /bms/connections/{connection_id}</td>
+  <td>— → BMSConnectionView</td>
+  <td>bms.connection.read</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/discoveries</td>
+  <td>BMSDiscoveryRequest → BMSJob</td>
+  <td>bms.discovery.run</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/map-revisions</td>
+  <td>BMSMapDraftCreate → BMSMapRevision</td>
+  <td>bms.mapping.edit</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/validations</td>
+  <td>BMSValidationRequest → BMSJob</td>
+  <td>bms.mapping.validate</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/qualifications</td>
+  <td>BMSQualificationCreate → BMSJob</td>
+  <td>bms.qualification.submit</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/activations</td>
+  <td>BMSActivationRequest → BMSJob</td>
+  <td>bms.connection.activate</td>
+</tr>
+<tr>
+  <td>GET /bms/connections/{connection_id}/points</td>
+  <td>— → BMSPointPage</td>
+  <td>bms.point.read</td>
+</tr>
+<tr>
+  <td>GET /bms/connections/{connection_id}/alarms</td>
+  <td>— → BMSAlarmPage</td>
+  <td>bms.alarm.read</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/alarms/{alarm_id}/native-acknowledgements</td>
+  <td>BMSNativeAckRequest → BMSMutationReceipt</td>
+  <td>bms.alarm.ack_native</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/command-previews</td>
+  <td>BMSCommandPreview → BMSCommandPreviewResult</td>
+  <td>bms.command.preview</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/commands</td>
+  <td>BMSCommandSubmit → BMSMutationReceipt</td>
+  <td>bms.command.submit</td>
+</tr>
+<tr>
+  <td>GET /bms/connections/{connection_id}/commands/{command_id}</td>
+  <td>— → BMSMutationReceipt</td>
+  <td>bms.command.read</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/commands/{command_id}/reconciliations</td>
+  <td>BMSCommandReconcile → BMSMutationReceipt</td>
+  <td>bms.command.reconcile</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/reconciliations</td>
+  <td>BMSReconciliationRequest → BMSJob</td>
+  <td>bms.reconciliation.run</td>
+</tr>
+<tr>
+  <td>POST /bms/connections/{connection_id}/lifecycle-transitions</td>
+  <td>BMSLifecycleRequest → BMSJob</td>
+  <td>bms.lifecycle.change</td>
+</tr>
+<tr>
+  <td>GET /bms/connections/{connection_id}/health</td>
+  <td>— → BMSHealth</td>
+  <td>bms.health.read</td>
+</tr>
+<tr>
+  <td>GET /bms/connections/{connection_id}/jobs/{job_id}</td>
+  <td>— → BMSJob</td>
+  <td>bms.job.read</td>
+</tr>
+<tr>
+  <td>GET /bms/connections/{connection_id}/policies/request-budget</td>
+  <td>— → BMSRequestBudgetView</td>
+  <td>bms.policy.budget.read</td>
+</tr>
+<tr>
+  <td>PATCH /bms/connections/{connection_id}/policies/request-budget</td>
+  <td>BMSRequestBudgetUpdate → BMSRequestBudgetView</td>
+  <td>bms.policy.budget.change</td>
+</tr>
+<tr>
+  <td>GET /bms/connections/{connection_id}/policies/incident-export</td>
+  <td>— → BMSIncidentExportView</td>
+  <td>bms.policy.export.read</td>
+</tr>
+<tr>
+  <td>PATCH /bms/connections/{connection_id}/policies/incident-export</td>
+  <td>BMSIncidentExportUpdate → BMSIncidentExportView</td>
+  <td>bms.policy.export.change</td>
+</tr>
+</tbody>
+</table>
+
+<p>POST requires Idempotency-Key; existing-resource mutations add If-Match and expected_revision. Collections use opaque tenant/site/filter-bound snapshot-stable cursors with limit1–500. A changed filter invalidates the cursor with 400. Never return an unbounded point inventory. Tenant/region bind from token; body cannot select another tenant. Credential_ref and endpoint_ref must be scoped registry resources, not client URLs.</p>
+
+<p>401/403 distinguish authentication/authority;404 hides out-of-scope resources;409 signals state/idempotency conflict;412 indicates ETag/evidence drift;422 indicates semantic/unit/domain failure;429 supplies a budget-based Retry-After;503 does not imply acceptance. If the ledger committed before response loss, the same key returns the old receipt. Vendor HTTP 200 batches still require per-item inspection; missing/partial outcomes are recorded in job results rather than marked universally successful. Completed jobs expose result_ref and structured problem. UI polling backs off; cancel stops undispatched work only and never undoes a physical command.</p>
+
+<h3 id="156-events-and-version-compatibility">15.6 Events and version compatibility</h3>
+
+<table>
+<thead>
+<tr>
+  <th>CloudEvent type</th>
+  <th>Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>com.smartalarm.bms.point_observed.v1</td>
+  <td>BMSPointView</td>
+</tr>
+<tr>
+  <td>com.smartalarm.bms.alarm_changed.v1</td>
+  <td>BMSAlarmView</td>
+</tr>
+<tr>
+  <td>com.smartalarm.bms.command_changed.v1</td>
+  <td>BMSMutationReceipt</td>
+</tr>
+<tr>
+  <td>com.smartalarm.bms.connection_changed.v1</td>
+  <td>BMSConnectionView</td>
+</tr>
+<tr>
+  <td>com.smartalarm.bms.health_changed.v1</td>
+  <td>BMSHealth</td>
+</tr>
+<tr>
+  <td>com.smartalarm.bms.map_published.v1</td>
+  <td>BMSMapRevision</td>
+</tr>
+<tr>
+  <td>com.smartalarm.bms.reconciliation_completed.v1</td>
+  <td>BMSReconciliationCompleted</td>
+</tr>
+</tbody>
+</table>
+
+<p>Keep the existing CloudEvents envelope, require time for the BMS namespace and validate strict payloads. Envelope tenantid/regionid must match payload tenant_id/region_id and workload certificate scope; this is a service invariant, not something JSON Schema can prove. id is stable after durable ingest; source identifies adapter deployment without secrets. Consumers atomically store inbox and projection. Side effects originate only from the policy engine with a separate dedupe key, not from every alarm_changed event. Optional v1 additions follow compatibility policy; meaning/type/enum changes require a v2 event and consumer migration. Profile version, adapter digest, map revision and qualification version evolve independently.</p>
+
+<h3 id="157-migration-upgrade-and-recovery">15.7 Migration, upgrade and recovery</h3>
+
+<p>M1 expands the database with new tables/indexes without changing old keys; online-index migration follows a lock-time runbook. M2 deploys BMS-aware consumers with ingestion disabled. M3 deploys a read-only lab adapter with pinned digest/schema and validates mapping, units and alarm gaps. M4 publishes a signed map and runs shadow correlation without dispatch, comparing samples to the BMS console. M5 enables site alarm/incident integration after FAT/SAT; ACK/write remain disabled. M6 enables capabilities individually after authority, interlock, feedback and handback checks. These are release gates within the full design, not scope cuts.</p>
+
+<p>Upgrade/rollback: drain rejects new mutations; wait for journaled outbox work and record pending/unknown commands. If the controller retains authority, complete local handback before stopping the writer. Preserve cursor, generation, mapping digest and prior image. A new adapter undergoes read qualification; semantic/native-ID changes need map migration and rebinding tests. Rolling back an image does not undo physical effects or native ACK, and does not automatically reactivate an old qualification. Database/edge restore always starts suspended/read-reconcile, advances epoch, reconciles snapshots and command readback, then requests renewed control admission.</p>
+
+<h3 id="158-mandatory-implementation-tests">15.8 Mandatory implementation tests</h3>
+
+<p>Contract tests cover23 request/response schemas,7 event payloads, reference resolution, preservation of44 existing APIs, tenant isolation, read-only ACK/write denial, expiry/revision and effect_confirmed invariants. Simulator tests cover subscription loss, duplicate/late/out-of-order delivery, units/endianness, active alarms at startup, incomplete generations, wrong-occurrence ACK, post-send timeout and split-brain fencing. Real-source FAT/SAT verifies entitlements, native methods, ACK semantics, timestamps/quality, actual batch/rate limits, local override/interlocks, feedback criteria, retained BACnet priority after power loss and handback.</p>
+
+<p>Evidence binds adapter digest, vendor build, mapping and qualification; simulation is insufficient for field_accepted. Executable JSON checks are in work/test_bms_technical_contracts.py with a separately packaged QA report. Schema tests do not establish authentication, current expiry, signer authority or physical effects; service, integration and hardware tests remain distinct gates.</p>
+
+<p>BMS06 budget policy applies through GET/PATCH request-budget with CAS and approval. history_backfill_paused pauses only historical backfill, not active alarm reconciliation. Upstream tested quotas and priority floors remain mandatory. BMS08 incident-export policy pins the approved namespace, target binding and field allowlist. Quarantine sets enabled=false, keeps raw/provenance evidence and stops new exports without changing native alarm state. Re-enable requires review of causation/echo and current export_incident qualification. No health/person fields are accepted by the contract.</p>
+
+<h2 id="required-appendices-within-the-same-baseline">Required appendices within the same baseline</h2>
+
+<p><a href="Voice-Rescue-Design.html">Rescue speakers and voice navigation</a> adds WF-21–22. <a href="Positioning-AI-Care-Design.html">Positioning, optimization, AI, and care profiles</a> adds WF-23–27. Both documents are components of the full design, not optional features for a later phase. <a href="Screen-Specifications.html">Screen specifications</a> provides FRs for each screen ID.</p>
+</main></body></html>

@@ -1,0 +1,218 @@
+{
+  "timestamp": "2026-10-23T22:12:09.333478+00:00",
+  "scope": "C14-C17 flood semantic correction only; full 699-view report preserved",
+  "hashes": {
+    "visuals-v2.js": "8bb9d408fc481b3cba2444d1cdbb7a280ac753ced21940044fe2b9400d727de2",
+    "prototype-v2.js": "f8afaf11fc9307286b1e74653ee90e5457ce2a3bd186f727a7c48e8dc0c5f222",
+    "locale-v2.js": "72600d25891a18702797695d510af19e538410657a058ea09b9900cab2cd8da6"
+  },
+  "views": [
+    {
+      "id": "C14",
+      "lang": "vi",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C15",
+      "lang": "vi",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C16",
+      "lang": "vi",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C17",
+      "lang": "vi",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C14",
+      "lang": "vi",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C15",
+      "lang": "vi",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C16",
+      "lang": "vi",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C17",
+      "lang": "vi",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C14",
+      "lang": "en",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C15",
+      "lang": "en",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C16",
+      "lang": "en",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C17",
+      "lang": "en",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C14",
+      "lang": "en",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C15",
+      "lang": "en",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C16",
+      "lang": "en",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C17",
+      "lang": "en",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C14",
+      "lang": "ja",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C15",
+      "lang": "ja",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C16",
+      "lang": "ja",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C17",
+      "lang": "ja",
+      "viewport": 1600,
+      "fireAbsent": true,
+      "floodPresent": true,
+      "blueZone": true,
+      "overflow": false
+    },
+    {
+      "id": "C14",
+      "lang": "ja",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C15",
+      "lang": "ja",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C16",
+      "lang": "ja",
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "C17",
+      "lang": "ja",
+      "viewport": 390,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "captures": [
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C14-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C15-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C16-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C17-vi.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C14-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C15-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C16-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C17-vi-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C14-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C15-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C16-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C17-en.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C14-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C15-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C16-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C17-en-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C14-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C15-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C16-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C17-ja.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C14-ja-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C15-ja-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C16-ja-mobile-390.png",
+    "C:\\Users\\Than Minh Trung\\Documents\\Codex\\2026-10-23\\hie\\outputs\\SmartAlarm\\screens\\C17-ja-mobile-390.png"
+  ]
+}

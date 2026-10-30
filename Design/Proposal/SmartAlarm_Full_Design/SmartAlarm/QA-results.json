@@ -1,0 +1,1328 @@
+{
+  "baseline": "1.0",
+  "screens": 233,
+  "workflows": 33,
+  "locales": [
+    "vi",
+    "en",
+    "ja"
+  ],
+  "screen_locale_views": 699,
+  "screenshots": 466,
+  "screenshots_by_locale": {
+    "vi": 233,
+    "en": 233
+  },
+  "js_errors": [],
+  "overflow": [],
+  "checks": [
+    [
+      "vi F01 all five source fields",
+      true
+    ],
+    [
+      "vi F01 no editable evidence",
+      true
+    ],
+    [
+      "vi F01 navigation",
+      true
+    ],
+    [
+      "vi F02 all five source fields",
+      true
+    ],
+    [
+      "vi F02 no editable evidence",
+      true
+    ],
+    [
+      "vi F02 navigation",
+      true
+    ],
+    [
+      "vi F03 all five source fields",
+      true
+    ],
+    [
+      "vi F03 no editable evidence",
+      true
+    ],
+    [
+      "vi F03 navigation",
+      true
+    ],
+    [
+      "vi F04 all five source fields",
+      true
+    ],
+    [
+      "vi F04 no editable evidence",
+      true
+    ],
+    [
+      "vi F04 navigation",
+      true
+    ],
+    [
+      "vi F05 all five source fields",
+      true
+    ],
+    [
+      "vi F05 no editable evidence",
+      true
+    ],
+    [
+      "vi F05 navigation",
+      true
+    ],
+    [
+      "vi F06 all five source fields",
+      true
+    ],
+    [
+      "vi F06 no editable evidence",
+      true
+    ],
+    [
+      "vi F06 navigation",
+      true
+    ],
+    [
+      "vi F07 all five source fields",
+      true
+    ],
+    [
+      "vi F07 no editable evidence",
+      true
+    ],
+    [
+      "vi F07 navigation",
+      true
+    ],
+    [
+      "vi F08 all five source fields",
+      true
+    ],
+    [
+      "vi F08 no editable evidence",
+      true
+    ],
+    [
+      "vi F08 navigation",
+      true
+    ],
+    [
+      "vi F09 all five source fields",
+      true
+    ],
+    [
+      "vi F09 no editable evidence",
+      true
+    ],
+    [
+      "vi F09 navigation",
+      true
+    ],
+    [
+      "vi F10 all five source fields",
+      true
+    ],
+    [
+      "vi F10 no editable evidence",
+      true
+    ],
+    [
+      "vi F10 navigation",
+      true
+    ],
+    [
+      "vi F11 all five source fields",
+      true
+    ],
+    [
+      "vi F11 no editable evidence",
+      true
+    ],
+    [
+      "vi F11 navigation",
+      true
+    ],
+    [
+      "vi F12 all five source fields",
+      true
+    ],
+    [
+      "vi F12 no editable evidence",
+      true
+    ],
+    [
+      "vi F12 navigation",
+      true
+    ],
+    [
+      "vi F13 all five source fields",
+      true
+    ],
+    [
+      "vi F13 no editable evidence",
+      true
+    ],
+    [
+      "vi F13 navigation",
+      true
+    ],
+    [
+      "vi F14 all five source fields",
+      true
+    ],
+    [
+      "vi F14 no editable evidence",
+      true
+    ],
+    [
+      "vi F14 navigation",
+      true
+    ],
+    [
+      "vi F15 all five source fields",
+      true
+    ],
+    [
+      "vi F15 no editable evidence",
+      true
+    ],
+    [
+      "vi F15 navigation",
+      true
+    ],
+    [
+      "vi F16 all five source fields",
+      true
+    ],
+    [
+      "vi F16 no editable evidence",
+      true
+    ],
+    [
+      "vi F16 navigation",
+      true
+    ],
+    [
+      "vi F17 all five source fields",
+      true
+    ],
+    [
+      "vi F17 no editable evidence",
+      true
+    ],
+    [
+      "vi F17 navigation",
+      true
+    ],
+    [
+      "vi F18 all five source fields",
+      true
+    ],
+    [
+      "vi F18 no editable evidence",
+      true
+    ],
+    [
+      "vi F18 navigation",
+      true
+    ],
+    [
+      "vi F19 all five source fields",
+      true
+    ],
+    [
+      "vi F19 no editable evidence",
+      true
+    ],
+    [
+      "vi F19 navigation",
+      true
+    ],
+    [
+      "vi F20 all five source fields",
+      true
+    ],
+    [
+      "vi F20 no editable evidence",
+      true
+    ],
+    [
+      "vi F20 navigation",
+      true
+    ],
+    [
+      "en F01 all five source fields",
+      true
+    ],
+    [
+      "en F01 no editable evidence",
+      true
+    ],
+    [
+      "en F01 navigation",
+      true
+    ],
+    [
+      "en F02 all five source fields",
+      true
+    ],
+    [
+      "en F02 no editable evidence",
+      true
+    ],
+    [
+      "en F02 navigation",
+      true
+    ],
+    [
+      "en F03 all five source fields",
+      true
+    ],
+    [
+      "en F03 no editable evidence",
+      true
+    ],
+    [
+      "en F03 navigation",
+      true
+    ],
+    [
+      "en F04 all five source fields",
+      true
+    ],
+    [
+      "en F04 no editable evidence",
+      true
+    ],
+    [
+      "en F04 navigation",
+      true
+    ],
+    [
+      "en F05 all five source fields",
+      true
+    ],
+    [
+      "en F05 no editable evidence",
+      true
+    ],
+    [
+      "en F05 navigation",
+      true
+    ],
+    [
+      "en F06 all five source fields",
+      true
+    ],
+    [
+      "en F06 no editable evidence",
+      true
+    ],
+    [
+      "en F06 navigation",
+      true
+    ],
+    [
+      "en F07 all five source fields",
+      true
+    ],
+    [
+      "en F07 no editable evidence",
+      true
+    ],
+    [
+      "en F07 navigation",
+      true
+    ],
+    [
+      "en F08 all five source fields",
+      true
+    ],
+    [
+      "en F08 no editable evidence",
+      true
+    ],
+    [
+      "en F08 navigation",
+      true
+    ],
+    [
+      "en F09 all five source fields",
+      true
+    ],
+    [
+      "en F09 no editable evidence",
+      true
+    ],
+    [
+      "en F09 navigation",
+      true
+    ],
+    [
+      "en F10 all five source fields",
+      true
+    ],
+    [
+      "en F10 no editable evidence",
+      true
+    ],
+    [
+      "en F10 navigation",
+      true
+    ],
+    [
+      "en F11 all five source fields",
+      true
+    ],
+    [
+      "en F11 no editable evidence",
+      true
+    ],
+    [
+      "en F11 navigation",
+      true
+    ],
+    [
+      "en F12 all five source fields",
+      true
+    ],
+    [
+      "en F12 no editable evidence",
+      true
+    ],
+    [
+      "en F12 navigation",
+      true
+    ],
+    [
+      "en F13 all five source fields",
+      true
+    ],
+    [
+      "en F13 no editable evidence",
+      true
+    ],
+    [
+      "en F13 navigation",
+      true
+    ],
+    [
+      "en F14 all five source fields",
+      true
+    ],
+    [
+      "en F14 no editable evidence",
+      true
+    ],
+    [
+      "en F14 navigation",
+      true
+    ],
+    [
+      "en F15 all five source fields",
+      true
+    ],
+    [
+      "en F15 no editable evidence",
+      true
+    ],
+    [
+      "en F15 navigation",
+      true
+    ],
+    [
+      "en F16 all five source fields",
+      true
+    ],
+    [
+      "en F16 no editable evidence",
+      true
+    ],
+    [
+      "en F16 navigation",
+      true
+    ],
+    [
+      "en F17 all five source fields",
+      true
+    ],
+    [
+      "en F17 no editable evidence",
+      true
+    ],
+    [
+      "en F17 navigation",
+      true
+    ],
+    [
+      "en F18 all five source fields",
+      true
+    ],
+    [
+      "en F18 no editable evidence",
+      true
+    ],
+    [
+      "en F18 navigation",
+      true
+    ],
+    [
+      "en F19 all five source fields",
+      true
+    ],
+    [
+      "en F19 no editable evidence",
+      true
+    ],
+    [
+      "en F19 navigation",
+      true
+    ],
+    [
+      "en F20 all five source fields",
+      true
+    ],
+    [
+      "en F20 no editable evidence",
+      true
+    ],
+    [
+      "en F20 navigation",
+      true
+    ],
+    [
+      "ja F01 all five source fields",
+      true
+    ],
+    [
+      "ja F01 no editable evidence",
+      true
+    ],
+    [
+      "ja F01 navigation",
+      true
+    ],
+    [
+      "ja F02 all five source fields",
+      true
+    ],
+    [
+      "ja F02 no editable evidence",
+      true
+    ],
+    [
+      "ja F02 navigation",
+      true
+    ],
+    [
+      "ja F03 all five source fields",
+      true
+    ],
+    [
+      "ja F03 no editable evidence",
+      true
+    ],
+    [
+      "ja F03 navigation",
+      true
+    ],
+    [
+      "ja F04 all five source fields",
+      true
+    ],
+    [
+      "ja F04 no editable evidence",
+      true
+    ],
+    [
+      "ja F04 navigation",
+      true
+    ],
+    [
+      "ja F05 all five source fields",
+      true
+    ],
+    [
+      "ja F05 no editable evidence",
+      true
+    ],
+    [
+      "ja F05 navigation",
+      true
+    ],
+    [
+      "ja F06 all five source fields",
+      true
+    ],
+    [
+      "ja F06 no editable evidence",
+      true
+    ],
+    [
+      "ja F06 navigation",
+      true
+    ],
+    [
+      "ja F07 all five source fields",
+      true
+    ],
+    [
+      "ja F07 no editable evidence",
+      true
+    ],
+    [
+      "ja F07 navigation",
+      true
+    ],
+    [
+      "ja F08 all five source fields",
+      true
+    ],
+    [
+      "ja F08 no editable evidence",
+      true
+    ],
+    [
+      "ja F08 navigation",
+      true
+    ],
+    [
+      "ja F09 all five source fields",
+      true
+    ],
+    [
+      "ja F09 no editable evidence",
+      true
+    ],
+    [
+      "ja F09 navigation",
+      true
+    ],
+    [
+      "ja F10 all five source fields",
+      true
+    ],
+    [
+      "ja F10 no editable evidence",
+      true
+    ],
+    [
+      "ja F10 navigation",
+      true
+    ],
+    [
+      "ja F11 all five source fields",
+      true
+    ],
+    [
+      "ja F11 no editable evidence",
+      true
+    ],
+    [
+      "ja F11 navigation",
+      true
+    ],
+    [
+      "ja F12 all five source fields",
+      true
+    ],
+    [
+      "ja F12 no editable evidence",
+      true
+    ],
+    [
+      "ja F12 navigation",
+      true
+    ],
+    [
+      "ja F13 all five source fields",
+      true
+    ],
+    [
+      "ja F13 no editable evidence",
+      true
+    ],
+    [
+      "ja F13 navigation",
+      true
+    ],
+    [
+      "ja F14 all five source fields",
+      true
+    ],
+    [
+      "ja F14 no editable evidence",
+      true
+    ],
+    [
+      "ja F14 navigation",
+      true
+    ],
+    [
+      "ja F15 all five source fields",
+      true
+    ],
+    [
+      "ja F15 no editable evidence",
+      true
+    ],
+    [
+      "ja F15 navigation",
+      true
+    ],
+    [
+      "ja F16 all five source fields",
+      true
+    ],
+    [
+      "ja F16 no editable evidence",
+      true
+    ],
+    [
+      "ja F16 navigation",
+      true
+    ],
+    [
+      "ja F17 all five source fields",
+      true
+    ],
+    [
+      "ja F17 no editable evidence",
+      true
+    ],
+    [
+      "ja F17 navigation",
+      true
+    ],
+    [
+      "ja F18 all five source fields",
+      true
+    ],
+    [
+      "ja F18 no editable evidence",
+      true
+    ],
+    [
+      "ja F18 navigation",
+      true
+    ],
+    [
+      "ja F19 all five source fields",
+      true
+    ],
+    [
+      "ja F19 no editable evidence",
+      true
+    ],
+    [
+      "ja F19 navigation",
+      true
+    ],
+    [
+      "ja F20 all five source fields",
+      true
+    ],
+    [
+      "ja F20 no editable evidence",
+      true
+    ],
+    [
+      "ja F20 navigation",
+      true
+    ],
+    [
+      "choice selected",
+      true
+    ],
+    [
+      "SOS type to location",
+      true
+    ],
+    [
+      "required field blocks submit",
+      true
+    ],
+    [
+      "valid form review route",
+      true
+    ],
+    [
+      "record filter",
+      true
+    ],
+    [
+      "local chat sample",
+      true
+    ],
+    [
+      "C09 state loading",
+      true
+    ],
+    [
+      "C09 state empty",
+      true
+    ],
+    [
+      "C09 state error",
+      true
+    ],
+    [
+      "C09 state offline",
+      true
+    ],
+    [
+      "C09 state denied",
+      true
+    ],
+    [
+      "F09 state loading",
+      true
+    ],
+    [
+      "F09 state empty",
+      true
+    ],
+    [
+      "F09 state error",
+      true
+    ],
+    [
+      "F09 state offline",
+      true
+    ],
+    [
+      "F09 state denied",
+      true
+    ],
+    [
+      "F11 state loading",
+      true
+    ],
+    [
+      "F11 state empty",
+      true
+    ],
+    [
+      "F11 state error",
+      true
+    ],
+    [
+      "F11 state offline",
+      true
+    ],
+    [
+      "F11 state denied",
+      true
+    ],
+    [
+      "F19 state loading",
+      true
+    ],
+    [
+      "F19 state empty",
+      true
+    ],
+    [
+      "F19 state error",
+      true
+    ],
+    [
+      "F19 state offline",
+      true
+    ],
+    [
+      "F19 state denied",
+      true
+    ],
+    [
+      "C35 390px no horizontal page overflow",
+      true
+    ],
+    [
+      "F09 390px no horizontal page overflow",
+      true
+    ],
+    [
+      "F19 390px no horizontal page overflow",
+      true
+    ]
+  ],
+  "capture_files": [
+    "A01-vi.png",
+    "A02-vi.png",
+    "A03-vi.png",
+    "A04-vi.png",
+    "A05-vi.png",
+    "A06-vi.png",
+    "A07-vi.png",
+    "A08-vi.png",
+    "A09-vi.png",
+    "A10-vi.png",
+    "C01-vi.png",
+    "C02-vi.png",
+    "C03-vi.png",
+    "C04-vi.png",
+    "C05-vi.png",
+    "C06-vi.png",
+    "C07-vi.png",
+    "C08-vi.png",
+    "C09-vi.png",
+    "C10-vi.png",
+    "C11-vi.png",
+    "C12-vi.png",
+    "C13-vi.png",
+    "C14-vi.png",
+    "C15-vi.png",
+    "C16-vi.png",
+    "C17-vi.png",
+    "C18-vi.png",
+    "C19-vi.png",
+    "C20-vi.png",
+    "C21-vi.png",
+    "C22-vi.png",
+    "C23-vi.png",
+    "C24-vi.png",
+    "C25-vi.png",
+    "C26-vi.png",
+    "C27-vi.png",
+    "C28-vi.png",
+    "C29-vi.png",
+    "C30-vi.png",
+    "R01-vi.png",
+    "R02-vi.png",
+    "R03-vi.png",
+    "R04-vi.png",
+    "R05-vi.png",
+    "R06-vi.png",
+    "R07-vi.png",
+    "R08-vi.png",
+    "R09-vi.png",
+    "R10-vi.png",
+    "R11-vi.png",
+    "R12-vi.png",
+    "O01-vi.png",
+    "O02-vi.png",
+    "O03-vi.png",
+    "O04-vi.png",
+    "O05-vi.png",
+    "O06-vi.png",
+    "O07-vi.png",
+    "O08-vi.png",
+    "O09-vi.png",
+    "O10-vi.png",
+    "O11-vi.png",
+    "O12-vi.png",
+    "O13-vi.png",
+    "O14-vi.png",
+    "O15-vi.png",
+    "O16-vi.png",
+    "O17-vi.png",
+    "O18-vi.png",
+    "O19-vi.png",
+    "O20-vi.png",
+    "O21-vi.png",
+    "O22-vi.png",
+    "O23-vi.png",
+    "O24-vi.png",
+    "O25-vi.png",
+    "O26-vi.png",
+    "O27-vi.png",
+    "O28-vi.png",
+    "O29-vi.png",
+    "O30-vi.png",
+    "S01-vi.png",
+    "S02-vi.png",
+    "S03-vi.png",
+    "S04-vi.png",
+    "S05-vi.png",
+    "S06-vi.png",
+    "S07-vi.png",
+    "S08-vi.png",
+    "S09-vi.png",
+    "S10-vi.png",
+    "S11-vi.png",
+    "S12-vi.png",
+    "S13-vi.png",
+    "S14-vi.png",
+    "I01-vi.png",
+    "I02-vi.png",
+    "I03-vi.png",
+    "I04-vi.png",
+    "I05-vi.png",
+    "I06-vi.png",
+    "I07-vi.png",
+    "I08-vi.png",
+    "I09-vi.png",
+    "I10-vi.png",
+    "I11-vi.png",
+    "I12-vi.png",
+    "I13-vi.png",
+    "I14-vi.png",
+    "I15-vi.png",
+    "T01-vi.png",
+    "T02-vi.png",
+    "T03-vi.png",
+    "T04-vi.png",
+    "T05-vi.png",
+    "T06-vi.png",
+    "T07-vi.png",
+    "T08-vi.png",
+    "T09-vi.png",
+    "T10-vi.png",
+    "T11-vi.png",
+    "T12-vi.png",
+    "T13-vi.png",
+    "T14-vi.png",
+    "T15-vi.png",
+    "T16-vi.png",
+    "T17-vi.png",
+    "X01-vi.png",
+    "X02-vi.png",
+    "X03-vi.png",
+    "X04-vi.png",
+    "X05-vi.png",
+    "X06-vi.png",
+    "X07-vi.png",
+    "X08-vi.png",
+    "X09-vi.png",
+    "X10-vi.png",
+    "G01-vi.png",
+    "G02-vi.png",
+    "G03-vi.png",
+    "G04-vi.png",
+    "G05-vi.png",
+    "G06-vi.png",
+    "G07-vi.png",
+    "G08-vi.png",
+    "G09-vi.png",
+    "G10-vi.png",
+    "G11-vi.png",
+    "G12-vi.png",
+    "D01-vi.png",
+    "D02-vi.png",
+    "D03-vi.png",
+    "D04-vi.png",
+    "D05-vi.png",
+    "D06-vi.png",
+    "D07-vi.png",
+    "D08-vi.png",
+    "L01-vi.png",
+    "L02-vi.png",
+    "L03-vi.png",
+    "L04-vi.png",
+    "L05-vi.png",
+    "L06-vi.png",
+    "C31-vi.png",
+    "C32-vi.png",
+    "C33-vi.png",
+    "C34-vi.png",
+    "O31-vi.png",
+    "O32-vi.png",
+    "O33-vi.png",
+    "O34-vi.png",
+    "C35-vi.png",
+    "C36-vi.png",
+    "C37-vi.png",
+    "C38-vi.png",
+    "C39-vi.png",
+    "C40-vi.png",
+    "P01-vi.png",
+    "P02-vi.png",
+    "P03-vi.png",
+    "P04-vi.png",
+    "P05-vi.png",
+    "P06-vi.png",
+    "P07-vi.png",
+    "P08-vi.png",
+    "P09-vi.png",
+    "S15-vi.png",
+    "S16-vi.png",
+    "O35-vi.png",
+    "O36-vi.png",
+    "H01-vi.png",
+    "H02-vi.png",
+    "H03-vi.png",
+    "H04-vi.png",
+    "H05-vi.png",
+    "H06-vi.png",
+    "H07-vi.png",
+    "H08-vi.png",
+    "H09-vi.png",
+    "H10-vi.png",
+    "H11-vi.png",
+    "H12-vi.png",
+    "Q01-vi.png",
+    "Q02-vi.png",
+    "Q03-vi.png",
+    "Q04-vi.png",
+    "Q05-vi.png",
+    "Q06-vi.png",
+    "Q07-vi.png",
+    "Q08-vi.png",
+    "Q09-vi.png",
+    "Q10-vi.png",
+    "F01-vi.png",
+    "F02-vi.png",
+    "F03-vi.png",
+    "F04-vi.png",
+    "F05-vi.png",
+    "F06-vi.png",
+    "F07-vi.png",
+    "F08-vi.png",
+    "F09-vi.png",
+    "F10-vi.png",
+    "F11-vi.png",
+    "F12-vi.png",
+    "F13-vi.png",
+    "F14-vi.png",
+    "F15-vi.png",
+    "F16-vi.png",
+    "F17-vi.png",
+    "F18-vi.png",
+    "F19-vi.png",
+    "F20-vi.png",
+    "A01-en.png",
+    "A02-en.png",
+    "A03-en.png",
+    "A04-en.png",
+    "A05-en.png",
+    "A06-en.png",
+    "A07-en.png",
+    "A08-en.png",
+    "A09-en.png",
+    "A10-en.png",
+    "C01-en.png",
+    "C02-en.png",
+    "C03-en.png",
+    "C04-en.png",
+    "C05-en.png",
+    "C06-en.png",
+    "C07-en.png",
+    "C08-en.png",
+    "C09-en.png",
+    "C10-en.png",
+    "C11-en.png",
+    "C12-en.png",
+    "C13-en.png",
+    "C14-en.png",
+    "C15-en.png",
+    "C16-en.png",
+    "C17-en.png",
+    "C18-en.png",
+    "C19-en.png",
+    "C20-en.png",
+    "C21-en.png",
+    "C22-en.png",
+    "C23-en.png",
+    "C24-en.png",
+    "C25-en.png",
+    "C26-en.png",
+    "C27-en.png",
+    "C28-en.png",
+    "C29-en.png",
+    "C30-en.png",
+    "R01-en.png",
+    "R02-en.png",
+    "R03-en.png",
+    "R04-en.png",
+    "R05-en.png",
+    "R06-en.png",
+    "R07-en.png",
+    "R08-en.png",
+    "R09-en.png",
+    "R10-en.png",
+    "R11-en.png",
+    "R12-en.png",
+    "O01-en.png",
+    "O02-en.png",
+    "O03-en.png",
+    "O04-en.png",
+    "O05-en.png",
+    "O06-en.png",
+    "O07-en.png",
+    "O08-en.png",
+    "O09-en.png",
+    "O10-en.png",
+    "O11-en.png",
+    "O12-en.png",
+    "O13-en.png",
+    "O14-en.png",
+    "O15-en.png",
+    "O16-en.png",
+    "O17-en.png",
+    "O18-en.png",
+    "O19-en.png",
+    "O20-en.png",
+    "O21-en.png",
+    "O22-en.png",
+    "O23-en.png",
+    "O24-en.png",
+    "O25-en.png",
+    "O26-en.png",
+    "O27-en.png",
+    "O28-en.png",
+    "O29-en.png",
+    "O30-en.png",
+    "S01-en.png",
+    "S02-en.png",
+    "S03-en.png",
+    "S04-en.png",
+    "S05-en.png",
+    "S06-en.png",
+    "S07-en.png",
+    "S08-en.png",
+    "S09-en.png",
+    "S10-en.png",
+    "S11-en.png",
+    "S12-en.png",
+    "S13-en.png",
+    "S14-en.png",
+    "I01-en.png",
+    "I02-en.png",
+    "I03-en.png",
+    "I04-en.png",
+    "I05-en.png",
+    "I06-en.png",
+    "I07-en.png",
+    "I08-en.png",
+    "I09-en.png",
+    "I10-en.png",
+    "I11-en.png",
+    "I12-en.png",
+    "I13-en.png",
+    "I14-en.png",
+    "I15-en.png",
+    "T01-en.png",
+    "T02-en.png",
+    "T03-en.png",
+    "T04-en.png",
+    "T05-en.png",
+    "T06-en.png",
+    "T07-en.png",
+    "T08-en.png",
+    "T09-en.png",
+    "T10-en.png",
+    "T11-en.png",
+    "T12-en.png",
+    "T13-en.png",
+    "T14-en.png",
+    "T15-en.png",
+    "T16-en.png",
+    "T17-en.png",
+    "X01-en.png",
+    "X02-en.png",
+    "X03-en.png",
+    "X04-en.png",
+    "X05-en.png",
+    "X06-en.png",
+    "X07-en.png",
+    "X08-en.png",
+    "X09-en.png",
+    "X10-en.png",
+    "G01-en.png",
+    "G02-en.png",
+    "G03-en.png",
+    "G04-en.png",
+    "G05-en.png",
+    "G06-en.png",
+    "G07-en.png",
+    "G08-en.png",
+    "G09-en.png",
+    "G10-en.png",
+    "G11-en.png",
+    "G12-en.png",
+    "D01-en.png",
+    "D02-en.png",
+    "D03-en.png",
+    "D04-en.png",
+    "D05-en.png",
+    "D06-en.png",
+    "D07-en.png",
+    "D08-en.png",
+    "L01-en.png",
+    "L02-en.png",
+    "L03-en.png",
+    "L04-en.png",
+    "L05-en.png",
+    "L06-en.png",
+    "C31-en.png",
+    "C32-en.png",
+    "C33-en.png",
+    "C34-en.png",
+    "O31-en.png",
+    "O32-en.png",
+    "O33-en.png",
+    "O34-en.png",
+    "C35-en.png",
+    "C36-en.png",
+    "C37-en.png",
+    "C38-en.png",
+    "C39-en.png",
+    "C40-en.png",
+    "P01-en.png",
+    "P02-en.png",
+    "P03-en.png",
+    "P04-en.png",
+    "P05-en.png",
+    "P06-en.png",
+    "P07-en.png",
+    "P08-en.png",
+    "P09-en.png",
+    "S15-en.png",
+    "S16-en.png",
+    "O35-en.png",
+    "O36-en.png",
+    "H01-en.png",
+    "H02-en.png",
+    "H03-en.png",
+    "H04-en.png",
+    "H05-en.png",
+    "H06-en.png",
+    "H07-en.png",
+    "H08-en.png",
+    "H09-en.png",
+    "H10-en.png",
+    "H11-en.png",
+    "H12-en.png",
+    "Q01-en.png",
+    "Q02-en.png",
+    "Q03-en.png",
+    "Q04-en.png",
+    "Q05-en.png",
+    "Q06-en.png",
+    "Q07-en.png",
+    "Q08-en.png",
+    "Q09-en.png",
+    "Q10-en.png",
+    "F01-en.png",
+    "F02-en.png",
+    "F03-en.png",
+    "F04-en.png",
+    "F05-en.png",
+    "F06-en.png",
+    "F07-en.png",
+    "F08-en.png",
+    "F09-en.png",
+    "F10-en.png",
+    "F11-en.png",
+    "F12-en.png",
+    "F13-en.png",
+    "F14-en.png",
+    "F15-en.png",
+    "F16-en.png",
+    "F17-en.png",
+    "F18-en.png",
+    "F19-en.png",
+    "F20-en.png"
+  ],
+  "note": "Design-only browser prototype checks. No production backend, supplier API, real hardware, fire suppression, drone flight, rescue operation, FAT or SAT executed. Screenshots are illustrative design evidence, not operational acceptance.",
+  "field_check_note": "Dashboard typography renders labels uppercase; field presence verified case-insensitively in all three locales. List filtering is not classified as editing source evidence.",
+  "superseded_by": "QA-v2-results.json",
+  "scope": "Historical baseline1 technical checks; not current UX acceptance"
+}

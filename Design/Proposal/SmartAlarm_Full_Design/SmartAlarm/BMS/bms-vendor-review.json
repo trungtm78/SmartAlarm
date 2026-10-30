@@ -1,0 +1,54 @@
+{
+  "reviewer": "bms_vendors",
+  "review_date": "2026-10-24",
+  "scope": "Read-only vendor accuracy review of bilingual research Markdown and 11 connector JSON design profiles against primary-source vendor research notes; no hardware or API runtime validation",
+  "result": "pass_with_advisories",
+  "blockers": [],
+  "profiles_reviewed": 11,
+  "verified_design_guards": [
+    "All 11 profiles declare adapter not_implemented and product version UNVERIFIED_AT_SITE",
+    "All profiles disable writes and have empty enabled_capabilities and tested_product_versions",
+    "All capability support values are unverified; limits and license evidence remain unset",
+    "Desigo and EBI OPC Classic are not misrepresented as OPC UA",
+    "EBI and WEBs are separated; Niagara local and NDS cloud are separated",
+    "EBO provider/discovery/alarm-event acknowledgement caveats retained",
+    "Metasys API separate licensing and per-item batch results retained",
+    "WebCTRL outbound events not represented as universal REST point commands",
+    "Delta -API entitlement tied to dated catalog and current verification",
+    "EC-Net Supervisor not conflated with ECLYPSE controller REST"
+  ],
+  "findings": [
+    {
+      "id": "VENDOR-01",
+      "severity": "minor",
+      "location": "VI/EN report vendor matrix: bms.alc.webctrl-soap-sdk",
+      "issue": "SOAP/JavaSDK combined wording implies case-specific licensing is documented for both. Primary sheet specifically applies case-by-case licensing to Java SDK.",
+      "recommendation": "State SOAP requires exact-version method contract; Java SDK licensing is case-by-case.",
+      "source": "https://www.automatedlogic.com/en/media/WebCTRL%20Open%20Integrations%20Platform_110325_tcm702-284058.pdf",
+      "status": "resolved_and_rechecked_in_bilingual_markdown"
+    },
+    {
+      "id": "VENDOR-02",
+      "severity": "advisory",
+      "location": "Metasys report/profile qualification",
+      "issue": "No explicit MVE exclusion retained from v4/Release12 source; generic product/version qualification remains safe but less specific.",
+      "recommendation": "Add version-qualified ADS/ADX/OAS scope and MVE exclusion for APIv4; do not extrapolate to all later releases without confirming contract.",
+      "source": "https://jci-metasys.github.io/api-landing/api/v4",
+      "status": "reported_to_writer"
+    },
+    {
+      "id": "VENDOR-03",
+      "severity": "advisory",
+      "location": "All profile capabilities[].evidence_refs",
+      "issue": "Each capability repeats a product reference even when that page does not establish that method. No support is claimed because all entries are unverified.",
+      "recommendation": "Document refs as research context until exact method evidence is supplied; never use nonempty evidence_refs as activation proof.",
+      "status": "reported_to_writer"
+    }
+  ],
+  "limitations": [
+    "Review does not assert source APIs were invoked or licenses purchased",
+    "Rendered HTML/PDF visual QA excluded",
+    "Protocol correctness beyond vendor claims reviewed by separate protocol reviewer",
+    "Writer was updating files concurrently; corrections require final recheck"
+  ]
+}

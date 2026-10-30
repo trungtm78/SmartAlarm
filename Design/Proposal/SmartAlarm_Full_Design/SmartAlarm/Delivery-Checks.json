@@ -1,0 +1,17 @@
+{
+  "revision": "3.0",
+  "date": "2026-10-24",
+  "screen_count": 241,
+  "workflow_count": 37,
+  "locale_views": 723,
+  "pdf_count": 30,
+  "proposal_slides": 188,
+  "appendix_rows": 590,
+  "BMS_requirements": 40,
+  "connector_profiles": 11,
+  "api_operations": 67,
+  "acceptance_specifications_per_language": 354,
+  "missing_links": [],
+  "ui_qa": "QA-v3-results.json",
+  "scope": "Implementation design and local prototype; hardware integration and operational acceptance pending"
+}

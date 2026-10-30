@@ -1,0 +1,26 @@
+{
+  "VI": {
+    "slides": 166,
+    "pdf_pages": 166,
+    "native_pngs": 166,
+    "text_overflows": [],
+    "out_of_bounds_shapes": [],
+    "appendix_rows": 527,
+    "appendix_start": 41,
+    "native_renderer": "Microsoft PowerPoint COM",
+    "ooxml_validation": "PASS",
+    "design_only": true
+  },
+  "EN": {
+    "slides": 166,
+    "pdf_pages": 166,
+    "native_pngs": 166,
+    "text_overflows": [],
+    "out_of_bounds_shapes": [],
+    "appendix_rows": 527,
+    "appendix_start": 41,
+    "native_renderer": "Microsoft PowerPoint COM",
+    "ooxml_validation": "PASS",
+    "design_only": true
+  }
+}

@@ -1,0 +1,407 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FRD · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="../index.html">SmartAlarm / Design Library</a><a href="../FRD.html">Tiếng Việt</a><button onclick="window.print()">Print / Save PDF</button></header><main><div class="document-meta">BASELINE 2.0 · 23 OCT 2026 · DESIGN FOR REVIEW</div><h1 id="smartalarm-functional-requirements-document">SmartAlarm — Functional Requirements Document</h1>
+
+<p><img src="../assets/proposal-v3/physical.png" alt="SmartAlarm — explanatory diagram" /></p>
+
+<p>Version 1.0 · 23/10/2026 · Proposed design. WF IDs are cross-screen requirements; FR-<screen ID> denotes detailed interface specifications in Screen-Specifications.md. Together they form the complete FRD for the baseline.</p>
+
+<p>Revision 1.0 is a complete design baseline, not a deployed or certified product. WF-01–WF-20 below, mandatory WF-21–WF-27 appendices, and WF-28–WF-33 physical workflows form 33 workflows. The screen catalog contains 233 screens, including F01–F20. Physical integration must use configuration-specific evidence from <a href="Physical-Device-Catalog.html">Physical Device Catalog</a>; the functional requirements below do not assert unsupported vendor capabilities.</p>
+
+<h2 id="1-terminology-and-state-models">1. Terminology and state models</h2>
+
+<p><strong>Signal/Event:</strong> an immutable observation from a source, with observed_at and received_at. <strong>Incident:</strong> an operational record collecting evidence, with severity and an owner. <strong>SOS:</strong> a request for assistance for a person/group, with its own state and an optional incident link. <strong>Warning:</strong> a message issued by version and audience. <strong>Delivery:</strong> one sending attempt through one channel. <strong>Task:</strong> an assignment for a unit. <strong>Personal status:</strong> a sourced statement/status, not an inference of absolute safety. <strong>Command:</strong> an instruction to a device, separate from an event.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Object</th>
+  <th>Valid states</th>
+  <th>Transition condition / actor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Signal</td>
+  <td>received → validated → correlated / quarantined / rejected</td>
+  <td>Gateway validates schema/source/tenant; invalid signals do not enter live workflows</td>
+</tr>
+<tr>
+  <td>Incident</td>
+  <td>new → triaging → active → contained → resolved → closed</td>
+  <td>Operator triage; supervisor closes after checklist completion; reopening requires a reason</td>
+</tr>
+<tr>
+  <td>Incident exception</td>
+  <td>new/triaging → dismissed; any incident not yet closed → linked</td>
+  <td>Dismissal requires a reason; linking does not delete IDs or evidence</td>
+</tr>
+<tr>
+  <td>SOS</td>
+  <td>submitted → acknowledged → assigned → assisting → resolved</td>
+  <td>Server receipt differs from operator ACK; responders update only assigned tasks</td>
+</tr>
+<tr>
+  <td>SOS cancel</td>
+  <td>submitted/acknowledged/assigned → cancellation_requested → canceled or continued processing</td>
+  <td>After dispatch, an operator decision is required; citizens cannot delete the record</td>
+</tr>
+<tr>
+  <td>Person status</td>
+  <td>unknown, in_danger, help_requested, self_reported_safe, responder_confirmed_assisted</td>
+  <td>Append observations with timestamp/source; may return to danger; safe does not close the incident</td>
+</tr>
+<tr>
+  <td>Warning</td>
+  <td>draft → review → approved → sending → active → expired / canceled</td>
+  <td>New versions require reapproval; authors cannot approve their own work when policy requires separation</td>
+</tr>
+<tr>
+  <td>Task</td>
+  <td>offered → accepted → en_route → on_scene → completed</td>
+  <td>Offer deadline → expired → reassign; decline requires a reason; a task has one current owner</td>
+</tr>
+<tr>
+  <td>Command</td>
+  <td>requested → approved → dispatched → accepted → executing → succeeded / failed / unknown / expired</td>
+  <td>Device acceptance does not prove success; a timeout does not automatically mean physical failure</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Physical asset:</strong> an installed, configuration-bound controller, pump, valve, releasing system, or rescue device. <strong>Capability:</strong> independently approved observe/control permission for an exact operation. <strong>Physical feedback:</strong> observed evidence distinct from transport/device acknowledgment. <strong>Impairment:</strong> an authorized reduction in protection requiring compensating measures and verified restoration. <strong>Mission:</strong> a supervised equipment operation with local authority and handover. UI label UNKNOWN maps to the existing machine state <code>unknown</code>; it is not a new terminal success/failure state. Impairment lifecycle: requested → approved → active → restoration_pending → verified_closed; expiry without restoration stays restoration_pending and escalates. Mission lifecycle: draft → review → approved → locally_accepted → executing → completed / aborted / unknown; completion requires outcome evidence.</p>
+
+<h2 id="2-authorization-and-common-controls">2. Authorization and common controls</h2>
+
+<p>Every endpoint checks the principal, tenant membership, region, site scope, object ownership, and action permission on the server. Hiding frontend buttons is not a security control. Family members see only shared fields; operators see information needed for the incident; platform admins have no automatic data access. Warning approvers and command approvers have separate permissions. Break-glass access requires a reason, expiry, audit, and supervisor notification; it does not bypass tenant boundaries. Access to out-of-scope objects returns 404 or an error that does not disclose their existence.</p>
+
+<p>Lists use cursor pagination, stable sorting (created_at,id), and a maximum of 100 records/page. All mutations require validation, idempotency when creating effects, and optimistic concurrency on updates. List screens provide search/filter for appropriate fields and loading/empty/error/denied states; forms provide required/invalid/conflict/unsaved states; details provide stale/not-found states. Prototype data is not real telemetry.</p>
+
+<p>Physical control additionally checks the site/controller capability, vendor permission, OT access policy, current impairment/lockout, local authority, and operation-specific approval. The UI must show monitor-only, control eligible, inhibited, stale, and UNKNOWN distinctly. Engineering access does not imply incident command authority. Segment OT from public networks; allowlist supported endpoints and operations, use controlled maintenance access, and retain credential/change audit. Local automatic detection, pump starting, and releasing protection must not depend on cloud approval or connectivity.</p>
+
+<h2 id="3-cross-cutting-functional-requirements">3. Cross-cutting functional requirements</h2>
+
+<h3 id="wf-01-onboarding-and-identity-br-06">WF-01 — Onboarding and identity (BR-06)</h3>
+
+<p>An admin creates a tenant with an immutable home_region; selects locale/timezone, configures SSO/MFA, and invites memberships by site. Users select a workspace before entering the console. Recovery returns the same message for existing and nonexistent emails to reduce enumeration. Invitations are single-use, have a TTL, and enforce email/domain policy. When SSO is unavailable, a controlled break-glass account is available within the appropriate tenant; MFA is not automatically bypassed.</p>
+
+<p><strong>AC:</strong> expired invitations are rejected; revoked roles cannot use old tokens after the proposed 60 s revocation propagation limit; switching workspaces does not display the previous tenant's cache. Screens A01–A10, T02–T04.</p>
+
+<h3 id="wf-02-location-and-map-registration-br-01">WF-02 — Location and map registration (BR-01)</h3>
+
+<p>Site admins create a country/region/site/building/floor/zone/road-segment/geofence graph. Not every site must have floors. Device binding checks that the device belongs to the same tenant. Floor plans have revisions, scale, exits, accessibility, and an approver. Each incident stores the plan revision used. Locations carry method, accuracy, and age; GPS does not automatically infer a floor. Without positioning, users can enter a location manually and send an SOS.</p>
+
+<p><strong>AC:</strong> plans without a reviewer cannot be published; zones with active incidents cannot be hard-deleted; routes without freshness information show “not verified” and are not presented as certainly safe. Screens S01–S05, C03, C06.</p>
+
+<h3 id="wf-03-multi-source-event-ingestion-br-0105">WF-03 — Multi-source event ingestion (BR-01,05)</h3>
+
+<p>Adapters check credentials, tenant binding, schema, clock skew, and payload limits, then durably store the event before issuing a receipt. A duplicate key (tenant,source,event_id) returns the previous receipt. Late events are retained for audit, but live rules evaluate TTL by hazard. Unknown sources/permissions/units/locations are quarantined. Inputs support HTTPS/CloudEvents, MQTT adapters, CAP, camera metadata, wearables, telematics, and manual entry.</p>
+
+<p><strong>AC:</strong> replaying the same ID 100 times creates one event; two tenants using the same event ID do not collide; sources spoofing a tenant are blocked; stale events do not initiate commands. Screens O03,O05,I01–I06.</p>
+
+<h3 id="wf-04-verification-and-correlation-br-0102">WF-04 — Verification and correlation (BR-01,02)</h3>
+
+<p>Versioned rules provide candidate incidents by time window, zone, hazard, and source. Operators review evidence and confidence, then create or link incidents; splitting preserves audit records and source links. Different hazards are not combined merely because they are nearby; cross-hazard relationships have a type (caused_by/nearby/possible_duplicate). Camera detection is labeled “possible fire”; fire panel policy may immediately initiate a response through a site-approved workflow without waiting for AI.</p>
+
+<p><strong>AC:</strong> merging does not lose SOS/tasks; splitting does not duplicate dispatch; rule changes do not rewrite history; dismissal requires a reason. Screens O03–O07,S11–S14.</p>
+
+<h3 id="wf-05-multi-category-sos-br-03">WF-05 — Multi-category SOS (BR-03)</h3>
+
+<p>Users select a category or Other/Unknown; enter/update location, notes, and the number of people. The emergency flow does not require a complete profile. The server returns an SOS ID and received_at after commit. The client displays pending when the request is only stored locally. Resending uses client_request_id, TTL, and reconciled state. Threat/discreet requests default to no sound and no group fan-out; ordinary assistance uses rule-based severity rather than treating every SOS as P1.</p>
+
+<p><strong>AC:</strong> network loss does not show “received”; resending does not create a second SOS; users who deny GPS can still enter location manually; changing category does not lose the ID. Screens C05–C10,C26–C27,X01–X02.</p>
+
+<h3 id="wf-06-fall-detection-and-check-in-br-03">WF-06 — Fall detection and check-in (BR-03)</h3>
+
+<p>An approved detector emits possible_fall; the app displays a proposed 30 s check-in with “I'm OK” and “Get help now”. Without a response, the server timer continues even if the app closes, creating an operator/caregiver request according to consent. An offline device produces unknown status, not a conclusion that the person fell. Check-in duration is configurable by service/group, with an accessible alternative; it is not automatically used as a diagnosis.</p>
+
+<p><strong>AC:</strong> escalation continues after the app is killed; a late “I'm OK” updates the record without silently withdrawing an ongoing task; false positives retain a review reason. Screens C24–C25,T07–T08.</p>
+
+<h3 id="wf-07-road-incident-br-03">WF-07 — Road incident (BR-03)</h3>
+
+<p>Reports/telematics provide position, heading if available, road segment, vehicle count, and injuries=unknown. Correlation distinguishes opposite traffic directions and bridge levels. Users can submit a minimal quick report and add details later. Dispatch targets configured units; without an agreement, the system does not automatically call a public emergency endpoint.</p>
+
+<p><strong>AC:</strong> missing injury data is accepted as unknown; one acceleration sample does not auto-confirm a collision; sensitive data goes only to the assigned team. Screens C26,O04,O08.</p>
+
+<h3 id="wf-08-disaster-and-cap-br-0106">WF-08 — Disaster and CAP (BR-01,06)</h3>
+
+<p>Connectors allowlist issuers and validate XML/schema, identifiers, sent, status, scope, info/area, and expiry. Deduplicate sender+identifier; Update/Cancel references the previous version and must preserve lineage. Official warnings and local responses are separate objects. Expired warnings do not continue live broadcast; cancellation does not delete previously sent versions. Polygons use CAP's coordinate order and are explicitly converted to GeoJSON; lat/lon must not be implicitly swapped.</p>
+
+<p><strong>AC:</strong> Test/Exercise does not enter the Actual flow; unauthorized issuers are quarantined; Update replaces the active version while retaining the previous one; users outside the polygon are not selected because of coordinate errors. Screens O28–O29,C14–C17.</p>
+
+<h3 id="wf-09-warning-and-audience-br-0206">WF-09 — Warning and audience (BR-02,06)</h3>
+
+<p>Authors select the incident, area/site/group, severity, languages, content, and expiry. Audience preview is a snapshot of eligible recipients and exclusion reasons; an independent approver signs the version. Changing content/audience after approval requires reapproval. Rapid break-glass issuance requires special permission and audit; not every P1 must wait for approval if the site playbook permits preapproved templates. Machine translation is draft-only; safety content must be reviewed.</p>
+
+<p><strong>AC:</strong> approval of v3 does not permit sending v4; an audience ID targeting the wrong tenant is blocked; scheduled warnings recheck expiry and permissions at issuance. Screens O13–O15,T06.</p>
+
+<h3 id="wf-10-delivery-and-escalation-br-0204">WF-10 — Delivery and escalation (BR-02,04)</h3>
+
+<p>Notifications create individual delivery attempts by recipient/channel/version; queued/submitted/provider_accepted/delivered/read/human_ack/failed/unknown remain distinct states. Provider callbacks are authenticated and replay-protected. An ACK deadline triggers durable escalation with an owner and maximum steps. Channel fallback does not automatically send private content by SMS; SMS templates are minimal and use authenticated links when needed. Push notifications cannot guarantee bypassing the operating system's silent mode.</p>
+
+<p><strong>AC:</strong> provider acceptance does not increase the human ACK count; duplicate callbacks do not duplicate escalation; provider failures use bounded retries and alternate providers, and 429 respects retry_after. Screens O16–O17,T05.</p>
+
+<h3 id="wf-11-dispatch-and-response-br-02">WF-11 — Dispatch and response (BR-02)</h3>
+
+<p>Dispatchers filter units by capability, availability, site authorization, and latest location. ETA is only a timestamped estimate. Offers have a deadline; units accept atomically using a version. If nobody accepts, escalate; do not automatically mark dispatch as completed. Responders transition through en_route/on_scene, record observations and handover, and complete tasks; task completion does not close the incident.</p>
+
+<p><strong>AC:</strong> two dispatchers cannot assign two owners to one task; offline acceptance must remain pending until server confirmation; reassignment retains the previous responder's notes as observations. Screens O08–O10,R01–R12.</p>
+
+<h3 id="wf-12-personal-safety-and-groups-br-03">WF-12 — Personal safety and groups (BR-03)</h3>
+
+<p>Safety reports store status, person, incident scope, observed_at, reporter, and location precision. Fan-out reaches all eligible subscribed groups at report time, plus verified contacts; recipients are deduplicated. Each group receives status; detailed location requires specific consent. Revoked memberships/consent are rechecked before delivery. Group chat includes membership, abuse reporting, and individual blocking for social interaction; blocking cannot disable mandatory site warnings under the published policy.</p>
+
+<p><strong>AC:</strong> one contact in 3 groups does not receive 3 identical SMS messages; location consent off does not leak coordinates; a safe report does not close a building incident; unknown is not counted as safe. Screens C11–C23,O11–O12.</p>
+
+<h3 id="wf-13-shelter-and-guidance-br-0304">WF-13 — Shelter and guidance (BR-03,04)</h3>
+
+<p>Operators maintain shelter status, estimated capacity, timestamp, accessibility, and valid_until. Offline packs store versioned, expiring plans/guidance/contacts and do not guarantee live routes. Voice uses the same approved text with a transcript and pause/replay; autoplay must not expose discreet mode. Without a verified route, display only the plan and approved guidance rather than automatically drawing an optimized fire-avoidance route.</p>
+
+<p><strong>AC:</strong> a shelter past valid_until becomes unknown; missing capacity data is not shown as 0; offline plans display their age. Screens C03–C04,C16–C18,O26–O27.</p>
+
+<h3 id="wf-14-devices-and-maintenance-br-0104">WF-14 — Devices and maintenance (BR-01,04)</h3>
+
+<p>Enrollment tokens are single-use; device certificates support rotation/revocation. Heartbeat thresholds depend on device class; stale/disconnected is distinct from the area's safety status. Maintenance suppression has a start/end, reason, approver, and replacement coverage; blind spots are always visible. When maintenance ends, monitoring automatically resumes and is logged.</p>
+
+<p><strong>AC:</strong> revoked certificates cannot ingest; suppression does not continue after maintenance ends; firmware upgrades do not automatically run fleet-wide during an active incident. Screens S06–S10.</p>
+
+<p>Physical maintenance additionally follows WF-31: ending a software suppression window does not prove that physical protection has been restored; required local checks and acknowledgment remain mandatory.</p>
+
+<h3 id="wf-15-physical-command-br-05">WF-15 — Physical command (BR-05)</h3>
+
+<p>Commands are limited to declared capabilities; parameter schema, zone, expiry, interlock, authorized approver, and local controller policy are all mandatory. The web interface cannot send arbitrary raw commands. Gateway receipt, device accepted, executing, and verified result are separate. An unknown timeout does not blindly retry a non-idempotent command. Cloud actuation does not replace certified local protection loops. Closed-head sprinklers typically activate thermally; the prototype does not assume software can open individual sprinkler heads.</p>
+
+<p><strong>AC:</strong> commands past TTL do not execute after reconnect; zone mismatches are rejected; acceptance without feedback remains unknown/awaiting confirmation; simulators have no live credentials. Screens O18–O19.</p>
+
+<p>WF-30 refines this command workflow for installed suppression and rescue equipment. Wet-pipe monitoring, releasing-controller requests, pump requests, and mobile equipment actions remain separate capabilities; use WF-28 binding and WF-32 acceptance before enabling any control.</p>
+
+<h3 id="wf-16-drone-br-05">WF-16 — Drone (BR-05)</h3>
+
+<p>Fleet adapters primarily provide telemetry/media and health. A mission draft includes purpose, incident, route/geofence, altitude reference, pilot, clearance, weather check, and lost-link policy. The local pilot decides deployment according to the integrated system's capabilities. Approval does not mean takeoff has occurred. AI detectors do not automatically issue TAKEOFF. Abort/return commands require capability support and flight-stack confirmation; the UI does not promise universal cancellation.</p>
+
+<p><strong>AC:</strong> no approval without pilot/clearance; stale telemetry disables position-dependent commands; link loss shows unknown while local policy continues; mission evidence has hash/provenance. Screens I11–I15.</p>
+
+<h3 id="wf-17-connector-lifecycle-br-05">WF-17 — Connector lifecycle (BR-05)</h3>
+
+<p>Install manifest → configure secret reference → map → sandbox test → approve → activate → monitor → rotate/deprecate. Connectors run with least privilege, outbound allowlists, quota/backpressure, and a kill switch. DLQ replay requires a reason, a valid schema, and retention of the original ID; command replay is blocked by default. Cross-tenant exchange requires an agreement and payload allowlist.</p>
+
+<p><strong>AC:</strong> adapter failures do not block direct SOS; oversized payloads return 413; incompatible major schemas are quarantined; secrets do not appear in logs/exports. Screens I01–I10.</p>
+
+<h3 id="wf-18-internationalization-and-data-br-06">WF-18 — Internationalization and data (BR-06)</h3>
+
+<p>Use UTC for storage, IANA timezones for display/schedules, BCP47 locales, Unicode, and E.164 phone numbers according to country. The UI includes RTL layout tests, pluralization, and pseudo-localization. Do not hardcode one worldwide emergency number; the emergency contact registry is verified by country/site. Residency covers databases, object storage, backups, logs, support, and exports; global routing does not carry raw SOS data.</p>
+
+<p><strong>AC:</strong> schedules crossing DST do not send twice, using a schedule occurrence ID; long locales do not obscure CTAs; changing region is a reviewed migration, not merely editing a dropdown. Screens A01,A10,T02,T06.</p>
+
+<h3 id="wf-19-retention-audit-and-privacy-br-0607">WF-19 — Retention, audit, and privacy (BR-06,07)</h3>
+
+<p>Data classes have retention policies, legal holds, and deletion jobs with reports. Export/deletion verifies the requester, scope, and exceptions; held evidence is not deleted. Audit is append-only with actor, action, object/version, reason, time, correlation, and before/after digests. Do not embed tokens, raw secrets, or complete medical notes in audit records.</p>
+
+<p><strong>AC:</strong> precise-location access is logged; deletion does not remove held records; exports exclude other tenants; break-glass access automatically revokes at TTL expiry. Screens C29–C30,T09–T11.</p>
+
+<h3 id="wf-20-closure-analytics-exercise-and-handover-br-07">WF-20 — Closure, analytics, exercise, and handover (BR-07)</h3>
+
+<p>Closure requires an open SOS/task check, disposition of people with unknown status, partner handover, a reason, and a supervisor. An “All clear” warning is a separate action. Drills require environment+mode isolation in the broker, credentials, and recipient directory; a banner alone is insufficient. Reports separate transport latency, operator latency, and response latency; samples with missing data explicitly state their denominator.</p>
+
+<p><strong>AC:</strong> safety check-ins do not close incidents; drills do not call live webhooks/actuators; shift handovers have incoming acknowledgment; reports are deidentified when the user lacks PII permission. Screens O20–O25,T16–T17.</p>
+
+<h3 id="wf-28-physical-onboarding-and-pointzone-mapping-br-1315">WF-28 — Physical onboarding and point/zone mapping (BR-13,15)</h3>
+
+<p>Bind the installed regional model, serial number, firmware, gateway, license, vendor permission, and compatibility dossier before activating an adapter. Import and independently review point addresses, semantic states, units/scaling, site/zone associations, and cause-and-effect revisions. Distinguish wet-pipe, pre-action/deluge, pump, and mobile rescue assets. Unknown capability defaults to monitor-only; onboarding cannot create control authority.</p>
+
+<p><strong>FR-PHY-01:</strong> retain the exact equipment/interface identity and approved evidence revision. <strong>FR-PHY-02:</strong> validate point and zone mapping against physical labels and reject cross-tenant, duplicate, or unresolved mappings. <strong>FR-PHY-03:</strong> version the cause-and-effect and read/control capability contracts; changes require impact review and reacceptance where affected.</p>
+
+<p><strong>AC:</strong> an unbound firmware or license change suspends dependent control; a wrong-zone mapping cannot be activated; wet-pipe heads are not offered as individually controllable outputs. Screens F02–F06,F20.</p>
+
+<h3 id="wf-29-physical-telemetry-and-supervision-br-0113">WF-29 — Physical telemetry and supervision (BR-01,13)</h3>
+
+<p>Ingest manufacturer-supported panel, pump, valve, release, waterflow, power, and link states with provenance and quality. Preserve controller alarm priority and local protection when cloud/edge is unavailable. Separate demand, motor running, release output, valve position, waterflow, and confirmed field observations. Missing or stale values remain unknown; do not turn a link fault into a safe indication.</p>
+
+<p><strong>FR-PHY-04:</strong> store source/receive time, source address, unit, quality, mapping revision, and raw evidence reference for each observation. <strong>FR-PHY-05:</strong> supervise freshness/link health using approved device/site thresholds and expose coverage gaps and compensating measures. <strong>FR-PHY-06:</strong> correlate without suppressing local protective actions; deduplicate transport replay while retaining state transitions and restoration evidence.</p>
+
+<p><strong>AC:</strong> stale pump-running data is visibly uncertain; pressure alone does not confirm discharge; loss of cloud leaves local automatic protection available; duplicate telemetry does not create duplicate incidents. Screens F01,F07–F08.</p>
+
+<h3 id="wf-30-authorized-actuation-feedback-and-unknown-reconciliation-br-14">WF-30 — Authorized actuation, feedback, and UNKNOWN reconciliation (BR-14)</h3>
+
+<p>Only a site-accepted, explicitly control-capable operation may create a physical request. Validate actor authority, incident/site/zone, approved parameter envelope, current physical readiness, local interlocks, command expiry, and the policy's independent approval requirements. Site/controller authority prevails. The system never assumes that BACnet/Modbus writes, a relay, or a network ACK authorizes or proves suppression. AI cannot originate autonomous release/start/motion actions.</p>
+
+<p><strong>FR-PHY-07:</strong> reject monitor-only or undocumented operations server-side and at the edge; preserve the approved request and command-policy version. <strong>FR-PHY-08:</strong> enforce TTL, unique request ID, duplicate-effect prevention, and bounded delivery; do not replay expired requests after reconnect or blindly retry non-idempotent actions. <strong>FR-PHY-09:</strong> distinguish transport receipt, device acceptance, execution, and physical feedback; evaluate success only against operation-specific approved evidence. <strong>FR-PHY-10:</strong> display UNKNOWN for missing/conflicting outcomes; assign reconciliation to a named operator and support local override and acknowledged manual handover without erasing history.</p>
+
+<p><strong>AC:</strong> ACK without required feedback cannot become succeeded; duplicate/expired requests produce no new effect; loss of feedback opens reconciliation; local override blocks conflicting remote control. Screens F09–F13; WF-15 remains applicable.</p>
+
+<h3 id="wf-31-impairment-test-and-restoration-br-1315">WF-31 — Impairment, test, and restoration (BR-13,15)</h3>
+
+<p>An authorized impairment identifies equipment, affected zones, time window, reason, owner, compensating protection, and the local test/lockout arrangement. Keep test and production credentials, routes, and outputs distinct; a UI banner is insufficient. Expiry prompts restoration verification and escalation rather than claiming protection has returned. Local safety ownership remains explicit during shift handover.</p>
+
+<p><strong>FR-PHY-11:</strong> require approved impairment and physical isolation/lockout evidence before relevant tests; block unauthorized production commands while preserving agreed local protection arrangements. <strong>FR-PHY-12:</strong> close an impairment only after required physical state checks, restoration evidence, and responsible-person acknowledgment; track overdue restoration and residual gaps.</p>
+
+<p><strong>AC:</strong> a simulated test cannot reach a live output; expiration without verification remains impaired/awaiting restoration; maintenance handover has an incoming owner. Screens F14,F18.</p>
+
+<h3 id="wf-32-fatsat-and-compatibility-evidence-br-15">WF-32 — FAT/SAT and compatibility evidence (BR-15)</h3>
+
+<p>Maintain a configuration-specific dossier of manufacturer documents, interface permissions, regional listings/limitations, point maps, electrical/hydraulic dependencies, approved cause-and-effect, FAT, SAT, commissioning, calibration, and operator training. Manufacturer research and simulator results are not field acceptance. No whole-system certification is inferred from a component listing.</p>
+
+<p><strong>FR-PHY-13:</strong> track document revision, provenance, reviewer, expiry where applicable, and acceptance scope per model/firmware/site/capability. <strong>FR-PHY-14:</strong> gate production capability activation on signed required tests and approvals; equipment, firmware, mapping, or policy changes trigger impact assessment and invalidate affected acceptance until revalidated.</p>
+
+<p><strong>AC:</strong> missing SAT blocks production control even after simulator PASS; an unrelated site's certificate cannot satisfy the gate; changed firmware leaves unaffected read capabilities available only if their contract remains valid. Screens F15–F17.</p>
+
+<h3 id="wf-33-rescue-robot-and-water-monitor-mission-br-16">WF-33 — Rescue robot and water-monitor mission (BR-16)</h3>
+
+<p>A mission binds the actual supported robot or water-monitor interface, purpose, incident, qualified operator, operating area, route/no-go zones, water/energy supply, telemetry freshness, and lost-link/local-emergency policy. Observe-only equipment remains observe-only. Approval is not movement or discharge. The local operator determines deployment and remains able to take over according to the vendor-supported design; no universal stop/return function is promised.</p>
+
+<p><strong>FR-PHY-15:</strong> require mission-specific authority, capability evidence, operating envelope, and readiness checks; separate movement, aiming, and water discharge permissions. <strong>FR-PHY-16:</strong> record telemetry and action feedback, enforce approved lost-link behavior locally, and provide acknowledged manual handover and outcome evidence; never infer rescue completion from command acceptance.</p>
+
+<p><strong>AC:</strong> missing vendor-supported control or operator blocks dispatch of physical actions; stale position blocks dependent aiming/motion; link loss shows UNKNOWN and the approved local policy; a handover retains responsibility and evidence. Screen F19, with F11–F13 for execution and reconciliation.</p>
+
+<h2 id="4-nfrs-and-acceptance-environment">4. NFRs and acceptance environment</h2>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Proposed requirement</th>
+  <th>Verification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>NFR-01</td>
+  <td>Production regional core 99.95% monthly</td>
+  <td>Synthetic + server metrics; include dependency failures affecting users</td>
+</tr>
+<tr>
+  <td>NFR-02</td>
+  <td>Ingest p95 ≤ 2 s; fan-out enqueue p95 ≤ 5 s</td>
+  <td>Load of 100 event/s steady, 1,000 event/s for 60 s; 10,000 recipients/incident; metadata payload ≤ 64 KB</td>
+</tr>
+<tr>
+  <td>NFR-03</td>
+  <td>Priority fairness</td>
+  <td>P1 reserved queues; tenant noisy-neighbor test; bulk telemetry must not block SOS</td>
+</tr>
+<tr>
+  <td>NFR-04</td>
+  <td>Multi-AZ target RPO 0 for committed records, RTO ≤ 15 minutes</td>
+  <td>Kill primary, verify durable commit and failover; commit only after testing</td>
+</tr>
+<tr>
+  <td>NFR-05</td>
+  <td>Regional disaster RPO ≤ 5 minutes, RTO ≤ 60 minutes</td>
+  <td>Restore/cold-region drill within residency policy; immutable backup restore</td>
+</tr>
+<tr>
+  <td>NFR-06</td>
+  <td>WCAG 2.2 AA target</td>
+  <td>Keyboard, screen reader, zoom, contrast, and error announcements; no certification claim yet</td>
+</tr>
+<tr>
+  <td>NFR-07</td>
+  <td>Web interactive p95 ≤ 3 s on the reference network</td>
+  <td>4G simulation, representative low-end device; map loads separate from core content</td>
+</tr>
+<tr>
+  <td>NFR-08</td>
+  <td>Offline durable outbox and stale visibility</td>
+  <td>Airplane mode, app kill, reconnect, clock skew, and reassignment conflict</td>
+</tr>
+<tr>
+  <td>NFR-09</td>
+  <td>Security isolation</td>
+  <td>Tenant/object permission tests, upload validation, credential revocation, audit coverage</td>
+</tr>
+<tr>
+  <td>NFR-10</td>
+  <td>Backward compatibility</td>
+  <td>API/event contract tests; additive minor changes; parallel major versions with sunset</td>
+</tr>
+</tbody>
+</table>
+
+<p>Reference loads are engineering targets, not measured benchmarks. Media uploads use object storage separately from the critical event pipeline. NFRs apply to the product to be built; the static prototype does not demonstrate that these requirements are met.</p>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Physical requirement</th>
+  <th>Verification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>NFR-11</td>
+  <td>Local automatic protection independent of cloud/edge availability</td>
+  <td>Witness cloud/link/adapter failure without inhibiting the approved local protection sequence</td>
+</tr>
+<tr>
+  <td>NFR-12</td>
+  <td>Configuration-specific telemetry/feedback timing and quality</td>
+  <td>Signed freshness, delivery, and feedback deadlines per device/site; measure separately; UNKNOWN on deadline violation</td>
+</tr>
+<tr>
+  <td>NFR-13</td>
+  <td>OT and command isolation</td>
+  <td>Prove monitor-only enforcement, denied writes, least privilege, maintenance access control, and no test-to-live path</td>
+</tr>
+<tr>
+  <td>NFR-14</td>
+  <td>Configuration-specific physical assurance</td>
+  <td>Complete provenance and signed required FAT/SAT; changes invalidate affected capability acceptance</td>
+</tr>
+</tbody>
+</table>
+
+<p>These physical NFRs do not substitute software latency targets for physical response or hydraulic performance. Device/site timing and pass criteria must be approved before tests, and results must identify firmware, hardware, and operating conditions.</p>
+
+<h2 id="5-overall-acceptance-gate">5. Overall acceptance gate</h2>
+
+<h3 id="v2-interaction-gate-mapped-to-existing-contracts">V2 interaction gate mapped to existing contracts</h3>
+
+<p>These criteria extend acceptance of the corresponding FRs without changing IDs or API enums.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Contract / screens</th>
+  <th>Condition and observable result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>WF-05, FR-C06/C07/C08, FR-X01</td>
+  <td>Without connectivity, save a locally pending request; do not display server or team receipt. Reconcile using the original identifier when connectivity returns. Reported location remains editable before submission.</td>
+</tr>
+<tr>
+  <td>WF-11, FR-R02/R03/R04, FR-O08/O09</td>
+  <td>Selecting a team does not mean acceptance or arrival. Show the owner and source-backed state; an unsupported ETA is unconfirmed, not an illustrative time presented as a promise.</td>
+</tr>
+<tr>
+  <td>WF-22/24, FR-C35/C36/C37/C38/C39</td>
+  <td>Unknown heading removes turn arrows; unverified floor removes turn-by-turn guidance. Withdrawal cancels old route graphics and queued speech before a replacement can open. Only an approved replacement with the correct revision may guide.</td>
+</tr>
+<tr>
+  <td>WF-12, FR-C27</td>
+  <td>Entering or reloading discreet mode starts no sound, vibration or speech; quick exit and clearly labeled assistance remain available.</td>
+</tr>
+<tr>
+  <td>WF-21/30, FR-P04/P09/F11/F12</td>
+  <td>Receipt, actual playback, human ACK and physical effect have separate sources and timestamps. Missing independent feedback remains UNKNOWN; no automatic retry of a non-idempotent operation.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Cross-cutting gate: VI/EN/JA diagrams have equivalent text, icons have labels and color is never the sole meaning. Keyboard and focus remain usable; 320 CSS px reflow and text enlargement retain the action. Measure 48–56 px touch targets for emergency/field flows and 44 px for ordinary controls. Test assistive technology and real devices; screenshots or CSS inspection alone do not establish conformity.</p>
+
+<p>Prototype v2 uses scene navigation and sample records. Navigation to C08 or a confirmation screen is not backend-receipt evidence. These are implementation gates and must not be marked PASS from prototype navigation alone.</p>
+
+<p>Run complete Fire, Disaster, Fall, Road, discreet SOS, and generic assistance flows; test duplicates, late data, out-of-order data, expiry, network partitions, unauthorized tenants, quota saturation, provider failures, and restore. For physical/drone integrations, simulator PASS does not replace on-site acceptance. The detailed matrix is in Acceptance-Matrix.csv. Screen-level acceptance is in Screen-Specifications.md and linked to each mockup ID.</p>
+
+<p>The physical gate additionally executes PHY-01–PHY-16 and AC-F01–AC-F20, checks every FR-PHY-01–FR-PHY-16 requirement, and requires the approved physical test arrangement and authorized site team. Acceptance-Matrix.csv contains 65 cross-system and 233 screen cases (298 total). Designed cases are not execution evidence. Supplier support, physical permits, local operator readiness, and signed FAT/SAT are dependencies for enabling production control; missing evidence leaves the relevant capability unavailable or monitor-only.</p>
+
+<h2 id="mandatory-appendices-within-the-same-baseline">Mandatory appendices within the same baseline</h2>
+
+<p><a href="Voice-Rescue-Design.html">Rescue speakers and voice navigation</a> adds WF-21–22. <a href="Positioning-AI-Care-Design.html">Positioning, optimization, AI, and care profiles</a> adds WF-23–27. These two documents are part of the full design, not optional features for a later phase. <a href="Screen-Specifications.html">Screen specifications</a> provides FRs for each screen ID.</p>
+</main></body></html>

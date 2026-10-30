@@ -1,0 +1,192 @@
+{
+  "revision": "2.0",
+  "pdf_count": 26,
+  "documents_per_language": 12,
+  "master_chapters_per_language": 11,
+  "missing_local_links": [],
+  "pdfs": [
+    {
+      "path": "BRD.pdf",
+      "pages": 8,
+      "extracted_characters": 20962,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "FRD.pdf",
+      "pages": 10,
+      "extracted_characters": 29297,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "Basic-Design.pdf",
+      "pages": 9,
+      "extracted_characters": 26452,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "Detail-Design.pdf",
+      "pages": 13,
+      "extracted_characters": 38532,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "Voice-Rescue-Design.pdf",
+      "pages": 5,
+      "extracted_characters": 15833,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "Positioning-AI-Care-Design.pdf",
+      "pages": 6,
+      "extracted_characters": 17439,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "UIUX-Design.pdf",
+      "pages": 7,
+      "extracted_characters": 16102,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "Screen-Specifications.pdf",
+      "pages": 270,
+      "extracted_characters": 750424,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "Physical-Device-Catalog.pdf",
+      "pages": 5,
+      "extracted_characters": 13400,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "Rescue-IoT-Device-Catalog.pdf",
+      "pages": 5,
+      "extracted_characters": 11620,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "External-Integration-Standards-Deployment.pdf",
+      "pages": 8,
+      "extracted_characters": 22840,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "UX-Redesign-Audit.pdf",
+      "pages": 96,
+      "extracted_characters": 260269,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "SmartAlarm_Master_Design_VI.pdf",
+      "pages": 151,
+      "extracted_characters": 472109,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\BRD.pdf",
+      "pages": 8,
+      "extracted_characters": 23333,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\FRD.pdf",
+      "pages": 11,
+      "extracted_characters": 33380,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\Basic-Design.pdf",
+      "pages": 9,
+      "extracted_characters": 28894,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\Detail-Design.pdf",
+      "pages": 13,
+      "extracted_characters": 41312,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\Voice-Rescue-Design.pdf",
+      "pages": 5,
+      "extracted_characters": 17318,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\Positioning-AI-Care-Design.pdf",
+      "pages": 6,
+      "extracted_characters": 18953,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\UIUX-Design.pdf",
+      "pages": 7,
+      "extracted_characters": 18194,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\Screen-Specifications.pdf",
+      "pages": 282,
+      "extracted_characters": 821269,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\Physical-Device-Catalog.pdf",
+      "pages": 5,
+      "extracted_characters": 14589,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\Rescue-IoT-Device-Catalog.pdf",
+      "pages": 5,
+      "extracted_characters": 13362,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\External-Integration-Standards-Deployment.pdf",
+      "pages": 8,
+      "extracted_characters": 24108,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\UX-Redesign-Audit.pdf",
+      "pages": 103,
+      "extracted_characters": 283372,
+      "empty_pages": [],
+      "broken_images": []
+    },
+    {
+      "path": "English\\SmartAlarm_Master_Design_EN.pdf",
+      "pages": 155,
+      "extracted_characters": 515998,
+      "empty_pages": [],
+      "broken_images": []
+    }
+  ],
+  "proposal_pdfs_unchanged": true
+}

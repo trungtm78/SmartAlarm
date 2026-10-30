@@ -1,0 +1,357 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:smartalarm:design:bms-connector-profile:0.1.0",
+  "title": "SmartAlarm BMS engineering profile — design-only, not a deployment manifest",
+  "type": "object",
+  "required": [
+    "profile_id",
+    "profile_version",
+    "status",
+    "adapter",
+    "product",
+    "protocol",
+    "secret_refs",
+    "capabilities",
+    "enabled_capabilities",
+    "site_acceptance",
+    "write_enabled",
+    "write_policy",
+    "mapping_revision",
+    "source_identity",
+    "limits",
+    "mode_isolation"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "const": "design_example"
+    },
+    "adapter": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "implementation_status",
+        "image_digest"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "implementation_status": {
+          "const": "not_implemented"
+        },
+        "image_digest": {
+          "type": "null"
+        }
+      },
+      "additionalProperties": false
+    },
+    "product": {
+      "type": "object",
+      "required": [
+        "vendor",
+        "name",
+        "version_constraint",
+        "license_evidence_ref"
+      ],
+      "properties": {
+        "vendor": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version_constraint": {
+          "type": "string"
+        },
+        "license_evidence_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "protocol": {
+      "type": "object",
+      "required": [
+        "kind",
+        "transport_profile",
+        "auth_profile"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "bacnet",
+            "opcua",
+            "modbus",
+            "haystack",
+            "vendor_native"
+          ]
+        },
+        "transport_profile": {
+          "type": "string"
+        },
+        "auth_profile": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "secret_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^secret-ref:"
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "support",
+          "retry_class",
+          "evidence_refs"
+        ],
+        "properties": {
+          "name": {
+            "enum": [
+              "point.catalog",
+              "point.read",
+              "point.subscribe",
+              "point.history",
+              "alarm.subscribe",
+              "alarm.query",
+              "alarm.ack",
+              "alarm.confirm",
+              "alarm.reset",
+              "alarm.shelve",
+              "alarm.inject",
+              "point.command",
+              "point.force",
+              "point.release"
+            ]
+          },
+          "support": {
+            "enum": [
+              "unverified",
+              "unsupported",
+              "documented"
+            ]
+          },
+          "retry_class": {
+            "enum": [
+              "bounded_read",
+              "adapter_defined",
+              "manual_reconcile"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "enabled_capabilities": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "site_acceptance": {
+      "type": "null"
+    },
+    "write_enabled": {
+      "const": false
+    },
+    "write_policy": {
+      "type": "object",
+      "required": [
+        "command_aggregate_only",
+        "allowlist",
+        "approval_required",
+        "fencing_required",
+        "local_override_wins",
+        "no_blind_retry",
+        "feedback_contract_ref"
+      ],
+      "properties": {
+        "command_aggregate_only": {
+          "const": true
+        },
+        "allowlist": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "approval_required": {
+          "const": true
+        },
+        "fencing_required": {
+          "const": true
+        },
+        "local_override_wins": {
+          "const": true
+        },
+        "no_blind_retry": {
+          "const": true
+        },
+        "feedback_contract_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "mapping_revision": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "source_identity": {
+      "type": "object",
+      "required": [
+        "epoch_support",
+        "sequence_support",
+        "alarm_occurrence_contract_ref",
+        "physical_lineage_mapping_ref"
+      ],
+      "properties": {
+        "epoch_support": {
+          "enum": [
+            "unknown",
+            "native",
+            "synthetic"
+          ]
+        },
+        "sequence_support": {
+          "enum": [
+            "unknown",
+            "native",
+            "synthetic"
+          ]
+        },
+        "alarm_occurrence_contract_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "physical_lineage_mapping_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "required": [
+        "max_requests_per_second",
+        "max_points",
+        "history_backfill_per_second",
+        "site_validation_required"
+      ],
+      "properties": {
+        "max_requests_per_second": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "max_points": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "history_backfill_per_second": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "site_validation_required": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "mode_isolation": {
+      "const": true
+    },
+    "research_context": {
+      "type": "object",
+      "required": [
+        "retrieved_at",
+        "candidate_interfaces",
+        "site_requirements",
+        "automatic_protocol_failover",
+        "tested_product_versions",
+        "references"
+      ],
+      "properties": {
+        "retrieved_at": {
+          "type": "string"
+        },
+        "candidate_interfaces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "site_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "automatic_protocol_failover": {
+          "const": false
+        },
+        "tested_product_versions": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

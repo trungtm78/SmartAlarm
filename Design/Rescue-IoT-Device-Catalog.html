@@ -1,0 +1,143 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rescue-IoT-Device-Catalog · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="index.html">SmartAlarm / Design Library</a><a href="English/Rescue-IoT-Device-Catalog.html">English</a><button onclick="window.print()">In / Lưu PDF</button></header><main><div class="document-meta">BASELINE 2.0 · 23/10/2026 · THIẾT KẾ ĐỂ REVIEW</div><h1 id="smartalarm-danh-muc-thiet-bi-cuu-ho-chua-chay-va-iot">SmartAlarm — Danh mục thiết bị cứu hộ, chữa cháy và IoT</h1><figure class="physical-figure"><img src="assets/proposal-v3/physical.png" alt="Physical firefighting and rescue integration"><figcaption>Hình khái niệm — tích hợp đề xuất, không phải hệ thống đã lắp đặt.</figcaption></figure>
+
+<p>Thời điểm nghiên cứu: <strong>2026-10-23</strong>. Sáu ứng viên triển khai được đối chiếu với tài liệu chính thức của nhà sản xuất. Có tính năng công bố không đồng nghĩa đã tích hợp SmartAlarm; mọi adapter vẫn là đề xuất cho đến khi kiểm thử bàn và nghiệm thu hiện trường. Danh mục bổ sung can thiệp vật lý bên cạnh cảm biến, cảnh báo, định vị và điều phối. Chưa mua sắm hoặc đưa thiết bị vào vận hành.</p>
+
+<h2 id="1-bang-chung-va-quyet-đinh-trien-khai">1. Bằng chứng và quyết định triển khai</h2>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Ứng viên chính xác</th>
+  <th>Vai trò vật lý</th>
+  <th>Bằng chứng tích hợp</th>
+  <th>Hướng thí điểm đề xuất</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>DEV-01</td>
+  <td>AXIS C1310-E Mk II Network Horn Speaker</td>
+  <td>Hướng dẫn âm thanh cố định tại site</td>
+  <td>Công bố VAPIX và SIP</td>
+  <td>Adapter bàn thử, sau đó đo âm học tại site</td>
+</tr>
+<tr>
+  <td>DEV-02</td>
+  <td>Bosch PRAESENSA với system controller PRA-SCL</td>
+  <td>PA / cảnh báo bằng giọng nói có giám sát</td>
+  <td>Open Interface được công bố</td>
+  <td>Đơn vị tích hợp đủ năng lực duyệt trước điều khiển khẩn cấp</td>
+</tr>
+<tr>
+  <td>DEV-03</td>
+  <td>DJI Matrice 4T + DJI AS1 Speaker</td>
+  <td>Hướng dẫn trên không, hỗ trợ tìm kiếm</td>
+  <td>Xác minh thao tác operator; chưa xác minh API lệnh AS1 cụ thể</td>
+  <td>Ban đầu vận hành qua phi công</td>
+</tr>
+<tr>
+  <td>DEV-04</td>
+  <td>DJI Matrice 400 + Zenmuse V1</td>
+  <td>Loa trên không có hướng tích hợp SDK</td>
+  <td>PSDK điều khiển V1 bằng widget; hãng công bố MSDK</td>
+  <td>Chứng minh SDK rồi diễn tập bay</td>
+</tr>
+<tr>
+  <td>DEV-05</td>
+  <td>Shark Robotics Colossus, cấu hình vòi phun nước/bọt và vận chuyển nạn nhân</td>
+  <td>Chữa cháy thực, trinh sát và vận chuyển nạn nhân</td>
+  <td>Điều khiển từ xa của hãng; API tích hợp công khai chưa rõ</td>
+  <td>Giao nhiệm vụ cho operator được huấn luyện, dùng console hãng</td>
+</tr>
+<tr>
+  <td>DEV-06</td>
+  <td>FLIR A700 với Smart Sensor configuration</td>
+  <td>Quan sát nhiệt, bằng chứng cảnh báo sớm</td>
+  <td>Công bố MQTT, Modbus TCP và REST</td>
+  <td>Thí điểm gateway cảm biến chỉ đọc</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="2-dev-01-loa-mang-co-đinh">2. DEV-01 — Loa mạng cố định</h2>
+
+<p><strong>Đã xác minh:</strong> Datasheet C1310-E Mk II liệt kê VAPIX, SIP, SRTP/SIPS, kết quả speaker test và sự kiện đang phát audio clip. Đây là khả năng thiết bị, không chứng minh người đã nghe. <a href="https://www.axis.com/dam/public/b5/cd/f9/datasheet-axis-c1310-e-mk-ii-network-horn-speaker-en-US-470491.pdf">Datasheet chính thức</a>.</p>
+
+<p><strong>Tích hợp đề xuất:</strong> Adapter edge ánh xạ intent nội dung/vùng đã duyệt vào phiên bản VAPIX cố định; live audio qua SIP media gateway đã kiểm thử. Quản lý ánh xạ loa–vùng; tách biên nhận lệnh, bằng chứng phát và xác nhận của con người. Không suy ra coverage chỉ từ trạng thái online.</p>
+
+<p><strong>RFI / giới hạn:</strong> Yêu cầu firmware/API cụ thể, phương thức upload/play/stop, xác thực, dung lượng clip, ý nghĩa feedback, giấy phép quản lý và vòng đời hỗ trợ. Xác nhận riêng license audio-manager hoặc tích hợp bên thứ ba; không mặc định miễn phí. Không chỉ định loa mạng này thay thế hệ thống báo cháy bằng giọng nói bắt buộc khi chưa có chứng chỉ phù hợp và thiết kế được duyệt.</p>
+
+<p><strong>SAT-01:</strong> Phát bản ghi đã duyệt đúng vùng; thử từ chối sai vùng, lỗi amplifier/âm học, lỗi chứng chỉ, mất điện, mất WAN và reconnect với lệnh hết hạn. Đo độ nghe hiểu trong tiếng ồn/số người thực tế, gồm bản ghi Việt/Anh/Nhật.</p>
+
+<h2 id="3-dev-02-pa-khan-cap-co-giam-sat">3. DEV-02 — PA khẩn cấp có giám sát</h2>
+
+<p><strong>Đã xác minh:</strong> PRA-SCL có Open Interface và bộ nhớ thông điệp được giám sát. <a href="https://commerce.keenfinity.tech/nlexp/en/System-controller-large/p/F.01U.325.042/">Sản phẩm PRA-SCL</a>. Hãng công bố tài liệu native protocol và C#/.NET. <a href="https://software-download.keenfinity-group.com/publicaddress/praesensa/manuals/PRAESENSA%20open%20interface%20programming%20intructions.pdf">Tài liệu lập trình</a>. Tài liệu cấu hình có TLS và tùy chọn chặn điều khiển khẩn cấp qua interface. <a href="https://resources.keenfinity.tech/public/documents/PRAESENSA_Configurat_Configuration_Manual_enUS_18014473303379595.pdf">Tài liệu cấu hình</a>.</p>
+
+<p><strong>Ranh giới chứng nhận:</strong> Hãng mô tả khả năng EN 54-16 của PRAESENSA; hiệu lực phụ thuộc hệ thống lắp đặt. <a href="https://www.keenfinity-group.com/it/it/soluzioni/soluzioni-per-la-comunicazione-pubblica/sistemi-di-comunicazione-al-pubblico-e-allarme-vocale/sistema-di-comunicazione-al-pubblico-basato-su-ip-praesensa/">Trang hệ thống chính thức</a>. Tài liệu cấu hình trước đây cảnh báo việc dùng Open Interface có thể làm mất tuân thủ tiêu chuẩn sơ tán. <a href="https://resources.keenfinity.tech/public/documents/PRAESENSA_2.20_Configuration_Manual_enUS_100857072779.pdf">Giới hạn tích hợp</a>.</p>
+
+<p><strong>Tích hợp đề xuất:</strong> Command policy SmartAlarm tại region → adapter cục bộ được duyệt → controller; bắt đầu từ health/events và thông báo thông thường được phép. Đường báo động cục bộ được chứng nhận giữ ưu tiên. Kích hoạt, xác nhận hoặc reset khẩn cấp phải có thiết kế được đơn vị tích hợp cho phép bằng văn bản; ACK API không phải hoàn tất âm thanh.</p>
+
+<p><strong>RFI / giới hạn:</strong> Lấy bộ firmware/manual/chứng chỉ hiện hành đúng cấu hình, lệnh được phép, arbitration vùng/ưu tiên, giám sát lỗi, redundancy, điện dự phòng và interface fire-panel được duyệt. Xác nhận controller, amplifier, PSU, call station, loa và license subsystem/phần mềm tùy chọn trong BOM đầy đủ. Một controller không tạo thành hệ thống được chứng nhận hoàn chỉnh. Link Bosch cũ có thể chuyển hướng; dùng portal hiện hành và khóa revision tài liệu khi mua sắm.</p>
+
+<p><strong>SAT-02:</strong> Thử ưu tiên báo cháy cục bộ khi SmartAlarm đang phát, mất adapter/mạng/controller, lỗi mạch có giám sát, hết hạn nội dung, failover và từ chối reset khẩn cấp trái phép. Đơn vị tích hợp và cơ quan quản lý site nghiệm thu toàn bộ cấu hình lắp đặt.</p>
+
+<h2 id="4-dev-03-drone-gon-nhe-va-as1">4. DEV-03 — Drone gọn nhẹ và AS1</h2>
+
+<p><strong>Đã xác minh:</strong> DJI công bố AS1 tương thích Matrice 4 Series, có ghi âm, nhập media, TTS và phát trực tiếp. FAQ hiện ghi TTS AS1 hỗ trợ Quan thoại/Anh và nêu SDK của máy bay. Điều này chưa chứng minh từng thao tác AS1 có API SmartAlarm sử dụng được. <a href="https://www.dji.com/support/product/matrice-4-series">Hỗ trợ Matrice 4 chính thức</a>.</p>
+
+<p><strong>Tích hợp đề xuất:</strong> SmartAlarm chuẩn bị nhiệm vụ và audio đã duyệt; phi công thao tác bằng workflow hãng hỗ trợ, sau đó ghi nhận kết quả. Start/stop/upload/status loa và đưa live audio qua SDK là <strong>CHƯA RÕ, cần tài liệu và trình diễn đúng model/firmware</strong>. Không lấy lệnh loa PSDK hoặc Dock chung chỉ vì tên giống thao tác cần có.</p>
+
+<p><strong>RFI / giới hạn:</strong> Yêu cầu capability matrix SDK riêng AS1, điều kiện truy cập/license, firmware, giới hạn stream/codec/file, hủy phát và feedback. Với tiếng Việt/Nhật, kiểm thử bản ghi duyệt được nhập; không công bố có TTS tích hợp. Xác nhận thời gian bay theo payload, điều kiện vận hành hợp pháp, bảo trì và đào tạo.</p>
+
+<p><strong>SAT-03:</strong> Trình diễn đúng ngôn ngữ, độ hiểu dưới tiếng rotor, operator abort, mất liên kết, pin cạn, nhiệm vụ trùng và nội dung cũ trong queue. Cảnh báo không tự gây cất cánh. Chứng minh fallback thủ công khi tích hợp không hoạt động.</p>
+
+<h2 id="5-dev-04-matrice-400-va-zenmuse-v1">5. DEV-04 — Matrice 400 và Zenmuse V1</h2>
+
+<p><strong>Đã xác minh:</strong> DJI công bố V1 tương thích Matrice 400, phát trực tiếp qua Pilot 2 và hướng tích hợp MSDK. <a href="https://enterprise.dji.com/zenmuse-v1">Sản phẩm V1</a>. Tài liệu PSDK nêu rõ điều khiển V1 trên Matrice 400 bằng widget values. <a href="https://developer.dji.com/doc/payload-sdk-tutorial/en/function-overview/basic-function/custom-widget.html">Interface PSDK</a>. Trang hỗ trợ có tiếng Nhật trong TTS Matrice 400, không liệt kê tiếng Việt. <a href="https://www.dji.com/support/product/zenmuse-v1">Hỗ trợ V1</a>.</p>
+
+<p><strong>Tích hợp đề xuất:</strong> Adapter mobile hoặc onboard khóa phiên bản chuyển lệnh voice đã duyệt thành thao tác SDK được tài liệu cho phép. Tách phê duyệt chuyến bay/nhiệm vụ khỏi phê duyệt phát loa. Có SDK không đồng nghĩa đầy đủ tính năng Pilot 2/FlightHub 2 và không chứng minh live streaming cloud-to-speaker không giới hạn.</p>
+
+<p><strong>RFI / giới hạn:</strong> Yêu cầu phiên bản SDK, key/activation, host tương thích, widget definitions, schema lệnh/trạng thái, media transport, permission và ý nghĩa callback. Xác nhận subscription FlightHub 2 riêng nếu chọn hướng đó. Kiểm thử bản ghi tiếng Việt được duyệt; xác nhận phát âm Nhật và TTS theo firmware. Yêu cầu BOM airframe/payload/mount/controller/battery đầy đủ.</p>
+
+<p><strong>SAT-04:</strong> Trên tổ hợp mua thực tế, thử upload/play/stop/repeat/volume và trạng thái ở những thao tác được API chính thức hỗ trợ. Thử operator đồng thời, hủy, mất link và phi công tiếp quản. Callback thành công không hiển thị “mọi người đã nghe”. Diễn tập ngoài trời có phép trước vận hành.</p>
+
+<h2 id="6-dev-05-robot-chua-chay-thuc-va-cuu-nan">6. DEV-05 — Robot chữa cháy thực và cứu nạn</h2>
+
+<p><strong>Đã xác minh:</strong> Colossus điều khiển từ xa, có cấu hình nước/bọt, thermal/video và cáng. Trang hiện hành công bố lưu lượng tối đa 3.000 L/phút; chữa cháy thực cần nguồn nước và thiết bị phù hợp. Trang chưa xác lập API điều khiển công khai cho bên thứ ba. <a href="https://www.shark-robotics.com/colossus-firefighting-robot/">Colossus chính thức</a>.</p>
+
+<p><strong>Tích hợp đề xuất:</strong> SmartAlarm giao nhiệm vụ robot cho đội được huấn luyện, theo dõi tiếp nhận/bằng chứng; chỉ nhập video/telemetry qua interface hãng hỗ trợ sau xác minh. Điều khiển di chuyển, ngắm vòi, phun nước và vận chuyển nạn nhân do operator đủ năng lực kiểm soát. <strong>API, ROS, MQTT, ONVIF, E-stop từ xa và tự hành đều CHƯA RÕ nếu nhà cung cấp chưa công bố/cung cấp tài liệu áp dụng.</strong> Không suy ra giao thức chỉ vì thiết bị có camera hoặc radio.</p>
+
+<p><strong>RFI / giới hạn:</strong> Yêu cầu thế hệ robot, SKU module, console đi kèm, API/SDK và điều kiện thương mại, xuất video, telemetry, hành vi mất link, emergency stop độc lập, interlock, giới hạn nhiệt, áp lực/lưu lượng nước, foam compatibility, vận chuyển và bảo trì. Xác nhận tải/cáng và quy trình di chuyển bệnh nhân. Đối chiếu sự khác nhau về số module/độ dốc giữa tài liệu hãng trước hợp đồng; danh mục không cam kết vận hành dựa trên các số chưa thống nhất.</p>
+
+<p><strong>SAT-05:</strong> Cùng cơ quan chữa cháy/cứu nạn thử bề rộng lối vào, tải sàn, dốc/vật cản, kéo vòi, mất nước, phản lực vòi, mất link, quãng dừng, giới hạn nhiệt và pin dự phòng. Diễn tập đưa/vận chuyển nạn nhân bằng hình nhân và quy trình đội được duyệt. SmartAlarm trùng lệnh hoặc mất dịch vụ không được kích hoạt di chuyển/phun.</p>
+
+<h2 id="7-dev-06-cam-bien-nhiet-iot">7. DEV-06 — Cảm biến nhiệt IoT</h2>
+
+<p><strong>Đã xác minh:</strong> Bảng Axxx công bố MQTT, Modbus TCP và REST cho cảnh báo/đọc dữ liệu họ A700 Smart Sensor. Dòng A500 khác, không thay thế chỉ dựa vào tên họ sản phẩm. <a href="https://www.flir.com/en-eu/products/axxx-series-smart-sensor/">Bảng sản phẩm/cấu hình</a>. FLIR liệt kê Advanced Smart Sensor và Wi-Fi/camera hình ảnh là tùy chọn riêng. <a href="https://flir.custhelp.com/app/answers/detail/a_id/6493/~/flir---a50%252F-a70-%2526-a400%252F-a500%252F-a700--series---smart-sensor">Hỗ trợ cấu hình</a>.</p>
+
+<p><strong>Tích hợp đề xuất:</strong> Bắt đầu chỉ đọc: edge gateway đọc nhiệt độ ROI/alarm, phát observation gắn nguồn với device time, receipt time, calibration/configuration version và quality. Vượt ngưỡng là bằng chứng xử lý theo alarm policy, không tự xác nhận đám cháy hoặc cho phép kích hoạt chữa cháy.</p>
+
+<p><strong>RFI / giới hạn:</strong> Yêu cầu SKU A700, Smart Sensor edition, lens, firmware cùng MQTT payload schema, Modbus register map và REST manual phù hợp. Xác nhận authentication/TLS cho từng interface; không giả định Modbus mã hóa. Xác nhận giới hạn ROI/analysis, calibration, vỏ bảo vệ môi trường và license tùy chọn. Số liệu nguồn không phải bảo đảm độ chính xác tại site.</p>
+
+<p><strong>SAT-06:</strong> Dùng mục tiêu tham chiếu kiểm soát; thử ảnh hưởng emissivity/phản xạ, che khuất, bẩn optics, threshold/hysteresis, lệch thời gian, mất mạng, observation trùng/replay và sensor fault. Dữ liệu suy giảm không được âm thầm biến thành kết luận không nguy hiểm.</p>
+
+<h2 id="8-cong-mua-sam-va-phat-hanh-chung">8. Cổng mua sắm và phát hành chung</h2>
+
+<p>Với từng cấu hình mua, ghi model/serial, firmware, license, interface revision, chủ credential, network zone, lệnh được phép, role duyệt, local override, expiry, ý nghĩa receipt, chủ bảo trì và ngày hết hỗ trợ. Đính kèm bằng chứng hãng và kết quả bench/SAT. Không ứng viên nào được gọi “đã tích hợp production” trước khi hồ sơ và negative tests đạt.</p>
+
+<p>Can thiệp vật lý đi theo <strong>nhiệm vụ incident đã duyệt → operator/cơ quan đủ năng lực → interlock thiết bị → bằng chứng thực thi → đối soát</strong>. SmartAlarm điều phối; hệ thống báo cháy được chứng nhận, phi công và operator cứu nạn giữ trách nhiệm điều khiển cục bộ tương ứng. API success, pixel nóng, ước lượng vị trí hoặc gợi ý AI không được độc lập xác nhận một người an toàn hay hành động cứu hộ thành công.</p>
+
+<h2 id="ux2-physical-giam-sat-truc-quan-va-phan-hoi-vat-ly">UX2-PHYSICAL · Giám sát trực quan và phản hồi vật lý</h2>
+
+<p>Console v2 dùng sơ đồ đường ống, van, bơm, vùng phủ và trạng thái thiết bị có nhãn. Yêu cầu lệnh, gateway tiếp nhận và hiệu ứng vật lý quan sát được là ba trạng thái riêng. Phản hồi chưa rõ hoặc đã cũ phải có ký hiệu, thời điểm; không hiển thị thành công màu xanh. Thao tác xem xét trong prototype không vận hành thiết bị. Quyền ưu tiên tại chỗ, liên động và điều kiện nghiệm thu thiết bị trong tài liệu này tiếp tục áp dụng.</p>
+
+<p>Kiểm tra F08–F20 khi mất liên lạc, trạng thái tại chỗ xung đột hoặc phản hồi trễ. Truy cập sơ đồ không được bỏ qua quyền điều khiển. Loa báo phát không chứng minh mọi người đã nghe. Drone/robot nhận nhiệm vụ không chứng minh đã đến hoặc cứu được người.</p>
+
+<p>Tham chiếu <a href="UIUX-Design.html">thiết kế UI/UX</a>, <a href="Screen-Specifications.html">đặc tả màn hình</a> và <a href="UX-Redesign-Audit.html">rà soát thiết kế</a>.</p>
+</main></body></html>

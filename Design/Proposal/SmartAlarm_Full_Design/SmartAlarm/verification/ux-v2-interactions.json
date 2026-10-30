@@ -1,0 +1,193 @@
+{
+  "as_of": "2026-10-24T05:09:32.667337",
+  "method": "Independent Chromium interaction tests using Python Playwright; local illustrative prototype only. Speech is intercepted without playback.",
+  "checks": [
+    {
+      "name": "SOS type selection keyboard state",
+      "pass": true,
+      "evidence": "Medical option pressed=true"
+    },
+    {
+      "name": "SOS location and people persist to review",
+      "pass": true,
+      "evidence": "SmartAlarm\nIllustrative\nReview before sending\n\nTo site command\n\nEstimated location\nSupport team\nStay connected\nAssistance rendezvous • example\nBlue circle shows uncertainty, not an exact position\nFall / medical help\nSouth wing / Level 2 / Room 209\nReported location\n3\npeople\nCannot use stairs; blue jacket\n\nLocation and notes are shared with the assigned response team.\n\nSend sample SOS\nEdit location\nDetails and sources\nSafety\nSOS\nCircles\nProfile"
+    },
+    {
+      "name": "SOS selected type named on review",
+      "pass": true,
+      "evidence": "SmartAlarm\nIllustrative\nReview before sending\n\nTo site command\n\nEstimated location\nSupport team\nStay connected\nAssistance rendezvous • example\nBlue circle shows uncertainty, not an exact position\nFall / medical help\nSouth wing / Level 2 / Room 209\nReported location\n3\npeople\nCannot use stairs; blue jacket\n\nLocation and notes are shared with the assigned response team.\n\nSend sample SOS\nEdit location\nDetails and sources\nSafety\nSOS\nCircles\nProfile"
+    },
+    {
+      "name": "SOS note visible before send",
+      "pass": true,
+      "evidence": "SmartAlarm\nIllustrative\nReview before sending\n\nTo site command\n\nEstimated location\nSupport team\nStay connected\nAssistance rendezvous • example\nBlue circle shows uncertainty, not an exact position\nFall / medical help\nSouth wing / Level 2 / Room 209\nReported location\n3\npeople\nCannot use stairs; blue jacket\n\nLocation and notes are shared with the assigned response team.\n\nSend sample SOS\nEdit location\nDetails and sources\nSafety\nSOS\nCircles\nProfile"
+    },
+    {
+      "name": "SOS fields retained on edit return",
+      "pass": true,
+      "evidence": {
+        "location": "South wing / Level 2 / Room 209",
+        "note": "Cannot use stairs; blue jacket",
+        "people": "3"
+      }
+    },
+    {
+      "name": "SOS draft survives confirm-pin redraw",
+      "pass": true,
+      "evidence": {
+        "location": "East stairs / landing 4",
+        "note": "New observation before confirming pin"
+      }
+    },
+    {
+      "name": "SOS type selection retained on return",
+      "pass": true,
+      "evidence": {
+        "selected": "Fall / medical help"
+      }
+    },
+    {
+      "name": "Dialog accessible label",
+      "pass": true,
+      "evidence": {
+        "title": "Decline assignment",
+        "ariaModal": "true"
+      }
+    },
+    {
+      "name": "Dialog forward focus containment",
+      "pass": true,
+      "evidence": "<button class=\"secondary\" data-demo=\"closeDialog\">Close</button>"
+    },
+    {
+      "name": "Dialog reverse focus containment",
+      "pass": true,
+      "evidence": "<button class=\"secondary\" data-demo=\"closeDialog\">Close</button>"
+    },
+    {
+      "name": "Dialog Escape returns focus",
+      "pass": true,
+      "evidence": "Escape closes and trigger regained focus"
+    },
+    {
+      "name": "Command layers update state and content",
+      "pass": true,
+      "evidence": [
+        {
+          "layer": "hazard",
+          "pressed": "true",
+          "rail": "Next priorities\n A05 · P1\n\nEast corridor smoke · review routes\n\nReview restrictions\n 3 unconfirmed\n\nNo signal does not mean safe\n\nOpen proactive rescue",
+          "svg": "8723e28567255de3a31ff4ef9405e1c7f8128026eb29f940537008279baf7d7f"
+        },
+        {
+          "layer": "people",
+          "pressed": "true",
+          "rail": "People needing contact\n Alex · 505\n\nMobility support · no SOS\n\nReview evidence\n Morgan · ?\n\nStale position · verify\n\nReview evidence",
+          "svg": "2ffadfa3c1fa544a1aadb77940d0196b9bc555ab27b2a85d80f7a77bb4981e0d"
+        },
+        {
+          "layer": "equipment",
+          "pressed": "true",
+          "rail": "Protection systems\nPump · valve · waterflow\n\nReview local-controller feedback\n\nOpen water-system view\nPA · A05\n\n7 playing / 1 unknown\n\nInspect playback",
+          "svg": "bee1da44ed710fdcb0cebfb318bcc42ed3df12a245bdb42bfd764858916759fd"
+        }
+      ]
+    },
+    {
+      "name": "C36 heading uncertainty and safe speech",
+      "pass": true,
+      "evidence": {
+        "caption": "SmartAlarm\nIllustrative\nGuidance v18\nA / 05\nUse the landmark, not a guess\nWest stair\nF03\nRefuge B\nRecognize on site • illustration\nExit sign • staircase • fire cabinet F03\nHeading unreliable · use the sign as a landmark\n“West stair” sign\nAvoid the illustrated smoke corridor\nHear sample guidance\n\nText alternative available · plays only on request.\n\nRepeat the landmark cue\nI cannot identify my location\nDetails and sources\nSafety\nSOS\nCircles\nProfile",
+        "speech": {
+          "text": "Design sample. No verified direction is available. Do not guess a heading. Confirm a landmark or request assistance.",
+          "lang": "en-US"
+        }
+      }
+    },
+    {
+      "name": "C37 route withdrawn and speech excludes old route",
+      "pass": true,
+      "evidence": {
+        "visibleRoute": false,
+        "speech": {
+          "text": "Design sample. No verified direction is available. Do not guess a heading. Confirm a landmark or request assistance.",
+          "lang": "en-US"
+        },
+        "heading": "Previous route withdrawn"
+      }
+    },
+    {
+      "name": "C38 route withdrawn and speech excludes old route",
+      "pass": true,
+      "evidence": {
+        "visibleRoute": false,
+        "speech": {
+          "text": "Design sample. No verified direction is available. Do not guess a heading. Confirm a landmark or request assistance.",
+          "lang": "en-US"
+        },
+        "heading": "No verified route"
+      }
+    },
+    {
+      "name": "C35 stale state suppresses route",
+      "pass": true,
+      "evidence": {
+        "visibleRoute": false,
+        "heading": "Evidence is stale"
+      }
+    },
+    {
+      "name": "C36 stale state suppresses route",
+      "pass": true,
+      "evidence": {
+        "visibleRoute": false,
+        "heading": "Evidence is stale"
+      }
+    },
+    {
+      "name": "C37 stale state suppresses route",
+      "pass": true,
+      "evidence": {
+        "visibleRoute": false,
+        "heading": "Evidence is stale"
+      }
+    },
+    {
+      "name": "C38 stale state suppresses route",
+      "pass": true,
+      "evidence": {
+        "visibleRoute": false,
+        "heading": "Evidence is stale"
+      }
+    },
+    {
+      "name": "C27 no autoplay or voice control",
+      "pass": true,
+      "evidence": {
+        "before": 3,
+        "after": 3,
+        "voiceControls": 0
+      }
+    },
+    {
+      "name": "C06 controls have label text",
+      "pass": true,
+      "evidence": []
+    }
+  ],
+  "issues": [],
+  "page_errors": [],
+  "limitations": [
+    "No live backend, delivery, dispatch or physical control tested.",
+    "No human usability study or screen-reader user test.",
+    "Keyboard and accessible-name checks are targeted, not complete WCAG audit."
+  ],
+  "source_sha256": "0887234e5f0400d4e9be23fa9b5d05f72356b821c6c1a8abea730115f9372d4d",
+  "summary": {
+    "checks": 21,
+    "passed": 21,
+    "failed": 0,
+    "page_errors": 0,
+    "status": "PASS"
+  }
+}

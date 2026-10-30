@@ -1,0 +1,259 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physical-Device-Catalog · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="../index.html">SmartAlarm / Design Library</a><a href="../Physical-Device-Catalog.html">Tiếng Việt</a><button onclick="window.print()">Print / Save PDF</button></header><main><div class="document-meta">BASELINE 2.0 · 23 OCT 2026 · DESIGN FOR REVIEW</div><h1 id="smartalarm-physical-device-compatibility-catalog">SmartAlarm — Physical device compatibility catalog</h1><figure class="physical-figure"><img src="../assets/proposal-v3/physical.png" alt="Physical firefighting and rescue integration"><figcaption>Concept illustration — proposed integration, not an installed system.</figcaption></figure>
+
+<p>Research date: <strong>2026-10-23</strong>. Status: <strong>document-verified candidates; no hardware integration, procurement, or field acceptance completed</strong>. This catalog supplements WF-03, WF-14, WF-15, and WF-17. The Vietnamese and English editions contain the same scope and conclusions.</p>
+
+<h2 id="1-deployment-decision">1. Deployment decision</h2>
+
+<p>Use manufacturer-supported interfaces to observe existing fire panels, pump controllers, and releasing panels. Keep their local automatic protection functions operational independently of SmartAlarm. A protocol connection, a writable BACnet property, a pump-running signal, and confirmed water discharge are four different capabilities. None alone demonstrates that SmartAlarm may safely initiate suppression or that water reaches the protected hazard.</p>
+
+<p>The six candidates below are alternatives or complementary components, not a single certified assembly. Availability, exact firmware, regional approval, optional parts, and permitted actions require project-specific vendor confirmation. A manufacturer's listing of its own component does not certify the complete SmartAlarm installation.</p>
+
+<h2 id="2-six-concrete-candidates">2. Six concrete candidates</h2>
+
+<table>
+<thead>
+<tr>
+  <th>ID / product binding</th>
+  <th>Documented interface and feedback</th>
+  <th>Command boundary and unresolved items</th>
+  <th>Proposed SmartAlarm use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>PHY-01 — Siemens Cerberus PRO FC922 / FC924; FCA2034-A1 S2 or FCA2035-A1 S3</td>
+  <td>FC922/FC924 are identified in the <a href="https://sid.siemens.com/v/u/A6V10349710">panel datasheet A6V10349710</a>. The US <a href="https://support.industry.siemens.com/cs/attachments/109789153/A6V10349679.pdf">accessory datasheet A6V10349679</a> describes S2 BACnet as monitoring-only; S3 retains monitoring-only BACnet while adding separate remote-viewer control.</td>
+  <td>Do not equate remote-viewer control with BACnet actuation. Obtain regional SKU, firmware, license scope, PICS/object export, and supported event states. No suppression-release capability is established here.</td>
+  <td>Read event/state data through a site edge adapter; preserve panel/point identifiers and communication quality.</td>
+</tr>
+<tr>
+  <td>PHY-02 — Honeywell NOTIFIER BACNET-GW-3 with NFS-320 / NFS2-640 / NFS2-3030 and appropriate NFN interface</td>
+  <td><a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/literature-and-specs/datasheets/notifier-us/hon-ba-fire-dn-6877.pdf?download=false">DN-6877:C, 2014-08-04</a>: BACnet/IP event objects; up to 14 NFN nodes and 15,000 objects; NCM/HS-NCM connection and browser configuration.</td>
+  <td>The <a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/regulatory-documents/fire-listings/notifier-us/ba-fire-LS10014-051NF-E.pdf">listing C6, 2019-02-21</a> restricts use to supplementary functions and excludes triggering mass-notification announcements. Confirm current supply/support, firmware, chassis, power, and exact panel compatibility.</td>
+  <td>Supplementary monitoring; never treat this gateway as a replacement for the primary alarm or as a proven suppression command path.</td>
+</tr>
+<tr>
+  <td>PHY-03 — Simplex BACpac 4100-6111 with 4100ES / 4100U</td>
+  <td><a href="https://docs.johnsoncontrols.com/simplex/api/khub/documents/c9ua0rLXB39jxpiKI54Hsw/content">S4100-0051 Rev.6, 10/2020, pp.1–4</a>: 15,000-point variant; separate 4100-6038 RS-232 module; BACnet IP/MS/TP or Modbus TCP/RTU. Supplementary status interface.</td>
+  <td>Its PICS includes WriteProperty support; this does not establish an authorized panel-release command. Obtain the actual point mapping and permitted write semantics. Confirm software and separately ordered hardware.</td>
+  <td>Read-only status adapter for a specifically bound panel configuration.</td>
+</tr>
+<tr>
+  <td>PHY-04 — Tornatech GPX electric fire-pump controller, V2 communication profile</td>
+  <td>The <a href="https://www.tornatech.com/wp-content/uploads/2018/08/GPx-V2.pdf">GPx-V2 Modbus bulletin</a> maps motor-run, voltage/current, pressure, and fault feedback. It also names remote/manual and automatic-start entries.</td>
+  <td>That short map does not fully specify write functions, enable conditions, persistence, or retry behavior. Do not automatically apply its V2 map to V2.1/current firmware. Exact controller suffix, options, and current register contract remain required.</td>
+  <td>Pump health and demand monitoring; command capability stays disabled until vendor-supported, project-approved validation.</td>
+</tr>
+<tr>
+  <td>PHY-05 — Tornatech GPD diesel fire-pump controller, V2 communication profile</td>
+  <td>The separate <a href="https://www.tornatech.com/wp-content/uploads/2018/08/GPD-V2.pdf">GPD-V2 Modbus bulletin</a> maps engine-run, batteries, pressure, and diesel faults, plus named start entries.</td>
+  <td>GPX and GPD maps are not interchangeable. Confirm firmware, engine interface, installed sensors, writable registers, and automatic/manual mode behavior. Missing sensors must remain unknown.</td>
+  <td>Diesel readiness and pump-state monitoring with a dedicated adapter profile.</td>
+</tr>
+<tr>
+  <td>PHY-06 — Potter PFC-4410G3, stock 3006735</td>
+  <td><a href="https://www.pottersignal.com/product/datasheet/5401600_PFC-4410G3.pdf">5401600 Rev.B, 4/23</a>: pre-action/deluge releasing panel; alarm, trouble, supervisory, and waterflow/discharge-confirmation relays; Ethernet programming; proprietary RS-485 P-Link.</td>
+  <td>Ethernet/P-Link does not prove a public release API. Confirm output ratings, chosen program, compatible solenoid, feedback wiring, and optional relay modules. Do not assume releasing output equals waterflow confirmation.</td>
+  <td>Read approved relay indications through a supervised interface; local releasing panel owns suppression sequencing.</td>
+</tr>
+</tbody>
+</table>
+
+<p>No additional interface license is established for PHY-02–06 by this review; this is not a claim that all configurations or engineering tools are free or included. Obtain a complete bill of materials and license statement.</p>
+
+<h2 id="3-version-and-lifecycle-findings-that-change-implementation">3. Version and lifecycle findings that change implementation</h2>
+
+<p><strong>Siemens regional distinction.</strong> The <a href="https://sid.siemens.com/api/khub/documents/IFS6rQE0Z_N43rKnuiSpCg/content">2018 Siemens FC72x catalog</a> describes FCA2034-A1 with basic and FCA2035-A1 with extended third-party BACnet commands. This differs from the US accessory wording above. Therefore the adapter key must include regional panel family and firmware, not just “Cerberus PRO” or the license label. The exact commands available at a particular site remain unverified.</p>
+
+<p><strong>NOTIFIER network constraints.</strong> <a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/manuals-and-guides/installation-guides/notifier-us/ba-fire-LS10014-000NF-E.pdf">Manual LS10014-000NF-E:D2, 2019-04-30, p.9</a> specifies a static IP and no NAT support. Proposed topology: keep the BACnet client in the permitted site network and export normalized events outward; do not assume a cloud VPN/NAT arrangement is supported.</p>
+
+<p><strong>Real pump start interfaces exist.</strong> Tornatech's current <a href="https://www.tornatech.com/pdf/Manuals/en/GPX-EN.pdf">GPX manual V2026.09 r0, p.16</a> documents remote manual-start contact closure and remote automatic/deluge-start contact opening. These are physical controller inputs, not evidence of a cloud command API. Its <a href="https://www.tornatech.com/product/gpx-series-electric-fire-pump-controllers-3/">GPX product page</a> also identifies remote alarm contacts. Obtain the job-specific wiring diagram, contact ratings, supervision, and fail-state behavior before designing an I/O interface.</p>
+
+<p>The <a href="https://www.tornatech.com/pdf/Manuals/en/GPD-EN.pdf">GPD manual V2026.09 r0, pp.13–15</a> separately documents contact-based remote starts. Automatic stopping is not enabled by default and requires authority-having-jurisdiction authorization; commissioning requires an authorized provider. SmartAlarm must not introduce an unvalidated remote-stop function.</p>
+
+<p><strong>Select the current releasing panel deliberately.</strong> Potter's <a href="https://www.pottersignal.com/special-hazard/releasing-panels">official releasing-panel catalog</a> marks PFC-4410RC obsolete. The G3 is the candidate for new procurement, subject to vendor confirmation. Its <a href="https://www.pottersignal.com/sprinkler/4410-conventional-releasing-panel">product page</a> explicitly identifies email monitoring as a non-UL-listed feature; it is not the safety event transport. Use the <a href="https://www.pottersignal.com/product/manual/5403751_PFC-4410G3.pdf">G3 manual 5403751 Rev.G, 11/25</a> and the manufacturer's <a href="https://www.pottersignal.com/product/manual/5403615_Compatible_Releasing_Device_List.pdf">compatible releasing-device list</a> to request confirmation of the exact panel/solenoid/valve assembly. No valve pairing is approved by this catalog.</p>
+
+<h2 id="4-proposed-integration-contract-smartalarm-design-not-manufacturer-claims">4. Proposed integration contract — SmartAlarm design, not manufacturer claims</h2>
+
+<p>For each installation, bind <code>manufacturer + regional_model + controller_serial + firmware + gateway_model + gateway_firmware + license + point_map_revision</code>. Store every observed point with source address, semantic type, engineering unit, source timestamp where available, receive timestamp, quality, and communication status. A point-map revision must be reviewable and rollback-capable.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Proposed semantic</th>
+  <th>Required evidence</th>
+  <th>Must not be inferred</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>fire_alarm_active</code></td>
+  <td>Valid panel point/state mapping</td>
+  <td>Camera confidence alone is not a panel alarm</td>
+</tr>
+<tr>
+  <td><code>pump_start_demand</code></td>
+  <td>Documented demand contact/register</td>
+  <td>Motor actually running</td>
+</tr>
+<tr>
+  <td><code>pump_running</code></td>
+  <td>Valid controller run feedback</td>
+  <td>Adequate pressure, flow, or extinguishment</td>
+</tr>
+<tr>
+  <td><code>system_pressure</code></td>
+  <td>Installed transducer, unit/scaling, calibration</td>
+  <td>Flow at a specific protected zone</td>
+</tr>
+<tr>
+  <td><code>release_output_active</code></td>
+  <td>Documented releasing circuit/output feedback</td>
+  <td>Valve movement or water discharge</td>
+</tr>
+<tr>
+  <td><code>waterflow_confirmed</code></td>
+  <td>Commissioned waterflow/pressure feedback and zone binding</td>
+  <td>Fire extinguished or every nozzle operating</td>
+</tr>
+<tr>
+  <td><code>communication_lost</code></td>
+  <td>Link supervision and timeout</td>
+  <td>Normal, safe, pump stopped, or failed actuation</td>
+</tr>
+</tbody>
+</table>
+
+<p>The default adapter capability is <code>observe</code>. A potential <code>request_start</code> or other command requires a distinct signed capability record describing authority, exact operation, conditions, local interlocks, TTL, duplicate handling, feedback, and recovery. An uncertain response stays <code>unknown</code>; reconnection must not replay expired physical requests. Do not add reset/silence/disable/stop actions merely because a protocol supports writing.</p>
+
+<h2 id="5-vendor-rfi-before-procurement">5. Vendor RFI before procurement</h2>
+
+<table>
+<thead>
+<tr>
+  <th>RFI</th>
+  <th>Required written answer/evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RFI-01 — Identity and lifecycle</td>
+  <td>Regional SKU, orderable status, end-of-support date, firmware matrix, substitutions, and spare-part availability</td>
+</tr>
+<tr>
+  <td>RFI-02 — Complete package</td>
+  <td>Gateway/modules, licenses, engineering tools, power/backup, enclosure, isolation, protection, and authorized commissioning scope</td>
+</tr>
+<tr>
+  <td>RFI-03 — Read contract</td>
+  <td>Current PICS/register map, supported event/state types, polling/subscription limits, address conventions, scaling, sequence/time behavior, and communication-loss semantics</td>
+</tr>
+<tr>
+  <td>RFI-04 — Command contract</td>
+  <td>Explicit allowed/prohibited operations; write function/property; enabling configuration; physical input semantics; local priority; TTL/replay behavior; confirmation and rollback limits</td>
+</tr>
+<tr>
+  <td>RFI-05 — Physical assembly</td>
+  <td>Approved valve/solenoid/controller combinations, electrical loads, hydraulic design responsibility, pressure/flow sensor placement, cause-and-effect matrix, and supervision</td>
+</tr>
+<tr>
+  <td>RFI-06 — Regional acceptance</td>
+  <td>Applicable adopted codes and editions, component listings and limitations, system designer approval, AHJ/site acceptance requirements; no blanket international-compliance assertion</td>
+</tr>
+<tr>
+  <td>RFI-07 — Cybersecurity/support</td>
+  <td>Network segmentation, credentials, supported updates, vulnerability process, maintenance access, logging, outage behavior, and recovery procedures</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="6-commissioning-evidence-and-release-gate">6. Commissioning evidence and release gate</h2>
+
+<p>The following are proposed SmartAlarm acceptance requirements, not a replacement for manufacturer or local mandatory tests.</p>
+
+<ol>
+<li>Record serial numbers, firmware, license proof, approved drawings, point map, and baseline controller configuration. Obtain approval of the complete cause-and-effect matrix.</li>
+<li>In a controlled test arrangement, verify each mapped alarm, supervisory, fault, pump demand/run, pressure, releasing-output, and waterflow indication against the physical system. Record expected versus observed states and timestamps.</li>
+<li>Test broken links, adapter restart, stale data, duplicate events, power/backup changes, and reconnect. Verify that local automatic protection continues and no stale event creates an unintended command.</li>
+<li>If any command is authorized, test its approved preconditions, denial paths, local override, feedback loss, and recovery with the qualified site team. Do not perform live discharge merely to validate software connectivity.</li>
+<li>Obtain signed factory/site acceptance records, calibration records, operator training, maintenance ownership, and an approved impairment/restoration procedure. Mark the adapter <code>field_accepted</code> only for that exact configuration.</li>
+</ol>
+
+<p>Procurement recommendation: first bind to the installed panel/controller family, then buy the supported interface and required options. For a greenfield water-suppression installation, have the fire-protection designer specify the physical hydraulic and releasing system before selecting the SmartAlarm adapter. No purchase or vendor contact has been made.</p>
+
+<h2 id="7-evidence-register-and-access-limits">7. Evidence register and access limits</h2>
+
+<p>All sources below were reviewed on <strong>2026-10-23</strong>. Document dates are publisher revision dates, not retrieval dates. Online presence does not establish current stock or support. Only manufacturer sources support product claims; no reseller claim is used.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Evidence</th>
+  <th>Publisher document / date</th>
+  <th>Access and scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>E01</td>
+  <td><a href="https://sid.siemens.com/v/u/A6V10349710">Siemens A6V10349710</a>; <a href="https://support.industry.siemens.com/cs/attachments/109789153/A6V10349679.pdf">A6V10349679</a></td>
+  <td>Official indexed title/accessory passages; direct PDF retrieval was blocked. Revision must be obtained with the quotation.</td>
+</tr>
+<tr>
+  <td>E02</td>
+  <td><a href="https://sid.siemens.com/api/khub/documents/IFS6rQE0Z_N43rKnuiSpCg/content">Siemens FC72x catalog</a>, ©2018</td>
+  <td>Official indexed license passage; full download exceeded browser size limit. Regional distinction only; not a current command contract.</td>
+</tr>
+<tr>
+  <td>E03</td>
+  <td><a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/literature-and-specs/datasheets/notifier-us/hon-ba-fire-dn-6877.pdf?download=false">NOTIFIER DN-6877:C</a>, 2014-08-04</td>
+  <td>Official indexed datasheet passages.</td>
+</tr>
+<tr>
+  <td>E04</td>
+  <td><a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/regulatory-documents/fire-listings/notifier-us/ba-fire-LS10014-051NF-E.pdf">NOTIFIER listing C6</a>, 2019-02-21; <a href="https://prod-edam.honeywell.com/content/dam/honeywell-edam/hbt/en-us/documents/manuals-and-guides/installation-guides/notifier-us/ba-fire-LS10014-000NF-E.pdf">manual D2</a>, 2019-04-30</td>
+  <td>Official indexed limitation/configuration passages; direct retrieval unavailable. Request controlled copies and current revisions.</td>
+</tr>
+<tr>
+  <td>E05</td>
+  <td><a href="https://docs.johnsoncontrols.com/simplex/api/khub/documents/c9ua0rLXB39jxpiKI54Hsw/content">Simplex S4100-0051 Rev.6</a>, 10/2020</td>
+  <td>Official six-page PDF read; selection and PICS tables examined.</td>
+</tr>
+<tr>
+  <td>E06</td>
+  <td><a href="https://www.tornatech.com/wp-content/uploads/2018/08/GPx-V2.pdf">Tornatech GPx-V2</a>; <a href="https://www.tornatech.com/wp-content/uploads/2018/08/GPD-V2.pdf">GPD-V2</a></td>
+  <td>Official two-page maps read; V2 identity verified, no printed revision date established. URL upload path is not a revision guarantee.</td>
+</tr>
+<tr>
+  <td>E07</td>
+  <td><a href="https://www.tornatech.com/pdf/Manuals/en/GPX-EN.pdf">Tornatech GPX</a>; <a href="https://www.tornatech.com/pdf/Manuals/en/GPD-EN.pdf">GPD</a>, both V2026.09 r0</td>
+  <td>Official manuals read, particularly starting/stopping and commissioning; current manuals do not by themselves validate the older V2 register maps.</td>
+</tr>
+<tr>
+  <td>E08</td>
+  <td><a href="https://www.pottersignal.com/product/datasheet/5401600_PFC-4410G3.pdf">Potter 5401600 Rev.B</a>, 4/23; <a href="https://www.pottersignal.com/product/manual/5403751_PFC-4410G3.pdf">5403751 Rev.G</a>, 11/25</td>
+  <td>Official datasheet and manual retrieved; interfaces and revision verified.</td>
+</tr>
+<tr>
+  <td>E09</td>
+  <td><a href="https://www.pottersignal.com/sprinkler/4410-conventional-releasing-panel">Potter G3 product page</a>; <a href="https://www.pottersignal.com/special-hazard/releasing-panels">releasing-panel catalog</a>; <a href="https://www.pottersignal.com/product/manual/5403615_Compatible_Releasing_Device_List.pdf">device compatibility list</a></td>
+  <td>Live manufacturer pages reviewed; compatibility-list link retrieved but subsequent fetch timed out, so no specific valve/solenoid pairing is asserted.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Open evidence gaps remain procurement gates, not proof of incompatibility. This research demonstrates feasible integration paths and specific restrictions; it does not report completed interoperability or certify a deployment.</p>
+
+<h2 id="ux2-physical-visual-supervision-and-physical-feedback">UX2-PHYSICAL · Visual supervision and physical feedback</h2>
+
+<p>The v2 console uses a pipe/valve/pump mimic, zone coverage and explicit device state. A requested command, gateway acknowledgement and observed physical effect are separate states. Unknown or stale feedback must use a labeled pattern and timestamp, never a green success state. Review-only actions in the prototype do not operate equipment. Local fire protection authority, interlocks and commissioning requirements in this document remain binding.</p>
+
+<p>Verify F08–F20 with communication loss, conflicting local state and delayed feedback. Operator access to the schematic must not bypass command authorization. PA playback feedback is not proof of audibility to every occupant. Drone/robot task acceptance is not proof of arrival or rescue.</p>
+
+<p>See <a href="UIUX-Design.html">UI/UX design</a>, <a href="Screen-Specifications.html">screen specifications</a> and <a href="UX-Redesign-Audit.html">redesign audit</a>.</p>
+</main></body></html>

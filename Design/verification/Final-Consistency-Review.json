@@ -1,0 +1,103 @@
+{
+  "scope": "Read-only integrated review of current Markdown documents, CSV acceptance/catalog/inventory, root API/Event/Connector contracts and prototype source/data; root and English. Proposal preview ignored per instruction.",
+  "findings": [
+    {
+      "id": "CONS-01",
+      "priority": "P2",
+      "title": "FRD impairment and rescue-mission lifecycles do not match typed event states",
+      "files": [
+        "outputs/SmartAlarm/FRD.md:26",
+        "outputs/SmartAlarm/English/FRD.md:26",
+        "outputs/SmartAlarm/API-Contract.json#/components/schemas/PhysicalImpairmentChanged",
+        "outputs/SmartAlarm/API-Contract.json#/components/schemas/RescueEquipmentMissionUpdated",
+        "outputs/SmartAlarm/Event-Schemas.json#//PhysicalImpairmentChanged",
+        "outputs/SmartAlarm/Event-Schemas.json#//RescueEquipmentMissionUpdated"
+      ],
+      "evidence": {
+        "FRD_impairment": [
+          "requested",
+          "approved",
+          "active",
+          "restoration_pending",
+          "verified_closed"
+        ],
+        "contract_impairment": [
+          "PLANNED",
+          "ACTIVE",
+          "RESTORATION_PENDING",
+          "RESTORED",
+          "CANCELLED"
+        ],
+        "FRD_mission": [
+          "draft",
+          "review",
+          "approved",
+          "locally_accepted",
+          "executing",
+          "completed",
+          "aborted",
+          "unknown"
+        ],
+        "contract_mission": [
+          "PROPOSED",
+          "ASSIGNED",
+          "ACCEPTED",
+          "IN_PROGRESS",
+          "COMPLETED_VERIFIED",
+          "CANCELLED",
+          "UNKNOWN",
+          "FAILED"
+        ]
+      },
+      "impact": "FRD literal states fail typed event validation; undocumented collapsing also loses required approval stages.",
+      "recommendation": "Align lifecycle definitions or provide explicit business-to-wire mapping with separately represented approval stages and their evidence.",
+      "status": "resolved",
+      "resolution": "API and Event schemas now use exact lowercase FRD impairment and mission lifecycles; dependent evidence guards and positive/negative fixtures updated.",
+      "verified_states": {
+        "PhysicalImpairmentChanged": [
+          "requested",
+          "approved",
+          "active",
+          "restoration_pending",
+          "verified_closed"
+        ],
+        "RescueEquipmentMissionUpdated": [
+          "draft",
+          "review",
+          "approved",
+          "locally_accepted",
+          "executing",
+          "completed",
+          "aborted",
+          "unknown"
+        ]
+      },
+      "verification": "61 design-only checks passed; legacy uppercase aliases rejected; canonical completed/verified_closed require evidence; API/Event schemas equal after reference normalization."
+    }
+  ],
+  "checks_passed": {
+    "screen_count": 233,
+    "workflow_identifiers": 33,
+    "acceptance_count": 298,
+    "acceptance_cross_system": 65,
+    "acceptance_screen_cases": 233,
+    "prototype_screen_count": 233,
+    "csv_id_uniqueness_and_language_parity": true,
+    "csv_workflow_language_parity": true,
+    "nine_core_document_physical_workflow_requirement_id_parity": true,
+    "local_automatic_control_independence_consistent": true,
+    "monitor_only_not_promoted_to_actuator_consistent": true,
+    "no_LLM_actuation_and_unknown_reconciliation_consistent": true,
+    "physical_point_example_validated_in_previous_45_case_contract_QA": true
+  },
+  "limits": [
+    "Initial review was read-only; subsequent specifically authorized remediation changed JSON contracts and QA only, not Markdown/PDF/prototype.",
+    "No backend authorization enforcement, device connection, physical actuation, FAT/SAT or certificate verification performed.",
+    "Prototype source/data reviewed; no fresh browser or accessibility audit.",
+    "No new broad standards/vendor research.",
+    "No pixel-level PDF or proposal-preview comparison; root packaging/build may be in progress.",
+    "Schema validation cannot prove actual approval, evidence authenticity, local interlock behavior or independent physical completion."
+  ],
+  "status": "resolved",
+  "open_material_findings": 0
+}

@@ -1,0 +1,15 @@
+{
+  "revision": "3.0",
+  "proposals": {
+    "vi": {
+      "slides": 188,
+      "appendix_rows": 590,
+      "native_text_overflows": []
+    },
+    "en": {
+      "slides": 188,
+      "appendix_rows": 590,
+      "native_text_overflows": []
+    }
+  }
+}

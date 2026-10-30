@@ -1,0 +1,46 @@
+﻿id,title,url,retrieved,notes
+S01,Haystack Ops,https://project-haystack.org/doc/docHaystack/Ops,2026-10-24,connector-platform
+S02,Brick Relationships,https://docs.brickschema.org/brick/relationships.html,2026-10-24,functions
+S03,Brick External Representation,https://docs.brickschema.org/metadata/external-representations.html,2026-10-24,functions
+S04,Haystack Points,https://project-haystack.org/doc/docHaystack/Points,2026-10-24,functions
+S05,BACnet Committee – PICS,https://bacnet.org/conformance-pics/,2026-10-24,protocols
+S06,BACnet International,https://bacnetinternational.org/bacnetsc/,2026-10-24,protocols
+S07,JCI BACnet/SC overview,https://docs.johnsoncontrols.com/bas/r/Facility-Explorer/en-US/Facility-Explorer-BACnet/SC-Commissioning-Guide/Introduction/BACnet/SC-overview,2026-10-24,protocols
+S08,OPC Foundation – BACnet companion model,https://reference.opcfoundation.org/specs/OPC-30030/3.2.1,2026-10-24,protocols
+S09,Beckhoff command prioritization,https://infosys.beckhoff.com/content/1033/tf8020_bacnetrev14/12319323787.html,2026-10-24,protocols
+S10,MSA BACnet MS/TP Driver Manual,https://assetlibrary.msasafety.com/m/79e528c359ff4020/original/Protocol-Driver-Manual-BACnet-MS-TP-8700-73.pdf,2026-10-24,protocols
+S11,CODESYS BACnetAcknowledgeAlarm,https://content.helpme-codesys.com/en/libs/CmpBACnet/Current/BACnetClientAPI/BACnetAcknowledgeAlarm.html,2026-10-24,protocols
+S12,OPC UA Part 4 – DataValue,https://reference.opcfoundation.org/specs/OPC-10000-4/7.11,2026-10-24,protocols
+S13,OPC UA Part 9 – acknowledgeable conditions,https://reference.opcfoundation.org/specs/OPC-10000-9/4.3,2026-10-24,protocols
+S14,OPC UA Part 9 – Acknowledge,https://reference.opcfoundation.org/specs/OPC-10000-9/5.7.3,2026-10-24,protocols
+S15,OPC UA Part 9 – synchronization,https://reference.opcfoundation.org/specs/OPC-10000-9/4.5,2026-10-24,protocols
+S16,OPC UA Part 4 – Services,https://reference.opcfoundation.org/specs/OPC-10000-4/5,2026-10-24,protocols
+S17,Modbus Organization – introduction,https://www.modbus.org/introduction-to-modbus,2026-10-24,protocols
+S18,Modbus Application Protocol V1.1b3,https://www.modbus.org/file/secure/modbusprotocolspecification.pdf,2026-10-24,protocols
+S19,Schneider DOCA0302EN-04,https://productinfo.se.com/i-o_smart_link_user_guide/doca0302-i-o-smartlink-user-guide/English/DOCA0302_Smartlink_Modbus_Plus_User_Guide_0001141942.xml/%24/SLMB_Modbus_Table_Formats_0001141927,2026-10-24,protocols
+S20,Modbus Organization – specifications,https://www.modbus.org/modbus-specifications,2026-10-24,protocols
+S21,OASIS MQTT 5.0,https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html,2026-10-24,protocols
+S22,NIST publication status,https://csrc.nist.gov/pubs/sp/800/82/r3/final,2026-10-24,protocols
+S23,"NIST SP 800-82r3, phần network segmentation",https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-82r3.pdf,2026-10-24,protocols
+S24,REST specification,https://sid.siemens.com/r/A6V14948151/29540941067___en-US_29542478475?contentId=l64oBrPVORrEbx6beXKzjw,2026-10-24,vendors
+S25,OPC specification,https://sid.siemens.com/r/A6V14948151/29540941067___en-US_29542447755?contentId=ryEd1gVcA_APpnx4L8EE2A,2026-10-24,vendors
+S26,BACnet specification,https://sid.siemens.com/r/A6V14948151/29540941067___en-US_29542455435?contentId=zw8Kj4aiIKuJVOt8bK4jSA,2026-10-24,vendors
+S27,Authentication and services,https://mybuilding.siemens.com/d036861342594/help/engineeringhelp/en-US/23637026955.html,2026-10-24,vendors
+S28,2021 application note,https://cache.industry.siemens.com/dl/files/039/109765039/att_1055671/v1/109765039_EnM_DesigoCC_en_V2.1.pdf,2026-10-24,vendors
+S29,Official SmartConnector developer guide,https://github.com/SchneiderElectricBuildings/SmartConnector/blob/main/docs/developer-guide/smartconnector-restful-ews-gateway.md,2026-10-24,vendors
+S30,API v6 reference,https://jci-metasys.github.io/api-landing/api/v6-16,2026-10-24,vendors
+S31,Metasys UI licensing,https://docs.johnsoncontrols.com/bas/r/Metasys/en-US/Metasys-UI-Help/7.0/Overview/Licensing,2026-10-24,vendors
+S32,API v4 introduction,https://jci-metasys.github.io/api-landing/api/v4,2026-10-24,vendors
+S33,EBI current product,https://buildings.honeywell.com/gb/en/solutions/integrated-operations/ebi,2026-10-24,vendors
+S34,"R600 guide specification, sections OPC/API",https://buildings.honeywell.com/content/dam/hbtbt/en/documents/downloads/IS_Guide%20Spec_EBI%20R600_04.20%20V2.pdf,2026-10-24,vendors
+S35,WEBs product,https://www.honeywellbuildings.com/bms/building-control-system/honeywell-webs,2026-10-24,vendors
+S36,BTL Honeywell listings,https://www.bacnetinternational.net/btl/index.php?m=21,2026-10-24,vendors
+S37,Supervisor4.6 datasheet,https://pages1.tridium.com/rs/808-SGM-271/images/Niagara%204.6%20Supervisor_DataSheet_VYKON.pdf,2026-10-24,vendors
+S38,2025 driver catalog,https://www.tridium.com/content/dam/tridium/en/documents/document-lists/drivers/tri-niagara-compatible-drivers-applications-en-2025-0020.pdf,2026-10-24,vendors
+S39,NDS product and prerequisites,https://www.tridium.com/us/en/Products/niagara-cloud-suite/niagara-data-service,2026-10-24,vendors
+S40,Tridium marketplace: BTIB ActiveAPI,https://www.tridium.com/us/en/niagara-marketplace/btib/active-api,2026-10-24,vendors
+S41,"enteliWEB4.23 catalog, pages4/7",https://deltacontrols.com/wp-content/uploads/enteliWEB-Catalog-Sheet.pdf,2026-10-24,vendors
+S42,Official integration sheet2025,https://www.automatedlogic.com/en/media/WebCTRL%20Open%20Integrations%20Platform_110325_tcm702-284058.pdf,2026-10-24,vendors
+S43,EC-Net security,https://www.distech-controls.com/en-gb/resources/bms-cybersecurity-support-portal/bms-cybersecurity-products-solutions,2026-10-24,vendors
+S44,EC-Net Facilities,https://www.distech-controls.com/de-de/products/detail/947839/distech-controls/ec-net-facilities,2026-10-24,vendors
+S45,Distech developer portal,https://developer.distech-controls.com/,2026-10-24,vendors

@@ -1,0 +1,187 @@
+{
+  "primitive": {
+    "red600": "#B51E32",
+    "ink900": "#142B35",
+    "nav900": "#192F39",
+    "white": "#FFFFFF",
+    "paper": "#F3F5F4",
+    "teal700": "#08745E",
+    "amber800": "#8B5B00",
+    "muted": "#52666F",
+    "line": "#D3DFDF",
+    "blue700": "#155FA0",
+    "stage": "#E8EEEF",
+    "guidance": "#0A5F50",
+    "uncertainSurface": "#FFF1CD",
+    "uncertainText": "#5F3E00"
+  },
+  "semantic": {
+    "action.urgent": "{primitive.red600}",
+    "surface.canvas": "{primitive.paper}",
+    "surface.content": "{primitive.white}",
+    "text.primary": "{primitive.ink900}",
+    "status.confirmed": "{primitive.teal700}",
+    "status.uncertain": "{primitive.amber800}",
+    "text.secondary": "{primitive.muted}",
+    "action.information": "{primitive.blue700}",
+    "status.unknown": "{primitive.amber800}",
+    "surface.navigation": "{primitive.nav900}",
+    "surface.review": "{primitive.stage}",
+    "border.subtle": "{primitive.line}",
+    "focus.indicator": "{primitive.blue700}",
+    "guidance.verified.background": "{primitive.guidance}",
+    "guidance.uncertain.background": "{primitive.uncertainSurface}",
+    "guidance.uncertain.text": "{primitive.uncertainText}"
+  },
+  "component": {
+    "button.urgent.background": "{semantic.action.urgent}",
+    "button.minHeight": 48,
+    "input.minHeight": 48,
+    "card.radius": 8,
+    "focus.width": 3,
+    "button.mobilePrimary.minHeight": 56,
+    "button.mobileTwoColumn.minHeight": 56,
+    "button.reviewChrome.minHeight": 44,
+    "input.catalog.minHeight": 44,
+    "scene.radius": 10,
+    "frame.radius": 12,
+    "frame.mobile.radius": 28,
+    "frame.mobile.maxWidth": 444,
+    "frame.focusMobile.maxWidth": 460,
+    "focus.offset": 4,
+    "button.radius": 8,
+    "disclosure.minHeight": 44,
+    "phoneNavigation.minHeight": 52,
+    "sosChoice.minHeight": 132,
+    "sosChoice.other.minHeight": 72
+  },
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64
+  ],
+  "typography": {
+    "body": 16,
+    "label": 14,
+    "caption": 12,
+    "h1": 30,
+    "h2": 21,
+    "fontStack": "\"Segoe UI\", Arial, \"Yu Gothic\", Meiryo, sans-serif",
+    "lineHeight": 1.45,
+    "h1.mobile": 26,
+    "h1.urgent": 27,
+    "h3": 17,
+    "guidance.action": 25,
+    "guidance.action.mobile": 23,
+    "headingLineHeight": 1.15
+  },
+  "motion": {
+    "shortMs": 0,
+    "standardMs": 0,
+    "respectReducedMotion": true,
+    "reducedMotionCSS": "animation:none!important;transition:none!important;scroll-behavior:auto!important",
+    "policy": "No timing-driven emergency meaning; do not introduce flashing, moving routes or decorative animation."
+  },
+  "version": "2.0",
+  "source": "prototype-v2.css",
+  "status": "Values synchronized to prototype-v2.css; accessibility acceptance requires rendered testing.",
+  "responsive": {
+    "compactDesktopMax": 1120,
+    "mobileMax": 720,
+    "stagePaddingDesktop": [
+      22,
+      26,
+      50
+    ],
+    "productPaddingDesktop": 25,
+    "productPaddingMobile": 18,
+    "catalogWidthDesktop": 236,
+    "catalogWidthCompact": 210,
+    "commandRailWidth": 290,
+    "behavior": "Collapse split panes and command rail; wrap actions; preserve accessible disclosure and alternate critical actions."
+  },
+  "cssVariableMap": {
+    "--paper": "primitive.paper",
+    "--ink": "primitive.ink900",
+    "--muted": "primitive.muted",
+    "--line": "primitive.line",
+    "--red": "primitive.red600",
+    "--green": "primitive.teal700",
+    "--blue": "primitive.blue700",
+    "--amber": "primitive.amber800",
+    "--font": "typography.fontStack"
+  },
+  "accessibility": {
+    "normalTextContrastMinimum": 4.5,
+    "largeTextContrastMinimum": 3,
+    "nonTextContrastMinimum": 3,
+    "wcag22TargetMinimumCSSPixels": 24,
+    "routineTargetDesignMinimumCSSPixels": 44,
+    "emergencyTargetDesignMinimumCSSPixels": 48,
+    "mobilePrimaryDesignMinimumCSSPixels": 56,
+    "reflowTestCSSPixels": 320,
+    "textResizeTestPercent": 200,
+    "colorOnlyMeaningAllowed": false,
+    "iconsRequireVisibleLabels": true,
+    "motionMayCarryEssentialMeaning": false,
+    "statusAnnouncementsRequired": true,
+    "mapListEquivalentRequired": true,
+    "unknownHeadingDirectionalArrowAllowed": false,
+    "productionConformanceClaim": false
+  },
+  "contrastReferencePairs": [
+    {
+      "foreground": "#142B35",
+      "background": "#FFFFFF",
+      "ratio": 14.72,
+      "scope": "Flat declared color pair only; not a rendered compliance result."
+    },
+    {
+      "foreground": "#52666F",
+      "background": "#FFFFFF",
+      "ratio": 6.02,
+      "scope": "Flat declared color pair only; not a rendered compliance result."
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#B51E32",
+      "ratio": 6.57,
+      "scope": "Flat declared color pair only; not a rendered compliance result."
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#08745E",
+      "ratio": 5.72,
+      "scope": "Flat declared color pair only; not a rendered compliance result."
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#155FA0",
+      "ratio": 6.61,
+      "scope": "Flat declared color pair only; not a rendered compliance result."
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#0A5F50",
+      "ratio": 7.59,
+      "scope": "Flat declared color pair only; not a rendered compliance result."
+    },
+    {
+      "foreground": "#5F3E00",
+      "background": "#FFF1CD",
+      "ratio": 8.6,
+      "scope": "Flat declared color pair only; not a rendered compliance result."
+    },
+    {
+      "foreground": "#8B5B00",
+      "background": "#FFFFFF",
+      "ratio": 5.84,
+      "scope": "Flat declared color pair only; not a rendered compliance result."
+    }
+  ]
+}

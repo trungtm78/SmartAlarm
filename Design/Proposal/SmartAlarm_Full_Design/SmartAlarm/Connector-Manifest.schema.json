@@ -1,0 +1,1048 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SmartAlarm connector manifest",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "protocol",
+    "capabilities",
+    "authentication",
+    "region_scope",
+    "retry_class",
+    "schemas",
+    "safety_class"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "protocol": {
+      "type": "string",
+      "enum": [
+        "mqtt5",
+        "https",
+        "cap12",
+        "sensorthings",
+        "onvif_gateway",
+        "ot_gateway",
+        "mavlink_gateway",
+        "pa_gateway",
+        "vendor_sdk"
+      ]
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "authentication": {
+      "type": "string",
+      "enum": [
+        "mtls",
+        "oauth2",
+        "signed_webhook",
+        "gateway_managed"
+      ]
+    },
+    "region_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "minItems": 1
+    },
+    "retry_class": {
+      "type": "string",
+      "enum": [
+        "idempotent",
+        "reconcile_before_retry",
+        "never_automatic"
+      ]
+    },
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "minItems": 1
+    },
+    "safety_class": {
+      "type": "string",
+      "enum": [
+        "read_only",
+        "notification",
+        "physical_control"
+      ]
+    },
+    "health_interval_seconds": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "outbound_allowlist": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "physical_profile": {
+      "type": "object",
+      "properties": {
+        "manufacturer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "regional_model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "controller_firmware": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "gateway_model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "gateway_firmware": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "license_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "interface_document_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "permission_mode": {
+          "enum": [
+            "observe_only",
+            "approved_control",
+            "operator_console_only"
+          ]
+        },
+        "binding_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "point_map_digest": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "zone_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cause_effect_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "acceptance_scope": {
+          "enum": [
+            "document_candidate",
+            "bench_only",
+            "field_accepted"
+          ]
+        },
+        "local_automatic_protection_independent": {
+          "const": true
+        },
+        "llm_actuation_allowed": {
+          "const": false
+        },
+        "generic_relay_bypass_allowed": {
+          "const": false
+        },
+        "capability_contracts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "capability_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "kind": {
+                "enum": [
+                  "observe",
+                  "notify",
+                  "physical_request",
+                  "operator_task"
+                ]
+              },
+              "operation": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "parameter_schema_ref": {
+                "type": "string",
+                "format": "uri"
+              },
+              "authorization_policy_ref": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "local_interlocks": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "minItems": 0,
+                "uniqueItems": true
+              },
+              "command_ttl_seconds": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "retry_class": {
+                "enum": [
+                  "idempotent",
+                  "reconcile_before_retry",
+                  "never_automatic"
+                ]
+              },
+              "feedback_point_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "minItems": 0,
+                "uniqueItems": true
+              },
+              "completion_criterion_ref": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "unknown_outcome_policy": {
+                "const": "reconcile_no_blind_retry"
+              },
+              "manufacturer_permission_ref": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "site_approval_ref": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "fat_evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "minItems": 0,
+                "uniqueItems": true
+              },
+              "sat_evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "minItems": 0,
+                "uniqueItems": true
+              },
+              "enabled": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "capability_id",
+              "kind",
+              "operation",
+              "enabled"
+            ],
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "physical_request"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "parameter_schema_ref",
+                    "authorization_policy_ref",
+                    "local_interlocks",
+                    "command_ttl_seconds",
+                    "retry_class",
+                    "feedback_point_ids",
+                    "completion_criterion_ref",
+                    "unknown_outcome_policy",
+                    "manufacturer_permission_ref",
+                    "site_approval_ref"
+                  ],
+                  "properties": {
+                    "local_interlocks": {
+                      "minItems": 1
+                    },
+                    "feedback_point_ids": {
+                      "minItems": 1
+                    },
+                    "retry_class": {
+                      "enum": [
+                        "reconcile_before_retry",
+                        "never_automatic"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "physical_request"
+                    },
+                    "enabled": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "enabled"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "fat_evidence_refs",
+                    "sat_evidence_refs"
+                  ],
+                  "properties": {
+                    "fat_evidence_refs": {
+                      "minItems": 1
+                    },
+                    "sat_evidence_refs": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "manufacturer",
+        "regional_model",
+        "controller_firmware",
+        "gateway_model",
+        "gateway_firmware",
+        "license_refs",
+        "interface_document_refs",
+        "permission_mode",
+        "binding_revision",
+        "point_map_digest",
+        "zone_revision",
+        "cause_effect_revision",
+        "acceptance_scope",
+        "local_automatic_protection_independent",
+        "llm_actuation_allowed",
+        "generic_relay_bypass_allowed",
+        "capability_contracts"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "permission_mode": {
+                "enum": [
+                  "observe_only",
+                  "operator_console_only"
+                ]
+              }
+            },
+            "required": [
+              "permission_mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "capability_contracts": {
+                "items": {
+                  "properties": {
+                    "kind": {
+                      "not": {
+                        "const": "physical_request"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "acceptance_scope": {
+                "enum": [
+                  "document_candidate",
+                  "bench_only"
+                ]
+              }
+            },
+            "required": [
+              "acceptance_scope"
+            ]
+          },
+          "then": {
+            "properties": {
+              "capability_contracts": {
+                "items": {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "physical_request"
+                      }
+                    },
+                    "required": [
+                      "kind"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "enabled": {
+                        "const": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "bms_profile": {
+      "type": "object",
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "profile_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "vendor_product": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "vendor_build": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "adapter_digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "tenant_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "site_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "endpoint_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "credential_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "map_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "qualification_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "qualification_expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "approval_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "deployment_state": {
+          "type": "string",
+          "enum": [
+            "disabled",
+            "qualified_read",
+            "qualified_control"
+          ]
+        },
+        "admitted_capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "discover",
+              "read_points",
+              "subscribe_points",
+              "read_active_alarms",
+              "subscribe_alarms",
+              "read_history",
+              "ack_alarm",
+              "write_point",
+              "relinquish",
+              "export_incident"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "request_rate_budget": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "max_inflight_requests": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "allow_automatic_protocol_fallback": {
+          "const": false
+        },
+        "allow_write_probe": {
+          "const": false
+        },
+        "fencing_policy_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "local_handback_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "profile_id",
+        "profile_version",
+        "vendor_product",
+        "vendor_build",
+        "adapter_digest",
+        "tenant_id",
+        "site_id",
+        "endpoint_ref",
+        "credential_ref",
+        "map_revision",
+        "qualification_id",
+        "qualification_expires_at",
+        "approval_ref",
+        "evidence_refs",
+        "deployment_state",
+        "admitted_capabilities",
+        "request_rate_budget",
+        "max_inflight_requests",
+        "allow_automatic_protocol_fallback",
+        "allow_write_probe",
+        "fencing_policy_ref",
+        "local_handback_ref"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "deployment_state": {
+                "const": "disabled"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "admitted_capabilities": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "deployment_state": {
+                "const": "qualified_read"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "admitted_capabilities": {
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "discover",
+                    "read_points",
+                    "subscribe_points",
+                    "read_active_alarms",
+                    "subscribe_alarms",
+                    "read_history"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "deployment_state": {
+                "const": "qualified_control"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "local_handback_ref": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "x-contract-version": "1.1.0",
+  "description": "Baseline 1.0 connector design schema. Validation is not manufacturer permission, certificate, exact-configuration site acceptance or permission to operate.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "safety_class": {
+            "const": "physical_control"
+          }
+        },
+        "required": [
+          "safety_class"
+        ]
+      },
+      "then": {
+        "required": [
+          "physical_profile"
+        ],
+        "properties": {
+          "retry_class": {
+            "enum": [
+              "reconcile_before_retry",
+              "never_automatic"
+            ]
+          },
+          "physical_profile": {
+            "properties": {
+              "permission_mode": {
+                "const": "approved_control"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "safety_class": {
+            "const": "read_only"
+          }
+        },
+        "required": [
+          "safety_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "physical_profile": {
+            "properties": {
+              "permission_mode": {
+                "const": "observe_only"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "physical_profile": {
+            "properties": {
+              "capability_contracts": {
+                "contains": {
+                  "properties": {
+                    "kind": {
+                      "const": "physical_request"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "capability_contracts"
+            ]
+          }
+        },
+        "required": [
+          "physical_profile"
+        ]
+      },
+      "then": {
+        "properties": {
+          "safety_class": {
+            "const": "physical_control"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "bms_profile"
+        ]
+      },
+      "then": {
+        "properties": {
+          "protocol": {
+            "enum": [
+              "https",
+              "ot_gateway",
+              "vendor_sdk",
+              "mqtt5"
+            ]
+          },
+          "capabilities": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "discover",
+                "read_points",
+                "subscribe_points",
+                "read_active_alarms",
+                "subscribe_alarms",
+                "read_history",
+                "ack_alarm",
+                "write_point",
+                "relinquish",
+                "export_incident"
+              ]
+            }
+          },
+          "retry_class": {
+            "enum": [
+              "reconcile_before_retry",
+              "never_automatic"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "bms_profile"
+        ],
+        "properties": {
+          "bms_profile": {
+            "properties": {
+              "admitted_capabilities": {
+                "contains": {
+                  "enum": [
+                    "write_point",
+                    "relinquish"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "safety_class": {
+            "const": "physical_control"
+          },
+          "bms_profile": {
+            "properties": {
+              "deployment_state": {
+                "const": "qualified_control"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "bms_profile"
+        ],
+        "properties": {
+          "bms_profile": {
+            "properties": {
+              "admitted_capabilities": {
+                "contains": {
+                  "const": "ack_alarm"
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "bms_profile": {
+            "properties": {
+              "deployment_state": {
+                "const": "qualified_control"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "not": {
+          "required": [
+            "bms_profile"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "capabilities": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "bms_profile"
+        ],
+        "properties": {
+          "bms_profile": {
+            "properties": {
+              "deployment_state": {
+                "const": "disabled"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "capabilities": {
+            "maxItems": 0
+          },
+          "safety_class": {
+            "const": "read_only"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "bms_profile"
+        ],
+        "properties": {
+          "bms_profile": {
+            "properties": {
+              "deployment_state": {
+                "const": "qualified_read"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "capabilities": {
+            "minItems": 1,
+            "items": {
+              "enum": [
+                "discover",
+                "read_points",
+                "subscribe_points",
+                "read_active_alarms",
+                "subscribe_alarms",
+                "read_history"
+              ]
+            }
+          },
+          "safety_class": {
+            "const": "read_only"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "bms_profile"
+        ],
+        "properties": {
+          "bms_profile": {
+            "properties": {
+              "admitted_capabilities": {
+                "contains": {
+                  "const": "ack_alarm"
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "safety_class": {
+            "enum": [
+              "notification",
+              "physical_control"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "bms_profile"
+        ],
+        "properties": {
+          "bms_profile": {
+            "properties": {
+              "admitted_capabilities": {
+                "contains": {
+                  "const": "export_incident"
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "safety_class": {
+            "enum": [
+              "notification",
+              "physical_control"
+            ]
+          },
+          "bms_profile": {
+            "properties": {
+              "deployment_state": {
+                "const": "qualified_control"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "x-runtime-invariants": [
+    "Bind tenant/region/site from verified identity; compare payload and envelope scope.",
+    "Resolve exact accepted model/firmware/gateway/license/point-map/cause-effect; observe-only or console-only bindings cannot actuate.",
+    "Match expected_version and If-Match, active revisions, source freshness and signed target/parameter approval digest.",
+    "Resolve parameters against approved capability schema and units; enforce expires_at against current server time and capability TTL.",
+    "Recheck local mode, impairment, interlocks and feedback at server and edge. Local protection/manual controls remain autonomous.",
+    "No LLM may approve, configure or issue physical commands.",
+    "Timeout after send becomes UNKNOWN absent proof; no blind retry; fence old writer and reconcile ledger.",
+    "Verify evidence ownership, authenticity, signers and physical completion criterion; schema-valid references are not evidence by themselves.",
+    "FAT/SAT must bind actual exact configuration; simulator cannot establish field_accepted.",
+    "Point-map IDs/raw addresses must be unique within binding and match accepted unit/type semantics.",
+    "If physical_profile exists, top-level capabilities exactly match capability_contracts IDs; no extra undeclared actions.",
+    "Resolve all evidence and approval references for the same tenant/site/model/firmware/license/binding; verify signer authority and actual FAT/SAT records.",
+    "Protocol writability does not establish an approved actuation capability. Monitoring-only model variants remain observe_only.",
+    "BMS engineering profiles under BMS/connectors are disabled specifications, never runtime deployment authorization. This optional bms_profile is a separate signed deployment projection generated by admission service.",
+    "For bms_profile, top-level capabilities must equal admitted_capabilities exactly; reject inconsistent disabled/profile/safety combinations.",
+    "Resolve exact vendor build, adapter image digest, current entitlement, site authorization and FAT/SAT evidence; intersection determines admitted capabilities. Evidence IDs or schema pass alone do not authorize activation.",
+    "Verify qualification_expires_at and signatures; require physical_profile for write_point/relinquish with accepted physical capability and local handback. Native ACK is separately authorized and is never read-only.",
+    "New adapter digest/map/vendor version or credential authority change invalidates qualification; resume control requires fresh reconciliation and approvals."
+  ]
+}

@@ -1,0 +1,1849 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nghiên cứu và thiết kế BMS · SmartAlarm</title><link rel="stylesheet" href="bms-report.css"></head><body><header><strong>SmartAlarm / BMS integration</strong><a href="index.html">Library</a><a href="BMS-Research-and-Design-VI.pdf">PDF ↓</a></header><main><h1 id="ket-noi-bms-cho-smartalarm">Kết nối BMS cho SmartAlarm</h1>
+
+<p><strong>Nghiên cứu và thiết kế mở rộng · 24/10/2026 · Phạm vi quốc tế, đa tenant và đa ngành.</strong></p>
+
+<p>Baseline 3.0 tích hợp một miền tích hợp BMS có quản lý vòng đời, dùng chung nền tảng connector và giữ profile riêng theo sản phẩm, phiên bản, giao diện và license. BMS tiếp tục vận hành cơ điện và quyền điều khiển tại chỗ; SmartAlarm sử dụng dữ liệu đó để hiểu nguy cơ, hướng dẫn thoát hiểm, phát thông báo, tìm người cần hỗ trợ và phối hợp đội cứu hộ. Nghiên cứu bao phủ <strong>8 nhóm hãng/sản phẩm và 11 profile connector đề xuất</strong>, không coi một giao thức là bằng chứng tương thích toàn hãng. Gói này cung cấp <strong>40 yêu cầu FR-BMS, 8 đặc tả màn hình mới, 20 ca nghiệm thu nghiệp vụ và 28 ca giao thức</strong>, cùng schema và các profile JSON. Các profile đã kiểm tra cấu trúc nhưng <strong>adapter chưa được triển khai và chưa kết nối BMS thật</strong>; capability chỉ được bật sau xác minh đúng cấu hình. Baseline tích hợp gồm 241 mockup màn hình, 37 workflow và proposal 188 slide ở mỗi ngôn ngữ. Tám màn hình BMS đã tích hợp vào danh mục mockup. API dưới đây là hợp đồng nội bộ SmartAlarm chính thức của baseline, không phải endpoint hãng. Đây là hồ sơ để triển khai, chưa phải phần mềm driver BMS đã bàn giao.</p>
+
+<p><img src="assets/bms-overview-vi.svg" alt="BMS all-in-one" /></p>
+
+<h2 id="1-tuong-thich-phai-đuoc-xac-nhan-theo-san-pham-va-thao-tac">1. Tương thích phải được xác nhận theo sản phẩm và thao tác</h2>
+
+<p>Khách hàng chưa có thông tin hãng hoặc phiên bản, vì vậy kiến trúc phải hỗ trợ cả BMS hiện đại có API, supervisor chỉ xuất BACnet/OPC, và hệ cũ qua gateway hoặc register map được duyệt. Chúng không cùng độ phong phú dữ liệu: point read không chứng minh có alarm lifecycle; có alarm list không chứng minh có ACK; có write không chứng minh có quyền tác động hệ thống an toàn. Kết nối vận hành được tính bằng giao của <strong>đã triển khai ∩ hãng hỗ trợ ∩ có license ∩ site cho phép ∩ đã nghiệm thu</strong>. Không tự đổi protocol khi lỗi vì đường mới có thể đổi định danh, quyền và ý nghĩa dữ liệu.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Profile</th>
+  <th>Sản phẩm và giao diện</th>
+  <th>Dữ kiện và điều kiện</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>bms.siemens.desigo-wsi</code></td>
+  <td>Desigo CC<br>REST / WSI subscriptions</td>
+  <td>Specification V8 nêu REST đọc/ghi, event và history. WSI auth có session/heartbeat theo phiên bản; northbound OPC được xác minh là DA, không phải UA. Cần project/extension, HTTPS, PICS nếu chọn BACnet. <a href="https://sid.siemens.com/r/A6V14948151/29540941067___en-US_29542478475?contentId=l64oBrPVORrEbx6beXKzjw">Siemens WSI</a></td>
+</tr>
+<tr>
+  <td><code>bms.schneider.ebo-ews</code></td>
+  <td>EcoStruxure Building Operation<br>SOAP EWS / SmartConnector REST</td>
+  <td>Guide SmartConnector2.6/EWS1.2 kiểm với EBO7.1.2: EBO từ3 dùng SoapEwsRestProvider. Không giả định root discovery/bulk. ACK áp dụng alarm event; không đồng nghĩa đổi toàn bộ trạng thái alarm. <a href="https://github.com/SchneiderElectricBuildings/SmartConnector/blob/main/docs/developer-guide/smartconnector-restful-ews-gateway.md">EBO EWS</a></td>
+</tr>
+<tr>
+  <td><code>bms.jci.metasys-rest</code></td>
+  <td>Metasys<br>Version-pinned REST / SSE</td>
+  <td>API v6 mô tả objects, command schema, alarms, histories và SSE. Phải kiểm từng kết quả batch, không chỉ HTTP200. Monitoring and Commanding cần license riêng; không suy API tương thích từ tên Metasys. <a href="https://jci-metasys.github.io/api-landing/api/v6-16">Metasys API</a></td>
+</tr>
+<tr>
+  <td><code>bms.honeywell.ebi-api</code></td>
+  <td>Enterprise Buildings Integrator<br>Vendor SDK / web services</td>
+  <td>EBI2025 giới thiệu enterprise web services nhưng trang public chưa đủ contract triển khai. Guide-spec R600 cũ có OPC DA/A&amp;E/HDA và API; không dùng để khẳng định EBI2025 có REST hoặc UA tương đương. <a href="https://buildings.honeywell.com/gb/en/solutions/integrated-operations/ebi">EBI</a></td>
+</tr>
+<tr>
+  <td><code>bms.honeywell.webs-niagara</code></td>
+  <td>WEBs N4<br>Niagara OEM station interface</td>
+  <td>WEBs dựa trên Niagara và phải dùng profile OEM riêng. Module, station exports, quyền và license quyết định capability; không tái sử dụng EBI API. <a href="https://www.honeywellbuildings.com/bms/building-control-system/honeywell-webs">WEBs N4</a></td>
+</tr>
+<tr>
+  <td><code>bms.tridium.niagara-local</code></td>
+  <td>Niagara local station / Supervisor<br>Qualified oBIX / licensed module</td>
+  <td>Tài liệu Supervisor4.6 và catalog driver2025 có oBIX. Module REST marketplace là capability riêng, không phải REST phổ quát mặc định. Alarm ACK phải có contract đã xác minh. <a href="https://pages1.tridium.com/rs/808-SGM-271/images/Niagara%204.6%20Supervisor_DataSheet_VYKON.pdf">Niagara local</a></td>
+</tr>
+<tr>
+  <td><code>bms.tridium.nds-cloud</code></td>
+  <td>Niagara Data Service<br>Cloud API</td>
+  <td>NDS là dịch vụ cloud riêng: histories/tags, live read/write và alarm queries. Prerequisites gồm SMA và reseller. Chưa xác nhận API alarm ACK; không dùng WAN cloud làm đường dự phòng cho điều khiển critical tại chỗ. <a href="https://www.tridium.com/us/en/Products/niagara-cloud-suite/niagara-data-service">Niagara Data Service</a></td>
+</tr>
+<tr>
+  <td><code>bms.delta.enteliweb</code></td>
+  <td>enteliWEB<br>Vendor API / BACnet Web Services</td>
+  <td>Catalog4.23, cập nhật11/2022, có add-on -API. Phải xác nhận entitlement hiện tại; brochure không đủ authentication, endpoint và lifecycle contract để viết driver. <a href="https://deltacontrols.com/wp-content/uploads/enteliWEB-Catalog-Sheet.pdf">enteliWEB</a></td>
+</tr>
+<tr>
+  <td><code>bms.alc.webctrl-events</code></td>
+  <td>WebCTRL event/telemetry integration<br>Outbound GET/POST / MQTT add-on</td>
+  <td>Sheet2025 nêu alarm REST và outbound GET/POST khi alarm xảy ra; MQTT là add-on. Không suy từ outbound event rằng có REST command point hoặc native ACK. Scope khởi đầu là nhận alarm/telemetry. <a href="https://www.automatedlogic.com/en/media/WebCTRL%20Open%20Integrations%20Platform_110325_tcm702-284058.pdf">WebCTRL</a></td>
+</tr>
+<tr>
+  <td><code>bms.alc.webctrl-soap-sdk</code></td>
+  <td>WebCTRL SOAP / SDK<br>SOAP / licensed Java SDK</td>
+  <td>SOAP cần method contract đúng phiên bản; license JavaSDK được xác định theo từng trường hợp. Đọc, ACK, command và lịch sử phải kiểm theo method và scope tài khoản. <a href="https://www.automatedlogic.com/en/media/WebCTRL%20Open%20Integrations%20Platform_110325_tcm702-284058.pdf">WebCTRL SDK</a></td>
+</tr>
+<tr>
+  <td><code>bms.distech.ecnet-niagara</code></td>
+  <td>EC-Net Facilities / EC-Net4<br>Niagara OEM station interface</td>
+  <td>EC-Net Facilities là tên mới của EC-Net4, dựa trên Niagara. ECLYPSE REST thuộc dòng controller; không coi là EC-Net Supervisor API. Cần xác minh OEM module và station access. <a href="https://www.distech-controls.com/de-de/products/detail/947839/distech-controls/ec-net-facilities">EC-Net</a></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="nguon-hang-va-gioi-han-ap-dung">Nguồn hãng và giới hạn áp dụng</h3>
+
+<p>Các link trong bảng mở trực tiếp tài liệu hãng. Phiên bản được nhắc đến là phiên bản tài liệu đã nghiên cứu, không phải phạm vi đã kiểm thử của SmartAlarm.</p>
+
+<p>Các mô tả cùng một hãng cần đọc cùng nhau. Đặc biệt license Metasys là điều kiện thương mại riêng, EBI R600 là guide-spec cũ chứ không chứng minh EBI2025 triển khai mọi mục, và ECLYPSE REST thuộc controller khác EC-Net supervisor. Các giới hạn cũ trong application note không được dùng làm năng lực cam kết của bản hiện tại. Không đưa giá, rate limit, token TTL, maximum points hoặc thời gian phát triển chưa có căn cứ vào proposal. <a href="https://docs.johnsoncontrols.com/bas/r/Metasys/en-US/Metasys-UI-Help/7.0/Overview/Licensing">Metasys licensing</a> · <a href="https://buildings.honeywell.com/content/dam/hbtbt/en/documents/downloads/IS_Guide%20Spec_EBI%20R600_04.20%20V2.pdf">EBI R600</a> · <a href="https://developer.distech-controls.com/">Distech developer portal</a></p>
+
+<h3 id="giao-thuc-la-lop-nen-khong-phai-hop-đong-nghiep-vu">Giao thức là lớp nền, không phải hợp đồng nghiệp vụ</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Lớp</th>
+  <th>Thiết kế cần giữ</th>
+  <th>Nguồn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>BACnet/IP / MS/TP</td>
+  <td>Đọc PICS đúng model. COV là thay đổi giá trị, không thay alarm lifecycle. Router IP không làm bus MS/TP nhanh như IP. Discovery và polling phải có budget.</td>
+  <td><a href="https://bacnet.org/conformance-pics/">PICS</a></td>
+</tr>
+<tr>
+  <td>BACnet/SC</td>
+  <td>WebSockets/TLS bảo vệ kết nối; cần CA, trust, expiry và hub failover. SC không tự cấp quyền điều khiển hoặc thay phân vùng OT.</td>
+  <td><a href="https://bacnetinternational.org/bacnetsc/">BACnet/SC</a></td>
+</tr>
+<tr>
+  <td>BACnet priority</td>
+  <td>16 mức ưu tiên; NULL trả một slot về quyền thấp hơn/default. Không có bảo đảm chung về TTL hay ownership ứng dụng. Edge mất điện có thể để lại slot đang giữ.</td>
+  <td><a href="https://reference.opcfoundation.org/specs/OPC-30030/3.2.1">Priority model</a> · <a href="https://infosys.beckhoff.com/content/1033/tf8020_bacnetrev14/12319323787.html">Relinquish</a></td>
+</tr>
+<tr>
+  <td>OPC UA</td>
+  <td>Giữ StatusCode, source time và server time. A&amp;C và history là capability riêng. ConditionRefresh nạp retained conditions; không phải replay history và có race với event mới.</td>
+  <td><a href="https://reference.opcfoundation.org/specs/OPC-10000-4/7.11">DataValue</a> · <a href="https://reference.opcfoundation.org/specs/OPC-10000-9/4.5">A&amp;C refresh</a></td>
+</tr>
+<tr>
+  <td>OPC Classic</td>
+  <td>DA, A&amp;E và HDA khác OPC UA. Nếu cần, bridge được duyệt chạy Windows trong OT; không đưa DCOM ra Internet.</td>
+  <td><a href="https://sid.siemens.com/r/A6V14948151/29540941067___en-US_29542447755?contentId=ryEd1gVcA_APpnx4L8EE2A">Desigo OPC</a></td>
+</tr>
+<tr>
+  <td>Modbus</td>
+  <td>Cần register map đúng model/firmware, địa chỉ PDU, type, signedness, word order, scale, unit và invalid sentinel. Alarm suy từ register phải đánh dấu derived. Modbus Security là profile riêng.</td>
+  <td><a href="https://www.modbus.org/introduction-to-modbus">Modbus</a> · <a href="https://www.modbus.org/modbus-specifications">Security</a></td>
+</tr>
+<tr>
+  <td>MQTT / webhook</td>
+  <td>Payload và alarm identity là hợp đồng dự án. QoS không chứng minh tác động vật lý; dedupe vẫn cần. Không dùng retained command tức thời. Webhook cần xác thực, chống replay và đối soát snapshot.</td>
+  <td><a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html">MQTT5</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>Brick/Haystack có thể hỗ trợ nhập semantics, không bắt khách hàng thay toàn bộ BMS. Giữ quan hệ vị trí, thành phần, luồng phục vụ và point riêng biệt; khóa version mô hình. Danh tính point ngữ nghĩa tách native reference để đổi binding có kiểm soát. <a href="https://docs.brickschema.org/brick/relationships.html">Brick relationships</a> · <a href="https://docs.brickschema.org/metadata/external-representations.html">External references</a> · <a href="https://project-haystack.org/doc/docHaystack/Points">Haystack points</a></p>
+
+<h2 id="2-edge-tai-cong-trinh-giu-semantics-va-ranh-gioi-đieu-khien">2. Edge tại công trình giữ semantics và ranh giới điều khiển</h2>
+
+<p><img src="assets/bms-architecture-vi.svg" alt="BMS architecture" /></p>
+
+<p>Nền tảng tái sử dụng Integration runtime, Physical integration, event bus, Incident, Routing, PA, Care và aggregate Command hiện hữu. BMS domain bổ sung hồ sơ hệ thống, native alarm projection, semantic mapping và qualification; không tạo một Command service song song. Edge đặt tại OT hoặc DMZ theo khảo sát mạng, kết nối regional ingress bằng conduit được duyệt, ưu tiên phiên outbound mTLS. Relay không là cầu nối IP trong suốt vào field bus. Bốn hợp đồng độc lập là observation, alarm exchange, command và vận hành; khách hàng có thể dùng đầy đủ giám sát đã duyệt dù chưa được phép điều khiển. <a href="https://csrc.nist.gov/pubs/sp/800/82/r3/final">NIST OT architecture</a></p>
+
+<table>
+<thead>
+<tr>
+  <th>Thành phần</th>
+  <th>Trách nhiệm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Registry / qualification</td>
+  <td>Product/build/license/interface/evidence; signed profile; không tự bật write khi connect thành công.</td>
+</tr>
+<tr>
+  <td>Read acquisition</td>
+  <td>Worker tách subscription, poll và history; source budget, reconnect jitter, cursor và raw evidence.</td>
+</tr>
+<tr>
+  <td>Semantic mapping</td>
+  <td>Immutable revision cho type/unit/enum/quality và equipment/zone/route dependency.</td>
+</tr>
+<tr>
+  <td>Edge journal</td>
+  <td>Commit bền vững, inbox/outbox, gaps, checksum, epoch; reserve cho alarm, không silently drop.</td>
+</tr>
+<tr>
+  <td>Alarm bridge</td>
+  <td>Native occurrence, snapshot+stream, external ACK intent, provenance và chống echo.</td>
+</tr>
+<tr>
+  <td>Command gate</td>
+  <td>Credential riêng, allowlist, approval digest, TTL, mapping revision, local permissive và fencing.</td>
+</tr>
+<tr>
+  <td>Readback / health</td>
+  <td>Đối soát hiệu ứng; health theo subscription, độ mới, clock, queue, license/cert và vùng bị ảnh hưởng.</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="quyen-quyet-đinh-thuoc-đung-he-thong">Quyền quyết định thuộc đúng hệ thống</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Nguồn có thẩm quyền</th>
+  <th>Dữ liệu và giới hạn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>BMS/controller</td>
+  <td>Native object, raw value, native alarm, local override và winning priority.</td>
+</tr>
+<tr>
+  <td>Site-approved mapping</td>
+  <td>Equipment/space/zone semantics, source lineage và quan hệ được phép dùng cho routing.</td>
+</tr>
+<tr>
+  <td>SmartAlarm</td>
+  <td>Incident, SOS, nhiệm vụ, hồ sơ hỗ trợ, approval/audit và ý định Command.</td>
+</tr>
+<tr>
+  <td>Qualified feedback source</td>
+  <td>Bằng chứng kết quả vật lý; command=true không chứng minh fan flow, unlock không chứng minh door open.</td>
+</tr>
+</tbody>
+</table>
+
+<p>BMS không nhận raw bệnh án, tuổi hoặc định danh người chỉ vì đã tích hợp. Writeback chỉ gửi incident reference, vùng, mức cảnh báo và trạng thái phối hợp tối thiểu được hợp đồng cho phép. Occupancy count, badge passage và dấu vết vị trí chỉ là bằng chứng presence có chất lượng; không tự xác nhận một người còn trong phòng hoặc đã an toàn. LLM chỉ đọc projection có scope, nguồn và timestamp; rule phản ứng đã duyệt không phụ thuộc vào kết quả LLM, và LLM không có quyền ghi BMS.</p>
+
+<h3 id="ha-offline-va-thu-hoi-quyen-phai-xu-ly-o-noi-phat-lenh">HA, offline và thu hồi quyền phải xử lý ở nơi phát lệnh</h3>
+
+<p>Partition theo tenant/site/connector; một control domain chỉ có một active writer. Fencing phải ngăn edge cũ thực sự ghi, không chỉ bầu leader trên cloud. Nếu controller legacy không hỗ trợ ràng buộc đủ mạnh, HA read-only vẫn triển khai được nhưng chuyển writer cần quy trình tại chỗ. Dedupe và idempotency ở ledger không biến một thao tác vật lý thành exactly-once. Sau restart, outstanding commands và priority slots phải được query/reconcile trước khi mở writes. Không replay command đã hết hạn.</p>
+
+<p>TTL của Command chỉ chặn phát lệnh trễ; nó không bảo đảm BACnet tự bỏ giá trị đã ghi. Khi edge mất điện, ứng dụng không thể hứa sẽ gửi NULL đúng hạn. Thiết kế site phải có fallback/ownership được nghiệm thu tại controller hoặc bàn giao operator; nếu không chứng minh được, capability đó không được bật. Relinquish là trả slot có quyền, không phải ghi OFF hoặc restore giá trị cũ; nếu không chứng minh ownership thì chuyển đối soát thủ công.</p>
+
+<h2 id="3-chuc-nang-phuc-vu-toan-bo-vong-đoi-ket-noi">3. Chức năng phục vụ toàn bộ vòng đời kết nối</h2>
+
+<p>Các yêu cầu sau đã tích hợp trong FRD hiện hữu với đầu vào, điều kiện, xử lý, đầu ra bền vững, lỗi, phân quyền và nghiệm thu. Workflow chính thức gồm WF-34 onboarding và qualification; WF-35 đối soát alarm và cứu hộ; WF-36 lệnh có kiểm soát; WF-37 vòng đời và khôi phục. Giữ nguyên WF-01–33. Mọi hàng áp dụng phân quyền tenant/site, audit, tách actual/exercise và version guard.</p>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Chức năng</th>
+  <th>Điều kiện nghiệm thu</th>
+  <th>Màn liên quan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>FR-BMS-01</td>
+  <td>Hồ sơ BMS theo công trình</td>
+  <td>Thiếu build, interface hoặc evidence thì chưa kích hoạt.</td>
+  <td>BMS01, I01–I02, F17</td>
+</tr>
+<tr>
+  <td>FR-BMS-02</td>
+  <td>Phân quyền từng capability</td>
+  <td>Read, history, ACK và command có quyền riêng ở server.</td>
+  <td>I02, I07, F03</td>
+</tr>
+<tr>
+  <td>FR-BMS-03</td>
+  <td>Discovery có phạm vi và budget</td>
+  <td>Chỉ quét phạm vi duyệt; hủy được; không nghẽn alarm.</td>
+  <td>I02, S08, BMS01</td>
+</tr>
+<tr>
+  <td>FR-BMS-04</td>
+  <td>Import point và object</td>
+  <td>Preview lỗi từng dòng, trùng ID, encoding; commit có revision.</td>
+  <td>F04, S06</td>
+</tr>
+<tr>
+  <td>FR-BMS-05</td>
+  <td>Ánh xạ units và semantics</td>
+  <td>Golden fixture xác nhận scale, enum, type và byte order.</td>
+  <td>I03, F04</td>
+</tr>
+<tr>
+  <td>FR-BMS-06</td>
+  <td>Topology thiết bị và vùng</td>
+  <td>Không đồng nhất phòng, HVAC zone, fire compartment và route edge.</td>
+  <td>BMS02, F05, S02–S04</td>
+</tr>
+<tr>
+  <td>FR-BMS-07</td>
+  <td>Publish mapping có impact review</td>
+  <td>Hiện dependency, duyệt revision; rollback không đảo tác động vật lý.</td>
+  <td>BMS05, F04, F17</td>
+</tr>
+<tr>
+  <td>FR-BMS-08</td>
+  <td>Chất lượng và độ mới dữ liệu</td>
+  <td>Zero khác missing; dữ liệu trễ không ghi đè quan sát mới.</td>
+  <td>F01, F07, S07</td>
+</tr>
+<tr>
+  <td>FR-BMS-09</td>
+  <td>Subscription và polling</td>
+  <td>Renew/reconcile khi mất COV; polling theo budget đã đo.</td>
+  <td>I05, BMS06</td>
+</tr>
+<tr>
+  <td>FR-BMS-10</td>
+  <td>Lịch sử và điều tra</td>
+  <td>Giữ UTC, timezone, gaps và raw/interpolated distinction.</td>
+  <td>F07, O21–O22</td>
+</tr>
+<tr>
+  <td>FR-BMS-11</td>
+  <td>Vòng đời alarm nguồn</td>
+  <td>Active, ACK, confirmed, suppressed là các chiều riêng; unsupported=null.</td>
+  <td>BMS03, O03, F07</td>
+</tr>
+<tr>
+  <td>FR-BMS-12</td>
+  <td>Mapping mức ưu tiên</td>
+  <td>Không đảo số priority bằng quy tắc chung; test theo source.</td>
+  <td>S11–S13, O05</td>
+</tr>
+<tr>
+  <td>FR-BMS-13</td>
+  <td>Tương quan và lineage</td>
+  <td>BMS mirror và panel trực tiếp không tính thành hai nguồn độc lập.</td>
+  <td>O05–O07, BMS03</td>
+</tr>
+<tr>
+  <td>FR-BMS-14</td>
+  <td>ACK BMS có kiểm soát</td>
+  <td>Đúng occurrence/version; thất bại giữ trạng thái pending.</td>
+  <td>BMS03, O03, F07</td>
+</tr>
+<tr>
+  <td>FR-BMS-15</td>
+  <td>Nhận ACK ngoài hệ thống</td>
+  <td>Giữ actor nguồn; ACK không đóng incident cứu hộ.</td>
+  <td>BMS03, O04</td>
+</tr>
+<tr>
+  <td>FR-BMS-16</td>
+  <td>Đưa incident sang BMS</td>
+  <td>Namespace duyệt, dữ liệu tối thiểu, chống echo; không đưa bệnh án.</td>
+  <td>BMS08, I08–I10</td>
+</tr>
+<tr>
+  <td>FR-BMS-17</td>
+  <td>Giảm nhiễu alarm cho operator</td>
+  <td>Giữ raw events, số bị nhóm; không ẩn P1 chưa nhận biết.</td>
+  <td>O03, BMS03</td>
+</tr>
+<tr>
+  <td>FR-BMS-18</td>
+  <td>Bảo trì và suppression</td>
+  <td>Reason, owner, expiry; hết lịch chưa chứng minh bảo vệ phục hồi.</td>
+  <td>F14, F18</td>
+</tr>
+<tr>
+  <td>FR-BMS-19</td>
+  <td>BMS evidence cho tuyến thoát hiểm</td>
+  <td>Door/fan/lift data cũ làm giảm tin cậy hoặc thu hồi tuyến.</td>
+  <td>Q04–Q05, C35–C38</td>
+</tr>
+<tr>
+  <td>FR-BMS-20</td>
+  <td>Cứu hộ chủ động</td>
+  <td>Kết hợp nhu cầu và presence có độ mới; occupancy count không định danh.</td>
+  <td>H08–H11, O11–O12</td>
+</tr>
+<tr>
+  <td>FR-BMS-21</td>
+  <td>PA và app theo quy tắc duyệt</td>
+  <td>Không chờ LLM; không phát lại do echo hoặc historical replay.</td>
+  <td>O13–O17, P01–P09</td>
+</tr>
+<tr>
+  <td>FR-BMS-22</td>
+  <td>Xem trước tác động điều khiển</td>
+  <td>Hiện target, owner, priority, điều kiện và vùng ảnh hưởng.</td>
+  <td>F09–F10, BMS04</td>
+</tr>
+<tr>
+  <td>FR-BMS-23</td>
+  <td>Lệnh có approval và TTL</td>
+  <td>Đổi tham số làm vô hiệu approval; override tại chỗ vẫn thắng.</td>
+  <td>F10, BMS04</td>
+</tr>
+<tr>
+  <td>FR-BMS-24</td>
+  <td>Priority lease và relinquish</td>
+  <td>Chỉ slot được phép; không xóa slot không chứng minh được ownership.</td>
+  <td>BMS04, F13</td>
+</tr>
+<tr>
+  <td>FR-BMS-25</td>
+  <td>Đối soát hiệu ứng vật lý</td>
+  <td>Tách transport receipt, controller report và feedback độc lập.</td>
+  <td>F11–F12</td>
+</tr>
+<tr>
+  <td>FR-BMS-26</td>
+  <td>Timeout và kết quả chưa rõ</td>
+  <td>Không tự gửi lại tác động không biết kết quả; query/readback trước.</td>
+  <td>F12, BMS07</td>
+</tr>
+<tr>
+  <td>FR-BMS-27</td>
+  <td>Local override và bàn giao</td>
+  <td>Không khôi phục lệnh cũ khi reconnect; cleanup có người chịu trách nhiệm.</td>
+  <td>F13, BMS04, BMS07</td>
+</tr>
+<tr>
+  <td>FR-BMS-28</td>
+  <td>Journal và offline</td>
+  <td>Không ACK trước durable commit; protection tại chỗ độc lập.</td>
+  <td>I05, G02, BMS07</td>
+</tr>
+<tr>
+  <td>FR-BMS-29</td>
+  <td>HA và single writer</td>
+  <td>Fencing hiệu lực tại điểm phát lệnh; standby không ghi.</td>
+  <td>G03–G04, BMS07</td>
+</tr>
+<tr>
+  <td>FR-BMS-30</td>
+  <td>Đối soát alarm sau mất dữ liệu</td>
+  <td>Snapshot/cursor không chắc chắn phải hiện gap; không clear theo một trang.</td>
+  <td>BMS03, BMS07</td>
+</tr>
+<tr>
+  <td>FR-BMS-31</td>
+  <td>Schema drift và nâng cấp</td>
+  <td>Rename giữ ID; đổi type/unit quarantine và vô hiệu capability bị ảnh hưởng.</td>
+  <td>BMS05, G09–G10</td>
+</tr>
+<tr>
+  <td>FR-BMS-32</td>
+  <td>License, chứng thư, tài khoản</td>
+  <td>Rotation có test; revoke chặn quyền; không log secret.</td>
+  <td>I05, I07, F17</td>
+</tr>
+<tr>
+  <td>FR-BMS-33</td>
+  <td>Health theo dữ liệu và vùng</td>
+  <td>Gateway online không che points stale; đo riêng alarm latency.</td>
+  <td>I05, F01, BMS01</td>
+</tr>
+<tr>
+  <td>FR-BMS-34</td>
+  <td>Capacity, backfill và retention</td>
+  <td>Quota theo BMS; historian không chiếm alarm queue.</td>
+  <td>BMS06, G02</td>
+</tr>
+<tr>
+  <td>FR-BMS-35</td>
+  <td>Cách ly actual và exercise</td>
+  <td>Simulation không ACK/write thật; commissioning có plan riêng.</td>
+  <td>I04, F15–F16</td>
+</tr>
+<tr>
+  <td>FR-BMS-36</td>
+  <td>FAT/SAT đúng cấu hình</td>
+  <td>Signoff theo capability; read PASS không cấp command.</td>
+  <td>F15–F17, BMS01</td>
+</tr>
+<tr>
+  <td>FR-BMS-37</td>
+  <td>Support và forensic export</td>
+  <td>Timeline có revision/source; redact secret và dữ liệu sức khỏe.</td>
+  <td>O21–O22, G07–G08</td>
+</tr>
+<tr>
+  <td>FR-BMS-38</td>
+  <td>AI phân tích evidence BMS</td>
+  <td>LLM đọc dữ liệu có scope và nguồn; không điều khiển trực tiếp.</td>
+  <td>Q06–Q09</td>
+</tr>
+<tr>
+  <td>FR-BMS-39</td>
+  <td>Đa tenant/site và residency</td>
+  <td>ID native trùng vẫn tách; cross-site chỉ qua projection được phép.</td>
+  <td>G01, T02–T04, BMS01</td>
+</tr>
+<tr>
+  <td>FR-BMS-40</td>
+  <td>Ngừng kết nối có bàn giao</td>
+  <td>Kiểm open alarm/lease, bàn giao, revoke, verify và giữ audit.</td>
+  <td>BMS01, F13, G06</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="phan-he-co-đien-co-ranh-gioi-tac-đong-khac-nhau">Phân hệ cơ điện có ranh giới tác động khác nhau</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Phân hệ</th>
+  <th>Phạm vi thiết kế</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>HVAC</td>
+  <td>Mode, nhiệt độ, áp suất, damper feedback; setpoint có bounds nếu được duyệt. Điều khiển comfort không thay smoke control.</td>
+</tr>
+<tr>
+  <td>Smoke control</td>
+  <td>Sequence status, fan proof, fault/inhibit. Chỉ yêu cầu sequence qua controller/cause-and-effect đã duyệt; không ghép output để tự dựng sequence.</td>
+</tr>
+<tr>
+  <td>Fire / water / pumps</td>
+  <td>Alarm, trouble, supervisory, run, flow, pressure, impairment. Mặc định giám sát; reset/silence/start/release cần hồ sơ riêng. Wet-pipe sprinkler không có API bật từng đầu.</td>
+</tr>
+<tr>
+  <td>Doors / access</td>
+  <td>Demand, contact, fault, override và ảnh hưởng lối đi. Unlock chỉ khi được phép, không đồng nghĩa cửa mở hoặc đường an toàn.</td>
+</tr>
+<tr>
+  <td>Elevators</td>
+  <td>Floor/mode/fault/recall theo interface; không tự chọn thang máy thoát hiểm từ cờ available.</td>
+</tr>
+<tr>
+  <td>Power / UPS / generator</td>
+  <td>Nguồn mất, readiness và tải bị ảnh hưởng; generator run không chứng minh mọi tải quan trọng đã có điện.</td>
+</tr>
+<tr>
+  <td>Flood / gas</td>
+  <td>Sensor, level, valve/pump feedback và sequence isolation được duyệt; missing không bằng zero.</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="tam-man-bms-đa-tich-hop-vao-baseline-241-man-hinh">Tám màn BMS đã tích hợp vào baseline 241 màn hình</h3>
+
+<h4 id="bms01-ho-so-va-kha-nang-bms">BMS01 · Hồ sơ và khả năng BMS</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Mục</th>
+  <th>Đặc tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Visual</td>
+  <td>BMS → edge → SmartAlarm</td>
+</tr>
+<tr>
+  <td>Trường dữ liệu</td>
+  <td>vendor, product, build, modules, license evidence, interface, owner, capability matrix</td>
+</tr>
+<tr>
+  <td>Hành động chính</td>
+  <td>Duyệt hồ sơ; mở health; kích hoạt capability đã nghiệm thu</td>
+</tr>
+<tr>
+  <td>Trạng thái lỗi riêng</td>
+  <td>license unknown; certificate expired; incompatible build; partial coverage</td>
+</tr>
+<tr>
+  <td>Quyền</td>
+  <td>bms.configure / acceptance approver</td>
+</tr>
+<tr>
+  <td>Liên kết hiện hữu</td>
+  <td>I02, F17, I05</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trạng thái ready/loading/empty/partial/stale/offline/denied phải có hình và nhãn phù hợp. Hành động không khả dụng hiển thị lý do, không chỉ đổi màu. Tách native raw evidence khỏi nhãn dịch; giữ ID, unit và code gốc.</p>
+
+<h4 id="bms02-topology-ngu-nghia">BMS02 · Topology ngữ nghĩa</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Mục</th>
+  <th>Đặc tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Visual</td>
+  <td>controller → equipment → served zone → route edge</td>
+</tr>
+<tr>
+  <td>Trường dữ liệu</td>
+  <td>native ID, equipment, room, fire compartment, HVAC zone, relation type, evidence, revision</td>
+</tr>
+<tr>
+  <td>Hành động chính</td>
+  <td>Ánh xạ; kiểm quan hệ; đề nghị revision</td>
+</tr>
+<tr>
+  <td>Trạng thái lỗi riêng</td>
+  <td>orphan point; cyclic containment; conflicting zones</td>
+</tr>
+<tr>
+  <td>Quyền</td>
+  <td>bms.configure / bms.mapping.approve</td>
+</tr>
+<tr>
+  <td>Liên kết hiện hữu</td>
+  <td>F04, F05, S15</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trạng thái ready/loading/empty/partial/stale/offline/denied phải có hình và nhãn phù hợp. Hành động không khả dụng hiển thị lý do, không chỉ đổi màu. Tách native raw evidence khỏi nhãn dịch; giữ ID, unit và code gốc.</p>
+
+<h4 id="bms03-đoi-soat-alarm-hai-he-thong">BMS03 · Đối soát alarm hai hệ thống</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Mục</th>
+  <th>Đặc tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Visual</td>
+  <td>native condition ↔ incident timeline</td>
+</tr>
+<tr>
+  <td>Trường dữ liệu</td>
+  <td>occurrence, generation, active/ack/confirm, source actor, cursor, gap, linked incident</td>
+</tr>
+<tr>
+  <td>Hành động chính</td>
+  <td>ACK đúng occurrence; liên kết incident; xem receipt</td>
+</tr>
+<tr>
+  <td>Trạng thái lỗi riêng</td>
+  <td>unknown ACK; stale snapshot; recurrence conflict; stream gap</td>
+</tr>
+<tr>
+  <td>Quyền</td>
+  <td>bms.read / bms.ack</td>
+</tr>
+<tr>
+  <td>Liên kết hiện hữu</td>
+  <td>O03, O05, F07, F12</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trạng thái ready/loading/empty/partial/stale/offline/denied phải có hình và nhãn phù hợp. Hành động không khả dụng hiển thị lý do, không chỉ đổi màu. Tách native raw evidence khỏi nhãn dịch; giữ ID, unit và code gốc.</p>
+
+<h4 id="bms04-quyen-đieu-khien-va-priority">BMS04 · Quyền điều khiển và priority</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Mục</th>
+  <th>Đặc tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Visual</td>
+  <td>priority ladder + demand / actual feedback</td>
+</tr>
+<tr>
+  <td>Trường dữ liệu</td>
+  <td>target, current winner, priority slots, lease, local override, approved intent, expiry</td>
+</tr>
+<tr>
+  <td>Hành động chính</td>
+  <td>Yêu cầu quyền; trả slot thuộc quyền đã duyệt</td>
+</tr>
+<tr>
+  <td>Trạng thái lỗi riêng</td>
+  <td>higher-priority override; foreign owner; expired lease; unknown feedback</td>
+</tr>
+<tr>
+  <td>Quyền</td>
+  <td>bms.command.request / bms.command.approve</td>
+</tr>
+<tr>
+  <td>Liên kết hiện hữu</td>
+  <td>F09–F13</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trạng thái ready/loading/empty/partial/stale/offline/denied phải có hình và nhãn phù hợp. Hành động không khả dụng hiển thị lý do, không chỉ đổi màu. Tách native raw evidence khỏi nhãn dịch; giữ ID, unit và code gốc.</p>
+
+<h4 id="bms05-thay-đoi-point-va-anh-huong">BMS05 · Thay đổi point và ảnh hưởng</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Mục</th>
+  <th>Đặc tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Visual</td>
+  <td>before / after diff + dependency graph</td>
+</tr>
+<tr>
+  <td>Trường dữ liệu</td>
+  <td>old/new native reference, type, unit, mapping hash, dependent rules/routes/commands</td>
+</tr>
+<tr>
+  <td>Hành động chính</td>
+  <td>Duyệt hoặc từ chối migration mapping</td>
+</tr>
+<tr>
+  <td>Trạng thái lỗi riêng</td>
+  <td>reused ID; changed type/unit; critical rule affected</td>
+</tr>
+<tr>
+  <td>Quyền</td>
+  <td>bms.mapping.approve</td>
+</tr>
+<tr>
+  <td>Liên kết hiện hữu</td>
+  <td>I03, G09, F17</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trạng thái ready/loading/empty/partial/stale/offline/denied phải có hình và nhãn phù hợp. Hành động không khả dụng hiển thị lý do, không chỉ đổi màu. Tách native raw evidence khỏi nhãn dịch; giữ ID, unit và code gốc.</p>
+
+<h4 id="bms06-budget-va-đo-moi-du-lieu">BMS06 · Budget và độ mới dữ liệu</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Mục</th>
+  <th>Đặc tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Visual</td>
+  <td>zone heatmap + alarm / telemetry / history queues</td>
+</tr>
+<tr>
+  <td>Trường dữ liệu</td>
+  <td>poll interval, batch size, subscriptions, queue lag, rate limits, backfill budget, freshness</td>
+</tr>
+<tr>
+  <td>Hành động chính</td>
+  <td>Áp policy đã review; dừng backfill; xem điểm stale</td>
+</tr>
+<tr>
+  <td>Trạng thái lỗi riêng</td>
+  <td>source throttling; queue pressure; partial gaps</td>
+</tr>
+<tr>
+  <td>Quyền</td>
+  <td>bms.configure / operations</td>
+</tr>
+<tr>
+  <td>Liên kết hiện hữu</td>
+  <td>I05, G02, O22</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trạng thái ready/loading/empty/partial/stale/offline/denied phải có hình và nhãn phù hợp. Hành động không khả dụng hiển thị lý do, không chỉ đổi màu. Tách native raw evidence khỏi nhãn dịch; giữ ID, unit và code gốc.</p>
+
+<h4 id="bms07-khoi-phuc-edge-va-ban-giao">BMS07 · Khôi phục edge và bàn giao</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Mục</th>
+  <th>Đặc tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Visual</td>
+  <td>writer / journal / cursor recovery swimlane</td>
+</tr>
+<tr>
+  <td>Trường dữ liệu</td>
+  <td>owner epoch, source epoch, checkpoint, journal gap, outstanding commands, leases</td>
+</tr>
+<tr>
+  <td>Hành động chính</td>
+  <td>Đối soát; bàn giao; cho phép ghi sau kiểm tra</td>
+</tr>
+<tr>
+  <td>Trạng thái lỗi riêng</td>
+  <td>split brain; missing journal; old epoch; unverified snapshot</td>
+</tr>
+<tr>
+  <td>Quyền</td>
+  <td>bms.reconcile / site OT approver</td>
+</tr>
+<tr>
+  <td>Liên kết hiện hữu</td>
+  <td>G03, G04, F12, F13</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trạng thái ready/loading/empty/partial/stale/offline/denied phải có hình và nhãn phù hợp. Hành động không khả dụng hiển thị lý do, không chỉ đổi màu. Tách native raw evidence khỏi nhãn dịch; giữ ID, unit và code gốc.</p>
+
+<h4 id="bms08-theo-doi-trao-đoi-va-vong-lap">BMS08 · Theo dõi trao đổi và vòng lặp</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Mục</th>
+  <th>Đặc tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Visual</td>
+  <td>origin → BMS → SmartAlarm causation path</td>
+</tr>
+<tr>
+  <td>Trường dữ liệu</td>
+  <td>origin event, causation, namespace, native outbound object, hash, receipt, quarantine reason</td>
+</tr>
+<tr>
+  <td>Hành động chính</td>
+  <td>Kiểm tra đường sự kiện; cách ly mapping gây loop</td>
+</tr>
+<tr>
+  <td>Trạng thái lỗi riêng</td>
+  <td>echo; reentry; conflicting identity; unsupported writeback</td>
+</tr>
+<tr>
+  <td>Quyền</td>
+  <td>bms.configure / incident reviewer</td>
+</tr>
+<tr>
+  <td>Liên kết hiện hữu</td>
+  <td>I06, I08, O05</td>
+</tr>
+</tbody>
+</table>
+
+<p>Trạng thái ready/loading/empty/partial/stale/offline/denied phải có hình và nhãn phù hợp. Hành động không khả dụng hiển thị lý do, không chỉ đổi màu. Tách native raw evidence khỏi nhãn dịch; giữ ID, unit và code gốc.</p>
+
+<h2 id="4-hop-đong-ky-thuat-giu-nguyen-nghia-khi-đoi-hang">4. Hợp đồng kỹ thuật giữ nguyên nghĩa khi đổi hãng</h2>
+
+<h3 id="bon-artifact-co-version-đoc-lap">Bốn artifact có version độc lập</h3>
+
+<p>Adapter image có digest/SBOM và SDK version; product profile có exact version/capability/evidence; site binding có point/zone/lineage/mapping revision; operation policy có allowlist, approval, priority, TTL và acceptance. Upgrade một artifact không tự nâng quyền của ba artifact còn lại. Profile phát hành trong catalog khác site deployment đã nghiệm thu. Các JSON đi kèm cố ý để adapter <code>not_implemented</code>, version site chưa xác minh, <code>enabled_capabilities=[]</code>, <code>write_enabled=false</code>, không chứa endpoint hoặc secret khách hàng.</p>
+
+<div class="codehilite">
+<pre><span></span><code>ConnectorFactory.create(profile, secretProvider, clock, durableStore, auditSink)
+inspectEndpoint(ReadOnlyProbeContext) -&gt; EndpointIdentity + CapabilityEvidence
+importInventory(ApprovedScope, Cursor?) -&gt; InventoryPage
+readPoints(PointRefs, ReadPolicy) -&gt; ObservationBatch
+subscribe(ApprovedScope, DurableCursor?) -&gt; AsyncStream&lt;NativeEnvelope&gt;
+reconcile(ReconcileRequest) -&gt; SnapshotPage + Watermark + Gaps
+readHistory(HistoryRequest, Cursor?) -&gt; HistoryPage | Unsupported
+acknowledge(AuthorizedAckEnvelope) -&gt; ExternalOperationReceipt
+dispatch(AuthorizedCommandEnvelope) -&gt; DispatchReceipt
+readback(CommandRef) -&gt; ReconciliationEvidence
+relinquish(AuthorizedReleaseEnvelope) -&gt; ReleaseReceipt | Unsupported
+health() -&gt; Endpoint + Subscription + Freshness + Queue + TrustHealth
+drain() -&gt; OutstandingIntents + Checkpoint
+close() -&gt; CloseResult
+</code></pre>
+</div>
+
+<p>Method chưa hỗ trợ phải trả lỗi có kiểu, không no-op success: <code>Unsupported</code>, <code>PermissionDenied</code>, <code>LicenseMissing</code>, <code>MappingMismatch</code>, <code>StalePrecondition</code>, <code>RateLimited</code>, <code>TransientTransport</code>, <code>SourceRejected</code>, <code>OutcomeUnknown</code>. Adapter giữ native lỗi/cursor/session; orchestration không tự xây raw request để vượt adapter. Read-only probe không được thử ghi lên point production để khám phá quyền.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Entity</th>
+  <th>Trường chính</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>BmsSystem</td>
+  <td>tenant/site, vendor/product/build, region/timezone, modules/licenses, owner, interface dossier</td>
+</tr>
+<tr>
+  <td>BmsConnection</td>
+  <td>profile, endpoint/secret references, connector group, rate budgets, lifecycle, separate health</td>
+</tr>
+<tr>
+  <td>BmsObject / PointBindingRevision</td>
+  <td>native stable ID, canonical physical point, semantic/type/unit/enum/scale, source and approved mapping revision</td>
+</tr>
+<tr>
+  <td>TopologyRelation</td>
+  <td>located_in / part_of / feeds_air / feeds_water / serves / controls / exposes / protects; source and approval</td>
+</tr>
+<tr>
+  <td>BmsAlarmOccurrence</td>
+  <td>native ID, generation, source epoch, condition/branch/event IDs, active/ack/confirm/retained/suppressed/out-of-service, timestamps</td>
+</tr>
+<tr>
+  <td>BmsAckIntent</td>
+  <td>actor, exact occurrence/version, comment, correlation, pending/accepted/rejected/unknown and receipt</td>
+</tr>
+<tr>
+  <td>ControlLeaseDetail</td>
+  <td>existing command_id, authorized target/slot/owner, before/desired state, expiry, release policy and physical outcome contract</td>
+</tr>
+<tr>
+  <td>MappingDrift / SourceAuthorityPolicy</td>
+  <td>change impact, invalidated capabilities, migration approval; physical lineage and quality-based source authority</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="identity-alarm-va-command-khong-dung-cung-mot-trang-thai">Identity, alarm và command không dùng cùng một trạng thái</h3>
+
+<p>Native alarm lưu các chiều active, acknowledged, confirmed, retained, suppressed và out-of-service độc lập; không hỗ trợ thì null, không gán false. Source return-to-normal không đóng incident hoặc xác nhận người an toàn. ACK nội bộ chỉ xác nhận trách nhiệm operator; ACK nguồn dùng đúng occurrence/event generation và receipt/readback. ACK trễ của occurrence trước không tác động alarm tái phát. Exact dedupe trước correlation; key dùng tenant, site, BMS, native alarm ID, generation, source epoch và source event ID khi có. Nếu tạo identity tổng hợp phải công bố thuật toán và giới hạn.</p>
+
+<p>Khi reconnect, mở stream/buffer rồi lấy snapshot và merge theo watermark nếu nguồn hỗ trợ. Không có atomic snapshot/cursor thì giữ trạng thái partial/gap, dùng đối soát nguồn riêng và manual review; không clear alarm vì vắng trong một trang. Historical replay được lưu làm bằng chứng, không tự phát PA, dispatch hoặc lệnh quá hạn. Hai đường BMS/direct-panel vẫn giữ provenance, nhưng cùng physical lineage không tính hai xác minh độc lập.</p>
+
+<p>Command giữ aggregate và enum hiện hữu: <code>requested/approved/dispatched/accepted/executing/succeeded/failed/unknown/expired</code>. Approval ký vào digest target, tham số, mapping và policy revision; thay đổi làm vô hiệu approval. Transport receipt, controller execution report và independent physical feedback là ba bằng chứng riêng. Multi-target plan có child commands, không giả transaction all-or-nothing. Compensating action là command mới có thẩm quyền, không rollback vật lý tự động.</p>
+
+<p>Writeback dùng namespace riêng và origin/causation/correlation. Nếu BMS không giữ metadata, bridge ledger liên kết native outbound object, effect key và payload hash; chỉ loại echo đủ chắc chắn, không loại mọi sự kiện giống text. Secret chỉ là vault reference; tenant/site được kiểm từ authenticated binding, không tin tenant_id trong payload.</p>
+
+<h3 id="hop-đong-api-va-event-chinh-thuc-trong-baseline-30">Hợp đồng API và event chính thức trong baseline 3.0</h3>
+
+<p>API hiện hữu đã có 23 operation BMS, tổng cộng 67 operation. Alias bản nháp như <code>/bms-systems</code> được thay bằng đường dẫn dưới đây. Kiểu request/response và guard được quy định tại <a href="../API-Contract.json">API-Contract.json</a>.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Method</th>
+  <th>Path</th>
+  <th>Permission</th>
+  <th>Request → success response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>GET</td>
+  <td><code>/bms/connections</code></td>
+  <td><code>bms.connection.read</code></td>
+  <td>— → BMSConnectionPage</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections</code></td>
+  <td><code>bms.connection.create</code></td>
+  <td>BMSConnectionCreate → BMSConnectionView</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td><code>/bms/connections/{connection_id}</code></td>
+  <td><code>bms.connection.read</code></td>
+  <td>— → BMSConnectionView</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/discoveries</code></td>
+  <td><code>bms.discovery.run</code></td>
+  <td>BMSDiscoveryRequest → BMSJob</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/map-revisions</code></td>
+  <td><code>bms.mapping.edit</code></td>
+  <td>BMSMapDraftCreate → BMSMapRevision</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/validations</code></td>
+  <td><code>bms.mapping.validate</code></td>
+  <td>BMSValidationRequest → BMSJob</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/qualifications</code></td>
+  <td><code>bms.qualification.submit</code></td>
+  <td>BMSQualificationCreate → BMSJob</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/activations</code></td>
+  <td><code>bms.connection.activate</code></td>
+  <td>BMSActivationRequest → BMSJob</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td><code>/bms/connections/{connection_id}/points</code></td>
+  <td><code>bms.point.read</code></td>
+  <td>— → BMSPointPage</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td><code>/bms/connections/{connection_id}/alarms</code></td>
+  <td><code>bms.alarm.read</code></td>
+  <td>— → BMSAlarmPage</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/alarms/{alarm_id}/native-acknowledgements</code></td>
+  <td><code>bms.alarm.ack_native</code></td>
+  <td>BMSNativeAckRequest → BMSMutationReceipt</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/command-previews</code></td>
+  <td><code>bms.command.preview</code></td>
+  <td>BMSCommandPreview → BMSCommandPreviewResult</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/commands</code></td>
+  <td><code>bms.command.submit</code></td>
+  <td>BMSCommandSubmit → BMSMutationReceipt</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td><code>/bms/connections/{connection_id}/commands/{command_id}</code></td>
+  <td><code>bms.command.read</code></td>
+  <td>— → BMSMutationReceipt</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/commands/{command_id}/reconciliations</code></td>
+  <td><code>bms.command.reconcile</code></td>
+  <td>BMSCommandReconcile → BMSMutationReceipt</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/reconciliations</code></td>
+  <td><code>bms.reconciliation.run</code></td>
+  <td>BMSReconciliationRequest → BMSJob</td>
+</tr>
+<tr>
+  <td>POST</td>
+  <td><code>/bms/connections/{connection_id}/lifecycle-transitions</code></td>
+  <td><code>bms.lifecycle.change</code></td>
+  <td>BMSLifecycleRequest → BMSJob</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td><code>/bms/connections/{connection_id}/health</code></td>
+  <td><code>bms.health.read</code></td>
+  <td>— → BMSHealth</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td><code>/bms/connections/{connection_id}/jobs/{job_id}</code></td>
+  <td><code>bms.job.read</code></td>
+  <td>— → BMSJob</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td><code>/bms/connections/{connection_id}/policies/request-budget</code></td>
+  <td><code>bms.policy.budget.read</code></td>
+  <td>— → BMSRequestBudgetView</td>
+</tr>
+<tr>
+  <td>PATCH</td>
+  <td><code>/bms/connections/{connection_id}/policies/request-budget</code></td>
+  <td><code>bms.policy.budget.change</code></td>
+  <td>BMSRequestBudgetUpdate → BMSRequestBudgetView</td>
+</tr>
+<tr>
+  <td>GET</td>
+  <td><code>/bms/connections/{connection_id}/policies/incident-export</code></td>
+  <td><code>bms.policy.export.read</code></td>
+  <td>— → BMSIncidentExportView</td>
+</tr>
+<tr>
+  <td>PATCH</td>
+  <td><code>/bms/connections/{connection_id}/policies/incident-export</code></td>
+  <td><code>bms.policy.export.change</code></td>
+  <td>BMSIncidentExportUpdate → BMSIncidentExportView</td>
+</tr>
+</tbody>
+</table>
+
+<p>Lệnh gửi preview đã duyệt cùng approval digest đến executor Command vật lý hiện hữu; không mở raw point write. Receipt 202 chỉ chứng minh đã lưu nhận cục bộ, không chứng minh tác động vật lý. HTTP 409 là xung đột trạng thái/idempotency/quyền điều khiển; 412 là ETag/revision bằng chứng không khớp; 422 sai ngữ nghĩa; 429 vượt budget; 503 nguồn hoặc khả năng lưu nhận không sẵn sàng. Kết quả lệnh chưa rõ phải đối soát, không phát lại mù.</p>
+
+<p>Policy request-budget được tạm dừng history backfill nhưng không dừng đối soát alarm đang hoạt động. Incident export cần capability <code>export_incident</code> được qualification riêng và namespace/binding được duyệt. Chỉ xuất incident_id, severity, status, zone_id, mode và occurred_at. Bắt buộc echo marker và quarantine-on-echo; quarantine vô hiệu hóa export. Lifecycle dùng contract typed drain/suspend/resume_read/upgrade/rollback/retire với expected revision, approval và bằng chứng bàn giao.</p>
+
+<p><a href="../Event-Schemas.json">Event-Schemas.json</a></p>
+
+<div class="codehilite">
+<pre><span></span><code>com.smartalarm.bms.alarm_changed.v1
+com.smartalarm.bms.command_changed.v1
+com.smartalarm.bms.connection_changed.v1
+com.smartalarm.bms.health_changed.v1
+com.smartalarm.bms.map_published.v1
+com.smartalarm.bms.point_observed.v1
+com.smartalarm.bms.reconciliation_completed.v1
+</code></pre>
+</div>
+
+<p>Envelope typed giữ provenance, mapping revision, chất lượng nguồn và freshness; thiếu source time phải giữ unknown. Feedback vật lý và thực thi lệnh giữ ranh giới miền physical hiện hữu. Snapshot lớn dùng object reference và hash.</p>
+
+<h3 id="sizing-theo-nguon-khong-theo-mot-con-so-điem-chung">Sizing theo nguồn, không theo một con số điểm chung</h3>
+
+<div class="codehilite">
+<pre><span></span><code>poll_samples_per_second = Σ(N_group / poll_interval_seconds)
+poll_requests_per_second = Σ(N_group / effective_batch_size / interval)
+subscription_bytes_per_second = Σ(change_rate × payload_size) + protocol overhead
+edge_journal_bytes &gt;= peak_accepted_bytes_per_second × offline_seconds × overhead_factor
+</code></pre>
+</div>
+
+<p>Ví dụ planning, không phải benchmark:2.000 điểm/5 giây và8.000 điểm/60 giây tạo khoảng533,3 samples/s. Payload300 byte/sample tương đương160KB/s, khoảng13,824GB cho24 giờ chưa tính header, index và replication; hệ số2 cho khoảng27,65GB, vẫn cần reserve và kiểm alarm burst. Snapshot, reconnect và shadow reader có tải riêng. Autoscale cloud không tăng năng lực BMS cũ. Đo riêng source→edge, edge commit→cloud, cloud→operator, request→native receipt và receipt→physical feedback. Chỉ công bố p95/p99 khi nguồn thời gian và fixture tải đã được chấp thuận.</p>
+
+<h2 id="5-nghiem-thu-theo-capability-va-chuyen-giao-co-bang-chung">5. Nghiệm thu theo capability và chuyển giao có bằng chứng</h2>
+
+<p>Release artifact đi qua draft→schema_validated→contract_tested→security_reviewed→approved→published→retired. Site activation đi qua proposed→discovered→mapped→lab_verified→site_commissioning→site_accepted→active; healthy/degraded/offline/quarantined là health riêng. Bộ JSON trong gói vẫn ở design_example. JSON Schema kiểm cấu trúc và một số guard, không kiểm chữ ký, tính thật của chứng cứ hay quyền controller.</p>
+
+<p>Upgrade chụp image/profile/mapping/policy digest, cursor và outstanding intents; validate compatibility; chạy shadow reader trong budget cho phép và cấm ACK/write; drain commands mới; persist checkpoint; chuyển writer bằng fencing; reconcile trước mở lại writes. Nếu còn unknown physical outcome hoặc orphan lease, giữ write disabled và bàn giao người tại chỗ. Rollback code/config không đảo ACK hoặc tác động đã xảy ra. Retire phải rà open alarms/leases, chuyển trách nhiệm, revoke credentials/certs và giữ audit.</p>
+
+<h3 id="20-ca-nghiep-vu-la-thiet-ke-kiem-thu-chua-chay-fatsat">20 ca nghiệp vụ là thiết kế kiểm thử, chưa chạy FAT/SAT</h3>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Kích thích</th>
+  <th>Kết quả cần chứng minh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>BMS-T01</td>
+  <td>Đổi tên/type/unit/enum point</td>
+  <td>Giữ ID khi rename; cách ly semantics sai và lệnh bị ảnh hưởng.</td>
+</tr>
+<tr>
+  <td>BMS-T02</td>
+  <td>ID native trùng giữa site/tenant</td>
+  <td>Không ghép, lộ dữ liệu hoặc ACK nhầm.</td>
+</tr>
+<tr>
+  <td>BMS-T03</td>
+  <td>Alarm normal trước ACK</td>
+  <td>Active=false nhưng ACK có thể còn pending; incident độc lập.</td>
+</tr>
+<tr>
+  <td>BMS-T04</td>
+  <td>Alarm tái phát khi ACK cũ còn pending</td>
+  <td>ACK cũ không tác động occurrence mới; refresh và báo conflict.</td>
+</tr>
+<tr>
+  <td>BMS-T05</td>
+  <td>Panel trực tiếp và BMS mirror phát lại100 lần</td>
+  <td>Một physical lineage; không nhân incident, dispatch, broadcast.</td>
+</tr>
+<tr>
+  <td>BMS-T06</td>
+  <td>Mất cursor; snapshot phân trang có event xen</td>
+  <td>Ghi gap; không clear alarm vì vắng trong một trang.</td>
+</tr>
+<tr>
+  <td>BMS-T07</td>
+  <td>Local override ưu tiên cao hơn</td>
+  <td>Hiện đúng bị từ chối hoặc demand chưa thắng; không vượt local.</td>
+</tr>
+<tr>
+  <td>BMS-T08</td>
+  <td>Mất receipt sau khi có thể đã ghi</td>
+  <td>Đánh dấu unknown và đối soát, không blind retry.</td>
+</tr>
+<tr>
+  <td>BMS-T09</td>
+  <td>Lease hết hạn và slot đổi owner</td>
+  <td>Không xóa slot chưa chứng minh ownership; relinquish được duyệt và readback.</td>
+</tr>
+<tr>
+  <td>BMS-T10</td>
+  <td>Fan được yêu cầu chạy nhưng proof=false/bad</td>
+  <td>Không báo physical success; hiện demand/feedback mismatch.</td>
+</tr>
+<tr>
+  <td>BMS-T11</td>
+  <td>Mất link, buffer đầy và failover2 node</td>
+  <td>Protection độc lập; durable commit và writer fencing giữ đúng.</td>
+</tr>
+<tr>
+  <td>BMS-T12</td>
+  <td>Alarm burst cùng historian backfill</td>
+  <td>Alarm không bị nghẽn; source budget không vượt.</td>
+</tr>
+<tr>
+  <td>BMS-T13</td>
+  <td>Cert hết hạn/revoke hoặc sai tenant</td>
+  <td>Chặn privileged action; không fallback insecure.</td>
+</tr>
+<tr>
+  <td>BMS-T14</td>
+  <td>BMS phản chiếu incident SmartAlarm</td>
+  <td>Không loop incident; giữ receipt evidence.</td>
+</tr>
+<tr>
+  <td>BMS-T15</td>
+  <td>Hết lịch bảo trì nhưng chưa khôi phục</td>
+  <td>Restoration pending và escalation, chưa ready.</td>
+</tr>
+<tr>
+  <td>BMS-T16</td>
+  <td>Door/fan stale ảnh hưởng route</td>
+  <td>Đánh giá/thu hồi tuyến và voice cũ; vẫn truy cập trợ giúp.</td>
+</tr>
+<tr>
+  <td>BMS-T17</td>
+  <td>Point AI/count/badge cũ</td>
+  <td>Không coi suy luận là đo thực hoặc người an toàn.</td>
+</tr>
+<tr>
+  <td>BMS-T18</td>
+  <td>VI/EN/JA, bàn phím, zoom, mù màu</td>
+  <td>Hành động/nguồn đọc rõ; native ID không bị dịch.</td>
+</tr>
+<tr>
+  <td>BMS-T19</td>
+  <td>Dữ liệu exercise reconnect</td>
+  <td>Exercise không vào actual; backfill không actuation.</td>
+</tr>
+<tr>
+  <td>BMS-T20</td>
+  <td>Retire còn command/lease mở</td>
+  <td>Bàn giao, revoke, verify, giữ audit; không orphan override.</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="28-ca-giao-thuc-bo-sung-co-phan-giao-nhau-voi-ca-nghiep-vu">28 ca giao thức bổ sung, có phần giao nhau với ca nghiệp vụ</h3>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Kích thích</th>
+  <th>Kết quả cần chứng minh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>BMS-P-01</td>
+  <td>Dùng account read-only, gửi write/ACK</td>
+  <td>Bị chặn trước dispatch; BMS audit không có write; UI chỉ rõ capability</td>
+</tr>
+<tr>
+  <td>BMS-P-02</td>
+  <td>Sensor known 6.0 bar với raw600/scale100; thử sai unit</td>
+  <td>Giá trị đúng; map chưa duyệt không vào routing/rules</td>
+</tr>
+<tr>
+  <td>BMS-P-03</td>
+  <td>Fixture register0/1 và 32-bit word order khác</td>
+  <td>Parser cho kết quả golden; mismatch chặn commissioning</td>
+</tr>
+<tr>
+  <td>BMS-P-04</td>
+  <td>Để subscription hết hạn hoặc BMS restart</td>
+  <td>Renew/reconcile; điểm stale trong gap, không falsely healthy</td>
+</tr>
+<tr>
+  <td>BMS-P-05</td>
+  <td>Burst trong budget được phép</td>
+  <td>Critical events ưu tiên; không gây polling storm; latency ghi thực tế</td>
+</tr>
+<tr>
+  <td>BMS-P-06</td>
+  <td>Connect khi alarm đã active</td>
+  <td>Current-alarm scan/ConditionRefresh nạp đủ; trạng thái syncing trước khi đủ</td>
+</tr>
+<tr>
+  <td>BMS-P-07</td>
+  <td>Event mới tới giữa RefreshStart/End</td>
+  <td>Không bị snapshot cũ ghi đè; retain/branch xử lý đúng</td>
+</tr>
+<tr>
+  <td>BMS-P-08</td>
+  <td>Gửi lại cùng source event nhiều lần</td>
+  <td>Một transition canonical, nhiều receipt audit; không tạo nhiều dispatch</td>
+</tr>
+<tr>
+  <td>BMS-P-09</td>
+  <td>Direct panel và BMS relay cùng physical alarm</td>
+  <td>Một incident liên kết hai nguồn khi map chắc chắn; không xóa provenance</td>
+</tr>
+<tr>
+  <td>BMS-P-10</td>
+  <td>Hai thiết bị cùng tên/tầng và gần thời gian</td>
+  <td>Không gộp sai chỉ vì text/time giống</td>
+</tr>
+<tr>
+  <td>BMS-P-11</td>
+  <td>Occurrence1 clear, occurrence2 active trước ACK1 về</td>
+  <td>ACK1 chỉ tác động occurrence1; occurrence2 vẫn chưa ACK</td>
+</tr>
+<tr>
+  <td>BMS-P-12</td>
+  <td>Operator nhận việc SmartAlarm</td>
+  <td>BMS chưa ACK giữ nguyên cho đến thao tác được phép và receipt</td>
+</tr>
+<tr>
+  <td>BMS-P-13</td>
+  <td>Source NORMAL nhưng còn người cần cứu</td>
+  <td>Incident rescue không tự đóng; occupant state không tự safe</td>
+</tr>
+<tr>
+  <td>BMS-P-14</td>
+  <td>Controller có thể đã nhận nhưng ACK bị mất</td>
+  <td>Outcome unknown; không blind retry; operator có reconcile evidence</td>
+</tr>
+<tr>
+  <td>BMS-P-15</td>
+  <td>WAN đứt, command hết hạn, WAN trở lại</td>
+  <td>Không phát lại; explicit reauthorization nếu còn cần</td>
+</tr>
+<tr>
+  <td>BMS-P-16</td>
+  <td>Local operator chiếm quyền cao hơn</td>
+  <td>SmartAlarm không báo physical success; hiển thị override và chặn write theo policy</td>
+</tr>
+<tr>
+  <td>BMS-P-17</td>
+  <td>Kill active edge giữa dispatch và record receipt</td>
+  <td>Standby fenced; readback trước tiếp tục; không hai writer</td>
+</tr>
+<tr>
+  <td>BMS-P-18</td>
+  <td>Edge mất điện khi đang giữ priority</td>
+  <td>Đo hành vi local controller; nghiệm thu chỉ khi fallback/ownership được site chấp thuận</td>
+</tr>
+<tr>
+  <td>BMS-P-19</td>
+  <td>BMS khác ghi cùng priority</td>
+  <td>Phát hiện cấu hình nguy hiểm/không chứng minh owner; không NULL tùy tiện</td>
+</tr>
+<tr>
+  <td>BMS-P-20</td>
+  <td>Hết hạn/revoke/change certificate</td>
+  <td>Fail closed cho write, cảnh báo health; read recovery theo trust policy; không auto trust</td>
+</tr>
+<tr>
+  <td>BMS-P-21</td>
+  <td>Native bad/uncertain hoặc source time thiếu</td>
+  <td>Không hiển thị safe/normal giả; ảnh hưởng routing/proactive rescue có uncertainty</td>
+</tr>
+<tr>
+  <td>BMS-P-22</td>
+  <td>Source clock lệch và event tới muộn</td>
+  <td>Giữ source time + received time, flag clock; không xóa occurrence đang mới</td>
+</tr>
+<tr>
+  <td>BMS-P-23</td>
+  <td>Burst P1/P2 cùng telemetry thường</td>
+  <td>Critical transition không mất; coalescing chỉ telemetry đủ policy; queue/gap rõ</td>
+</tr>
+<tr>
+  <td>BMS-P-24</td>
+  <td>Spool gần đầy/full</td>
+  <td>Alarm vận hành rõ; evidence gap có phạm vi; không âm thầm discard</td>
+</tr>
+<tr>
+  <td>BMS-P-25</td>
+  <td>SmartAlarm summary→BMS→SmartAlarm</td>
+  <td>Không tạo incident mới/loop command; origin và namespace bảo toàn</td>
+</tr>
+<tr>
+  <td>BMS-P-26</td>
+  <td>VI/EN/JA severity/action/unknown</td>
+  <td>Ý nghĩa giống nhau; raw native code vẫn truy xuất; không dịch ID/tag</td>
+</tr>
+<tr>
+  <td>BMS-P-27</td>
+  <td>Credential/mapping/command từ tenant khác</td>
+  <td>Denied và audit; không lộ topology/sức khỏe người khác</td>
+</tr>
+<tr>
+  <td>BMS-P-28</td>
+  <td>Cloud/edge hoàn toàn mất</td>
+  <td>Chức năng bảo vệ tại chỗ vẫn vận hành theo thiết kế đã nghiệm thu riêng; không cần SmartAlarm để kích hoạt chuỗi gốc</td>
+</tr>
+</tbody>
+</table>
+
+<p>18 mục protocol assurance được ánh xạ về40 FR, không cộng thành58 chức năng độc lập. Nhóm18 được đặt mã BMS-CTRL để tránh nhầm với8 màn BMS01–08.</p>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Kiểm soát</th>
+  <th>FR-BMS</th>
+  <th>UI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>BMS-CTRL-01</td>
+  <td>Survey</td>
+  <td>01</td>
+  <td>BMS01</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-02</td>
+  <td>Endpoint access</td>
+  <td>02</td>
+  <td>I02/I07</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-03</td>
+  <td>Discovery/import</td>
+  <td>03–04</td>
+  <td>BMS01/F04</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-04</td>
+  <td>Semantic mapping</td>
+  <td>05–07</td>
+  <td>BMS02/F04</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-05</td>
+  <td>Point explorer</td>
+  <td>08–10</td>
+  <td>F07</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-06</td>
+  <td>Alarm reconciliation</td>
+  <td>11/30</td>
+  <td>BMS03</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-07</td>
+  <td>Multi-source correlation</td>
+  <td>13</td>
+  <td>O05/BMS03</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-08</td>
+  <td>Internal ACK</td>
+  <td>14–15</td>
+  <td>O03</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-09</td>
+  <td>External ACK</td>
+  <td>14</td>
+  <td>BMS03</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-10</td>
+  <td>Incident writeback</td>
+  <td>16</td>
+  <td>BMS08</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-11</td>
+  <td>Command approval</td>
+  <td>22–24</td>
+  <td>F09/F10</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-12</td>
+  <td>Outcome evidence</td>
+  <td>25–26</td>
+  <td>F11/F12</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-13</td>
+  <td>Override/relinquish</td>
+  <td>24/27</td>
+  <td>BMS04</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-14</td>
+  <td>History/evidence</td>
+  <td>10/37</td>
+  <td>O21/F07</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-15</td>
+  <td>Health</td>
+  <td>32–34</td>
+  <td>I05/BMS01</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-16</td>
+  <td>Maintenance</td>
+  <td>18</td>
+  <td>F14/F18</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-17</td>
+  <td>FAT/SAT</td>
+  <td>35–36</td>
+  <td>F15/F17</td>
+</tr>
+<tr>
+  <td>BMS-CTRL-18</td>
+  <td>Lifecycle</td>
+  <td>31/40</td>
+  <td>BMS05/BMS07</td>
+</tr>
+</tbody>
+</table>
+
+<p>FAT dùng fixture/emulator và BMS sandbox đúng profile, SAT dùng cấu hình site được chủ thể có thẩm quyền cho phép. Từng case ghi expected/actual/evidence/version/witness; chưa chạy thì status=not_run. Không cần kích hoạt thiết bị chữa cháy thật để chứng minh API đọc. Test physical control phải có kế hoạch impairment, cause-and-effect, người tại chỗ và phương án dừng đã duyệt. Cổng schema trong gói chỉ chứng minh file JSON hợp lệ và thiết kế mặc định chưa bật ghi.</p>
+
+<h3 id="đong-bo-vao-bo-tai-lieu-hien-huu-baseline-30">Đồng bộ vào bộ tài liệu hiện hữu baseline 3.0</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Tài liệu</th>
+  <th>Nội dung đã tích hợp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>BRD</td>
+  <td>Đã tích hợp BR-BMS về giữ đầu tư BMS, cứu hộ dựa evidence và governance; bổ sung BMS owner, facility, OT security, integrator; KPI coverage/gap/ACK outcome.</td>
+</tr>
+<tr>
+  <td>FRD</td>
+  <td>Đã tích hợp 40 FR-BMS chi tiết và WF-34–37; giữ WF-01–33; traceability theo capability.</td>
+</tr>
+<tr>
+  <td>Basic Design</td>
+  <td>BMS domain, edge/conduits, authority matrix, queue priority và recovery; dùng Command hiện hữu.</td>
+</tr>
+<tr>
+  <td>Detail Design</td>
+  <td>Entities/API/events, occurrence identity, cursor/epoch, priority ownership, unknown reconciliation và sizing.</td>
+</tr>
+<tr>
+  <td>UI/UX</td>
+  <td>Đã tích hợp đặc tả và mockup 8 màn mới; sửa I/F/S/O/Q/G theo mapping; hình topology, priority ladder, freshness và timeline.</td>
+</tr>
+<tr>
+  <td>Device / standards catalogs</td>
+  <td>Exact build/interface/license/PICS; phân loại documented, tested, unknown theo capability.</td>
+</tr>
+<tr>
+  <td>API/Event schemas</td>
+  <td>Extension có version, không silently break; reuse physical observation và Command types.</td>
+</tr>
+<tr>
+  <td>Proposal VI/EN</td>
+  <td>Đã tích hợp all-in-one BMS, ranh giới điều khiển, tình huống cháy/no-SOS và qualification; phụ lục40 FR và8 màn đã tích hợp.</td>
+</tr>
+<tr>
+  <td>Acceptance / deployment</td>
+  <td>Đưa48case vào ma trận theo scope, không cộng cơ học độ phủ; build/point map/owner/SLA/rollback/handover.</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="noi-dung-gioi-thieu-khach-hang-tich-hop-trong-proposal">Nội dung giới thiệu khách hàng tích hợp trong proposal</h3>
+
+<p><strong>BMS tiếp tục quản lý tòa nhà; SmartAlarm bổ sung phối hợp cứu hộ dựa trên thông tin tòa nhà.</strong> Khách hàng giữ hệ cơ điện, supervisor và quy trình hiện có, đồng thời kết nối alarm, vị trí thiết bị, trạng thái lối đi và dữ liệu bảo vệ sang app, loa và đội phản ứng. Lợi ích cần đo là độ đầy đủ nguồn, thời gian biết sự cố, người chưa được tiếp cận và kết quả bàn giao; không chỉ số point đã kết nối. Khả năng hai chiều được chọn theo từng interface và hồ sơ quyền, không bán một cam kết plug-and-play chung cho mọi hãng.</p>
+
+<p><strong>Tình huống cháy tại tầng 12:</strong> BMS chuyển alarm kèm source và thời gian; SmartAlarm đối chiếu panel/direct feed để tránh đếm hai lần, khoanh vùng ảnh hưởng và đánh giá route theo door/fan evidence còn hiệu lực. Hồ sơ nhu cầu hỗ trợ và presence đưa người không gửi SOS vào danh sách cần kiểm tra. App/PA sử dụng thông điệp đã duyệt; đội được phân công và phải xác nhận tiếp nhận. Nếu có thao tác BMS được duyệt, Command đi qua policy/edge, sau đó tách receipt, controller report và feedback. BMS normal trở lại không đóng incident cho đến khi điều hành xác minh công tác cứu hộ.</p>
+
+<p>Thông tin cần chốt trước estimate triển khai là product/build/license, interface contract, point/alarm dictionary, network boundaries, quyền ACK/write dự kiến, local cause-and-effect, quy mô/timing/offline và người ký SAT. Thiết kế nền tảng đầy đủ ngay từ đầu; việc bật capability theo bằng chứng là cổng chất lượng, không phải kiến trúc tạm cho demo.</p>
+
+<h2 id="phu-luc-nguon-va-artifact">Phụ lục nguồn và artifact</h2>
+
+<p>Nguồn được các nhánh nghiên cứu tìm/đối chiếu ngày24/10/2026. Link nguồn chuẩn live có thể thay đổi; khi commissioning phải lưu bản/version được duyệt. URL Modbus PDF mới từng timeout khi mở; kết luận Modbus được đối chiếu trang Introduction/Specifications và tài liệu register hãng, không giả định PDF đã đọc trọn. Một source ledger không phải chứng nhận site.</p>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Nguồn</th>
+  <th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>S01</td>
+  <td>Haystack Ops</td>
+  <td><a href="https://project-haystack.org/doc/docHaystack/Ops">Open</a></td>
+</tr>
+<tr>
+  <td>S02</td>
+  <td>Brick Relationships</td>
+  <td><a href="https://docs.brickschema.org/brick/relationships.html">Open</a></td>
+</tr>
+<tr>
+  <td>S03</td>
+  <td>Brick External Representation</td>
+  <td><a href="https://docs.brickschema.org/metadata/external-representations.html">Open</a></td>
+</tr>
+<tr>
+  <td>S04</td>
+  <td>Haystack Points</td>
+  <td><a href="https://project-haystack.org/doc/docHaystack/Points">Open</a></td>
+</tr>
+<tr>
+  <td>S05</td>
+  <td>BACnet Committee – PICS</td>
+  <td><a href="https://bacnet.org/conformance-pics/">Open</a></td>
+</tr>
+<tr>
+  <td>S06</td>
+  <td>BACnet International</td>
+  <td><a href="https://bacnetinternational.org/bacnetsc/">Open</a></td>
+</tr>
+<tr>
+  <td>S07</td>
+  <td>JCI BACnet/SC overview</td>
+  <td><a href="https://docs.johnsoncontrols.com/bas/r/Facility-Explorer/en-US/Facility-Explorer-BACnet/SC-Commissioning-Guide/Introduction/BACnet/SC-overview">Open</a></td>
+</tr>
+<tr>
+  <td>S08</td>
+  <td>OPC Foundation – BACnet companion model</td>
+  <td><a href="https://reference.opcfoundation.org/specs/OPC-30030/3.2.1">Open</a></td>
+</tr>
+<tr>
+  <td>S09</td>
+  <td>Beckhoff command prioritization</td>
+  <td><a href="https://infosys.beckhoff.com/content/1033/tf8020_bacnetrev14/12319323787.html">Open</a></td>
+</tr>
+<tr>
+  <td>S10</td>
+  <td>MSA BACnet MS/TP Driver Manual</td>
+  <td><a href="https://assetlibrary.msasafety.com/m/79e528c359ff4020/original/Protocol-Driver-Manual-BACnet-MS-TP-8700-73.pdf">Open</a></td>
+</tr>
+<tr>
+  <td>S11</td>
+  <td>CODESYS BACnetAcknowledgeAlarm</td>
+  <td><a href="https://content.helpme-codesys.com/en/libs/CmpBACnet/Current/BACnetClientAPI/BACnetAcknowledgeAlarm.html">Open</a></td>
+</tr>
+<tr>
+  <td>S12</td>
+  <td>OPC UA Part 4 – DataValue</td>
+  <td><a href="https://reference.opcfoundation.org/specs/OPC-10000-4/7.11">Open</a></td>
+</tr>
+<tr>
+  <td>S13</td>
+  <td>OPC UA Part 9 – acknowledgeable conditions</td>
+  <td><a href="https://reference.opcfoundation.org/specs/OPC-10000-9/4.3">Open</a></td>
+</tr>
+<tr>
+  <td>S14</td>
+  <td>OPC UA Part 9 – Acknowledge</td>
+  <td><a href="https://reference.opcfoundation.org/specs/OPC-10000-9/5.7.3">Open</a></td>
+</tr>
+<tr>
+  <td>S15</td>
+  <td>OPC UA Part 9 – synchronization</td>
+  <td><a href="https://reference.opcfoundation.org/specs/OPC-10000-9/4.5">Open</a></td>
+</tr>
+<tr>
+  <td>S16</td>
+  <td>OPC UA Part 4 – Services</td>
+  <td><a href="https://reference.opcfoundation.org/specs/OPC-10000-4/5">Open</a></td>
+</tr>
+<tr>
+  <td>S17</td>
+  <td>Modbus Organization – introduction</td>
+  <td><a href="https://www.modbus.org/introduction-to-modbus">Open</a></td>
+</tr>
+<tr>
+  <td>S18</td>
+  <td>Modbus Application Protocol V1.1b3</td>
+  <td><a href="https://www.modbus.org/file/secure/modbusprotocolspecification.pdf">Open</a></td>
+</tr>
+<tr>
+  <td>S19</td>
+  <td>Schneider DOCA0302EN-04</td>
+  <td><a href="https://productinfo.se.com/i-o_smart_link_user_guide/doca0302-i-o-smartlink-user-guide/English/DOCA0302_Smartlink_Modbus_Plus_User_Guide_0001141942.xml/%24/SLMB_Modbus_Table_Formats_0001141927">Open</a></td>
+</tr>
+<tr>
+  <td>S20</td>
+  <td>Modbus Organization – specifications</td>
+  <td><a href="https://www.modbus.org/modbus-specifications">Open</a></td>
+</tr>
+<tr>
+  <td>S21</td>
+  <td>OASIS MQTT 5.0</td>
+  <td><a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html">Open</a></td>
+</tr>
+<tr>
+  <td>S22</td>
+  <td>NIST publication status</td>
+  <td><a href="https://csrc.nist.gov/pubs/sp/800/82/r3/final">Open</a></td>
+</tr>
+<tr>
+  <td>S23</td>
+  <td>NIST SP 800-82r3, phần network segmentation</td>
+  <td><a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-82r3.pdf">Open</a></td>
+</tr>
+<tr>
+  <td>S24</td>
+  <td>REST specification</td>
+  <td><a href="https://sid.siemens.com/r/A6V14948151/29540941067___en-US_29542478475?contentId=l64oBrPVORrEbx6beXKzjw">Open</a></td>
+</tr>
+<tr>
+  <td>S25</td>
+  <td>OPC specification</td>
+  <td><a href="https://sid.siemens.com/r/A6V14948151/29540941067___en-US_29542447755?contentId=ryEd1gVcA_APpnx4L8EE2A">Open</a></td>
+</tr>
+<tr>
+  <td>S26</td>
+  <td>BACnet specification</td>
+  <td><a href="https://sid.siemens.com/r/A6V14948151/29540941067___en-US_29542455435?contentId=zw8Kj4aiIKuJVOt8bK4jSA">Open</a></td>
+</tr>
+<tr>
+  <td>S27</td>
+  <td>Authentication and services</td>
+  <td><a href="https://mybuilding.siemens.com/d036861342594/help/engineeringhelp/en-US/23637026955.html">Open</a></td>
+</tr>
+<tr>
+  <td>S28</td>
+  <td>2021 application note</td>
+  <td><a href="https://cache.industry.siemens.com/dl/files/039/109765039/att_1055671/v1/109765039_EnM_DesigoCC_en_V2.1.pdf">Open</a></td>
+</tr>
+<tr>
+  <td>S29</td>
+  <td>Official SmartConnector developer guide</td>
+  <td><a href="https://github.com/SchneiderElectricBuildings/SmartConnector/blob/main/docs/developer-guide/smartconnector-restful-ews-gateway.md">Open</a></td>
+</tr>
+<tr>
+  <td>S30</td>
+  <td>API v6 reference</td>
+  <td><a href="https://jci-metasys.github.io/api-landing/api/v6-16">Open</a></td>
+</tr>
+<tr>
+  <td>S31</td>
+  <td>Metasys UI licensing</td>
+  <td><a href="https://docs.johnsoncontrols.com/bas/r/Metasys/en-US/Metasys-UI-Help/7.0/Overview/Licensing">Open</a></td>
+</tr>
+<tr>
+  <td>S32</td>
+  <td>API v4 introduction</td>
+  <td><a href="https://jci-metasys.github.io/api-landing/api/v4">Open</a></td>
+</tr>
+<tr>
+  <td>S33</td>
+  <td>EBI current product</td>
+  <td><a href="https://buildings.honeywell.com/gb/en/solutions/integrated-operations/ebi">Open</a></td>
+</tr>
+<tr>
+  <td>S34</td>
+  <td>R600 guide specification, sections OPC/API</td>
+  <td><a href="https://buildings.honeywell.com/content/dam/hbtbt/en/documents/downloads/IS_Guide%20Spec_EBI%20R600_04.20%20V2.pdf">Open</a></td>
+</tr>
+<tr>
+  <td>S35</td>
+  <td>WEBs product</td>
+  <td><a href="https://www.honeywellbuildings.com/bms/building-control-system/honeywell-webs">Open</a></td>
+</tr>
+<tr>
+  <td>S36</td>
+  <td>BTL Honeywell listings</td>
+  <td><a href="https://www.bacnetinternational.net/btl/index.php?m=21">Open</a></td>
+</tr>
+<tr>
+  <td>S37</td>
+  <td>Supervisor4.6 datasheet</td>
+  <td><a href="https://pages1.tridium.com/rs/808-SGM-271/images/Niagara%204.6%20Supervisor_DataSheet_VYKON.pdf">Open</a></td>
+</tr>
+<tr>
+  <td>S38</td>
+  <td>2025 driver catalog</td>
+  <td><a href="https://www.tridium.com/content/dam/tridium/en/documents/document-lists/drivers/tri-niagara-compatible-drivers-applications-en-2025-0020.pdf">Open</a></td>
+</tr>
+<tr>
+  <td>S39</td>
+  <td>NDS product and prerequisites</td>
+  <td><a href="https://www.tridium.com/us/en/Products/niagara-cloud-suite/niagara-data-service">Open</a></td>
+</tr>
+<tr>
+  <td>S40</td>
+  <td>Tridium marketplace: BTIB ActiveAPI</td>
+  <td><a href="https://www.tridium.com/us/en/niagara-marketplace/btib/active-api">Open</a></td>
+</tr>
+<tr>
+  <td>S41</td>
+  <td>enteliWEB4.23 catalog, pages4/7</td>
+  <td><a href="https://deltacontrols.com/wp-content/uploads/enteliWEB-Catalog-Sheet.pdf">Open</a></td>
+</tr>
+<tr>
+  <td>S42</td>
+  <td>Official integration sheet2025</td>
+  <td><a href="https://www.automatedlogic.com/en/media/WebCTRL%20Open%20Integrations%20Platform_110325_tcm702-284058.pdf">Open</a></td>
+</tr>
+<tr>
+  <td>S43</td>
+  <td>EC-Net security</td>
+  <td><a href="https://www.distech-controls.com/en-gb/resources/bms-cybersecurity-support-portal/bms-cybersecurity-products-solutions">Open</a></td>
+</tr>
+<tr>
+  <td>S44</td>
+  <td>EC-Net Facilities</td>
+  <td><a href="https://www.distech-controls.com/de-de/products/detail/947839/distech-controls/ec-net-facilities">Open</a></td>
+</tr>
+<tr>
+  <td>S45</td>
+  <td>Distech developer portal</td>
+  <td><a href="https://developer.distech-controls.com/">Open</a></td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="BMS-Functional-Inventory.csv">Danh mục40chức năng CSV</a> · <a href="BMS-Source-Ledger.csv">Source ledger CSV</a> · <a href="connectors/bms-connector-profile.schema.json">Connector schema</a></p>
+
+<table>
+<thead>
+<tr>
+  <th>Profile</th>
+  <th>JSON</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>bms.siemens.desigo-wsi</td>
+  <td><a href="connectors/bms.siemens.desigo-wsi.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.schneider.ebo-ews</td>
+  <td><a href="connectors/bms.schneider.ebo-ews.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.jci.metasys-rest</td>
+  <td><a href="connectors/bms.jci.metasys-rest.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.honeywell.ebi-api</td>
+  <td><a href="connectors/bms.honeywell.ebi-api.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.honeywell.webs-niagara</td>
+  <td><a href="connectors/bms.honeywell.webs-niagara.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.tridium.niagara-local</td>
+  <td><a href="connectors/bms.tridium.niagara-local.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.tridium.nds-cloud</td>
+  <td><a href="connectors/bms.tridium.nds-cloud.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.delta.enteliweb</td>
+  <td><a href="connectors/bms.delta.enteliweb.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.alc.webctrl-events</td>
+  <td><a href="connectors/bms.alc.webctrl-events.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.alc.webctrl-soap-sdk</td>
+  <td><a href="connectors/bms.alc.webctrl-soap-sdk.json">JSON</a></td>
+</tr>
+<tr>
+  <td>bms.distech.ecnet-niagara</td>
+  <td><a href="connectors/bms.distech.ecnet-niagara.json">JSON</a></td>
+</tr>
+</tbody>
+</table>
+</main></body></html>

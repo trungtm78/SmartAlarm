@@ -1,0 +1,528 @@
+﻿ID,Function,Workflow,Screens,Proposal slide
+WF-01,"Thiết lập tenant/region, SSO/MFA, invitation và workspace, chống lộ tài khoản.",WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",42
+WF-02,"Quản lý site/tầng/zone, sơ đồ có duyệt và vị trí kèm chất lượng.",WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",42
+WF-03,"Nhận event đa nguồn bền vững, xác thực tenant/source, dedupe và quarantine.",WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",42
+WF-04,"Review evidence, tạo/liên kết/tách incident giữ audit và trách nhiệm.",WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",42
+WF-05,"Gửi SOS theo nhu cầu, vị trí thủ công, pending offline và hủy có review.",WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",42
+WF-06,Check-in possible fall với server timer và chuyển cấp khi không phản hồi.,WF-06,"['C24', 'C25']",43
+WF-07,"Báo/điều phối tai nạn theo vị trí, hướng đường và thương tích chưa rõ.",WF-07,['C26'],43
+WF-08,"Nhận CAP/thiên tai đúng issuer, mode, polygon, lineage và expiry.",WF-08,"['C14', 'C15', 'O28', 'O29']",43
+WF-09,Soạn và duyệt warning đúng version nội dung/audience/ngôn ngữ.,WF-09,"['O13', 'O14', 'O15', 'T06']",43
+WF-10,"Theo dõi delivery từng kênh, callback, retry/fallback và escalation.",WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",43
+WF-11,"Phân công đội đủ khả năng, nhận atomically, cập nhật và bàn giao task.",WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",44
+WF-12,"Ghi trạng thái cá nhân có nguồn, chia sẻ nhóm/liên hệ theo consent.",WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",44
+WF-13,"Quản lý shelter và guidance đã duyệt, offline pack có expiry.",WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",44
+WF-14,"Enroll/chứng chỉ thiết bị, health, bảo trì/calibration và coverage gap.",WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",44
+WF-15,Lệnh thiết bị theo capability/interlock/TTL và bằng chứng kết quả.,WF-15,"['O18', 'O19']",44
+WF-16,"Lập/duyệt nhiệm vụ drone, pilot authority, telemetry và lost-link policy.",WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",45
+WF-17,"Vòng đời connector từ manifest, sandbox tới activate/rotate/deprecate.",WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",45
+WF-18,"Đa locale/timezone, residency và danh bạ emergency theo site/quốc gia.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",45
+WF-19,"Retention, legal hold, export/delete đúng scope và audit bất biến.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",45
+WF-20,"Đóng incident, analytics, cải tiến, drill cách ly và bàn giao ca.",WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",45
+WF-21,"PA cho người không smartphone: duyệt vùng/nội dung, playback, live và fallback.",WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",46
+WF-22,"Voice navigation từng chặng theo graph/hazard/accessibility, reroute và SOS.",WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",46
+WF-23,"Hợp nhất định vị có uncertainty, phân biệt presence và đăng ký.",WF-23,"['H10', 'Q01', 'Q02', 'Q03']",46
+WF-24,"Tối ưu tuyến khả thi với hard constraints, capacity và cohort balancing.",WF-24,"['Q04', 'Q05', 'Q10']",46
+WF-25,"AI tóm tắt grounded, đối chiếu SOP và draft; con người duyệt, không actuation.",WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",46
+WF-26,"Quản lý profile trợ giúp, caregiver authority, emergency subset và audit.",WF-26,"['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07']",47
+WF-27,Chủ động tìm/ưu tiên người cần hỗ trợ trước SOS bằng presence và evidence.,WF-27,"['H08', 'H09', 'H12']",47
+WF-28,"Ràng buộc model/firmware/capability, mapping point/zone và cause-effect.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",47
+WF-29,"Giám sát tín hiệu vật lý có provenance/freshness, bảo vệ cục bộ độc lập.",WF-29,"['F01', 'F07', 'F08']",47
+WF-30,"Duyệt/thi hành lệnh có thẩm quyền, đối soát UNKNOWN và local takeover.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",47
+WF-31,"Impairment/test cách ly, biện pháp bù và khôi phục có xác minh.",WF-31,"['F14', 'F18']",48
+WF-32,"Hồ sơ tương thích/chứng nhận, FAT/SAT và cổng bật capability theo cấu hình.",WF-32,"['F15', 'F16', 'F17']",48
+WF-33,"Giao nhiệm vụ robot/water-monitor có operator, giới hạn và kết quả xác minh.",WF-33,['F19'],48
+FR-A01,Chọn vùng và ngôn ngữ: Chọn vùng và ngôn ngữ để bắt đầu đăng nhập.,WF-01,['A01'],49
+FR-A02,Đăng nhập: Đăng nhập bằng passkey hoặc SSO của tổ chức.,WF-01,['A02'],49
+FR-A03,Xác minh danh tính: Xác minh phiên đăng nhập bằng phương thức được cấp.,WF-01,['A03'],49
+FR-A04,Chọn không gian làm việc: Chọn tổ chức và vào phạm vi điều hành được phép.,WF-01,['A04'],49
+FR-A05,Khôi phục truy cập: Gửi liên kết phục hồi mà không tiết lộ tài khoản tồn tại.,WF-01,['A05'],49
+FR-A06,Chấp nhận lời mời: Kiểm tra tổ chức/vai trò và chấp nhận lời mời còn hạn.,WF-01,['A06'],50
+FR-A07,"Quyền truy cập và đồng ý: Lưu lựa chọn thông báo, vị trí, camera và chia sẻ.",WF-01,['A07'],50
+FR-A08,Phiên và thiết bị đăng nhập: Xem phiên/thiết bị có quyền và chọn phiên cần thu hồi.,WF-01,['A08'],50
+FR-A09,"Thu hồi phiên đăng nhập: Thu hồi phiên thiết bị đã chọn, yêu cầu đăng nhập lại.",WF-01,['A09'],50
+FR-A10,"Hồ sơ và khả năng tiếp cận: Lưu ngôn ngữ, cỡ chữ, giảm chuyển động và múi giờ.",WF-01,['A10'],50
+FR-C01,An toàn của bạn: Mở cảnh báo đang hoạt động từ tổng quan cá nhân.,WF-13,['C01'],51
+FR-C02,"Chi tiết cảnh báo: Xem nguồn, mức độ và chỉ dẫn của cảnh báo.",WF-13,['C02'],51
+FR-C03,Hướng dẫn sơ tán: Xem sơ đồ được duyệt hoặc yêu cầu hỗ trợ sơ tán.,WF-13,['C03'],51
+FR-C04,Hướng dẫn bằng giọng nói: Nghe/đọc cùng chỉ dẫn và quay lại sơ đồ.,WF-13,['C04'],51
+FR-C05,Chọn loại trợ giúp: Chọn loại trợ giúp trước khi bổ sung vị trí.,WF-05,['C05'],51
+FR-C06,"Vị trí và nội dung SOS: Nhập vị trí, số người và ghi chú rồi xem lại SOS.",WF-05,['C06'],52
+FR-C07,Xác nhận gửi SOS: Xác nhận phạm vi chia sẻ và gửi SOS tới đơn vị nhận.,WF-05,['C07'],52
+FR-C08,"Theo dõi yêu cầu trợ giúp: Theo dõi biên nhận, ACK, phân công và liên hệ đội.",WF-05,['C08'],52
+FR-C09,Trao đổi với đội ứng cứu: Trao đổi tin nhắn sự cố với đội ứng cứu được giao.,WF-05,['C09'],52
+FR-C10,Cập nhật hoặc đề nghị hủy SOS: Cập nhật hoặc yêu cầu hủy SOS để operator xem xét.,WF-05,['C10'],52
+FR-C11,Báo trạng thái an toàn: Tự báo trạng thái an toàn và chọn phạm vi chia sẻ.,WF-12,['C11'],53
+FR-C12,Biên nhận báo an toàn: Xem biên nhận báo an toàn và kết quả gửi nhóm/liên hệ.,WF-12,['C12'],53
+FR-C13,"Hộp thông báo: Mở thông báo và phân biệt đã gửi, nhận, đọc.",WF-10,['C13'],53
+FR-C14,Nguy cơ gần bạn: Xem nguy cơ lân cận theo nguồn và khoảng cách.,WF-08,['C14'],53
+FR-C15,Thông tin thiên tai: Đọc cảnh báo thiên tai và tìm điểm hỗ trợ.,WF-08,['C15'],53
+FR-C16,Nơi trú ẩn và điểm tập kết: Tìm shelter/điểm tập kết theo trạng thái và accessibility.,WF-13,['C16'],54
+FR-C17,Chi tiết nơi trú ẩn: Xem sức chứa/địa chỉ và lưu shelter dùng offline.,WF-13,['C17'],54
+FR-C18,"Thông tin an toàn ngoại tuyến: Đọc sơ đồ, liên hệ, chỉ dẫn đã cache kèm revision.",WF-13,['C18'],54
+FR-C19,Các nhóm của tôi: Mở nhóm được đăng ký nhận cập nhật an toàn.,WF-12,['C19'],54
+FR-C20,Trò chuyện trong nhóm: Trao đổi trong nhóm và xem trạng thái thành viên.,WF-12,['C20'],54
+FR-C21,"Tạo hoặc sửa nhóm: Lưu thành viên, cách mời và quy tắc chia sẻ nhóm.",WF-12,['C21'],55
+FR-C22,Trạng thái thành viên: Xem trạng thái có nguồn và gửi yêu cầu check-in.,WF-12,['C22'],55
+FR-C23,"Liên hệ khẩn cấp: Lưu liên hệ khẩn cấp, kênh và phạm vi thông tin.",WF-12,['C23'],55
+FR-C24,Chăm sóc và phát hiện té ngã: Cấu hình detector té ngã được hỗ trợ và thử cảnh báo.,WF-06,['C24'],55
+FR-C25,Kiểm tra sau nghi ngờ té ngã: Phản hồi check-in té ngã hoặc yêu cầu trợ giúp ngay.,WF-06,['C25'],55
+FR-C26,"Báo sự cố giao thông: Báo vị trí, hướng đường và thông tin tai nạn chưa rõ.",WF-07,['C26'],56
+FR-C27,Yêu cầu trợ giúp kín đáo: Gửi yêu cầu kín đáo qua giao diện yên lặng.,WF-05,['C27'],56
+FR-C28,Lịch sử yêu cầu: Xem lịch sử báo cáo và mở yêu cầu trợ giúp.,WF-05,['C28'],56
+FR-C29,Quyền riêng tư và dữ liệu: Điều chỉnh chia sẻ tùy chọn và yêu cầu dữ liệu.,WF-19,['C29'],56
+FR-C30,"Biên nhận yêu cầu dữ liệu: Xem biên nhận yêu cầu dữ liệu, không coi đã xử lý xong.",WF-19,['C30'],56
+FR-R01,Ca trực và trạng thái sẵn sàng: Khai báo ca trực/sẵn sàng và xem nhiệm vụ.,WF-11,['R01'],59
+FR-R02,Nhiệm vụ được giao: Mở nhiệm vụ được đề nghị cho đội.,WF-11,['R02'],59
+FR-R03,Tiếp nhận nhiệm vụ: Nhận hoặc từ chối nhiệm vụ theo version hiện hành.,WF-11,['R03'],59
+FR-R04,Đường tiếp cận và đến nơi: Xem lối tiếp cận và báo đã đến hiện trường.,WF-11,['R04'],59
+FR-R05,Tình hình hiện trường: Xem bối cảnh hiện trường và hồ sơ cần trợ giúp.,WF-11,['R05'],59
+FR-R06,"Hồ sơ hỗ trợ tại hiện trường: Ghi quan sát hỗ trợ/triage, không suy thành chẩn đoán.",WF-11,['R06'],60
+FR-R07,Trạng thái và bàn giao nhiệm vụ: Cập nhật nhiệm vụ và gửi hồ sơ bàn giao.,WF-11,['R07'],60
+FR-R08,Hoàn tất nhiệm vụ: Xem hoàn tất nhiệm vụ rồi trở về ca trực.,WF-11,['R08'],60
+FR-R09,Trao đổi trong đội: Trao đổi qua kênh liên lạc đội theo sự cố.,WF-11,['R09'],60
+FR-R10,Ghi nhận bằng chứng: Đính kèm bằng chứng quan sát và đưa vào outbox.,WF-11,['R10'],60
+FR-R11,Dữ liệu chờ đồng bộ: Xem cập nhật chờ sync và xử lý xung đột.,WF-11,['R11'],61
+FR-R12,"Xử lý xung đột đồng bộ: Giữ ghi chú hiện trường, tải lại trạng thái phân công.",WF-11,['R12'],61
+FR-O01,Tổng quan điều hành: Mở sự cố ưu tiên từ tổng quan điều hành.,WF-20,['O01'],62
+FR-O02,Bản đồ tình hình: Xem bản đồ sự cố trong region được cấp quyền.,WF-20,['O02'],62
+FR-O03,Hàng đợi xác minh tín hiệu: Phân loại tín hiệu và mở bằng chứng để kiểm tra.,WF-03,['O03'],62
+FR-O04,"Không gian xử lý sự cố: Điều hành một incident với evidence, người và dispatch.",WF-20,['O04'],62
+FR-O05,Kiểm tra bằng chứng: Kiểm bằng chứng camera/cảm biến trước lập incident.,WF-04,['O05'],62
+FR-O06,"Tạo sự cố: Lập incident với hazard, vị trí và owner.",WF-04,['O06'],63
+FR-O07,"Liên kết hoặc tách sự cố: Liên kết/tách báo cáo trùng, giữ bằng chứng và audit.",WF-04,['O07'],63
+FR-O08,"Bảng điều phối: Chọn đội theo khả năng, sẵn sàng và quyền site.",WF-11,['O08'],63
+FR-O09,Phân công đội ứng cứu: Xác nhận giao nhiệm vụ và owner chịu trách nhiệm.,WF-11,['O09'],63
+FR-O10,Dòng thời gian ứng cứu: Xem timeline quyết định và kiểm trạng thái con người.,WF-11,['O10'],63
+FR-O11,Theo dõi trạng thái con người: Phân biệt người có báo cáo với người chưa rõ.,WF-12,['O11'],64
+FR-O12,Chi tiết yêu cầu hỗ trợ: Xem nhu cầu cá nhân và phân công trợ giúp.,WF-12,['O12'],64
+FR-O13,"Soạn cảnh báo: Soạn cảnh báo có incident, nội dung, vùng và expiry.",WF-09,['O13'],64
+FR-O14,Xem trước nội dung và người nhận: Xem trước thông điệp/audience và gửi duyệt.,WF-09,['O14'],64
+FR-O15,Duyệt cảnh báo: Duyệt độc lập đúng version cảnh báo và audience.,WF-09,['O15'],64
+FR-O16,"Gửi tin và chuyển cấp: Theo dõi từng kênh gửi, ACK và chuyển cấp.",WF-10,['O16'],65
+FR-O17,Xử lý gửi tin thất bại: Xem lỗi gửi và lập fallback theo policy.,WF-10,['O17'],65
+FR-O18,Duyệt lệnh thiết bị: Duyệt hành động thiết bị theo capability/interlock.,WF-15,['O18'],65
+FR-O19,"Trạng thái thực thi lệnh: Đọc bằng chứng controller, giữ unknown nếu thiếu feedback.",WF-15,['O19'],65
+FR-O20,Kiểm tra trước khi đóng sự cố: Kiểm SOS/task/người chưa rõ trước đóng incident.,WF-20,['O20'],65
+FR-O21,Đánh giá sau sự cố: Đánh giá sau sự cố và tạo việc cải tiến.,WF-20,['O21'],66
+FR-O22,"Hành động cải tiến: Giao owner, hạn và nội dung cho việc cải tiến.",WF-20,['O22'],66
+FR-O23,Lập lịch diễn tập: Lập lịch diễn tập tách người nhận thật.,WF-20,['O23'],66
+FR-O24,Điều hành diễn tập: Điều hành bài diễn tập và xem báo cáo kết quả.,WF-20,['O24'],66
+FR-O25,Bàn giao ca trực: Bàn giao trách nhiệm vận hành có người nhận.,WF-20,['O25'],66
+FR-O26,Vận hành nơi trú ẩn: Xem trạng thái/sức chứa shelter và cập nhật.,WF-13,['O26'],67
+FR-O27,Cập nhật nơi trú ẩn: Công bố trạng thái shelter có thời điểm/hiệu lực.,WF-13,['O27'],67
+FR-O28,Nguồn cảnh báo thiên tai: Xem feed thiên tai từ nguồn được cho phép.,WF-08,['O28'],67
+FR-O29,"Kiểm tra thông điệp CAP: Kiểm CAP và tạo phản ứng cục bộ, giữ context nguồn.",WF-08,['O29'],67
+FR-O30,Tìm kiếm và lịch sử kiểm toán: Tìm event/audit mà không sửa lịch sử.,WF-19,['O30'],67
+FR-S01,Danh mục địa điểm: Tìm site trong mô hình vị trí dùng chung.,WF-02,['S01'],70
+FR-S02,Cấu trúc địa điểm: Xem cây site/building/floor/zone và chọn vị trí.,WF-02,['S02'],70
+FR-S03,"Chỉnh sửa vị trí: Lưu vị trí gắn tenant, tọa độ và cấu trúc vật lý.",WF-02,['S03'],70
+FR-S04,Biên tập sơ đồ tầng: Biên tập sơ đồ có exits/accessibility để gửi duyệt.,WF-02,['S04'],70
+FR-S05,Phê duyệt và phiên bản sơ đồ: Duyệt và xuất bản revision sơ đồ có truy vết.,WF-02,['S05'],70
+FR-S06,Danh mục thiết bị: Xem inventory thiết bị và mở health detail.,WF-14,['S06'],71
+FR-S07,"Chi tiết và sức khỏe thiết bị: Xem health, source binding và cấu hình thiết bị.",WF-14,['S07'],71
+FR-S08,Đăng ký thiết bị: Enroll thiết bị vào tenant bằng token/chứng chỉ.,WF-14,['S08'],71
+FR-S09,Giám sát camera: Xem camera được chọn và mở evidence phát hiện.,WF-14,['S09'],71
+FR-S10,Bảo trì và hiệu chuẩn: Lập bảo trì/calibration và hiển thị vùng thiếu bảo vệ.,WF-14,['S10'],71
+FR-S11,Thư viện quy tắc: Chọn rule phát hiện theo hazard/site để sửa.,WF-04,['S11'],72
+FR-S12,Biên tập và mô phỏng quy tắc: Mô phỏng rule trên event đã ghi trước khi duyệt.,WF-04,['S12'],72
+FR-S13,Kiểm thử và duyệt quy tắc: Kiểm kết quả test và trả rule cần sửa.,WF-04,['S13'],72
+FR-S14,Giám sát mô hình AI: Theo dõi detector/model theo site và queue review.,WF-04,['S14'],72
+FR-I01,Danh mục kết nối: Chọn connector theo capability khai báo.,WF-17,['I01'],74
+FR-I02,Thiết lập kết nối: Cấu hình kết nối có scope và kiểm tra.,WF-17,['I02'],74
+FR-I03,Ánh xạ dữ liệu: Ánh xạ schema nguồn sang event có version.,WF-03,['I03'],74
+FR-I04,Kiểm thử kết nối: Chạy contract tests trước kích hoạt connector.,WF-17,['I04'],74
+FR-I05,Sức khỏe các kết nối: Theo dõi transport/processing và dead letters.,WF-17,['I05'],74
+FR-I06,"Xử lý lỗi và phát lại sự kiện: Kiểm lỗi, replay event giữ ID gốc và audit.",WF-17,['I06'],75
+FR-I07,API client và phạm vi quyền: Cấp API client đúng scope cần thiết.,WF-17,['I07'],75
+FR-I08,Đăng ký webhook: Đăng ký webhook lọc sự kiện và gửi payload test.,WF-17,['I08'],75
+FR-I09,Thỏa thuận trao đổi dữ liệu: Lập thỏa thuận chia sẻ xuyên tổ chức.,WF-17,['I09'],75
+FR-I10,Lịch sử trao đổi IOC: Kiểm payload và lịch sử đối tác thực nhận.,WF-17,['I10'],75
+FR-I11,Đội drone: Xem đội drone/health và lập nhiệm vụ.,WF-16,['I11'],76
+FR-I12,"Lập nhiệm vụ drone: Lập mục đích, vùng bay, pilot và điều kiện nhiệm vụ.",WF-16,['I12'],76
+FR-I13,"Kiểm tra trước bay và phê duyệt: Kiểm preflight/clearance trước duyệt, pilot giữ quyền.",WF-16,['I13'],76
+FR-I14,Theo dõi nhiệm vụ drone: Theo dõi telemetry/media drone và độ mới.,WF-16,['I14'],76
+FR-I15,Hồ sơ nhiệm vụ drone: Giữ hồ sơ/bằng chứng nhiệm vụ drone.,WF-16,['I15'],76
+FR-T01,Tổng quan tổ chức: Xem tenant và quản trị tổ chức/region.,WF-20,['T01'],77
+FR-T02,"Tổ chức và vùng dữ liệu: Thiết lập residency, locale và mặc định tổ chức.",WF-18,['T02'],77
+FR-T03,"Người dùng và lời mời: Quản lý user, invitation và membership.",WF-01,['T03'],77
+FR-T04,"Vai trò và phạm vi quyền: Lưu role/site scope, tách nhiệm vụ vận hành.",WF-01,['T04'],77
+FR-T05,Lịch trực và chuyển cấp: Cấu hình on-call và chuyển cấp khi thiếu ACK.,WF-10,['T05'],77
+FR-T06,Mẫu nội dung và ngôn ngữ: Quản lý template được duyệt theo ngôn ngữ.,WF-09,['T06'],78
+FR-T07,Phân loại nguy cơ và quy trình: Biên tập taxonomy hazard và playbook bản nháp.,WF-20,['T07'],78
+FR-T08,Phê duyệt quy trình: Duyệt và công bố trình tự playbook.,WF-20,['T08'],78
+FR-T09,Lưu trữ và bảo toàn pháp lý: Lập retention/hold theo class và region.,WF-19,['T09'],78
+FR-T10,Xử lý yêu cầu quyền riêng tư: Kiểm danh tính/scope/ngoại lệ yêu cầu privacy.,WF-19,['T10'],78
+FR-T11,Bản ghi kiểm toán: Đọc audit bất biến có actor/object/version/reason.,WF-19,['T11'],79
+FR-T12,Sức khỏe dịch vụ và khôi phục: Giám sát service suy giảm và mở recovery runbook.,WF-20,['T12'],79
+FR-T13,Quy trình khôi phục: Ghi kết quả diễn tập phục hồi dữ liệu region.,WF-20,['T13'],79
+FR-T14,Sử dụng và gói dịch vụ: Xem usage/subscription và policy năng lực.,WF-20,['T14'],79
+FR-T15,Dung lượng và giới hạn: Lập quota bảo vệ traffic khẩn cấp khi tải đột biến.,WF-20,['T15'],79
+FR-T16,Phân tích và xuất báo cáo: Đo response với denominator rõ và xuất báo cáo.,WF-20,['T16'],80
+FR-T17,Lập lịch báo cáo: Lập lịch gửi báo cáo tới người đủ quyền.,WF-20,['T17'],80
+FR-X01,Mất mạng · SOS chưa gửi: Hiện SOS chưa tới server và mở outbox.,WF-05,['X01'],81
+FR-X02,Không có quyền vị trí: Cho nhập vị trí bằng tay khi thiếu permission.,WF-05,['X02'],81
+FR-X03,Không có sự cố đang mở: Phân biệt không có incident với health thiết bị.,WF-20,['X03'],81
+FR-X04,Không có quyền truy cập: Không lộ record ngoài scope; chọn lại workspace.,WF-01,['X04'],81
+FR-X05,Dịch vụ tạm gián đoạn: Hiện service unavailable và mở gói offline.,WF-20,['X05'],81
+FR-X06,Thay đổi chưa lưu và xung đột: Giữ draft và so phiên bản khi có conflict.,WF-02,['X06'],82
+FR-X07,Không có kết quả tìm kiếm: Hiện không có kết quả và reset bộ lọc.,WF-20,['X07'],82
+FR-X08,Phiên đăng nhập hết hạn: Yêu cầu đăng nhập lại khi phiên hết hạn.,WF-01,['X08'],82
+FR-X09,Đang tải và dữ liệu cũ: Hiện loading/stale mà không giả dữ liệu mới.,WF-20,['X09'],82
+FR-X10,Tệp đính kèm bị từ chối: Giải thích attachment bị từ chối và chọn lại.,WF-11,['X10'],82
+FR-G01,Vận hành các vùng dữ liệu: Xem vận hành các production cell độc lập.,WF-20,['G01'],83
+FR-G02,Chi tiết regional cell: Kiểm cell region và mức sẵn sàng recovery.,WF-20,['G02'],83
+FR-G03,Diễn tập khôi phục thảm họa: Ghi bằng chứng diễn tập disaster recovery.,WF-20,['G03'],83
+FR-G04,Xác minh khôi phục: Xác minh dữ liệu/writer ownership trước đổi routing.,WF-20,['G04'],83
+FR-G05,Khởi tạo tổ chức: Lập kế hoạch provision boundary tenant production.,WF-18,['G05'],83
+FR-G06,Vòng đời tổ chức: Quản lý lifecycle tenant và yêu cầu support access.,WF-18,['G06'],84
+FR-G07,Truy cập hỗ trợ có thời hạn: Yêu cầu support scope nhỏ nhất với thời hạn.,WF-19,['G07'],84
+FR-G08,Duyệt quyền hỗ trợ: Duyệt session support có scope và expiry.,WF-19,['G08'],84
+FR-G09,Phát hành và tương thích schema: Kiểm release với API/schema compatibility.,WF-20,['G09'],84
+FR-G10,Cổng phát hành và rollback: Ghi quyết định promotion/rollback theo release gate.,WF-20,['G10'],84
+FR-G11,Sự cố an ninh nền tảng: Theo dõi incident an ninh nền tảng.,WF-19,['G11'],85
+FR-G12,Hồ sơ an ninh và cô lập: Contain nguồn sự cố mà không che coverage gap.,WF-19,['G12'],85
+FR-D01,Không gian nhà phát triển: Mở workspace phát triển theo contract rõ.,WF-17,['D01'],86
+FR-D02,"Khám phá API: Thử API trong sandbox, không tác động production.",WF-03,['D02'],86
+FR-D03,Kết quả yêu cầu sandbox: Đọc đầy đủ request receipt và mở schema.,WF-03,['D03'],86
+FR-D04,Danh mục schema: Theo dõi schema/version trước nâng cấp.,WF-03,['D04'],86
+FR-D05,Biên tập manifest kết nối: Khai báo manifest capability để kiểm conformance.,WF-17,['D05'],86
+FR-D06,Kiểm tra tính tương thích: Kiểm adapter dưới lỗi trước duyệt version.,WF-17,['D06'],87
+FR-D07,Truy vết gửi webhook: Theo dấu từng attempt webhook.,WF-10,['D07'],87
+FR-D08,Luân chuyển thông tin xác thực: Yêu cầu rotate credential không lộ secret.,WF-17,['D08'],87
+FR-L01,Mức độ hoàn thiện ngôn ngữ: Theo dõi coverage Việt/Anh/Nhật và bản thiếu.,WF-18,['L01'],88
+FR-L02,Biên tập bản dịch: Biên tập bản dịch message có version để review.,WF-18,['L02'],88
+FR-L03,Phê duyệt bản dịch: Duyệt thuật ngữ và ý nghĩa khẩn cấp bản dịch.,WF-18,['L03'],88
+FR-L04,Giọng đọc và phát âm: Lưu voice/pronunciation khớp text đã duyệt.,WF-18,['L04'],88
+FR-L05,Quy tắc ngôn ngữ dự phòng: Lập fallback policy làm rõ bản dịch thiếu.,WF-18,['L05'],88
+FR-L06,Thuật ngữ khẩn cấp: Quản lý thuật ngữ khẩn cấp nhất quán đa kênh.,WF-18,['L06'],89
+FR-C31,Thành viên và lời mời nhóm: Quản lý membership và lời mời nhóm.,WF-12,['C31'],57
+FR-C32,Mời thành viên nhóm: Tạo lời mời người tin cậy vào nhóm.,WF-12,['C32'],57
+FR-C33,Báo cáo hoặc chặn hội thoại: Báo cáo hoặc chặn liên lạc xã hội không mong muốn.,WF-12,['C33'],57
+FR-C34,Tùy chọn thông báo: Lưu kênh thông báo và giờ yên lặng.,WF-10,['C34'],57
+FR-O31,Lưu trữ và mở lại sự cố: Xem incident đã đóng và lịch sử trước reopen.,WF-20,['O31'],68
+FR-O32,Mở lại sự cố: Mở lại incident với lý do được ghi nhận.,WF-20,['O32'],68
+FR-O33,Chia sẻ sự cố liên tổ chức: Chia sẻ projection incident theo thỏa thuận.,WF-17,['O33'],68
+FR-O34,Hàng đợi hỗ trợ tiếp cận: Phân đội đủ khả năng theo nhu cầu accessibility.,WF-11,['O34'],68
+FR-C35,Dẫn đường thoát hiểm bằng giọng nói: Theo dõi từng chặng hướng dẫn voice đã review.,WF-22,['C35'],57
+FR-C36,Chặng dẫn đường và phương hướng: Đọc mốc định hướng và phát lại chỉ dẫn.,WF-22,['C36'],58
+FR-C37,Thông báo thay đổi tuyến: Thông báo tuyến cũ bị rút và xem tuyến mới.,WF-22,['C37'],58
+FR-C38,Chưa rõ vị trí hoặc không có tuyến: Hiện vị trí/route chưa xác minh và yêu cầu trợ giúp.,WF-22,['C38'],58
+FR-C39,Di chuyển khỏi vùng nguy hiểm: Theo hướng dẫn ngoài trời tránh vùng hạn chế.,WF-22,['C39'],58
+FR-C40,Ngôn ngữ và tùy chọn giọng đọc: Lưu ngôn ngữ/cách nhận voice guidance.,WF-22,['C40'],58
+FR-P01,Vùng loa và độ bao phủ: Chọn vùng loa và xem khoảng trống coverage.,WF-21,['P01'],90
+FR-P02,Soạn thông báo cứu hộ: Soạn nội dung cứu hộ cho đúng vùng/ngôn ngữ.,WF-21,['P02'],90
+FR-P03,"Nghe thử và duyệt thông báo: Duyệt message, vùng và hành vi playback.",WF-21,['P03'],90
+FR-P04,Giám sát phát loa: Giám sát playback riêng với command receipt.,WF-21,['P04'],90
+FR-P05,Thiết bị loa và tự kiểm tra: Kiểm speaker self-test và chuyển fallback coverage.,WF-21,['P05'],90
+FR-P06,Micro cứu hộ trực tiếp: Review live session microphone cho vùng được duyệt.,WF-21,['P06'],91
+FR-P07,Loa trên drone hoặc phương tiện: Phối hợp loa drone/xe với nhiệm vụ được duyệt.,WF-21,['P07'],91
+FR-P08,Thư viện âm thanh và duyệt TTS: Quản lý audio/TTS đã review theo ngôn ngữ.,WF-21,['P08'],91
+FR-P09,Ưu tiên và điều phối phát loa: Lập priority/zone arbitration tránh phát chồng.,WF-21,['P09'],91
+FR-S15,Biên tập mạng lưới thoát hiểm: Biên tập graph tuyến indoor/outdoor có version.,WF-22,['S15'],72
+FR-S16,Mô phỏng và phê duyệt tuyến: Thử hazard/accessibility/uncertainty trước duyệt graph.,WF-22,['S16'],73
+FR-O35,Vùng nguy hiểm và hạn chế di chuyển: Công bố hạn chế di chuyển có thời hạn.,WF-22,['O35'],68
+FR-O36,Phân phối hướng dẫn và biên nhận: Đối chiếu guidance version/receipt app và loa.,WF-22,['O36'],69
+FR-H01,Hồ sơ hỗ trợ cứu hộ của tôi: Ghi nhu cầu hỗ trợ cứu hộ và xem sharing.,WF-26,['H01'],92
+FR-H02,Chia sẻ thông tin hỗ trợ và sức khỏe: Chọn subset health/assistance chia sẻ khẩn cấp.,WF-26,['H02'],92
+FR-H03,Người chăm sóc được ủy quyền: Xem quan hệ caregiver và phạm vi quyền.,WF-26,['H03'],92
+FR-H04,Xác minh quyền người chăm sóc: Xác minh authority trước cấp quan hệ theo scope.,WF-26,['H04'],92
+FR-H05,Hồ sơ người được chăm sóc: Xem kế hoạch hỗ trợ người phụ thuộc.,WF-26,['H05'],92
+FR-H06,Cập nhật và kiểm tra hồ sơ: Cập nhật/review profile theo nguồn và version.,WF-26,['H06'],93
+FR-H07,Danh mục người cần hỗ trợ: Tìm người có thể cần chủ động trợ giúp.,WF-26,['H07'],93
+FR-H08,Chủ động ưu tiên cứu hộ: Xếp queue cứu hộ trước SOS với reason/evidence.,WF-27,['H08'],93
+FR-H09,Căn cứ ưu tiên và quyết định: Xem lý do priority và phân công trợ giúp.,WF-27,['H09'],93
+FR-H10,Hiện diện và kiểm đếm: Phân biệt presence thực ghi nhận và đăng ký.,WF-23,['H10'],93
+FR-H11,Hồ sơ y tế hạn chế truy cập: Đọc emergency medical subset có audit/scope.,WF-19,['H11'],94
+FR-H12,Kết quả chủ động kiểm tra: Ghi kết quả welfare check kể cả chưa có SOS.,WF-27,['H12'],94
+FR-Q01,Sức khỏe nguồn định vị: Giám sát nguồn định vị và chất lượng.,WF-23,['Q01'],95
+FR-Q02,"Chất lượng và lịch sử vị trí: Xem lịch sử vị trí, uncertainty và assistance context.",WF-23,['Q02'],95
+FR-Q03,Hiệu chuẩn định vị trong nhà: Hiệu chuẩn anchor với floor plan có revision.,WF-23,['Q03'],95
+FR-Q04,Tối ưu phương án thoát hiểm: So sánh phương án sơ tán khả thi dưới constraints.,WF-24,['Q04'],95
+FR-Q05,So sánh và chọn tuyến: Duyệt trade-off tuyến và công bố guidance version.,WF-24,['Q05'],95
+FR-Q06,"Trợ lý AI xử lý sự cố: Tóm tắt AI có nguồn, cutoff và uncertainty.",WF-25,['Q06'],96
+FR-Q07,Bằng chứng và duyệt đề xuất AI: Review evidence/đề xuất AI trước quyết định.,WF-25,['Q07'],96
+FR-Q08,Chính sách AI và đánh giá mô hình: Đánh giá model/policy bằng scenario và metric.,WF-25,['Q08'],96
+FR-Q09,Quản trị triển khai AI: Quản trị phiên bản model/prompt đã review.,WF-25,['Q09'],96
+FR-Q10,"Mô phỏng dòng người và kịch bản: Mô phỏng crowd/chiến lược, không khẳng định thực địa.",WF-24,['Q10'],96
+FR-F01,"Tổng quan hệ thống vật lý: Giám sát controller/vùng và freshness, không gộp stale thành an toàn.",WF-29,['F01'],97
+FR-F02,Danh mục bộ điều khiển: Kiểm inventory đúng model/firmware/site; discovery không cấp quyền ghi.,WF-28,['F02'],97
+FR-F03,Chi tiết khả năng bộ điều khiển: Đối chiếu capability; thiếu tài liệu giữ chỉ đọc.,WF-28,['F03'],97
+FR-F04,"Ánh xạ điểm tín hiệu: Ánh xạ point, cực tính và ý nghĩa theo dây/test chứng kiến.",WF-28,['F04'],97
+FR-F05,Ánh xạ vùng vật lý: Ánh xạ zone đúng tầng/tenant và revision sơ đồ.,WF-28,['F05'],97
+FR-F06,Ma trận nguyên nhân–tác động: Review cause-and-effect được site duyệt trước thay đổi.,WF-28,['F06'],98
+FR-F07,"Chi tiết sự kiện vật lý: Giữ source sequence, alarm/trouble/test và incident linkage.",WF-29,['F07'],98
+FR-F08,Trạng thái nước chữa cháy: Tách pump/pressure/valve/flow và khả năng cấp nước.,WF-29,['F08'],98
+FR-F09,"Xem xét kích hoạt có kiểm soát: Review release có phép site, capability và interlock đã xác minh.",WF-30,['F09'],98
+FR-F10,Phê duyệt lệnh thiết bị: Duyệt độc lập đúng digest/target/operation/expiry.,WF-30,['F10'],98
+FR-F11,Phản hồi thực thi: Tách ACK và phản hồi vật lý; thiếu feedback thành UNKNOWN.,WF-30,['F11'],99
+FR-F12,"Đối soát kết quả chưa rõ: Đối soát bằng readback/quan sát, không retry release mù.",WF-30,['F12'],99
+FR-F13,Ưu tiên cục bộ và bàn giao: Thu hồi remote lease khi local override; bàn giao có xác nhận.,WF-30,['F13'],99
+FR-F14,"Suy giảm và chế độ kiểm thử: Lập impairment/test permit, cách ly và biện pháp bù.",WF-31,['F14'],99
+FR-F15,Kế hoạch nghiệm thu: Khóa cấu hình và kế hoạch FAT/SAT có witness/abort.,WF-32,['F15'],99
+FR-F16,Bằng chứng lần kiểm thử: Ghi expected/observed độc lập và bằng chứng từng test.,WF-32,['F16'],100
+FR-F17,Hồ sơ tương thích và chứng nhận: Đối chiếu certificate/BOM/firmware/SAT trước bật capability.,WF-32,['F17'],100
+FR-F18,Bảo trì và khôi phục: Xác minh khôi phục vật lý và site duyệt trước xóa impairment.,WF-31,['F18'],100
+FR-F19,Nhiệm vụ thiết bị cứu hộ: Giao robot cho operator đủ năng lực; API chưa rõ không điều khiển cloud.,WF-33,['F19'],100
+FR-F20,"Kết nối hệ thống vật lý: Onboard connector chỉ đọc, vault credential và capability ký duyệt.",WF-28,['F20'],100
+APP-SYS-001,"Signal/Event: quan sát từ nguồn, immutable; có observed_at và received_at.",ALL,[],101
+APP-SYS-002,"Incident: hồ sơ vận hành tập hợp bằng chứng, có severity và owner.",ALL,[],101
+APP-SYS-003,"SOS: yêu cầu trợ giúp theo người/nhóm, có trạng thái riêng và có thể liên kết incident.",ALL,[],101
+APP-SYS-004,Warning: thông điệp phát hành theo version và audience.,ALL,[],101
+APP-SYS-005,Delivery: một lần gửi qua một kênh.,ALL,[],102
+APP-SYS-006,Task: nhiệm vụ của đơn vị.,ALL,[],102
+APP-SYS-007,"Personal status: lời khai/trạng thái có nguồn, không phải suy luận an toàn tuyệt đối.",ALL,[],102
+APP-SYS-008,"Command: lệnh đến thiết bị, tách khỏi event.",ALL,[],102
+APP-SYS-009,Signal — received → validated → correlated / quarantined / rejected — Gateway xác thực schema/source/tenant; invalid không vào live workflow,ALL,[],103
+APP-SYS-010,Incident — new → triaging → active → contained → resolved → closed — Operator triage; supervisor đóng khi checklist hoàn tất; có reopen với reason,ALL,[],103
+APP-SYS-011,Incident exception — new/triaging → dismissed; bất kỳ incident chưa closed → linked — Dismiss phải có reason; linking không xóa ID hoặc evidence,ALL,[],103
+APP-SYS-012,SOS — submitted → acknowledged → assigned → assisting → resolved — Server receipt khác operator ACK; responder chỉ cập nhật task được giao,ALL,[],103
+APP-SYS-013,SOS cancel — submitted/acknowledged/assigned → cancellation_requested → canceled hoặc tiếp tục — Sau dispatch cần operator quyết định; citizen không xóa hồ sơ,ALL,[],104
+APP-SYS-014,"Person status — unknown, in_danger, help_requested, self_reported_safe, responder_confirmed_assisted — Append observation với timestamp/source; có thể đổi lại danger; safe không đóng incident",ALL,[],104
+APP-SYS-015,Warning — draft → review → approved → sending → active → expired / canceled — Version mới cần duyệt lại; tác giả không duyệt chính mình khi policy yêu cầu,ALL,[],104
+APP-SYS-016,Task — offered → accepted → en_route → on_scene → completed — Hết hạn offer → expired → reassign; decline có reason; task có một owner hiện hành,ALL,[],104
+APP-SYS-017,Command — requested → approved → dispatched → accepted → executing → succeeded / failed / unknown / expired — Device acceptance không đủ chứng minh success; timeout không tự coi failed vật lý,ALL,[],105
+APP-SYS-018,"Tài sản vật lý: controller, bơm, van, hệ xả hoặc thiết bị cứu hộ đang lắp, ràng buộc cấu hình.",ALL,[],105
+APP-SYS-019,Capability: quyền quan sát/điều khiển được duyệt riêng cho thao tác chính xác.,ALL,[],105
+APP-SYS-020,"Phản hồi vật lý: bằng chứng quan sát, khác acknowledgment truyền tải/thiết bị.",ALL,[],105
+APP-SYS-021,"Impairment: giảm bảo vệ có thẩm quyền, cần biện pháp bù và khôi phục xác minh.",ALL,[],106
+APP-SYS-022,"Mission: vận hành thiết bị có giám sát, quyền tại chỗ và bàn giao.",ALL,[],106
+APP-SYS-023,"Nhãn UI UNKNOWN ánh xạ trạng thái máy unknown hiện có, không phải trạng thái kết thúc thành công/thất bại mới.",ALL,[],106
+APP-SYS-024,Vòng đời impairment: requested → approved → active → restoration_pending → verified_closed; hết hạn chưa khôi phục giữ restoration_pending và escalation.,ALL,[],106
+APP-SYS-025,Vòng đời mission: draft → review → approved → locally_accepted → executing → completed / aborted / unknown; hoàn tất cần bằng chứng kết quả.,ALL,[],107
+APP-SYS-026,"Mọi endpoint kiểm tra principal, tenant membership, region, site scope, object ownership và action permission ở server.",ALL,[],107
+APP-SYS-027,Frontend ẩn nút không phải kiểm soát bảo mật.,ALL,[],107
+APP-SYS-028,Người thân chỉ thấy trường được chia sẻ; operator xem thông tin phục vụ incident; platform admin không mặc nhiên đọc data.,ALL,[],107
+APP-SYS-029,Warning approver và command approver có quyền riêng.,ALL,[],108
+APP-SYS-030,"Break-glass yêu cầu lý do, thời hạn, audit và thông báo người giám sát; không bỏ tenant boundary.",ALL,[],108
+APP-SYS-031,Từ chối truy cập object ngoài scope trả 404 hoặc lỗi không tiết lộ tồn tại.,ALL,[],108
+APP-SYS-032,"Danh sách phân trang cursor, sort ổn định (created_at,id), tối đa 100 bản ghi/trang.",ALL,[],108
+APP-SYS-033,"Tất cả mutation có validation, idempotency khi tạo tác động và optimistic concurrency khi cập nhật.",ALL,[],109
+APP-SYS-034,"Các màn list có search/filter theo trường phù hợp, trạng thái loading/empty/error/denied; form có required/invalid/conflict/unsaved; detail có stale/not-found.",ALL,[],109
+APP-SYS-035,Dữ liệu prototype không phải telemetry thật.,ALL,[],109
+APP-SYS-036,"Điều khiển vật lý kiểm tra thêm capability site/controller, quyền hãng, policy truy cập OT, impairment/lockout hiện tại, thẩm quyền tại chỗ và phê duyệt theo thao tác.",ALL,[],109
+APP-SYS-037,"UI phân biệt chỉ giám sát, đủ điều kiện điều khiển, bị khóa, cũ và UNKNOWN.",ALL,[],110
+APP-SYS-038,Quyền kỹ thuật không mặc nhiên là quyền chỉ huy sự cố.,ALL,[],110
+APP-SYS-039,"Phân đoạn OT khỏi mạng công cộng; allowlist endpoint/thao tác hỗ trợ, kiểm soát truy cập bảo trì, giữ audit credential/thay đổi.",ALL,[],110
+APP-SYS-040,"Phát hiện, khởi động bơm và bảo vệ xả tự động cục bộ không phụ thuộc duyệt/kết nối cloud.",ALL,[],110
+APP-SYS-041,"Actor admin tạo tenant với immutable home_region; chọn locale/timezone, thiết lập SSO/MFA, mời membership theo site.",WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",111
+APP-SYS-042,User chọn workspace trước khi vào console.,WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",111
+APP-SYS-043,Email chưa tồn tại và tồn tại trả cùng thông điệp recovery để giảm enumeration.,WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",111
+APP-SYS-044,"Invite dùng một lần, TTL, đúng email/domain policy.",WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",111
+APP-SYS-045,SSO không khả dụng có break-glass account được kiểm soát ở tenant phù hợp; không tự bypass MFA.,WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",112
+APP-SYS-046,AC: invite hết hạn bị từ chối; role đã revoke không được dùng token cũ sau hạn revocation propagation 60 s đề xuất; switch workspace không hiển thị cache tenant cũ.,WF-01,"['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'T03', 'T04', 'X04', 'X08']",112
+APP-SYS-047,Site admin tạo graph country/region/site/building/floor/zone/road-segment/geofence.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",112
+APP-SYS-048,Không bắt buộc mọi site có tầng.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",112
+APP-SYS-049,Device binding kiểm tra thuộc cùng tenant.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",113
+APP-SYS-050,"Floor plan có revision, scale, exits, accessibility và người duyệt.",WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",113
+APP-SYS-051,Mỗi incident lưu plan revision đã sử dụng.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",113
+APP-SYS-052,"Vị trí mang method, accuracy, age; GPS không tự suy ra tầng.",WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",113
+APP-SYS-053,Không có định vị thì user nhập vị trí thủ công và gửi SOS.,WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",114
+APP-SYS-054,"AC: không publish plan thiếu reviewer; zone có incident active không hard-delete; route thiếu freshness hiện “not verified”, không hiển thị là tuyến chắc chắn an toàn.",WF-02,"['S01', 'S02', 'S03', 'S04', 'S05', 'X06']",114
+APP-SYS-055,"Adapter kiểm tra credential, tenant binding, schema, clock skew, payload limit rồi ghi event bền vững trước receipt.",WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",114
+APP-SYS-056,"Duplicate key (tenant,source,event_id) trả receipt cũ.",WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",114
+APP-SYS-057,Event trễ vẫn lưu để audit nhưng rule live xét TTL theo hazard.,WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",115
+APP-SYS-058,Unknown source/quyền/unit/location bị quarantine.,WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",115
+APP-SYS-059,"Input hỗ trợ HTTPS/CloudEvents, MQTT adapter, CAP, camera metadata, wearable, telematics và manual.",WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",115
+APP-SYS-060,AC: replay 100 lần cùng ID tạo một event; hai tenant cùng event ID không collision; source có tenant spoof bị chặn; event stale không khởi động command.,WF-03,"['O03', 'I03', 'D02', 'D03', 'D04']",115
+APP-SYS-061,"Rule versioned cung cấp candidate incident theo khoảng thời gian, zone, hazard và source.",WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",116
+APP-SYS-062,"Operator xem evidence và confidence, tạo hoặc liên kết; split giữ audit và liên kết nguồn.",WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",116
+APP-SYS-063,Không gom khác hazard chỉ vì gần nhau; cross-hazard relationship có type (caused_by/nearby/possible_duplicate).,WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",116
+APP-SYS-064,"Camera detection được gọi “possible fire”; fire panel policy có thể lập tức mở response theo site-approved workflow, không phải đợi AI.",WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",116
+APP-SYS-065,AC: merge không mất SOS/task; split không nhân dispatch; rule thay đổi không sửa lịch sử; có reason khi dismiss.,WF-04,"['O05', 'O06', 'O07', 'S11', 'S12', 'S13', 'S14']",117
+APP-SYS-066,"User chọn category hoặc Other/Unknown; nhập/cập nhật vị trí, ghi chú và số người.",WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",117
+APP-SYS-067,Emergency flow không buộc điền hết profile.,WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",117
+APP-SYS-068,Server trả SOS ID và received_at sau commit.,WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",117
+APP-SYS-069,Client hiển thị pending khi chỉ lưu local.,WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",118
+APP-SYS-070,"Lệnh gửi lại dùng client_request_id, TTL và trạng thái đã reconcile.",WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",118
+APP-SYS-071,"Với threat/discreet, mặc định không âm thanh và không fan-out nhóm; với hỗ trợ thông thường severity theo rule, không coi mọi SOS là P1.",WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",118
+APP-SYS-072,AC: mất mạng không hiện “đã nhận”; gửi lại không tạo SOS thứ hai; người không cấp GPS vẫn gửi vị trí bằng tay; đổi category không mất ID.,WF-05,"['C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C27', 'C28', 'X01', 'X02']",118
+APP-SYS-073,"Detector được phê duyệt phát possible_fall; app hiện check-in 30 s đề xuất, có “I'm OK” và “Get help now”.",WF-06,"['C24', 'C25']",119
+APP-SYS-074,"Nếu không có phản hồi, server timer tiếp tục kể cả app bị đóng; tạo yêu cầu operator/caregiver theo consent.",WF-06,"['C24', 'C25']",119
+APP-SYS-075,"Thiết bị offline tạo trạng thái unknown, không kết luận người đã té.",WF-06,"['C24', 'C25']",119
+APP-SYS-076,"Thời gian check-in được cấu hình theo dịch vụ/nhóm, có accessibility alternative; không tự dùng làm chẩn đoán.",WF-06,"['C24', 'C25']",119
+APP-SYS-077,AC: app bị kill vẫn escalation; late “I'm OK” cập nhật chứ không rút task đang xử lý âm thầm; false positive lưu review reason.,WF-06,"['C24', 'C25']",120
+APP-SYS-078,"Report/telematics cung cấp position, heading nếu có, road segment, vehicle count và injuries=unknown.",WF-07,['C26'],120
+APP-SYS-079,Correlation phân biệt hai chiều đường hoặc tầng cầu.,WF-07,['C26'],120
+APP-SYS-080,"User có thể gửi nhanh tối thiểu, bổ sung sau.",WF-07,['C26'],120
+APP-SYS-081,Điều phối tới đơn vị được cấu hình; chưa có hợp đồng không tự gọi emergency public endpoint.,WF-07,['C26'],121
+APP-SYS-082,AC: thiếu injury data được chấp nhận dưới dạng unknown; không auto-confirm collision từ một mẫu gia tốc; dữ liệu nhạy cảm chỉ vào assigned team.,WF-07,['C26'],121
+APP-SYS-083,"Connector allowlist issuer, kiểm tra XML/schema, identifiers, sent, status, scope, info/area và expiry.",WF-08,"['C14', 'C15', 'O28', 'O29']",121
+APP-SYS-084,Dedupe sender+identifier; Update/Cancel tham chiếu bản trước và phải giữ lineage.,WF-08,"['C14', 'C15', 'O28', 'O29']",121
+APP-SYS-085,Official warning và local response là hai object.,WF-08,"['C14', 'C15', 'O28', 'O29']",122
+APP-SYS-086,Warning hết hạn không tiếp tục live broadcast; cancel không xóa bản đã gửi.,WF-08,"['C14', 'C15', 'O28', 'O29']",122
+APP-SYS-087,"Polygon dùng đúng thứ tự tọa độ của CAP, chuyển explicit sang GeoJSON; không đảo lat/lon ngầm.",WF-08,"['C14', 'C15', 'O28', 'O29']",122
+APP-SYS-088,AC: Test/Exercise không vào luồng Actual; issuer không cho phép bị quarantine; Update thay active version nhưng lưu trước; user ngoài polygon không bị chọn do lỗi tọa độ.,WF-08,"['C14', 'C15', 'O28', 'O29']",122
+APP-SYS-089,"Author chọn incident, vùng/site/group, severity, ngôn ngữ, nội dung và expiry.",WF-09,"['O13', 'O14', 'O15', 'T06']",123
+APP-SYS-090,Preview audience là snapshot gồm recipients đủ điều kiện và lý do loại trừ; approver độc lập ký version.,WF-09,"['O13', 'O14', 'O15', 'T06']",123
+APP-SYS-091,Thay nội dung/audience sau approval bắt buộc duyệt lại.,WF-09,"['O13', 'O14', 'O15', 'T06']",123
+APP-SYS-092,Break-glass phát nhanh chỉ theo quyền đặc biệt và audit; không yêu cầu mọi P1 phải chờ duyệt nếu site playbook cho phép template preapproved.,WF-09,"['O13', 'O14', 'O15', 'T06']",123
+APP-SYS-093,"Translation máy chỉ draft, nội dung an toàn phải reviewed.",WF-09,"['O13', 'O14', 'O15', 'T06']",124
+APP-SYS-094,AC: approve v3 không cho send v4; gửi nhầm tenant bằng audience ID bị chặn; scheduled warning tái kiểm tra expiry và permission lúc phát.,WF-09,"['O13', 'O14', 'O15', 'T06']",124
+APP-SYS-095,Notification tạo từng delivery attempt theo recipient/channel/version; trạng thái queued/submitted/provider_accepted/delivered/read/human_ack/failed/unknown không bị gộp.,WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",124
+APP-SYS-096,Provider callback xác thực và chống replay.,WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",124
+APP-SYS-097,"Deadline không ACK kích hoạt escalation bền vững, có owner và max steps.",WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",125
+APP-SYS-098,"Channel fallback không tự gửi nội dung riêng tư qua SMS; template SMS tối thiểu, link xác thực khi cần.",WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",125
+APP-SYS-099,Push không bảo đảm vượt chế độ im lặng của hệ điều hành.,WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",125
+APP-SYS-100,"AC: provider accepted không tăng human ACK count; callback trùng không nhân escalation; provider lỗi có retry bounded và alternate provider, 429 tôn trọng retry_after.",WF-10,"['C13', 'O16', 'O17', 'T05', 'D07', 'C34']",125
+APP-SYS-101,"Dispatcher lọc unit theo capability, availability, site authorization và vị trí mới nhất.",WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",126
+APP-SYS-102,ETA chỉ là ước tính có timestamp.,WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",126
+APP-SYS-103,Offer có deadline; unit accept atomically bằng version.,WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",126
+APP-SYS-104,Không ai nhận thì escalate; không tự đánh dấu dispatched hoàn thành.,WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",126
+APP-SYS-105,"Responder chuyển en_route/on_scene, ghi observations, handover, task complete; task completion không đóng incident.",WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",127
+APP-SYS-106,AC: hai dispatcher không gán hai owner cho một task; offline acceptance chưa server confirm phải ghi pending; reassignment giữ note của responder cũ dưới observation.,WF-11,"['R01', 'R02', 'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10', 'R11', 'R12', 'O08', 'O09', 'O10', 'X10', 'O34']",127
+APP-SYS-107,"Safety report lưu status, person, incident scope, observed_at, reporter và location precision.",WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",127
+APP-SYS-108,"Fan-out đến tất cả nhóm đăng ký đủ điều kiện tại thời điểm báo, cộng contacts đã xác minh; mỗi recipient được dedupe.",WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",127
+APP-SYS-109,"Mỗi nhóm nhận status, vị trí chi tiết chỉ khi consent cụ thể.",WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",128
+APP-SYS-110,Revoked membership/consent được kiểm tra lại trước delivery.,WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",128
+APP-SYS-111,"Group chat có membership, report abuse, block cá nhân cho social; block không được tắt mandatory site warning theo policy đã công bố.",WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",128
+APP-SYS-112,AC: 3 nhóm cùng một contact không gửi 3 SMS giống nhau; consent location off không rò tọa độ; safe report không đóng building incident; unknown không đếm safe.,WF-12,"['C11', 'C12', 'C19', 'C20', 'C21', 'C22', 'C23', 'O11', 'O12', 'C31', 'C32', 'C33']",128
+APP-SYS-113,"Operator duy trì shelter status, capacity estimate, timestamp, accessibility và valid_until.",WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",129
+APP-SYS-114,"Offline pack lưu plan/guidance/contact có version và expiry, không đảm bảo live route.",WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",129
+APP-SYS-115,"Voice dùng cùng approved text với transcript, có pause/replay; không autoplay gây lộ discreet mode.",WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",129
+APP-SYS-116,"Không có route verified thì chỉ trình bày plan và hướng dẫn được phê duyệt, không tự vẽ tuyến tối ưu tránh cháy.",WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",129
+APP-SYS-117,AC: shelter hết valid_until thành unknown; capacity không có dữ liệu không hiện 0; offline plan hiển thị age.,WF-13,"['C01', 'C02', 'C03', 'C04', 'C16', 'C17', 'C18', 'O26', 'O27']",130
+APP-SYS-118,Enrollment token một lần; device certificate có rotate/revoke.,WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",130
+APP-SYS-119,Heartbeat thresholds theo device class; stale/disconnected khác trạng thái an toàn của khu vực.,WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",130
+APP-SYS-120,"Maintenance suppression có start/end, reason, approver và coverage thay thế; luôn hiển thị khoảng mù.",WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",130
+APP-SYS-121,Hết maintenance tự phục hồi monitoring và log.,WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",131
+APP-SYS-122,AC: cert revoked không ingest; hết maintenance không tiếp tục suppress; firmware upgrade không tự động đồng loạt trong active incident.,WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",131
+APP-SYS-123,Bảo trì vật lý áp dụng thêm WF-31: hết cửa sổ suppress phần mềm không chứng minh bảo vệ vật lý đã khôi phục; vẫn bắt buộc kiểm tra tại chỗ và acknowledgment cần thiết.,WF-14,"['S06', 'S07', 'S08', 'S09', 'S10']",131
+APP-SYS-124,"Command chỉ cho capability đã khai báo; parameter schema, zone, expiry, interlock, authorized approver và local controller policy đều bắt buộc.",WF-15,"['O18', 'O19']",131
+APP-SYS-125,Không gửi raw arbitrary command từ web.,WF-15,"['O18', 'O19']",132
+APP-SYS-126,"Gateway receipt, device accepted, executing và verified result riêng.",WF-15,"['O18', 'O19']",132
+APP-SYS-127,Timeout unknown không blind retry lệnh không idempotent.,WF-15,"['O18', 'O19']",132
+APP-SYS-128,Actuation cloud không thay vòng bảo vệ cục bộ được chứng nhận.,WF-15,"['O18', 'O19']",132
+APP-SYS-129,Sprinkler đầu kín thường hoạt động nhiệt; prototype không giả định phần mềm mở từng đầu phun.,WF-15,"['O18', 'O19']",133
+APP-SYS-130,AC: command hết TTL không execute sau reconnect; zone mismatch reject; accepted mà không feedback giữ unknown/awaiting confirmation; simulator không có credential live.,WF-15,"['O18', 'O19']",133
+APP-SYS-131,WF-30 chi tiết hóa workflow lệnh này cho thiết bị chữa cháy/cứu hộ đang lắp.,WF-15,"['O18', 'O19']",133
+APP-SYS-132,"Giám sát wet-pipe, yêu cầu tủ xả, yêu cầu bơm và tác động thiết bị di động là capability riêng; dùng ràng buộc WF-28 và nghiệm thu WF-32 trước khi bật điều khiển.",WF-15,"['O18', 'O19']",133
+APP-SYS-133,Fleet adapter trước hết cung cấp telemetry/media và health.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",134
+APP-SYS-134,"Mission draft có purpose, incident, route/geofence, altitude reference, pilot, clearance, weather check và lost-link policy.",WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",134
+APP-SYS-135,Local pilot quyết định triển khai theo năng lực hệ thống được tích hợp.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",134
+APP-SYS-136,Approval không đồng nghĩa đã cất cánh.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",134
+APP-SYS-137,Không tự động phát TAKEOFF dựa trên AI detector.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",135
+APP-SYS-138,Lệnh abort/return phải có capability và xác nhận của flight stack; UI không hứa cancel phổ quát.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",135
+APP-SYS-139,AC: thiếu pilot/clearance không approve; stale telemetry vô hiệu command phụ thuộc vị trí; mất link hiện unknown và local policy tiếp tục; mission evidence có hash/provenance.,WF-16,"['I11', 'I12', 'I13', 'I14', 'I15']",135
+APP-SYS-140,Install manifest → configure secret reference → map → sandbox test → approve → activate → monitor → rotate/deprecate.,WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",135
+APP-SYS-141,"Connector chạy quyền tối thiểu, allowlist outbound, quota/backpressure và kill switch.",WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",136
+APP-SYS-142,"Replay DLQ cần reason, schema đúng và giữ original ID; replay command bị chặn mặc định.",WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",136
+APP-SYS-143,Cross-tenant exchange chỉ qua agreement và payload allowlist.,WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",136
+APP-SYS-144,AC: adapter lỗi không ngăn SOS trực tiếp; payload quá lớn reject 413; incompatible major schema quarantine; secret không lộ trong logs/export.,WF-17,"['I01', 'I02', 'I04', 'I05', 'I06', 'I07', 'I08', 'I09', 'I10', 'D01', 'D05', 'D06', 'D08', 'O33']",136
+APP-SYS-145,"UTC cho lưu trữ, IANA timezone cho hiển thị/lịch, BCP47 locale, Unicode, E.164 cho số điện thoại theo quốc gia.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",137
+APP-SYS-146,"UI có RTL layout test, pluralization và pseudo-localization.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",137
+APP-SYS-147,Không hardcode số emergency toàn cầu; emergency contact registry được xác minh theo quốc gia/site.,WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",137
+APP-SYS-148,"Residency áp dụng DB, object store, backup, logs, support và export; global routing không mang raw SOS.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",137
+APP-SYS-149,"AC: lịch qua DST không gửi hai lần nhờ schedule occurrence ID; locale dài không che CTA; changing region là migration có review, không chỉ sửa dropdown.",WF-18,"['T02', 'G05', 'G06', 'L01', 'L02', 'L03', 'L04', 'L05', 'L06']",138
+APP-SYS-150,"Data class có retention policy, legal hold và delete job có report.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",138
+APP-SYS-151,"Export/deletion phải xác minh requester, scope và ngoại lệ; không xóa evidence có hold.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",138
+APP-SYS-152,"Audit append-only với actor, action, object/version, reason, time, correlation, before/after digest.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",138
+APP-SYS-153,"Không nhúng token, raw secret hoặc toàn bộ medical note vào audit.",WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",139
+APP-SYS-154,AC: truy cập precise location được log; delete không xóa record held; export không chứa tenant khác; break-glass hết TTL tự revoke.,WF-19,"['C29', 'C30', 'O30', 'T09', 'T10', 'T11', 'G07', 'G08', 'G11', 'G12', 'H11']",139
+APP-SYS-155,"Closure cần open SOS/task check, unknown-person disposition, partner handover, reason và supervisor.",WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",139
+APP-SYS-156,“All clear” warning là hành động riêng.,WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",139
+APP-SYS-157,"Drill có environment+mode isolation ở broker, credentials và recipient directory; banner alone không đủ.",WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",140
+APP-SYS-158,"Báo cáo tách transport latency, operator latency và response latency; mẫu thiếu dữ liệu ghi denominator rõ.",WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",140
+APP-SYS-159,AC: safety check-in không close; drill không gọi live webhook/actuator; shift handover có incoming acknowledgment; report chỉ deidentified nếu user không có quyền PII.,WF-20,"['O01', 'O02', 'O04', 'O20', 'O21', 'O22', 'O23', 'O24', 'O25', 'T01', 'T07', 'T08', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'X03', 'X05', 'X07', 'X09', 'G01', 'G02', 'G03', 'G04', 'G09', 'G10', 'O31', 'O32']",140
+APP-SYS-160,"Ràng buộc model khu vực đang lắp, serial, firmware, gateway, license, quyền hãng và hồ sơ tương thích trước khi bật adapter.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",140
+APP-SYS-161,"Nhập và review độc lập địa chỉ điểm, trạng thái ngữ nghĩa, đơn vị/scaling, site/zone và revision cause-and-effect.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",141
+APP-SYS-162,"Phân biệt tài sản wet-pipe, pre-action/deluge, bơm và cứu hộ di động.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",141
+APP-SYS-163,Capability chưa biết mặc định chỉ giám sát; onboarding không tạo quyền điều khiển.,WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",141
+FR-PHY-01,FR-PHY-01: giữ định danh thiết bị/giao diện chính xác và revision bằng chứng được duyệt.,WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",141
+FR-PHY-02,"FR-PHY-02: xác thực mapping điểm/zone với nhãn vật lý, từ chối khác tenant, trùng hoặc chưa giải quyết.",WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",142
+FR-PHY-03,FR-PHY-03: version cause-and-effect và hợp đồng capability đọc/điều khiển; thay đổi phải review tác động và nghiệm thu lại phần ảnh hưởng.,WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",142
+APP-SYS-167,AC: thay firmware/license chưa ràng buộc đình chỉ điều khiển phụ thuộc; mapping sai zone không được bật; đầu wet-pipe không được đưa ra như output điều khiển riêng.,WF-28,"['F02', 'F03', 'F04', 'F05', 'F06', 'F20']",142
+APP-SYS-168,"Nhận trạng thái tủ, bơm, van, xả, waterflow, nguồn và link được hãng hỗ trợ, có provenance/chất lượng.",WF-29,"['F01', 'F07', 'F08']",142
+APP-SYS-169,Giữ ưu tiên cảnh báo controller và bảo vệ cục bộ khi cloud/edge không hoạt động.,WF-29,"['F01', 'F07', 'F08']",143
+APP-SYS-170,"Tách nhu cầu, motor chạy, output xả, vị trí van, waterflow và quan sát hiện trường đã xác nhận.",WF-29,"['F01', 'F07', 'F08']",143
+APP-SYS-171,Giá trị thiếu/cũ giữ unknown; không biến lỗi link thành chỉ thị an toàn.,WF-29,"['F01', 'F07', 'F08']",143
+FR-PHY-04,"FR-PHY-04: lưu thời gian nguồn/nhận, địa chỉ nguồn, đơn vị, chất lượng, revision mapping và tham chiếu bằng chứng gốc cho mỗi quan sát.",WF-29,"['F01', 'F07', 'F08']",143
+FR-PHY-05,"FR-PHY-05: giám sát freshness/sức khỏe link bằng ngưỡng thiết bị/site được duyệt, hiển thị khoảng trống bảo vệ và biện pháp bù.",WF-29,"['F01', 'F07', 'F08']",144
+FR-PHY-06,FR-PHY-06: tương quan không ngăn bảo vệ cục bộ; dedupe replay truyền tải nhưng giữ chuyển trạng thái và bằng chứng phục hồi.,WF-29,"['F01', 'F07', 'F08']",144
+APP-SYS-175,AC: dữ liệu bơm chạy cũ hiện chưa chắc chắn; áp suất riêng lẻ không xác nhận xả; mất cloud vẫn có bảo vệ tự động tại chỗ; telemetry trùng không tạo incident trùng.,WF-29,"['F01', 'F07', 'F08']",144
+APP-SYS-176,"Chỉ thao tác đã nghiệm thu site, được xác định rõ có quyền điều khiển mới tạo yêu cầu vật lý.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",144
+APP-SYS-177,"Kiểm tra thẩm quyền actor, incident/site/zone, giới hạn tham số được duyệt, mức sẵn sàng vật lý hiện tại, interlock cục bộ, expiry lệnh và yêu cầu phê duyệt độc lập theo policy.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",145
+APP-SYS-178,Thẩm quyền site/controller ưu tiên.,WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",145
+APP-SYS-179,"Không giả định ghi BACnet/Modbus, relay hay ACK mạng cấp quyền hoặc chứng minh chữa cháy.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",145
+APP-SYS-180,AI không tự khởi tạo tác động xả/khởi động/chuyển động.,WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",145
+FR-PHY-07,FR-PHY-07: từ chối thao tác chỉ giám sát hoặc thiếu tài liệu ở server và edge; giữ yêu cầu đã duyệt và version policy lệnh.,WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",146
+FR-PHY-08,"FR-PHY-08: thực thi TTL, request ID duy nhất, chống tác động trùng và truyền có giới hạn; không replay yêu cầu hết hạn sau reconnect hoặc blind retry thao tác không idempotent.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",146
+FR-PHY-09,"FR-PHY-09: tách receipt truyền tải, thiết bị chấp nhận, thực thi và phản hồi vật lý; chỉ đánh giá thành công theo bằng chứng được duyệt riêng cho thao tác.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",146
+FR-PHY-10,"FR-PHY-10: hiện UNKNOWN khi kết quả thiếu/mâu thuẫn; giao đối soát cho người có tên, hỗ trợ ưu tiên cục bộ và bàn giao thủ công có acknowledgment, không xóa lịch sử.",WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",146
+APP-SYS-185,AC: ACK thiếu phản hồi bắt buộc không thành succeeded; yêu cầu trùng/hết hạn không tạo tác động mới; mất phản hồi mở đối soát; local override chặn điều khiển từ xa xung đột.,WF-30,"['F09', 'F10', 'F11', 'F12', 'F13']",147
+APP-SYS-186,"Impairment được phép xác định thiết bị, zone ảnh hưởng, cửa sổ thời gian, lý do, chủ sở hữu, bảo vệ bù và bố trí test/lockout tại chỗ.",WF-31,"['F14', 'F18']",147
+APP-SYS-187,"Tách credential, route và output test/production; banner UI không đủ.",WF-31,"['F14', 'F18']",147
+APP-SYS-188,"Hết hạn yêu cầu xác minh khôi phục và escalation, không tự tuyên bố bảo vệ đã trở lại.",WF-31,"['F14', 'F18']",147
+APP-SYS-189,Trách nhiệm an toàn tại chỗ luôn rõ khi bàn giao ca.,WF-31,"['F14', 'F18']",148
+FR-PHY-11,"FR-PHY-11: yêu cầu impairment được duyệt và bằng chứng cách ly/lockout vật lý trước thử liên quan; chặn lệnh production không được phép, giữ bố trí bảo vệ cục bộ đã thỏa thuận.",WF-31,"['F14', 'F18']",148
+FR-PHY-12,"FR-PHY-12: chỉ đóng impairment sau kiểm tra trạng thái vật lý, bằng chứng khôi phục và xác nhận người chịu trách nhiệm; theo dõi khôi phục quá hạn/khoảng trống còn lại.",WF-31,"['F14', 'F18']",148
+APP-SYS-192,AC: thử mô phỏng không tới output thật; hết hạn chưa xác minh vẫn impaired/awaiting restoration; bàn giao bảo trì có người nhận trách nhiệm.,WF-31,"['F14', 'F18']",148
+APP-SYS-193,"Duy trì hồ sơ theo cấu hình gồm tài liệu hãng, quyền giao diện, listing/giới hạn khu vực, point map, phụ thuộc điện/thủy lực, cause-and-effect được duyệt, FAT, SAT, commissioning, hiệu chuẩn và đào tạo.",WF-32,"['F15', 'F16', 'F17']",149
+APP-SYS-194,Nghiên cứu hãng/kết quả simulator không phải nghiệm thu hiện trường.,WF-32,"['F15', 'F16', 'F17']",149
+APP-SYS-195,Không suy chứng nhận toàn hệ từ listing thành phần.,WF-32,"['F15', 'F16', 'F17']",149
+FR-PHY-13,"FR-PHY-13: theo dõi revision tài liệu, provenance, reviewer, expiry khi áp dụng và phạm vi nghiệm thu theo model/firmware/site/capability.",WF-32,"['F15', 'F16', 'F17']",149
+FR-PHY-14,"FR-PHY-14: chặn bật capability production tới khi có kiểm thử/phê duyệt bắt buộc ký duyệt; thay thiết bị, firmware, mapping hoặc policy kích hoạt đánh giá tác động, làm mất hiệu lực nghiệm thu phần ảnh hưởng tới khi kiểm chứng lại.",WF-32,"['F15', 'F16', 'F17']",150
+APP-SYS-198,AC: thiếu SAT chặn điều khiển production dù simulator PASS; chứng nhận site khác không vượt cổng; firmware thay đổi chỉ giữ capability đọc không ảnh hưởng nếu hợp đồng còn hợp lệ.,WF-32,"['F15', 'F16', 'F17']",150
+APP-SYS-199,"Nhiệm vụ ràng buộc giao diện robot/water-monitor được hỗ trợ thực tế, mục đích, incident, người điều khiển đủ năng lực, vùng vận hành, tuyến/vùng cấm, nguồn nước/năng lượng, freshness telemetry và policy mất link/khẩn cấp cục bộ.",WF-33,['F19'],150
+APP-SYS-200,Thiết bị chỉ quan sát vẫn chỉ quan sát.,WF-33,['F19'],150
+APP-SYS-201,Phê duyệt không phải đã chuyển động/xả.,WF-33,['F19'],151
+APP-SYS-202,Người tại chỗ quyết định triển khai và tiếp quản theo thiết kế được hãng hỗ trợ; không hứa chức năng stop/return phổ quát.,WF-33,['F19'],151
+FR-PHY-15,"FR-PHY-15: yêu cầu thẩm quyền theo nhiệm vụ, bằng chứng capability, giới hạn vận hành và kiểm tra sẵn sàng; tách quyền chuyển động, ngắm và xả nước.",WF-33,['F19'],151
+FR-PHY-16,"FR-PHY-16: ghi telemetry/phản hồi tác động, thực thi hành vi mất link đã duyệt tại chỗ, có bàn giao thủ công được xác nhận và bằng chứng kết quả; không suy hoàn tất cứu hộ từ lệnh được nhận.",WF-33,['F19'],151
+APP-SYS-205,AC: thiếu điều khiển được hãng hỗ trợ hoặc người điều khiển chặn phát tác động vật lý; vị trí cũ chặn ngắm/chuyển động phụ thuộc; mất link hiện UNKNOWN và policy cục bộ đã duyệt; bàn giao giữ trách nhiệm/bằng chứng.,WF-33,['F19'],152
+NFR-01,NFR-01 — Production regional core 99.95% tháng — Synthetic + server metrics; tính cả lỗi dependency ảnh hưởng người dùng,ALL,[],152
+NFR-02,"NFR-02 — Ingest p95 ≤ 2 s; fan-out enqueue p95 ≤ 5 s — Tải 100 event/s steady, 1,000 event/s trong 60 s; 10,000 recipients/incident; payload metadata ≤ 64 KB",ALL,[],152
+NFR-03,NFR-03 — Priority fairness — P1 reserved queues; tenant noisy-neighbor test; không để telemetry bulk chặn SOS,ALL,[],152
+NFR-04,"NFR-04 — Multi-AZ RPO mục tiêu 0 cho committed records, RTO ≤ 15 phút — Kill primary, verify durable commit và failover; chỉ cam kết sau test",ALL,[],153
+NFR-05,"NFR-05 — Regional disaster RPO ≤ 5 phút, RTO ≤ 60 phút — Restore/cold-region drill trong residency policy; immutable backup restore",ALL,[],153
+NFR-06,"NFR-06 — WCAG 2.2 AA target — Keyboard, screen reader, zoom, contrast và error announcements; chưa claim certified",ALL,[],153
+NFR-07,"NFR-07 — Web interactive p95 ≤ 3 s ở mạng tham chiếu — 4G simulation, representative low-end device; map loads tách core content",ALL,[],153
+NFR-08,"NFR-08 — Offline durable outbox và stale visibility — Airplane mode, app kill, reconnect, clock skew và reassignment conflict",ALL,[],154
+NFR-09,"NFR-09 — Security isolation — Tenant/object permission tests, upload validation, credential revocation, audit coverage",ALL,[],154
+NFR-10,NFR-10 — Backward compatibility — API/event contract tests; additive minor changes; major versions song song có sunset,ALL,[],154
+APP-SYS-216,"Tải tham chiếu là mục tiêu engineering, không phải đo benchmark.",ALL,[],154
+APP-SYS-217,Media upload qua object store tách khỏi critical event pipeline.,ALL,[],155
+APP-SYS-218,"Các mục NFR áp dụng sản phẩm cần xây, prototype tĩnh không chứng minh đạt các mục này.",ALL,[],155
+NFR-11,NFR-11 — Bảo vệ tự động cục bộ độc lập cloud/edge — Chứng kiến mất cloud/link/adapter không ngăn trình tự bảo vệ cục bộ được duyệt,ALL,[],155
+NFR-12,"NFR-12 — Thời gian/chất lượng telemetry và phản hồi theo cấu hình — Ký ngưỡng freshness, truyền và phản hồi theo thiết bị/site; đo riêng; UNKNOWN khi quá hạn",ALL,[],155
+NFR-13,"NFR-13 — Cách ly OT và lệnh — Chứng minh chỉ giám sát, từ chối ghi, quyền tối thiểu, truy cập bảo trì kiểm soát và không có đường test-to-live",ALL,[],156
+NFR-14,NFR-14 — Bảo đảm vật lý theo cấu hình — Đủ provenance và FAT/SAT bắt buộc ký duyệt; thay đổi làm hết hiệu lực nghiệm thu capability bị ảnh hưởng,ALL,[],156
+APP-SYS-223,NFR vật lý không dùng mục tiêu độ trễ phần mềm thay hiệu năng phản ứng vật lý/thủy lực.,ALL,[],156
+APP-SYS-224,"Thời gian và tiêu chí đạt theo thiết bị/site phải duyệt trước thử, kết quả ghi firmware, phần cứng và điều kiện vận hành.",ALL,[],156
+APP-SYS-225,"Phải chạy đủ flow Fire, Disaster, Fall, Road, discreet SOS và generic assistance; test duplicate, late data, out-of-order, expiry, network partition, unauthorized tenant, quota saturation, provider failure và restore.",ALL,[],157
+APP-SYS-226,"Với physical/drone, simulator PASS không thay acceptance hiện trường.",ALL,[],157
+APP-SYS-227,Ma trận chi tiết trong Acceptance-Matrix.csv.,ALL,[],157
+APP-SYS-228,Screen-level acceptance nằm trong Screen-Specifications.md và gắn từng mockup ID.,ALL,[],157
+APP-SYS-229,"Cổng vật lý thực thi thêm PHY-01–PHY-16 và AC-F01–AC-F20, kiểm đủ FR-PHY-01–FR-PHY-16, cần bố trí thử vật lý được duyệt và đội site được ủy quyền.",ALL,[],158
+APP-SYS-230,Acceptance-Matrix.csv có 65 ca xuyên hệ thống và 233 ca màn hình (tổng 298).,ALL,[],158
+APP-SYS-231,Ca thiết kế không phải bằng chứng thực thi.,ALL,[],158
+APP-SYS-232,"Hỗ trợ hãng, giấy phép vật lý, người tại chỗ sẵn sàng và FAT/SAT ký duyệt là phụ thuộc để bật điều khiển production; thiếu bằng chứng giữ capability liên quan không khả dụng hoặc chỉ giám sát.",ALL,[],158
+APP-SUP-01,"Điều phối PA theo exact message/zone digest, priority, repeat và expiry; giữ lease tránh phát chồng.",WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",159
+APP-SUP-02,"Tách controller ACK, buffering/playing/completed và acoustic evidence; lỗi sinh coverage gap/fallback.",WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",159
+APP-SUP-03,"Live mic cần thao tác rõ, zone approval, token ngắn hạn, chỉ báo, heartbeat và timeout dừng.",WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",159
+APP-SUP-04,Gateway media chuyển WebRTC sang giao thức hãng đã hỗ trợ; OT cách ly; cache audio có checksum/version.,WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",159
+APP-SUP-05,Ưu tiên fire alarm cục bộ; stop chỉ đúng broadcast; reconnect không phát lại thông điệp hết hạn.,WF-21,"['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09']",160
+APP-SUP-06,"Kiểm floor/heading quality; thiếu tin cậy dùng landmark/SOS, không chỉ trái/phải giả.",WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",160
+APP-SUP-07,Graph loại cạnh cấm/blocked/unknown-critical và đích hết hạn; accessibility là hard constraint.,WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",160
+APP-SUP-08,Dijkstra/A* chỉ chọn tuyến khả thi; penalty không vượt hard exclusion; không có đường thì assistance/refuge.,WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",160
+APP-SUP-09,"Hazard mới cắt tuyến rút ngay; replan có hysteresis, hủy TTS cũ; cache stale chỉ dùng procedure đã duyệt.",WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",161
+APP-SUP-10,"Đồng bộ text/voice vi/en/ja, lexicon, pronunciation, transcript và visual/haptic alternative.",WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",161
+APP-SUP-11,API route trả LOCATION_UNCERTAIN/NO_VERIFIED_ROUTE khi thiếu bằng chứng; arrival không tự safe.,WF-22,"['C35', 'C36', 'C37', 'C38', 'C39', 'C40', 'S15', 'S16', 'O35', 'O36']",161
+APP-SUP-12,"Thu GNSS/QR/NFC/BLE/UWB/Wi-Fi/manual theo capability/permission, calibration và coordinate frame.",WF-23,"['H10', 'Q01', 'Q02', 'Q03']",161
+APP-SUP-13,Fusion dùng floor hypothesis/outlier/motion/quality; không trung bình hai tầng hoặc bỏ provenance khi sửa.,WF-23,"['H10', 'Q01', 'Q02', 'Q03']",162
+APP-SUP-14,Presence tách registered/expected/observed/last-seen/absent/unknown; mất beacon không suy absent/safe.,WF-23,"['H10', 'Q01', 'Q02', 'Q03']",162
+APP-SUP-15,"Lập 1 primary và tối đa2 alternatives, reason/assumption/validity; tránh chung bottleneck khi có thể.",WF-24,"['Q04', 'Q05', 'Q10']",162
+APP-SUP-16,Cân bằng cohort/capacity theo occupancy/throughput có uncertainty; đổi chiến lược vùng cần operator duyệt.,WF-24,"['Q04', 'Q05', 'Q10']",162
+APP-SUP-17,"Simulation tách observed hazard, ghi assumptions; ETA interval/confidence, không chính xác giả.",WF-24,"['Q04', 'Q05', 'Q10']",163
+APP-SUP-18,"AI retrieve SOP được duyệt, trả structured claims/evidence/cutoff/uncertainty; unsupported không thành instruction.",WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",163
+APP-SUP-19,"AI chỉ compare_routes read-only từ planner; không sửa graph, ký warning, command, chẩn đoán hoặc đóng incident.",WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",163
+APP-SUP-20,"Policy proxy chặn injection/tool vượt scope; model theo residency, health tối thiểu, log redacted không chain-of-thought.",WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",163
+APP-SUP-21,Đánh giá grounding/injection/leakage/unsafe action/locale/abstention trước promotion; feedback cần review.,WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",164
+APP-SUP-22,AI timeout không ngăn alarm/SOS/dispatch; text streaming không phát loa trước validation/approval.,WF-25,"['Q06', 'Q07', 'Q08', 'Q09']",164
+APP-SUP-23,Tách identity khỏi functional-needs profile; giữ source/verification/review/consent; self-report không medical verified.,WF-26,"['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07']",164
+APP-SUP-24,"Guardian/caregiver phải verified, field-scoped/revocable; dispatcher/responder chỉ emergency subset cần thiết.",WF-26,"['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07']",164
+APP-SUP-25,Health access có audit/break-glass scope/time/reason; social group không thấy medical note/impairment.,WF-26,"['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07']",165
+APP-SUP-26,"Candidate từ presence+impact+needs+no recent confirmation; uncertain presence tạo welfare check, không khẳng định vị trí.",WF-27,"['H08', 'H09', 'H12']",165
+APP-SUP-27,Priority có exposure/ability/isolation/route/contact/confidence; không wealth/nationality hoặc tuổi đơn lẻ.,WF-27,"['H08', 'H09', 'H12']",165
+APP-SUP-28,"Dedupe ProactiveCase theo incident+person+policyVersion; SOS tới sau liên kết case, không dispatch trùng.",WF-27,"['H08', 'H09', 'H12']",165
+APP-SUP-29,"Không phản hồi thì escalate, không xác nhận injured; sửa vị trí giữ evidence/audit và đánh giá lại.",WF-27,"['H08', 'H09', 'H12']",166

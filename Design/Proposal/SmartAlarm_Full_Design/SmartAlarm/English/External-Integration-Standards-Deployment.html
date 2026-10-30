@@ -1,0 +1,494 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>External-Integration-Standards-Deployment · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="../index.html">SmartAlarm / Design Library</a><a href="../External-Integration-Standards-Deployment.html">Tiếng Việt</a><button onclick="window.print()">Print / Save PDF</button></header><main><div class="document-meta">BASELINE 3.0 · 24 OCT 2026 · DESIGN FOR REVIEW</div><h1 id="smartalarm-external-integration-standards-and-deployment">SmartAlarm — External Integration Standards and Deployment</h1><figure class="physical-figure"><img src="../assets/proposal-v3/physical.png" alt="Physical firefighting and rescue integration"><figcaption>Concept illustration — proposed integration, not an installed system.</figcaption></figure>
+
+<p>Research/design baseline 3.0 · 24 October 2026 · English. Scope: physical fire protection integration, deployment engineering, and acceptance. This is a proposed integration design, not a certificate, installation approval, or substitute for the site fire-protection design. Manufacturer/model research is documented separately. The architecture below is a SmartAlarm proposal; cited standards summaries describe verified public scope rather than unverified clauses.</p>
+
+<h2 id="1-decision-and-boundary">1. Decision and boundary</h2>
+
+<p>SmartAlarm shall support real physical fire-protection systems through approved interfaces while preserving autonomous local protection. It may ingest fire/supervisory/trouble states, coordinate responders, publish approved evacuation guidance, and request explicitly authorized actions. It must not require the cloud, Internet, a mobile app, or an LLM to complete the local automatic protective sequence.</p>
+
+<p>Do not implement a universal “turn on sprinklers” API. Conventional heat-operated sprinkler heads act locally and individually; an interface to a fire panel does not imply that those heads are electrically addressable. Deluge, preaction, gas suppression, pumps, smoke control, and robotic monitors have different controllers, prerequisites, and consequences. Their permitted actions must be identified by system type and exact manufacturer configuration. The distinction between individual heat operation and software control is supported by the <a href="https://www.pa.gov/agencies/osfc/communities/home-sprinklers">Pennsylvania Office of the State Fire Commissioner</a>.</p>
+
+<p>Three approvals remain separate: the applicable local code/edition and authority having jurisdiction (AHJ); the equipment listing/certification and manufacturer compatibility constraints; and acceptance of the complete installed integration. A protocol, a compliant component, or a cloud test does not establish all three. Record local adoption explicitly: an example official 2026 notice from <a href="https://www.poudre-fire.org/home/showpublisheddocument/9013/639063278557630000">Poudre Fire Authority</a> cites earlier editions for specific inspection work, illustrating why the newest publication is not automatically the project edition.</p>
+
+<h2 id="2-verified-standards-and-interface-matrix">2. Verified standards and interface matrix</h2>
+
+<p>Publication versions below were checked on 23 October 2026. The project must separately freeze adopted editions, amendments, equipment approvals, and contractual requirements. Exact paywalled clauses, installation dimensions, hydraulic calculations, and test intervals have not been inferred from public summaries.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Reference / verified version</th>
+  <th>Verified scope</th>
+  <th>Proposed SmartAlarm use and limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>NFPA 72, 2025</td>
+  <td>Fire alarm, signaling, emergency communication, and mass notification</td>
+  <td>Map alarm/supervisory/trouble and approved communication interfaces; no claim that SmartAlarm is a listed fire alarm panel. <a href="https://www.nfpa.org/codes-and-standards/nfpa-72-standard-development/72">NFPA</a></td>
+</tr>
+<tr>
+  <td>NFPA 13, 2025</td>
+  <td>Design and installation of automatic sprinkler systems</td>
+  <td>Preserve the engineered sprinkler installation; collect waterflow/valve supervision through approved interfaces. Software does not replace sprinkler design. <a href="https://www.nfpa.org/codes-and-standards/nfpa-standard-development-process/13">NFPA</a></td>
+</tr>
+<tr>
+  <td>NFPA 20, 2025</td>
+  <td>Selection and installation of stationary fire-protection pumps</td>
+  <td>Integrate approved controller status; any permitted remote request remains subordinate to the approved controller design. <a href="https://www.nfpa.org/codes-and-standards/nfpa-13-standard-development/20">NFPA</a></td>
+</tr>
+<tr>
+  <td>NFPA 25, 2026</td>
+  <td>Inspection, testing, and maintenance of water-based fire protection</td>
+  <td>Track deficiencies, impairment, restoration, and evidence; schedules must be set from the adopted text and equipment instructions. Edition corroborated by <a href="https://www.nfpa.org/sitecore/content/Storefront/Catalog/home/products/p/0/0/P0025HB">NFPA's 2026 handbook</a> and <a href="https://webstore.ansi.org/standards/nfpa/NFPA252026">ANSI's NFPA 25 record</a>.</td>
+</tr>
+<tr>
+  <td>EN 54-2 / -4 / -13</td>
+  <td>Control/indicating equipment; power supplies; component compatibility</td>
+  <td>Require exact certificates, configurations, and applicable national editions; no single “EN 54 certified system” shortcut. Public scope: <a href="https://www.bsigroup.com/Documents/product-certification/BSI-fire-standards-brochure-UK-EN.pdf?epslanguage=az">BSI fire standards guide</a>. Edition/amendment freeze remains a procurement task for these parts.</td>
+</tr>
+<tr>
+  <td>EN 54-16:2008 / EN 54-24:2008</td>
+  <td>Voice alarm control/indicating equipment; voice alarm loudspeakers</td>
+  <td>Use an approved voice alarm chain with zone mapping, priority, power/fault monitoring, and commissioned performance; an ordinary IP speaker is not automatically equivalent. <a href="https://www.bsigroup.com/globalassets/localfiles/it-it/PRODUCT%20SERVICES/Product%20Certification%20Interactive%20Guide.pdf">BSI certification guide</a></td>
+</tr>
+<tr>
+  <td>ISO 7240-5:2018</td>
+  <td>Point-type heat-detector requirements and testing</td>
+  <td>Record detector class and approved application; not a universal environmental suitability claim. <a href="https://www.iso.org/standard/67759.html">ISO</a></td>
+</tr>
+<tr>
+  <td>ISO 7240-16:2007 / -19:2007, both confirmed in 2025</td>
+  <td>Emergency sound control equipment; emergency sound-system design, installation, commissioning, and service</td>
+  <td>Distinguish component evidence from installed audibility/intelligibility and operating procedures. <a href="https://www.iso.org/standard/42978.html">ISO part 16</a>, <a href="https://www.iso.org/standard/42979.html">ISO part 19</a></td>
+</tr>
+<tr>
+  <td>BACnet / ISO 16484-5:2026, edition 8, published August 2026</td>
+  <td>Building-system data communication and object-oriented representation</td>
+  <td>Require supported objects/services, revision, writable-property allowlist, priorities, and quality semantics. Interoperability does not authorize a life-safety action. <a href="https://www.iso.org/standard/92057.html">ISO</a>, <a href="https://bacnet.org/about-bacnet-standard/">BACnet committee</a></td>
+</tr>
+<tr>
+  <td>Modbus Application Protocol V1.1b3; Modbus Security</td>
+  <td>Transactions/function codes; TLS-based authentication and integrity for the security profile</td>
+  <td>Require exact register map, scaling, byte/word order, access mode, and supported security profile. Do not assume ordinary Modbus/TCP has Modbus Security. <a href="https://www.modbus.org/modbus-specifications">Modbus Organization</a></td>
+</tr>
+<tr>
+  <td>OPC UA / IEC 62541; verified part 2:2026</td>
+  <td>OPC UA security model</td>
+  <td>Require server namespace, node IDs, profiles, certificates, security policy, user rights, and status/timestamp semantics. Ordinary OPC UA use is not proof of a safety-certified control path. <a href="https://webstore.iec.ch/en/publication/81514">IEC</a></td>
+</tr>
+<tr>
+  <td>IEC 62443-3-2:2020; ISA/IEC 62443 series</td>
+  <td>IACS risk assessment, zones/conduits, target security levels; lifecycle security</td>
+  <td>Produce site risk assessment and zone/conduit controls. Do not assign a security level or claim certification merely because the gateway uses TLS. <a href="https://webstore.iec.ch/en/publication/30727">IEC</a>, <a href="https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards">ISA</a></td>
+</tr>
+<tr>
+  <td>MQTT 5.0, OASIS Standard 7 March 2019</td>
+  <td>Publish/subscribe messaging</td>
+  <td>Edge telemetry transport with authentication, ACLs, expiry, deduplication, and bounded queues; QoS is not physical completion. <a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">OASIS</a></td>
+</tr>
+<tr>
+  <td>CloudEvents; deployed schema version must be pinned</td>
+  <td>Common event description/envelope</td>
+  <td>Carry source, type, event ID, time, and versioned domain payload; does not certify detection or actuation. <a href="https://cloudevents.io/">CloudEvents</a></td>
+</tr>
+<tr>
+  <td>CAP 1.2, OASIS Standard 1 July 2010</td>
+  <td>Common alert exchange</td>
+  <td>Public advisories with source/update/cancel/area/expiry handling; never a direct suppression-release protocol. <a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html">OASIS</a></td>
+</tr>
+<tr>
+  <td>MAVLink Command Protocol; vendor/flight-stack version pinned per aircraft</td>
+  <td>Command transport and command acknowledgments</td>
+  <td>Capability-specific gateway and pilot authority; ACK and physical outcome remain distinct. Protocol support grants no flight authorization. <a href="https://mavlink.io/en/services/command.html">MAVLink</a></td>
+</tr>
+<tr>
+  <td>Aviation rules of the operating jurisdiction</td>
+  <td>Operator, aircraft, airspace, and mission authorization</td>
+  <td>Record jurisdiction, permission, pilot, flight constraints, and emergency procedure. The <a href="https://www.faa.gov/uas/public_safety_gov/drone_program">FAA public-safety guide</a> is a United States example, not a worldwide permit.</td>
+</tr>
+<tr>
+  <td>WCAG 2.2</td>
+  <td>Web content accessibility</td>
+  <td>AA design target, with keyboard, focus, contrast, target, status, and text alternatives verified independently; does not establish acoustic coverage. <a href="https://www.w3.org/TR/WCAG22/">W3C</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>Fire suppression media, special hazards, pressure equipment, electrical installation, smoke-control systems, and local fire/building law can add other standards. The site designer must identify these from the actual system; this matrix is not an exhaustive code list.</p>
+
+<h2 id="3-proposed-deployment-architecture">3. Proposed deployment architecture</h2>
+
+<pre><code>flowchart TB
+  CLOUD[SmartAlarm regional cloud: incident / policy / approval / audit]
+  DMZ[OT DMZ: authenticated broker or reverse connection / firewall / monitoring]
+  EDGE[Site edge: durable events / signed policy / command ledger / fencing]
+  VG[Approved vendor gateway: supported API or supervised interface]
+  LOCAL[Local approved fire / releasing / pump / voice controllers]
+  DEV[Detectors / valves / pumps / suppression devices / speakers]
+  MAN[Authorized local controls / manual stations / pilot]
+  CLOUD &lt;--&gt;|events and bounded approved intents| DMZ
+  DMZ &lt;--&gt; EDGE
+  EDGE &lt;--&gt; VG
+  VG &lt;--&gt; LOCAL
+  LOCAL &lt;--&gt; DEV
+  MAN --&gt; LOCAL
+  DEV --&gt;|local initiating inputs| LOCAL
+</code></pre>
+
+<p>The local controller/device path runs independently of the cloud, DMZ, edge, identity service, and LLM. Existing approved hardwired/manual paths remain authoritative. SmartAlarm's edge is an integration component unless separately assessed and approved for another role; “edge” does not itself mean a safety controller.</p>
+
+<p>Place cloud-facing services in an OT DMZ with explicit conduits to site systems. Prefer an authenticated site-initiated connection where supported; prohibit public Internet access to panel buses and general-purpose remote desktop into fire controllers. Separate telemetry ingestion from command authorization. Broker ACLs, firewalls, service identities, signed configurations, certificate rotation, and bounded maintenance access enforce that separation. These are proposed controls derived from the zone/conduit approach, not a claimed IEC 62443 certification.</p>
+
+<p>Use a manufacturer-approved gateway or supervised I/O only where the exact design permits it. Specify input supervision, fault detection, isolation, wiring, electrical ratings, feedback, and commissioning evidence in the approved installation documents. No generic relay board bypasses a releasing panel, pump controller, interlock, or evacuation priority controller. Do not attach undocumented writes to a maintenance port. If only a common alarm contact exists, report common alarm—not a fabricated detector address or zone.</p>
+
+<h2 id="4-integration-permission-tiers">4. Integration permission tiers</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Tier</th>
+  <th>Permitted behavior</th>
+  <th>Evidence required before enabling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>T0 Inventory</td>
+  <td>Register assets/documents; no live connection</td>
+  <td>Site owner, exact models, location and ownership</td>
+</tr>
+<tr>
+  <td>T1 Observe</td>
+  <td>Read alarm, supervisory, trouble, flow, pressure, health, and status where available</td>
+  <td>Approved read path, point list, semantic mapping, FAT/SAT</td>
+</tr>
+<tr>
+  <td>T2 Operational coordination</td>
+  <td>Create incident/tasks; publish approved communications through the permitted voice interface</td>
+  <td>Approved message/zone/priority policy and verified delivery feedback</td>
+</tr>
+<tr>
+  <td>T3 Restricted control request</td>
+  <td>Only explicitly approved target/capability combinations</td>
+  <td>Manufacturer authorization, site engineering, AHJ/other acceptance as applicable, signed cause-and-effect revision, local interlocks, completion evidence</td>
+</tr>
+<tr>
+  <td>T4 Local automatic protection</td>
+  <td>Executes in the local approved protection system</td>
+  <td>Existing/local system design and acceptance; not granted to the cloud by a software entitlement</td>
+</tr>
+</tbody>
+</table>
+
+<p>Default new connectors to T1 or lower. Alarm acknowledgment, silence, reset, disable/isolate, pump requests, and suppression release are distinct capabilities. Do not make a single generic “control” permission enable them all. Some remain local-only. An incident commander may coordinate the incident without possessing authority to reset or inhibit protection.</p>
+
+<h2 id="5-asset-point-zone-and-cause-and-effect-contract">5. Asset, point, zone, and cause-and-effect contract</h2>
+
+<p>Each binding is versioned and reviewable before activation. Minimum contract fields:</p>
+
+<table>
+<thead>
+<tr>
+  <th>Object</th>
+  <th>Required information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Asset</td>
+  <td>tenant_id, site_id, asset_id, controller_id, manufacturer, exact model, firmware, serial, controller/gateway relationship, protocol revision, certificate/listing reference and scope, maintenance owner, maintenance_state, impairment_ref</td>
+</tr>
+<tr>
+  <td>Point</td>
+  <td>point_id, controller_id, zone_id, raw address/object/node/register, type, read/write permissions, unit, scale, byte/word order if applicable, enumeration, normal/alarm/trouble/supervisory mapping, validity, observed_at, received_at, timestamp source, quality, stale_after</td>
+</tr>
+<tr>
+  <td>Zone</td>
+  <td>zone_id, physical boundary/floor, fire compartment reference, detection/suppression/voice zone types, point membership, exclusions, revision and approver</td>
+</tr>
+<tr>
+  <td>Capability</td>
+  <td>capability_id, allowed target types, parameter schema/ranges, local preconditions/interlocks, manual/automatic authority, authorization_policy, command_ttl, expiry, idempotency_key, retry class, feedback_point_ids, completion criterion, unknown_outcome_policy</td>
+</tr>
+<tr>
+  <td>Cause and effect</td>
+  <td>revision, initiating condition, required local confirmations, effect, affected zone, priority, delay if approved, interlocks/inhibits, reset authority, failure response, test case and signoff</td>
+</tr>
+<tr>
+  <td>Evidence</td>
+  <td>source time, receive time, source quality, raw payload reference/hash, connector/firmware/config versions, operator and approval, command/result correlation</td>
+</tr>
+</tbody>
+</table>
+
+<p>Never equate a location zone with a suppression zone automatically. A floor may have several control zones and a control zone may cross UI boundaries. Changes to device addressing or zoning invalidate the affected mapping and require review/test before write capabilities resume. Quality states are GOOD, BAD, STALE, UNKNOWN, and TEST; absence of data is not NORMAL.</p>
+
+<p>A cause-and-effect record is the approved engineer/vendor/site document reflected in software, not a rule invented by an LLM. For example, a locally approved releasing sequence may report its initiation, pending state, interlock condition, and discharge feedback to SmartAlarm. SmartAlarm records and coordinates these states; it must not infer authorization to release from camera confidence or silence alarms as a side effect of closing an incident.</p>
+
+<h2 id="6-command-lifecycle-and-physical-evidence">6. Command lifecycle and physical evidence</h2>
+
+<p>Proposed states: DRAFT → PENDING_APPROVAL → AUTHORIZED → SENT → ACCEPTED → EXECUTING → COMPLETED_VERIFIED; alternatives REJECTED, EXPIRED, FAILED, UNKNOWN, and RECONCILED. A controller may omit EXECUTING; the adapter must declare which states are observable. UNKNOWN is mandatory when the command may have arrived but the physical outcome is unverified.</p>
+
+<p>Bind approval to command_id, target, capability, parameter digest, zone revision, cause-and-effect revision, requester, approver, writer_epoch, nonce, issued_at, and expires_at. Edge and vendor gateway enforce allowlists, freshness, authorization, and local controller acceptance. Local protection/interlocks take precedence. Mutating parameters or zone revisions invalidates approval. Failover fences the old writer; it never blindly repeats an uncertain physical action.</p>
+
+<p>Record transport receipt, controller acceptance, and physical feedback separately. A pump-request ACK is not pressure/flow evidence; a voice-buffer ACK is not confirmed playback or intelligibility; a valve command is not confirmed position. Completion criteria are capability-specific and may require more than one instrument. Network timeout after transmission produces UNKNOWN, blocks automatic non-idempotent retry, and opens reconciliation with local staff/controller status. A software cancellation cannot promise to reverse released agent or a completed physical action. Reset and restoration follow a separate authorized process.</p>
+
+<h2 id="7-failure-mode-analysis-and-degraded-operation">7. Failure-mode analysis and degraded operation</h2>
+
+<p>This is the initial qualitative FMEA; the site team assigns severity, likelihood, detectability, residual risk, and owners using site evidence. No generic numerical risk score is asserted.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Failure / consequence</th>
+  <th>Detection</th>
+  <th>Proposed containment and acceptance evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Cloud/Internet loss / remote visibility lost</td>
+  <td>Heartbeat age and connection state</td>
+  <td>Local automatic protection continues; edge buffers events; UI shows stale; prove with disconnection test</td>
+</tr>
+<tr>
+  <td>Edge loss / integration unavailable</td>
+  <td>Edge heartbeat and independent panel observation</td>
+  <td>Local sequence remains autonomous; cloud shows unavailable; restore from durable ledger without replaying uncertain writes; power-off edge test</td>
+</tr>
+<tr>
+  <td>Gateway restart or split brain / duplicate effect</td>
+  <td>Epoch/lease, durable command ledger</td>
+  <td>One fenced writer; uncertain writes reconciled, not replayed; reboot/failover tests</td>
+</tr>
+<tr>
+  <td>Wrong point or zone map / wrong action location</td>
+  <td>Independent point walkdown and revision digest</td>
+  <td>Disable affected write binding; verify every enabled target and negative cross-zone case</td>
+</tr>
+<tr>
+  <td>Stuck relay or failed feedback / false completion</td>
+  <td>Supervision and independent controller feedback where approved</td>
+  <td>No inferred success; local fault response and physical inspection under approved procedure</td>
+</tr>
+<tr>
+  <td>Lost power or depleted backup / incomplete coverage</td>
+  <td>Controller/power trouble and maintenance evidence</td>
+  <td>Preserve approved backup design; verify site-specific fail states and power restoration</td>
+</tr>
+<tr>
+  <td>Alarm storm / delayed critical event</td>
+  <td>Queue age, source rate, priority metrics</td>
+  <td>Reserve critical processing, bound queues, flag loss; local sequence never waits for broker</td>
+</tr>
+<tr>
+  <td>Compromised gateway / unauthorized request</td>
+  <td>Identity, allowlist, audit, anomaly monitoring</td>
+  <td>Revoke conduit/credential and isolate integration without disabling local protection</td>
+</tr>
+<tr>
+  <td>Maintenance mode confused with actual / unintended effect or ignored alarm</td>
+  <td>Explicit mode and local panel state</td>
+  <td>Separate test identities/routes, physical procedure, authorized test window, restoration checks</td>
+</tr>
+<tr>
+  <td>Clock skew or stale observation / unsafe premise</td>
+  <td>Source/receive times and quality flag</td>
+  <td>Block stale remote request; retain local protection; no timestamp rewrite hiding uncertainty</td>
+</tr>
+<tr>
+  <td>Controller ACCEPTED but no outcome / operator assumes success</td>
+  <td>Feedback deadline and missing independent evidence</td>
+  <td>UNKNOWN, local verification, alternative response; no blind retry</td>
+</tr>
+<tr>
+  <td>Voice zone unavailable / occupants not warned</td>
+  <td>Per-zone/controller fault and commissioned checks</td>
+  <td>Display coverage gap; initiate approved alternative communication procedure</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="8-impairment-testing-and-change-governance">8. Impairment, testing, and change governance</h2>
+
+<p>An impairment record contains affected assets/zones/functions, reason, start/end plan, responsible person, required notifications, compensatory measures determined by the site authority, access controls, and restoration proof. SmartAlarm does not decide that a degraded fire system is safe merely because alerts are acknowledged. Unplanned impairment escalates to the named site responsible person.</p>
+
+<p>Test mode must have an explicit boundary. Software exercise labels alone cannot prevent a physical output from operating. Use only approved isolation/test arrangements, a responsible local technician, a reviewed test script, site notifications, and the required authorization. Simulator results do not authorize live agent discharge, pump operation, or emergency broadcasts. Live tests follow the adopted standard, vendor method, and local authority/site plan.</p>
+
+<p>Configuration and firmware changes require impact assessment, signed version, rollback/recovery plan, and regression of affected cause-and-effect paths. No remote software rollback is assumed to restore a physical system state. Close impairment only after local restoration, normal supervisory state, target verification, outstanding-defect review, and signed handback. Test frequency and compensatory measures remain site-specific; this document invents neither.</p>
+
+<h2 id="9-rfi-survey-fat-sat-and-handover">9. RFI, survey, FAT, SAT, and handover</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Gate</th>
+  <th>Required deliverable</th>
+  <th>Exit evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RFI / procurement</td>
+  <td>Exact panel/controller/device models, firmware, regional variants, supported APIs/registers, read/write permissions, gateway licenses, listing/certificates, compatible accessories, lifecycle and maintenance support</td>
+  <td>Vendor written confirmation of each proposed capability; unresolved items stay disabled</td>
+</tr>
+<tr>
+  <td>Site survey</td>
+  <td>As-built drawings, fire strategy, hydraulic/system boundaries, cause-and-effect, zone/point schedule, communications/power, AHJ/adopted editions, operational roles and impairment process</td>
+  <td>Designer/site owner reviews mapping and identifies missing documentation</td>
+</tr>
+<tr>
+  <td>Detailed binding design</td>
+  <td>Network zones/conduits, point contracts, command state/feedback, local-only controls, approved interface/wiring, migration and rollback plans</td>
+  <td>Engineering/vendor/site approval and authority acceptance where applicable</td>
+</tr>
+<tr>
+  <td>FAT</td>
+  <td>Representative exact hardware/firmware or documented scope-limited simulator; positive/negative mappings, access control, bad quality, clock skew, duplicates, lost ACK, timeout, expiry, restart, failover, no-Internet operation</td>
+  <td>Signed results, raw evidence, defects resolved; simulator limitations explicit</td>
+</tr>
+<tr>
+  <td>SAT</td>
+  <td>Installed point-to-point verification, physical zone confirmation, approved cause-and-effect tests, local autonomy on loss of cloud/edge, supervised faults, voice coverage/performance per approved plan, restoration</td>
+  <td>Witnessed site evidence; every enabled command has verified result semantics; no unresolved critical defect</td>
+</tr>
+<tr>
+  <td>Handover / operation</td>
+  <td>As-built configuration, credential ownership, backup/restore, training, runbooks, maintenance schedule, impairment contacts, support boundaries</td>
+  <td>Site owner acceptance; inspection/authority records where required; ongoing change control</td>
+</tr>
+</tbody>
+</table>
+
+<p>Acceptance means more than a green dashboard. For each enabled physical capability, demonstrate that a denied request cannot actuate, stale/expired requests cannot actuate, an uncertain outcome is shown as UNKNOWN, local controls retain priority, and cloud failure cannot stop the independent automatic sequence. Record response times measured in the approved test; do not claim a universal latency target without the site/controller acceptance criterion.</p>
+
+<h2 id="10-evidence-register-and-remaining-engineering-decisions">10. Evidence register and remaining engineering decisions</h2>
+
+<p>All links in section 2 and this register were consulted on <strong>2026-10-23</strong>. Evidence type is public official scope/catalog/technical guidance; none is a full installation conformity assessment.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Evidence group</th>
+  <th>Official sources</th>
+  <th>Confirmed / remaining limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>E01 Fire alarm and suppression</td>
+  <td><a href="https://www.nfpa.org/codes-and-standards/nfpa-72-standard-development/72">NFPA 72</a>, <a href="https://www.nfpa.org/codes-and-standards/nfpa-standard-development-process/13">NFPA 13</a>, <a href="https://www.nfpa.org/codes-and-standards/nfpa-13-standard-development/20">NFPA 20</a>, <a href="https://www.nfpa.org/sitecore/content/Storefront/Catalog/home/products/p/0/0/P0025HB">NFPA 25 handbook</a>, <a href="https://webstore.ansi.org/standards/nfpa/NFPA252026">ANSI NFPA 25</a></td>
+  <td>Titles/editions/scope verified; adopted clauses/amendments must be checked for the project. NFPA 13 scope was available in official indexed content; direct retrieval was intermittent.</td>
+</tr>
+<tr>
+  <td>E02 Detection/voice</td>
+  <td><a href="https://www.bsigroup.com/Documents/product-certification/BSI-fire-standards-brochure-UK-EN.pdf?epslanguage=az">BSI components</a>, <a href="https://www.bsigroup.com/globalassets/localfiles/it-it/PRODUCT%20SERVICES/Product%20Certification%20Interactive%20Guide.pdf">BSI voice</a>, <a href="https://www.iso.org/standard/67759.html">ISO 7240-5</a>, <a href="https://www.iso.org/standard/42978.html">ISO 7240-16</a>, <a href="https://www.iso.org/standard/42979.html">ISO 7240-19</a></td>
+  <td>Public part scopes; national EN editions/amendments and exact product certificates require procurement verification.</td>
+</tr>
+<tr>
+  <td>E03 Building/OT data</td>
+  <td><a href="https://www.iso.org/standard/92057.html">ISO BACnet</a>, <a href="https://bacnet.org/about-bacnet-standard/">BACnet committee</a>, <a href="https://www.modbus.org/modbus-specifications">Modbus</a>, <a href="https://webstore.iec.ch/en/publication/81514">IEC OPC UA</a></td>
+  <td>Protocol scope/version; not vendor compatibility or safety approval.</td>
+</tr>
+<tr>
+  <td>E04 OT security</td>
+  <td><a href="https://webstore.iec.ch/en/publication/30727">IEC 62443-3-2</a>, <a href="https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards">ISA series</a></td>
+  <td>Risk/lifecycle framework; site target levels and evidence remain to be engineered.</td>
+</tr>
+<tr>
+  <td>E05 Events and warning</td>
+  <td><a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">MQTT</a>, <a href="https://cloudevents.io/">CloudEvents</a>, <a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html">CAP</a></td>
+  <td>Messaging scope; no guarantee of physical completion.</td>
+</tr>
+<tr>
+  <td>E06 Drone/accessibility/local context</td>
+  <td><a href="https://mavlink.io/en/services/command.html">MAVLink</a>, <a href="https://www.faa.gov/uas/public_safety_gov/drone_program">FAA</a>, <a href="https://www.w3.org/TR/WCAG22/">WCAG</a>, <a href="https://www.pa.gov/agencies/osfc/communities/home-sprinklers">Pennsylvania sprinkler explanation</a>, <a href="https://www.poudre-fire.org/home/showpublisheddocument/9013/639063278557630000">Poudre adopted-edition example</a></td>
+  <td>Interface, jurisdiction example, accessibility target, and local physical context; not global compliance.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Open decisions before implementation: deployment countries and authorities; installed system types and exact variants; permission to read versus write each point; vendor gateway and certificate scope; approved cause-and-effect; local-only actions; physical completion feedback; cybersecurity risk assessment; site-specific acceptance criteria and responsible signatories. These are required engineering inputs, not reasons to replace the full physical integration scope with a demo.</p>
+
+<h2 id="ux2-physical-visual-supervision-and-physical-feedback">UX2-PHYSICAL · Visual supervision and physical feedback</h2>
+
+<p>The v2 console uses a pipe/valve/pump mimic, zone coverage and explicit device state. A requested command, gateway acknowledgement and observed physical effect are separate states. Unknown or stale feedback must use a labeled pattern and timestamp, never a green success state. Review-only actions in the prototype do not operate equipment. Local fire protection authority, interlocks and commissioning requirements in this document remain binding.</p>
+
+<p>Verify F08–F20 with communication loss, conflicting local state and delayed feedback. Operator access to the schematic must not bypass command authorization. PA playback feedback is not proof of audibility to every occupant. Drone/robot task acceptance is not proof of arrival or rescue.</p>
+
+<p>See <a href="UIUX-Design.html">UI/UX design</a>, <a href="Screen-Specifications.html">screen specifications</a> and <a href="UX-Redesign-Audit.html">redesign audit</a>.</p>
+
+<!-- BMS-INTEGRATED-3.0-BEGIN -->
+
+<h2 id="11-bms-integration-deployment-contract-site-implementation">11. BMS integration deployment contract — site implementation</h2>
+
+<h3 id="engineering-bundle-and-commissioning-sequence">Engineering bundle and commissioning sequence</h3>
+
+<ol>
+<li><strong>Survey:</strong> inventory supervisors, servers/engines/controllers, product/build/firmware, API/module/provider/license, protocol/PICS, point/alarm dictionaries, network routes/ports, principal scopes, local emergency authority and maintenance windows. Record unknowns explicitly; unknown capabilities remain disabled.</li>
+<li><strong>Read-only qualification:</strong> configure endpoint allowlists, secret references/certificates, clocks and measured budgets. Discovery is bounded to approved roots/scope, cancellable and logged. Verify authentication, pagination, subscriptions/polling, native timestamps, quality, reconnect and active-alarm reconciliation before production admission.</li>
+<li><strong>Mapping qualification:</strong> stage and run golden fixtures for raw addresses, types, endianness, scale/offset, units, enums, severity ordering, native occurrences and ACK tokens. Map equipment/room/HVAC/fire-compartment/route/PA groups with typed relationships; verify direct/mirror lineage. Publish revisions with impact graphs and independent review.</li>
+<li><strong>Runtime admission:</strong> registry records adapter binary/hash, profile/mapping versions, qualified build/license and site acceptance. Servers calculate effective capabilities from current evidence. Exercises use separate namespaces and connector sessions; UI switches cannot enable writes.</li>
+<li><strong>Site SAT:</strong> measure actual load/bursts and clock quality; execute BMS-T01–20/BMS-P-01–28 per capability. Local protection/override remains cloud-independent. Record deviations, rollback/handover, owners and signed acceptance; reads/history/ACK/commands/release receive separate sign-off.</li>
+<li><strong>Handover:</strong> deliver data-freshness dashboards, alarm-gap runbooks, certificate/license expiry, support scopes, backup/restore, upgrade/cutover, priority-ownership cleanup and retirement. Update inventory and evidence when builds or equipment change.</li>
+</ol>
+
+<h3 id="network-and-security">Network and security</h3>
+
+<p>Site edges terminate BMS/OT communication in approved segments; northbound communication crosses authenticated OT-DMZ conduits with tenant/site binding and restricted egress. Do not expose BACnet/Modbus/OPC DA directly to the Internet. BACnet/SC, OPC UA security or Modbus Security requires correctly supported endpoint profiles; legacy TCP is not implicitly encrypted. OPC DA adapters require a site-approved compatible Windows/DCOM bridge/runtime and cannot be relabeled OPC UA. Secrets reference a vault; audits/exports remove tokens and clinical data. Apply NIST OT segmentation and site risk assessment without treating a standard as whole-system certification. <a href="https://csrc.nist.gov/pubs/sp/800/82/r3/final">NIST SP800-82r3</a>.</p>
+
+<h3 id="protocol-specific-contract">Protocol-specific contract</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Interface</th>
+  <th>Semantics to verify</th>
+  <th>Prohibited inference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>BACnet IP/MS-TP/SC</td>
+  <td>Objects/properties, PICS, COV lifetime, notification/ACK, status flags, priority arrays and relinquish default</td>
+  <td>WriteProperty does not grant life-safety authority; application TTL cannot clear retained slots automatically; cloud leases do not prove slot ownership</td>
+</tr>
+<tr>
+  <td>OPC UA</td>
+  <td>Namespace URI, stable NodeIds, status/timestamps, security policy, A&amp;C occurrence/branch/EventId, ConditionRefresh and history capability</td>
+  <td>Subscription alone does not load all active alarms; refresh is not replay; DA/A&amp;E/HDA are not UA</td>
+</tr>
+<tr>
+  <td>Modbus</td>
+  <td>Register maps, function codes, zero/one-based addresses, byte/word order, scale, quality provenance and polling budgets</td>
+  <td>Register changes do not create native alarm lifecycle/ACK; plain TCP is not Modbus Security</td>
+</tr>
+<tr>
+  <td>Native REST/SOAP/SSE</td>
+  <td>Authentication/session expiry, pagination/tokens, object IDs, event semantics, per-method scopes/licenses, partial batch failures and restart cursors</td>
+  <td>HTTP200 cannot confirm every batch item; event ACK need not change whole-alarm state; outbound webhooks do not establish inbound command APIs</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="recovery-failover-and-prohibited-shortcuts">Recovery, failover and prohibited shortcuts</h3>
+
+<p>Lost source cursors or restarts move connections to reconciling. Commit active-snapshot completion markers; partial snapshots cannot clear missing alarms. Replay/history carries mode and cannot create broadcasts/commands. Duplicates retain receipts/canonical lineage; incident-writeback echoes are isolated before intake rules. Edge journals are durable before acceptance; disk pressure generates backpressure/gap alarms, not silent discard. Write fencing must operate at real egress; if unproven, standby remains observe-only with operator recovery. Local override revokes remote eligibility; reconnect never restores old setpoints automatically. BACnet slots retained after power loss need site-approved local watchdogs or cleanup; cloud TTL alone cannot guarantee release.</p>
+
+<h3 id="acceptance-evidence-and-operating-contract">Acceptance evidence and operating contract</h3>
+
+<p>Each case records test revision, deployment fingerprint, input fixtures/expected observations, raw native statuses/timestamps, policy/approval results, redacted transport evidence, any physical witnesses, result and exceptions. Measure source→edge, edge commit→cloud, cloud→operator, request→native receipt and receipt→independent feedback separately. Freshness thresholds differ from latency SLAs and depend on hazard/site; historian backfills cannot starve alarm queues. Certificate/license rotation measures interruptions and reconciles data rather than suppressing errors to report healthy. Invalidate admission evidence for the affected scope while retaining unrelated capabilities only where evidence still holds.</p>
+
+<h3 id="sources-and-implementation-artifacts">Sources and implementation artifacts</h3>
+
+<p>The existing <a href="Physical-Device-Catalog.html">Physical Device Catalog</a> incorporates 11 source-backed vendor profiles. <a href="FRD.html">FRD</a> defines FR-BMS-01–40/WF-34–37. <a href="Basic-Design.html">Basic Design</a> and <a href="Detail-Design.html">Detail Design</a> are the primary implementation specifications; the <a href="../BMS/BMS-Source-Ledger.csv">BMS source ledger</a> retains 45 sources and research limitations. Engineering JSON profiles are not runtime authorization; activation requires site-specific evidence and the corresponding runtime policy/schema.
+<!-- BMS-INTEGRATED-3.0-END --></p>
+</main></body></html>

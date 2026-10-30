@@ -1,0 +1,464 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BRD · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="../index.html">SmartAlarm / Design Library</a><a href="../BRD.html">Tiếng Việt</a><button onclick="window.print()">Print / Save PDF</button></header><main><div class="document-meta">BASELINE 2.0 · 23 OCT 2026 · DESIGN FOR REVIEW</div><h1 id="smartalarm-business-requirements-document">SmartAlarm — Business Requirements Document</h1>
+
+<p><img src="../assets/proposal-v3/overview.png" alt="SmartAlarm — explanatory diagram" /></p>
+
+<p><strong>Version:</strong> 1.0 · 23/10/2026 · Design documentation for review, not yet signed-off requirements.<br />
+<strong>Confirmed direction:</strong> international and cross-industry from the outset; a complete production design from the outset; no temporary architecture for a demo; Vietnamese–English–Japanese are mandatory scope.<br />
+<strong>Documentation language:</strong> Vietnamese in the original; this is the English translation. The interface has a Vietnamese–English–Japanese switcher; illustrative records retain their source language when they represent entered content.</p>
+
+<h2 id="1-product-decision">1. Product decision</h2>
+
+<p>SmartAlarm is a platform for receiving signals, verifying incidents, alerting the right audiences, coordinating assistance, and tracking outcomes. The proposed name remains <strong>SmartAlarm</strong>, with the description “Multi-hazard safety &amp; response platform”. <strong>SmartAlarm One</strong> may be used for the product suite, and <strong>SmartAlarm Command / Connect / Companion / Field</strong> for its four product surfaces. Alternative names: <strong>SignalAid</strong> (emphasizing assistance), <strong>Sentra Response</strong> (emphasizing coordination). Trademarks, domains, and registration availability have not been checked; these names must not be treated as protected marks.</p>
+
+<p>The differentiators are a closed-loop response lifecycle and interoperability. The product does more than sound a siren or send a push notification: it identifies where a signal came from, what has been confirmed, who is responsible, who needs help, which information is stale, and who recorded the outcome.</p>
+
+<p>Physical firefighting and rescue are core product scope: observe existing alarm panels, water-based suppression, fire pumps, releasing controllers, and rescue equipment; coordinate approved physical operations and verify outcomes. Local automatic protection remains authoritative and independent of cloud availability. SmartAlarm distinguishes monitor-only connections from individually approved control capabilities; a generic protocol name does not grant control authority.</p>
+
+<h2 id="2-analysis-basis-and-source-limitations">2. Analysis basis and source limitations</h2>
+
+<p>The content of all 34 slides of FireEscape_Proposal_Expanded_EN.pptx was read, and the embedded images of the legacy interface, two-hub diagram, cameras, and floor plans were reviewed. The file is business reference material, not execution instructions. Slide 33 links to FireEscape_Introduction.pptx and FEscape_Demo.mp4, but neither file was supplied. The deck cannot recover the original source code, database structure, or protocols; this design rebuilds the described capabilities and is not verified reverse engineering.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Capability in the deck</th>
+  <th>Source slides</th>
+  <th>Treatment in SmartAlarm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Property → building → floor → zone</td>
+  <td>11, 23–24</td>
+  <td>Retain and generalize into a Location graph supporting roads, areas, and outdoor facilities</td>
+</tr>
+<tr>
+  <td>Camera fire detection and imagery</td>
+  <td>13–14, 25</td>
+  <td>Retain through connector/model adapters; confidence is unverified evidence</td>
+</tr>
+<tr>
+  <td>Maps and voice guidance</td>
+  <td>16</td>
+  <td>Retain; add offline versions, accessibility, and approved revisions</td>
+</tr>
+<tr>
+  <td>SOS with location and notes</td>
+  <td>15–16, 26</td>
+  <td>Retain; expand the taxonomy and support multiple people needing assistance</td>
+</tr>
+<tr>
+  <td>Smart Alarm Hub / Integration Hub</td>
+  <td>9, 27, 32</td>
+  <td>Retain business boundaries; separate Connect, Incident, Workflow, and Delivery</td>
+</tr>
+<tr>
+  <td>IOC / fire alarm / suppression</td>
+  <td>17–18</td>
+  <td>Design adapters by partner and capability; do not assume connections already exist</td>
+</tr>
+<tr>
+  <td>Groups/chat/family and safety reporting</td>
+  <td>19–20, 28–29</td>
+  <td>Retain fan-out to subscribed groups; add consent and data minimization</td>
+</tr>
+<tr>
+  <td>A safe status does not close an incident</td>
+  <td>6, 19, 29</td>
+  <td>An invariant throughout design and acceptance</td>
+</tr>
+</tbody>
+</table>
+
+<p>The physical baseline additionally uses the manufacturer evidence in <a href="Physical-Device-Catalog.html">Physical Device Catalog</a>. Concrete candidates include Siemens Cerberus PRO, NOTIFIER BACNET-GW-3, Simplex BACpac, Tornatech GPX/GPD, and Potter PFC-4410G3. These are researched candidates, not a claim of universal interoperability or a completed installation. Model, regional variant, firmware, license, point map, permitted operations, and field acceptance must be bound for each site.</p>
+
+<h2 id="3-business-problems-and-required-outcomes">3. Business problems and required outcomes</h2>
+
+<p>BR-01: unify multi-source signals while retaining provenance and confidence. BR-02: reduce the gap between an alert and someone accepting responsibility. BR-03: provide SOS suitable for varied situations and accessibility needs. BR-04: maintain situational awareness when networks or providers fail. BR-05: enable rapid integration through adapters with clear contracts. BR-06: expand internationally with data and authority boundaries. BR-07: retain audit evidence and learn from drills and incidents. BR-08: build a complete production platform with long-term scalability. BR-09: provide rescue assistance through speakers and voice navigation. BR-10: provide fused positioning and evacuation optimization. BR-11: provide evidence-based real-time AI analysis. BR-12: proactively rescue people needing assistance even without an SOS.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Success metric</th>
+  <th>Measurement</th>
+  <th>Proposed acceptance target, not an actual measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Time for the system to record an SOS</td>
+  <td>server accepted_at − ingress_at; excludes the device network</td>
+  <td>p95 ≤ 2 s at the reference load</td>
+</tr>
+<tr>
+  <td>Time until an alert is ready to send</td>
+  <td>delivery job created_at − incident committed_at</td>
+  <td>p95 ≤ 5 s at the reference load</td>
+</tr>
+<tr>
+  <td>Duplicate signals creating duplicate incidents</td>
+  <td>Replay the same source + event ID</td>
+  <td>0 new incidents from replaying the same ID</td>
+</tr>
+<tr>
+  <td>Decision traceability</td>
+  <td>Incident → source → rule version → actor → dispatch</td>
+  <td>100% of acceptance cases have all links</td>
+</tr>
+<tr>
+  <td>Detection of missing acknowledgment</td>
+  <td>Deadline expires without anyone accepting</td>
+  <td>100% of test scenarios create escalation exactly once per step</td>
+</tr>
+<tr>
+  <td>Time to integrate a new adapter</td>
+  <td>After the partner sandbox, spec, and credentials are available</td>
+  <td>Target of 5–10 person-days for a simple telemetry adapter, to be measured in a pilot</td>
+</tr>
+<tr>
+  <td>Availability</td>
+  <td>Minutes the core API operates / minutes in the month</td>
+  <td>Production target 99.95%; the prototype does not demonstrate an SLA</td>
+</tr>
+</tbody>
+</table>
+
+<p>No casualty-reduction target or rescue-time commitment is set without research and operational data. Detector accuracy is evaluated by hazard/site/model using labeled data, rather than one generic marketing percentage.</p>
+
+<p>BR-13: provide trustworthy visibility of physical fire-protection coverage, pump readiness, waterflow, and impairment. BR-14: execute only authorized physical requests and reconcile uncertain outcomes with independent feedback. BR-15: maintain compatibility, FAT/SAT, commissioning, and restoration evidence throughout the equipment lifecycle. BR-16: coordinate supervised rescue-robot/water-monitor missions with local operator authority and human handover.</p>
+
+<p>Physical acceptance adds configuration-specific measures: every enabled point and command must trace to approved mapping and evidence; every stale or lost link must become visibly uncertain within its signed site threshold; no expired or duplicate command may cause a new physical effect in acceptance testing. Detection-to-observation, approval-to-request, and request-to-physical-feedback latency are measured separately. Thresholds depend on the approved device and site design and are not universal rescue-time guarantees.</p>
+
+<h2 id="4-users-and-organizational-model">4. Users and organizational model</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Group</th>
+  <th>Work</th>
+  <th>Critical permissions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Citizen / occupant / worker / traveler</td>
+  <td>Receive guidance, send SOS, check in</td>
+  <td>Personal data, invited groups, and public warnings relevant to the area</td>
+</tr>
+<tr>
+  <td>Family / caregiver</td>
+  <td>Monitor shared status and assist</td>
+  <td>No automatic access to precise location or health profiles</td>
+</tr>
+<tr>
+  <td>Operator</td>
+  <td>Classify, verify, and coordinate incidents</td>
+  <td>Locations within the shift and tenant scope</td>
+</tr>
+<tr>
+  <td>Dispatcher / responder</td>
+  <td>Assign, accept, arrive, and hand over work</td>
+  <td>Assigned incidents; task-necessary data</td>
+</tr>
+<tr>
+  <td>Supervisor / incident commander</td>
+  <td>Approve warnings and commands; close incidents</td>
+  <td>Separation of author and approver according to policy</td>
+</tr>
+<tr>
+  <td>Site/device/integration admin</td>
+  <td>Configure assets and integrations</td>
+  <td>No automatic permission to view sensitive SOS content</td>
+</tr>
+<tr>
+  <td>Privacy officer / auditor</td>
+  <td>Handle data requests and audits</td>
+  <td>Controlled read access; audit history cannot be edited</td>
+</tr>
+<tr>
+  <td>Platform operator</td>
+  <td>Infrastructure health and recovery</td>
+  <td>No tenant payload access by default; time-limited, audited break-glass access</td>
+</tr>
+<tr>
+  <td>Partner / city IOC</td>
+  <td>Receive agreed information fields</td>
+  <td>Service identity, field-level scope, and application ACK</td>
+</tr>
+</tbody>
+</table>
+
+<p>A tenant is a security and commercial boundary; an organization has multiple sites and users. A person may have membership in multiple tenants, but each operation must have an explicit tenant context. A response federation does not imply sharing the entire database. Personal data belongs to the selected regional cell; cross-region operational metrics are aggregated and deidentified.</p>
+
+<p>Additional operating stakeholders are the fire-protection designer, OT owner, authorized commissioning/maintenance provider, local pump/releasing-system operator, robot/water-monitor pilot, and the authority having jurisdiction (AHJ), where applicable. The designer owns the physical cause-and-effect and hydraulic design; the OT owner approves network access; the local operator owns immediate physical control and restoration; the incident commander coordinates operational authorization. Software administrators cannot self-authorize physical actuation. Procurement must obtain vendor permission, support terms, regional approvals, and evidence for the exact assembly.</p>
+
+<h2 id="5-scope-of-the-complete-solution">5. Scope of the complete solution</h2>
+
+<p>The domains are Access, Companion, Field, Command, Sites &amp; Detection, Connect &amp; Drone, Administration, Platform, Developer, Localization, Public Address, Care, Intelligence, and System states. The official catalog is in Screen-Catalog.csv; each ID has one mockup and a corresponding specification in Screen-Specifications.md. “All screens” means the entire baseline catalog, not a claim to cover undiscovered requirements of every country/vendor. Shared modals/states are recorded in UIUX and the X states; screen counts are not inflated by counting colors or viewports.</p>
+
+<p>Business packages use the same core:</p>
+
+<table>
+<thead>
+<tr>
+  <th>Package</th>
+  <th>Input</th>
+  <th>Coordination</th>
+  <th>Mandatory distinctions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Fire &amp; evacuation</td>
+  <td>Cameras, smoke/heat controllers, manual reports</td>
+  <td>Verification, site guidance, SOS, accountability</td>
+  <td>Versioned floor plans; do not infer a safe route from a single camera</td>
+</tr>
+<tr>
+  <td>Disaster</td>
+  <td>Authorized CAP/feed, sensors, manual reports</td>
+  <td>Affected areas, shelters, check-in, broadcast</td>
+  <td>Retain issuer, validity, and Update/Cancel; do not replace source content with AI</td>
+</tr>
+<tr>
+  <td>Personal &amp; care</td>
+  <td>Wearables, permitted cameras, SOS, timers</td>
+  <td>Check-in, caregiver, operator, responder</td>
+  <td>Distinguish suspected from verified falls; no medical diagnosis</td>
+</tr>
+<tr>
+  <td>Road safety</td>
+  <td>Telematics, cameras, user reports</td>
+  <td>Verify location/direction of travel, dispatch, perimeter</td>
+  <td>Speed/hard braking does not automatically confirm a crash; avoid requiring interaction while driving</td>
+</tr>
+<tr>
+  <td>General SOS</td>
+  <td>Fire, medical, threat, lost, welfare, assistance, custom</td>
+  <td>Playbooks by tenant and sensitivity</td>
+  <td>Provide an “unknown type” path; threat supports discreet mode and does not post to groups by default</td>
+</tr>
+</tbody>
+</table>
+
+<p>Outside the scope of uncontrolled automation: controlling suppression without a compatible/authorized controller, autonomous drone flight without authority and validation, replacing certified fire alarm systems, automatically calling public authorities without an agreement, medical certification, AI independently choosing evacuation routes, comprehensive facial recognition, and real payments. All required integrations are part of the product design; simulated mockups are for review only. Real hardware requires vendor binding and on-site acceptance.</p>
+
+<p>The physical domain covers WF-28–WF-33 and screens F01–F20, extending the baseline from 213 to 233 screens and from 27 to 33 workflows. The original workflows and screen requirements remain in force. Physical scope includes approved equipment onboarding, point/zone mapping, telemetry supervision, authorized actuation, physical outcome reconciliation, impairment/test/restoration, FAT/SAT evidence, and supervised unmanned missions.</p>
+
+<p>Wet-pipe sprinklers and controlled-release pre-action/deluge systems must have distinct asset types and operating models. SmartAlarm does not assume an ordinary thermally operated sprinkler head is individually software-addressable. A supported releasing controller remains responsible for its approved local release sequence. Pump-start demand, pump running, release-output activation, valve position, and confirmed waterflow are different observations; none alone proves extinguishment. Retrofit monitoring is allowed even where remote control is prohibited. Real water-discharge and motion tests require the approved site test arrangement, qualified personnel, and a documented impairment/restoration plan.</p>
+
+<h2 id="6-beforeduringafter-journeys">6. Before–during–after journeys</h2>
+
+<p>Before: onboard the organization and region; import sites and floor plans; provision device identities; test connectors; configure playbooks and rosters; invite users; establish consent; conduct drills. During: receive event → assess → incident → alert/dispatch → citizen SOS/check-in → responder updates → partner synchronization. After: complete each task, confirm statuses with provenance, have the supervisor close or hand over the incident, report, and take improvement actions. Do not infer “everyone is safe” from the registered-person list: unregistered people, visitors, and disconnected devices are gaps that must be visible.</p>
+
+<p>The physical journey adds an approved device survey and compatibility pack before onboarding; evidence-based monitoring and operator-approved requests during an incident; and independent outcome verification, manual handover, restoration, and signed records afterward. When feedback is lost, the operator sees UNKNOWN and the responsible site contact, not a fabricated success/failure. A cloud outage must not interrupt local detection, automatic pump start, or approved releasing logic. An impairment creates a visible coverage gap and compensating measures rather than silently hiding alarms.</p>
+
+<h2 id="7-architecture-selected-according-to-confirmed-requirements">7. Architecture selected according to confirmed requirements</h2>
+
+<p><strong>Full production domain services + regional cells + edge adapters.</strong> A complete design from the outset, including HA, event streaming, durable workflows, database ownership, field-level access, AI governance, PA, positioning, and proactive assistance. A modular monolith or microservices only for a demo are no longer the baseline. Higher investment in SRE, contract testing, and operations is accepted in exchange for long-term independent development boundaries. Trade-offs and topology are in Basic Design.</p>
+
+<p>Physical integration uses site edge adapters and segmented OT connectivity. The cloud records intent, authorization, and evidence; local controllers enforce their approved interlocks and protection functions. Read and command capabilities are separate contracts. AI may summarize physical evidence but cannot invent supported actions, override local authority, or issue autonomous release/start/motion commands. Regional cells preserve equipment/site ownership and audit boundaries.</p>
+
+<h2 id="8-complete-development-plan-through-quality-gates">8. Complete development plan through quality gates</h2>
+
+<p>The full functional scope is retained. Workstreams organize execution and verification; they do not split the product into a feature-reduced demo/MVP.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Gate</th>
+  <th>Outcome</th>
+  <th>Completion criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>G0 — Architecture &amp; product baseline</td>
+  <td>BRD/FRD/Basic/Detail/UX/contracts</td>
+  <td>Stakeholder review, domain safety review, confirmed assumptions</td>
+</tr>
+<tr>
+  <td>G1 — Production foundations</td>
+  <td>IAM/tenant/regions/event/workflow/data/edge/security</td>
+  <td>Contract tests, tenant isolation, HA, observability</td>
+</tr>
+<tr>
+  <td>G2 — Full domain workflows</td>
+  <td>Fire/disaster/personal/road/SOS/care/voice/PA/AI</td>
+  <td>Complete flows, roles, vi/en/ja, and error states</td>
+</tr>
+<tr>
+  <td>G3 — Integration &amp; resilience</td>
+  <td>Vendor adapters, localization, HIL, load/DR/security</td>
+  <td>Site acceptance, measured SLOs, and recovery evidence</td>
+</tr>
+<tr>
+  <td>G4 — Operational readiness</td>
+  <td>Training, support, runbooks, contracts, go-live controls</td>
+  <td>Independent UAT, approved operational ownership</td>
+</tr>
+</tbody>
+</table>
+
+<p>Budget and staffing are not yet available to commit to a completion schedule. Estimates by workstream, load scale, and vendor are needed after baseline review. The team requires product/domain, architecture, backend/integration, web/mobile, UX/localization, QA, security/privacy, SRE, and site safety/hardware specialists.</p>
+
+<p>Each gate explicitly includes physical evidence: G0 approves system boundaries and cause-and-effect; G1 validates OT separation and edge resilience; G2 completes WF-28–WF-33 and all physical roles/error states; G3 requires compatibility tests and FAT/SAT for each enabled assembly; G4 requires local operator training, maintenance ownership, manual fallback, and restoration procedures. Simulator success is insufficient for physical go-live.</p>
+
+<h2 id="9-commercial-model-and-operations">9. Commercial model and operations</h2>
+
+<p>Proposed commercial units: tenant/region, site count, devices, protected users, connectors, and support tier; SMS/voice/video are budgeted usage. Do not silently drop SOS when quota is exhausted: reserve emergency capacity, alert operations, and record degraded status. The buyer must designate 24/7 recipients or an explicit service schedule; an app does not create a rescue team. Contracts must distinguish software processing time from human response time.</p>
+
+<p>Physical delivery depends on licensed interfaces, gateways, supported firmware, hydraulic and electrical design, qualified installers, commissioning providers, and local approval. Quotations must distinguish software integration, equipment, installation, FAT/SAT, recurring maintenance, connectivity, and vendor support. The buyer must identify who can authorize start/release/motion, who is physically present, and who can restore an impaired system; software support is not a substitute for those roles.</p>
+
+<h2 id="10-risks-and-open-decisions">10. Risks and open decisions</h2>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Risk / decision</th>
+  <th>Baseline assumption</th>
+  <th>Confirmation owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Q01</td>
+  <td>First country/region not selected</td>
+  <td>Demonstrate EU and APAC with synthetic data; region pinning</td>
+  <td>Product + legal</td>
+</tr>
+<tr>
+  <td>Q02</td>
+  <td>Authority to issue public warnings</td>
+  <td>Only configured and authorized sources/issuers</td>
+  <td>Operating partner</td>
+</tr>
+<tr>
+  <td>Q03</td>
+  <td>Authority to control suppression/drones</td>
+  <td>Read-only first; commands subject to capability and approval</td>
+  <td>Site engineer / pilot</td>
+</tr>
+<tr>
+  <td>Q04</td>
+  <td>Detectors and devices not selected</td>
+  <td>Adapter simulator; no accuracy commitment</td>
+  <td>Integration + domain lead</td>
+</tr>
+<tr>
+  <td>Q05</td>
+  <td>Retention and data of children/dependents</td>
+  <td>Design values are proposals; consent is versioned</td>
+  <td>Privacy owner</td>
+</tr>
+<tr>
+  <td>Q06</td>
+  <td>Assurance level and certification</td>
+  <td>No compliance/certification claims yet</td>
+  <td>Compliance + engineering</td>
+</tr>
+<tr>
+  <td>Q07</td>
+  <td>Indoor maps and positioning</td>
+  <td>User-entered/QR first; do not assume GPS knows the floor</td>
+  <td>Site owner</td>
+</tr>
+<tr>
+  <td>Q08</td>
+  <td>Roster coverage</td>
+  <td>Separate registered/estimated/unknown; do not infer total occupancy</td>
+  <td>Command owner</td>
+</tr>
+</tbody>
+</table>
+
+<p>These decisions do not prevent preparation of documents and review mockups, but are gates before real deployment. Country-specific legal assessment has not been performed; the architecture provides configuration and audit points rather than guaranteeing compliance by itself.</p>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Physical risk / decision</th>
+  <th>Baseline treatment</th>
+  <th>Confirmation owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Q09</td>
+  <td>Exact installed equipment/firmware and interface rights unknown</td>
+  <td>Monitor-only until signed capability and compatibility evidence</td>
+  <td>Vendor + site engineer</td>
+</tr>
+<tr>
+  <td>Q10</td>
+  <td>Physical command outcome unavailable or conflicting</td>
+  <td>UNKNOWN, reconcile, manual handover; no blind retry</td>
+  <td>Local operator + incident commander</td>
+</tr>
+<tr>
+  <td>Q11</td>
+  <td>Test or maintenance reduces protection</td>
+  <td>Authorized impairment, compensating coverage, verified restoration</td>
+  <td>Site safety owner</td>
+</tr>
+<tr>
+  <td>Q12</td>
+  <td>Robot/water-monitor interface and operating envelope unverified</td>
+  <td>Mission authorization and vendor-bound controls; no autonomous deployment claim</td>
+  <td>Equipment vendor + qualified operator</td>
+</tr>
+</tbody>
+</table>
+
+<p>These gates apply separately to each country, site, model, firmware, and permitted operation. Research evidence does not establish certification of SmartAlarm or authorize a change to a protected system.</p>
+
+<h2 id="11-business-approval">11. Business approval</h2>
+
+<h3 id="v2-experience-acceptance-conditions">V2 experience acceptance conditions</h3>
+
+<p>The v2 baseline retains every BR, WF, FR and all 233 screen IDs. It changes how decisions are presented, not operational authority. Emergency priority is <strong>hazard → place → immediate action → uncertainty</strong>. Floor plans, exit landmarks, assistance needs and equipment diagrams must support a decision. Decorative imagery or metric dashboards must not displace the action. Administration uses matrices, traces and comparisons when a map is inappropriate.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Business outcome to verify</th>
+  <th>Screens / acceptance criterion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Do not direct people from insufficient evidence</td>
+  <td>C35–C39, O35/O36: unknown heading removes relative arrows; route withdrawal removes the old route and speech together; reported-location entry and assistance remain available.</td>
+</tr>
+<tr>
+  <td>Do not create false rescue expectations</td>
+  <td>C08, R02–R04, O08/O09: assignment, acceptance, approach and arrival remain separate; no ETA without a confirmed source.</td>
+</tr>
+<tr>
+  <td>Do not turn receipts into outcomes</td>
+  <td>C07/C08/X01, P04, F11/F12: local saving, server receipt, human acknowledgment, playback and physical effect remain distinct.</td>
+</tr>
+<tr>
+  <td>Preserve discreet and accessible completion</td>
+  <td>C27 never starts sound or vibration automatically; emergency flows provide text labels, audio transcripts, keyboard access and reflow; one-handed and participant testing precede acceptance.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Three-second recognition is a research hypothesis in UX-Redesign-Audit, not a measured achievement. Acceptance records correctness, dangerous misunderstandings and recovery by role and language; average speed must not hide errors. Prototype v2 demonstrates illustrative data and local interactions only. It does not establish field safety, WCAG conformity or real rescue submission.</p>
+
+<p>Reviewers: product owner, command operator, responder, site engineer, privacy/security, integration partner, and accessibility reviewer. Minimum review scenarios: fire with trapped people, updated/canceled flood warnings, unresponsive fall detection, unverified collision, discreet SOS, network loss, duplicate source submissions, access from another tenant, and delivery provider failure. Record results in the acceptance matrix; the document has not been signed off.</p>
+
+<p>Physical reviewers additionally include the fire-protection designer, OT security owner, vendor/authorized installer, commissioning provider, and qualified mission operator. Review must cover local protection during cloud loss, stale/cross-zone telemetry, denied control, expired/duplicate requests, ACK without physical feedback, conflicting feedback, impairment expiry without proven restoration, and mission link loss. Acceptance-Matrix.csv adds 16 cross-system physical cases and 20 physical screen cases; product execution remains unperformed.</p>
+
+<h2 id="mandatory-appendices-within-the-same-baseline">Mandatory appendices within the same baseline</h2>
+
+<p><a href="Voice-Rescue-Design.html">Rescue speakers and voice navigation</a> adds WF-21–22. <a href="Positioning-AI-Care-Design.html">Positioning, optimization, AI, and care profiles</a> adds WF-23–27. These two documents are part of the full design, not optional features for a later phase. <a href="Screen-Specifications.html">Screen specifications</a> provides FRs for each screen ID.</p>
+</main></body></html>

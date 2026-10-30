@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "documents": [
+    {
+      "path": "outputs\\SmartAlarm\\BRD.md",
+      "bytes": 31484,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\FRD.md",
+      "bytes": 82168,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\Voice-Rescue-Design.md",
+      "bytes": 21717,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\Positioning-AI-Care-Design.md",
+      "bytes": 23698,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\Physical-Device-Catalog.md",
+      "bytes": 27017,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\Rescue-IoT-Device-Catalog.md",
+      "bytes": 18458,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\External-Integration-Standards-Deployment.md",
+      "bytes": 38060,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\English\\BRD.md",
+      "bytes": 28031,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\English\\FRD.md",
+      "bytes": 76515,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\English\\Voice-Rescue-Design.md",
+      "bytes": 20672,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\English\\Positioning-AI-Care-Design.md",
+      "bytes": 22421,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\English\\Physical-Device-Catalog.md",
+      "bytes": 24662,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\English\\Rescue-IoT-Device-Catalog.md",
+      "bytes": 17132,
+      "bms_section": true
+    },
+    {
+      "path": "outputs\\SmartAlarm\\English\\External-Integration-Standards-Deployment.md",
+      "bytes": 33616,
+      "bms_section": true
+    }
+  ],
+  "requirements": 40,
+  "new_workflows": [
+    "WF-34",
+    "WF-35",
+    "WF-36",
+    "WF-37"
+  ],
+  "new_business_requirements": [
+    "BR-17",
+    "BR-18",
+    "BR-19",
+    "BR-20"
+  ],
+  "languages": [
+    "vi",
+    "en"
+  ],
+  "implementation_claim": "specification only; no FAT/SAT execution claimed",
+  "acceptance_bms_cases_per_language": 48,
+  "acceptance_total_per_language": 346,
+  "canonical_api_family": "/bms/connections/{connection_id}/...",
+  "BMS_protocol_test_ids": "BMS-P-01..28",
+  "permissions_aligned_to_API_contract": true,
+  "local_links_checked": "PASS",
+  "final_research_sync": {
+    "reports": 2,
+    "baseline": "3.0",
+    "screens": 241,
+    "workflows": 37,
+    "proposal_slides_each_language": 188,
+    "bms_api_operations": 23,
+    "total_api_operations": 67,
+    "source_ledgers_preserved": true,
+    "local_links": "PASS",
+    "front_metadata_documents": 14
+  }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "language": "vi",
+    "pages": 22,
+    "bytes": 255675,
+    "broken_images": [],
+    "required_ids_present": true
+  },
+  {
+    "language": "en",
+    "pages": 23,
+    "bytes": 244042,
+    "broken_images": [],
+    "required_ids_present": true
+  }
+]

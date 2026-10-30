@@ -1,0 +1,29 @@
+{
+  "revision": "2.0",
+  "proposals": {
+    "vi": {
+      "slides": 166,
+      "updated_slides": [
+        13,
+        18,
+        19,
+        34,
+        35
+      ],
+      "appendix_rows": 527,
+      "native_text_overflows": []
+    },
+    "en": {
+      "slides": 166,
+      "updated_slides": [
+        13,
+        18,
+        19,
+        34,
+        35
+      ],
+      "appendix_rows": 527,
+      "native_text_overflows": []
+    }
+  }
+}

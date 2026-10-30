@@ -1,0 +1,932 @@
+{
+  "reviewer": "bms_protocols",
+  "review_date": "2026-10-24",
+  "scope": "Independent protocol/safety contract review of BMS design annex and 11 profiles; no runtime/hardware validation",
+  "status": "PASS_DESIGN_ONLY",
+  "tests": [
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-events",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.alc.webctrl-soap-sdk",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.delta.enteliweb",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.distech.ecnet-niagara",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.ebi-api",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.honeywell.webs-niagara",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.jci.metasys-rest",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.schneider.ebo-ews",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.siemens.desigo-wsi",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.nds-cloud",
+      "case": "claim_lab_support",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "valid_design_profile",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "write_enabled",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "external_ack",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "point_command",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "claim_site_accepted",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "claim_implemented",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "disable_fencing",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "bypass_local_override",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "allow_blind_retry",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "disable_approval",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "raw_password",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "raw_token",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "automatic_protocol_failover",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "raw_secret_value",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "unknown_capability",
+      "pass": true
+    },
+    {
+      "profile": "bms.tridium.niagara-local",
+      "case": "claim_lab_support",
+      "pass": true
+    }
+  ],
+  "test_summary": {
+    "total": 176,
+    "passed": 176,
+    "failed": 0
+  },
+  "resolved_findings": [
+    {
+      "id": "BMS-R01",
+      "severity": "high",
+      "finding": "Initial imported research schema permitted unsafe combinations of write_enabled and adapter/capability state.",
+      "resolution": "Final delivered schema restricted to non-activatable design examples: status design_example, adapter not_implemented, empty enabled capabilities, write disabled. Negative mutation checks passed."
+    }
+  ],
+  "open_blocking_findings": [],
+  "review_checks": {
+    "readonly_disabled_defaults": "pass",
+    "capability_intersection_and_no_write_probe": "pass",
+    "BACnet_TTL_is_not_controller_deadman": "pass",
+    "local_override_and_ownership_proof": "pass",
+    "fencing_at_actual_egress": "pass",
+    "internal_ACK_external_ACK_incident_closure_separate": "pass",
+    "late_ACK_occurrence_identity": "pass",
+    "snapshot_stream_reconciliation_and_gap_handling": "pass",
+    "replay_and_echo_do_not_actuate": "pass",
+    "direct_panel_BMS_lineage_not_independent_evidence": "pass",
+    "secrets_references_no_customer_credentials": "pass",
+    "SDK_typed_unsupported_and_outcome_unknown": "pass"
+  },
+  "limitations": [
+    "Schema proves design profile non-activation, not deployment authorization or evidence authenticity.",
+    "Operational deployment schema and SDK/runtime implementation remain future work; current package correctly states no adapter implementation or live BMS connection.",
+    "No protocol emulation, vendor lab, FAT or SAT executed; included 48 cases are specifications.",
+    "Read-only review; only this review report written."
+  ],
+  "nonblocking_notes": [
+    {
+      "id": "BMS-N01",
+      "note": "Schema retains a write_enabled=true conditional branch rendered unreachable by design-only constants. Harmless but could remove for clarity."
+    },
+    {
+      "id": "BMS-N02",
+      "note": "English proposal scenario says command verifies rescue outcomes; incident command/incident commander would be clearer than software Command aggregate."
+    }
+  ]
+}

@@ -1,0 +1,717 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Detail-Design · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="index.html">SmartAlarm / Design Library</a><a href="English/Detail-Design.html">English</a><button onclick="window.print()">In / Lưu PDF</button></header><main><div class="document-meta">BASELINE 2.0 · 23/10/2026 · THIẾT KẾ ĐỂ REVIEW</div><h1 id="smartalarm-detail-design-thiet-ke-ky-thuat-chi-tiet">SmartAlarm — Detail Design / Thiết kế kỹ thuật chi tiết</h1>
+
+<p><img src="assets/proposal-v3/physical.png" alt="SmartAlarm — sơ đồ giải thích" /></p>
+
+<p>Version 1.0 · baseline thiết kế kiến trúc production, chưa triển khai · 23/10/2026. Tài liệu kết hợp API-Contract.json, Event-Schemas.json, Screen-Specifications.md và Acceptance-Matrix.csv. API contract đính kèm là baseline core có cấu trúc máy đọc; các integration vendor cần binding specification riêng khi có thiết bị thực tế.</p>
+
+<h2 id="1-domain-data-model">1. Domain data model</h2>
+
+<p>ID dùng UUIDv7 hoặc UUID tương đương có uniqueness; external IDs chỉ trong namespace nguồn. Tất cả bảng tenant data có tenant_id, region_id, created_at UTC, updated_at và version bigint. Internal foreign keys composite tenant_id+id khi cùng DB; reference cross-service dùng ID và snapshot version, không foreign key xuyên database.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Entity</th>
+  <th>Trường chính và constraint</th>
+  <th>Retention đề xuất / owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Tenant</td>
+  <td>id, home_region, status, policy_version, default_locale; region immutable qua normal API</td>
+  <td>Hết hợp đồng + policy / Tenant</td>
+</tr>
+<tr>
+  <td>Membership</td>
+  <td>tenant,user,role,site_scope,valid_from,valid_until,revoked_at; unique tenant,user,role,scope</td>
+  <td>Audit giữ lịch sử / IAM</td>
+</tr>
+<tr>
+  <td>Location</td>
+  <td>id,parent_id,type,name_i18n,geometry,timezone,version; parent cùng tenant; cycle forbidden</td>
+  <td>Version lưu lâu dài / Location</td>
+</tr>
+<tr>
+  <td>PlanRevision</td>
+  <td>plan_id,revision,asset_id,scale,exit_graph,reviewer,published_at; unique plan,revision</td>
+  <td>Theo incident reference / Location</td>
+</tr>
+<tr>
+  <td>Device</td>
+  <td>id,external_id,connector_id,location_id,cert_thumbprint,capabilities,health; unique tenant,connector,external_id</td>
+  <td>Đời thiết bị + audit / Registry</td>
+</tr>
+<tr>
+  <td>Signal</td>
+  <td>id,source,event_id,type,observed_at,received_at,schema_version,payload_ref,location_snapshot,mode</td>
+  <td>30 ngày hot + archive policy / Ingestion</td>
+</tr>
+<tr>
+  <td>Incident</td>
+  <td>id,hazard,severity,state,home_region,writer_epoch,owner,location_ref,version,opened_at,closed_at</td>
+  <td>365 ngày mặc định đề xuất / Incident</td>
+</tr>
+<tr>
+  <td>IncidentSignal</td>
+  <td>incident_id,signal_id,relation,actor,reason; unique incident,signal</td>
+  <td>Theo incident / Incident</td>
+</tr>
+<tr>
+  <td>SOS</td>
+  <td>id,client_request_id,person_ref,incident_ref,category,state,location_report,sharing_policy,version</td>
+  <td>365 ngày, precise location tách / Assistance</td>
+</tr>
+<tr>
+  <td>PersonObservation</td>
+  <td>id,person_ref,incident_ref,status,reporter_type,observed_at,received_at,location_ref</td>
+  <td>Append-only; precise location 30 ngày / Assistance</td>
+</tr>
+<tr>
+  <td>Task</td>
+  <td>id,incident_ref,unit_ref,state,offer_deadline,version,assignment_epoch,completed_at</td>
+  <td>365 ngày / Dispatch</td>
+</tr>
+<tr>
+  <td>WarningVersion</td>
+  <td>warning_id,version,content_i18n,area,audience_snapshot,expiry,status,approvals</td>
+  <td>365 ngày / Warning</td>
+</tr>
+<tr>
+  <td>DeliveryAttempt</td>
+  <td>id,warning_ref,recipient_ref,channel,attempt_no,provider_id,state,receipt_at; effect_key unique</td>
+  <td>90 ngày metadata / Delivery</td>
+</tr>
+<tr>
+  <td>Command</td>
+  <td>id,target,capability,params_digest,nonce,expires_at,approval,state,device_receipt,writer_epoch</td>
+  <td>365 ngày / Command</td>
+</tr>
+<tr>
+  <td>Mission</td>
+  <td>id,drone_ref,incident_ref,pilot_ref,plan_version,clearance_ref,state,flight_log_ref</td>
+  <td>365 ngày policy / Command</td>
+</tr>
+<tr>
+  <td>Evidence</td>
+  <td>id,tenant,object_key,sha256,mime,size,scan_state,classification,hold_id</td>
+  <td>90 ngày, legal hold override / Evidence</td>
+</tr>
+<tr>
+  <td>Consent</td>
+  <td>subject,purpose,recipient_scope,fields,policy_version,granted_at,revoked_at</td>
+  <td>Version history / Privacy</td>
+</tr>
+<tr>
+  <td>AuditEntry</td>
+  <td>id,actor,action,object_ref,object_version,reason,trace_id,at,digest,previous_digest</td>
+  <td>365+ theo policy / Audit</td>
+</tr>
+<tr>
+  <td>Outbox / Inbox</td>
+  <td>outbox: event_id,payload,attempt,next_attempt; inbox: consumer,event_id,processed_at</td>
+  <td>Replay horizon + margin / từng service</td>
+</tr>
+<tr>
+  <td>PhysicalBindingRevision</td>
+  <td>binding_id,revision,controller_id,regional_model,firmware,gateway_model,gateway_firmware,license_ref,point_map_digest,zone_revision,cause_effect_revision,status,acceptance_ref; unique tenant,binding_id,revision</td>
+  <td>Lịch sử cấu hình có tham chiếu; policy được duyệt / Physical integration</td>
+</tr>
+<tr>
+  <td>PhysicalPoint</td>
+  <td>id,binding_id,binding_revision,controller_id,zone_id,raw_address,semantic,access_mode,unit,scale,offset,byte_order,word_order,enum_map,stale_after,feedback_for; unique tenant,binding_id,binding_revision,raw_address</td>
+  <td>Đời binding + tham chiếu incident/test / Physical integration</td>
+</tr>
+<tr>
+  <td>PhysicalObservation</td>
+  <td>id,binding_id,point_id,binding_revision,source_event_id,observed_at,received_at,value,quality,controller_mode,maintenance_state,raw_evidence_ref; append-only</td>
+  <td>Đề xuất 30 ngày hot; archive theo policy incident/test / Physical integration</td>
+</tr>
+<tr>
+  <td>PhysicalCapability</td>
+  <td>id,binding_id,revision,operation,parameter_schema,allowed_targets,authorization_policy,local_interlocks,command_ttl,retry_class,feedback_point_ids,completion_criterion,unknown_outcome_policy,approval_evidence_ref</td>
+  <td>Lịch sử phê duyệt có version / Command</td>
+</tr>
+<tr>
+  <td>PhysicalCommandDetail</td>
+  <td>command_id,binding_revision,capability_revision,zone_revision,cause_effect_revision,expected_point_versions,feedback_deadline,physical_state,evidence_refs; one-to-one Command</td>
+  <td>Kế thừa retention Command / Command</td>
+</tr>
+<tr>
+  <td>Impairment</td>
+  <td>id,scope_refs,functions_affected,reason,owner,planned_until,notifications,compensatory_plan_ref,status,restoration_evidence_refs,version</td>
+  <td>Policy kiểm tra site; áp dụng legal hold / Physical readiness</td>
+</tr>
+<tr>
+  <td>PhysicalTestRun</td>
+  <td>id,binding_revision,test_plan_ref,mode,authorization_ref,impairment_ref,operator,witness,started_at,ended_at,result,evidence_refs</td>
+  <td>Policy kiểm tra/nghiệm thu site / Physical readiness</td>
+</tr>
+<tr>
+  <td>CompatibilityAssessment</td>
+  <td>id,binding_revision,hardware_serials,firmware_versions,license_refs,certificate_refs,fat_run_refs,sat_run_refs,open_defects,signoffs,status</td>
+  <td>Vòng đời cấu hình và policy site / Physical readiness</td>
+</tr>
+<tr>
+  <td>RescueEquipmentMission</td>
+  <td>id,incident_ref,dispatch_task_ref,equipment_ref,operator_ref,capability_revision,mission_scope,local_console_required,flight_mission_ref,state,limitations,result_evidence_refs</td>
+  <td>Đề xuất 365 ngày; evidence nhạy cảm riêng / Rescue equipment operations</td>
+</tr>
+</tbody>
+</table>
+
+<p>Giá trị retention là default đề xuất phục vụ design, không kết luận pháp lý. Legal hold ngăn purge các object liên quan. Deletion có tombstone tham chiếu để không phá audit, không giữ PII ngoài mục đích. Search/index/backup phải có deletion propagation và expiration strategy; không chỉ xóa OLTP.</p>
+
+<h3 id="indexes-va-concurrency">Indexes và concurrency</h3>
+
+<p>Signal unique(tenant_id,source,event_id); index(tenant_id,observed_at DESC), partition theo received_at tháng. Incident index(tenant_id,state,severity,opened_at DESC), spatial index geometry; partial index active. SOS unique(tenant_id,client_request_id), index(tenant_id,incident_ref,state). Task update dùng <code>WHERE version=:expected AND assignment_epoch=:epoch</code>; affected_rows=0 trả 409. Delivery unique(effect_key); provider callback unique(provider,event_id). Outbox index(status,next_attempt_at) và leasing worker tránh xử lý concurrent cùng row.</p>
+
+<p>RLS dùng tenant context được bind từ verified principal trong transaction, không từ header tin cậy trực tiếp. Connection pool reset context bắt buộc. Tenant ID trong URL không đủ authorization. Region routing kiểm tra membership directory và signed region mapping; request sai region nhận redirect metadata an toàn hoặc 409 REGION_MISMATCH.</p>
+
+<h3 id="bat-bien-luu-tru-va-revision-vat-ly">Bất biến lưu trữ và revision vật lý</h3>
+
+<p>Mỗi entity vật lý cũng có tenant_id, region_id, created_at, updated_at và version chung ở trên. Dùng composite reference trong cùng service; reference xuyên service giữ accepted snapshot digest. Dedupe PhysicalObservation là unique(tenant_id,binding_id,source_event_id,point_id) khi có source event ID ổn định; nếu không, adapter tạo receipt ID ổn định và ghi rõ không chứng minh được dedupe cấp nguồn. Index observation theo tenant_id,point_id,observed_at và partition theo received_at. Latest view của point dùng source sequence/time và quality, không chỉ thứ tự đến.</p>
+
+<p>Binding revision bất biến sau nghiệm thu. Activation chỉ đổi active revision nguyên tử sau compatibility acceptance và readiness check; command approval còn mở gắn revision gốc và mất quyền dispatch khi không còn khớp active binding. physical_state không được thành COMPLETED_VERIFIED nếu thiếu tiêu chí evidence đã khai báo. Khôi phục impairment và bật lại capability là hai transaction khác nhau; xóa alarm dashboard không khôi phục thiết bị hoặc cấp quyền ghi. Snapshot reconciliation so maintenance_state phần mềm với mode controller và báo conflict.</p>
+
+<h2 id="2-api-conventions">2. API conventions</h2>
+
+<p>Base <code>/v1</code>; JSON UTF-8, RFC3339 timestamps, cursor pagination. Authorization Bearer + verified tenant context; optional X-Tenant-ID chỉ là selector, server đối chiếu token membership. <code>Idempotency-Key</code> bắt buộc cho POST tạo SOS, warning send, dispatch offer, commands; scope principal+tenant+route+key, request body hash. Cùng key khác payload → 409 IDEMPOTENCY_MISMATCH; cùng key cùng payload → response cũ. Receipt chỉ sau durable commit. Key retention 7 ngày đề xuất cho human mutation; source event dedupe theo archive replay horizon 90 ngày tối thiểu đề xuất, replay cũ qua controlled path. Expiry của command không phụ thuộc dedupe retention.</p>
+
+<p><code>If-Match</code> version/ETag cho updates; 412 VERSION_MISMATCH hoặc domain 409 theo API schema. Error envelope: code, message_key, params, trace_id, retryable, field_errors; không expose stack. 400 malformed, 401 authentication, 403 permission, 404 inaccessible/not found, 409 domain conflict, 412 precondition, 413 payload, 422 validation, 429 quota, 503 unavailable. GET retries bounded; mutation retry chỉ với idempotency key.</p>
+
+<table>
+<thead>
+<tr>
+  <th>API</th>
+  <th>Quyền</th>
+  <th>Request/response và side effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>POST /events</td>
+  <td>event.ingest + source binding</td>
+  <td>CloudEvent; 202 durable receipt, không incident success</td>
+</tr>
+<tr>
+  <td>GET /incidents</td>
+  <td>incident.read scope</td>
+  <td>Filters severity/state/site/from; cursor result</td>
+</tr>
+<tr>
+  <td>POST /incidents</td>
+  <td>incident.create</td>
+  <td>hazard,severity,location,signal_refs; 201 aggregate + outbox</td>
+</tr>
+<tr>
+  <td>POST /incidents/{id}/transitions</td>
+  <td>incident.transition</td>
+  <td>expected version,to,reason; validate state guard</td>
+</tr>
+<tr>
+  <td>POST /sos</td>
+  <td>sos.create</td>
+  <td>client_request_id,category,location,note; 201 server receipt</td>
+</tr>
+<tr>
+  <td>POST /sos/{id}/updates</td>
+  <td>sos.self_update hoặc sos.manage</td>
+  <td>append note/location/cancellation request; không delete</td>
+</tr>
+<tr>
+  <td>POST /safety-reports</td>
+  <td>safety.self_report</td>
+  <td>incident_ref,status,sharing preference; save observation + fan-out event</td>
+</tr>
+<tr>
+  <td>POST /tasks</td>
+  <td>task.assign</td>
+  <td>unit,incident,scope,deadline; offer + workflow timer</td>
+</tr>
+<tr>
+  <td>POST /tasks/{id}/accept</td>
+  <td>task.accept + assigned unit</td>
+  <td>expected version; atomic owner confirmation</td>
+</tr>
+<tr>
+  <td>POST /warnings</td>
+  <td>warning.author</td>
+  <td>localized content,audience,expires; create draft version</td>
+</tr>
+<tr>
+  <td>POST /warnings/{id}/approvals</td>
+  <td>warning.approve</td>
+  <td>version,digest,decision,reason; separate actor guard</td>
+</tr>
+<tr>
+  <td>POST /warnings/{id}/send</td>
+  <td>warning.send</td>
+  <td>approved version; effect key, immutable audience snapshot</td>
+</tr>
+<tr>
+  <td>GET /deliveries</td>
+  <td>delivery.read</td>
+  <td>warning,channel,state; không trả private address nếu thiếu scope</td>
+</tr>
+<tr>
+  <td>POST /commands</td>
+  <td>command.request</td>
+  <td>capability,target,parameters,expiry; 202 requested, chưa actuation</td>
+</tr>
+<tr>
+  <td>POST /commands/{id}/approve</td>
+  <td>command.approve</td>
+  <td>digest,version; publish intent sau interlock checks</td>
+</tr>
+<tr>
+  <td>POST /connectors/{id}/tests</td>
+  <td>connector.test</td>
+  <td>fixture_set,manifest_version; sandbox results</td>
+</tr>
+<tr>
+  <td>POST /connectors/{id}/replay</td>
+  <td>connector.replay</td>
+  <td>event IDs,reason; forbid command replay</td>
+</tr>
+<tr>
+  <td>POST /evidence/upload-sessions</td>
+  <td>evidence.write</td>
+  <td>mime,size,classification; short-lived scoped URL</td>
+</tr>
+<tr>
+  <td>POST /privacy-requests</td>
+  <td>privacy.self_request</td>
+  <td>type,scope; identity verification workflow</td>
+</tr>
+<tr>
+  <td>GET /stream</td>
+  <td>authenticated subscriptions</td>
+  <td>event cursor + projection changes; no mutation through socket</td>
+</tr>
+<tr>
+  <td>POST /physical-bindings</td>
+  <td>physical.binding.author</td>
+  <td>controller_id,regional_model,firmware,gateway,point_map,zone_revision,cause_effect_revision; tạo candidate revision bất biến</td>
+</tr>
+<tr>
+  <td>POST /physical-bindings/{id}/validate</td>
+  <td>physical.binding.test</td>
+  <td>revision,fixture_set; kiểm schema/point/capability, không actuation thật</td>
+</tr>
+<tr>
+  <td>POST /physical-bindings/{id}/activate</td>
+  <td>physical.binding.activate</td>
+  <td>expected_version,revision,acceptance_ref; từ chối thiếu signoff hoặc readiness không phù hợp</td>
+</tr>
+<tr>
+  <td>GET /physical-points</td>
+  <td>physical.point.read</td>
+  <td>controller,zone,binding_revision,quality; point projection theo scope</td>
+</tr>
+<tr>
+  <td>GET /physical-points/{id}/observations</td>
+  <td>physical.point.read</td>
+  <td>from,to,cursor; value, unit, source/receive time, quality và revision</td>
+</tr>
+<tr>
+  <td>POST /physical-commands</td>
+  <td>physical.command.request</td>
+  <td>capability_id,target,binding_revision,zone_revision,cause_effect_revision,parameters,expires_at; tạo Command + PhysicalCommandDetail, chưa actuation</td>
+</tr>
+<tr>
+  <td>POST /physical-commands/{id}/approvals</td>
+  <td>physical.command.approve</td>
+  <td>expected_version,digest,decision; actor khác khi policy yêu cầu, guard tại chỗ vẫn áp dụng</td>
+</tr>
+<tr>
+  <td>POST /physical-commands/{id}/reconciliations</td>
+  <td>physical.command.reconcile</td>
+  <td>expected_version,observations,evidence_refs,reason; không tự resend; giữ lịch sử UNKNOWN</td>
+</tr>
+<tr>
+  <td>POST /impairments</td>
+  <td>physical.impairment.manage</td>
+  <td>scope,functions_affected,reason,owner,planned_until,compensatory_plan_ref; tạo impairment theo dõi được</td>
+</tr>
+<tr>
+  <td>POST /impairments/{id}/restoration-checks</td>
+  <td>physical.impairment.restore</td>
+  <td>expected_version,checklist,evidence_refs,witness; xác minh trước đóng; không ngầm gửi lệnh</td>
+</tr>
+<tr>
+  <td>POST /physical-test-runs</td>
+  <td>physical.test.execute</td>
+  <td>binding_revision,test_plan_ref,mode,authorization_ref,impairment_ref; vòng đời test được duyệt</td>
+</tr>
+<tr>
+  <td>POST /physical-test-runs/{id}/evidence</td>
+  <td>physical.test.record</td>
+  <td>expected_version,step_id,expected,observed,evidence_refs; append evidence</td>
+</tr>
+<tr>
+  <td>POST /compatibility-assessments</td>
+  <td>physical.compatibility.author</td>
+  <td>binding_revision,hardware,firmware,licenses,certificates,fat_run_refs,sat_run_refs; tạo hồ sơ review</td>
+</tr>
+<tr>
+  <td>POST /compatibility-assessments/{id}/acceptance</td>
+  <td>physical.compatibility.accept</td>
+  <td>expected_version,decision,signoffs,open_defects; từ chối lỗi nghiêm trọng chưa xử lý</td>
+</tr>
+<tr>
+  <td>POST /rescue-equipment-missions</td>
+  <td>rescue.equipment.assign</td>
+  <td>incident_ref,dispatch_task_ref,equipment_ref,operator_ref,mission_scope,capability_revision; workflow operator đủ năng lực, không chuyển động</td>
+</tr>
+</tbody>
+</table>
+
+<p>Mọi physical POST mutation cần Idempotency-Key; update phù hợp cũng cần expected_version/If-Match. Route <code>/commands</code> hiện hữu vẫn là giao diện lệnh chung; <code>/physical-commands</code> là facade chuyên biệt trên cùng aggregate Command, không phải queue actuator thứ hai. Capability chưa rõ/chưa duyệt trả 422 CAPABILITY_NOT_APPROVED; lệch revision trả 409 BINDING_REVISION_MISMATCH; impairment/local inhibit đang hiệu lực trả 409 PHYSICAL_INTERLOCK hoặc IMPAIRMENT_ACTIVE; tiền đề cũ trả 409 PHYSICAL_STATE_STALE. Reconciliation không được kết luận kết quả thiếu evidence. Quyền theo site/controller/capability, không mặc định toàn tenant.</p>
+
+<h2 id="3-canonical-event-envelope-va-semantics">3. Canonical event envelope và semantics</h2>
+
+<div class="codehilite">
+<pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;specversion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;019a0000-0000-7000-8000-000000000041&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:smartalarm:connector:gw-12&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;com.smartalarm.signal.fire.observed.v1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;subject&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;devices/cam-a05-03&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-10-23T08:40:12Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;datacontenttype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenantid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tenant-northstar&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;regionid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eu-cell-1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;actual&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;schema_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;observed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-10-23T08:40:11Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hazard&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fire.possible_flame&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;zone-a05-03&quot;</span><span class="p">,</span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;registry&quot;</span><span class="p">,</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.82</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;model_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;flame-v3&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;evidence_refs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;evidence-31&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>tenantid được gateway xác nhận theo credential, không lấy payload làm nguồn sự thật. source là identity namespace đã đăng ký. Schema event có additional-property policy theo version; invalid fields quarantine kèm reason. Confidence từ detector không map trực tiếp sang severity, severity dựa policy và impact. observed_at có thể trễ/sai clock; received_at server luôn có; skew flag lưu riêng. Location geometry theo GeoJSON longitude,latitude; CAP inbound đổi từ lat,lon explicit và có test polygon.</p>
+
+<p>Topics đề xuất: <code>sa.&lt;region&gt;.&lt;mode&gt;.signals.v1</code>, <code>incidents.v1</code>, <code>assistance.v1</code>, <code>dispatch.v1</code>, <code>warnings.v1</code>, <code>delivery.v1</code>, <code>commands.v1</code>, <code>audit.v1</code>, <code>deadletters.v1</code>. Không tạo topic cho mỗi user. Broker ACL service-specific, mode actual/exercise isolation. Partition key aggregate ID kèm tenant; telemetry key device ID. DLQ không chứa secret; có encrypted payload reference, reason và replay policy.</p>
+
+<h3 id="hop-đong-event-vat-ly">Hợp đồng event vật lý</h3>
+
+<p>Dùng cùng CloudEvents envelope, source binding đã xác minh và cách ly actual/exercise. Type đề xuất là <code>com.smartalarm.physical.point.observed.v1</code>, <code>com.smartalarm.physical.command.state_changed.v1</code>, <code>com.smartalarm.physical.impairment.changed.v1</code>, <code>com.smartalarm.physical.test.completed.v1</code>, <code>com.smartalarm.physical.binding.accepted.v1</code>, <code>com.smartalarm.rescue.equipment_mission.updated.v1</code>. Event data gồm schema_version, aggregate_id, aggregate_version, binding_revision khi liên quan, source provenance và evidence reference. Ví dụ point payload chuẩn dưới đây là fixture thiết kế, không phải observation thật:</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;schema_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;aggregate_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;point-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;aggregate_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tenant-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;site_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;site-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;controller_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;controller-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;binding_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;binding-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;binding_revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;point_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;point-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;zone_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zone-example&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;semantic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pump_running&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;observed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-10-23T08:40:11Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;received_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-10-23T08:40:12Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;quality&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GOOD&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;controller_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;maintenance_state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IN_SERVICE&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cause_effect_revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;source_event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source-example-1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;raw_evidence_ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;evidence-example&quot;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><code>pump_running</code> không phải <code>waterflow_confirmed</code> và cả hai không có nghĩa đám cháy đã tắt. Unit/scaling do point contract đã nghiệm thu quy định; thiếu sensor giữ UNKNOWN. Command event mang command_id, capability_revision, previous_state, state, controller_receipt_ref, feedback_observation_ids, unknown_reason và source/receive time khi phù hợp. Impairment event mang scope/functions và trạng thái khôi phục; test event mang authorization/evidence reference; mission event mang operator và mode giao diện hỗ trợ. Không phát raw medical notes trong equipment event.</p>
+
+<h2 id="4-sequence-signal-incident-warning">4. Sequence: signal → incident → warning</h2>
+
+<pre><code>sequenceDiagram
+  participant E as Edge
+  participant I as Ingestion
+  participant B as Broker
+  participant C as Correlation
+  participant S as Incident
+  participant W as Workflow
+  participant D as Delivery
+  E-&gt;&gt;I: event + source credential + stable ID
+  I-&gt;&gt;I: verify / durable store + outbox
+  I--&gt;&gt;E: received (not incident confirmed)
+  I-&gt;&gt;B: signal.accepted (retryable publish)
+  B-&gt;&gt;C: at-least-once delivery
+  C-&gt;&gt;S: create candidate (idempotency key)
+  S-&gt;&gt;S: commit aggregate + outbox
+  S-&gt;&gt;B: incident.created
+  B-&gt;&gt;W: start versioned playbook
+  W-&gt;&gt;W: approved template or human approval
+  W-&gt;&gt;D: enqueue warning version + audience
+  D-&gt;&gt;D: channel attempts + feedback tracking
+</code></pre>
+
+<p>Nếu Incident API timeout sau commit, caller retry cùng key và nhận incident cũ. Nếu broker down, outbox tồn tại; ingestion vẫn có giới hạn durable capacity và trạng thái degraded, không ACK nếu chưa commit. Nếu correlation lỗi, queue lag alert và operator có raw signal triage; không chặn manual SOS.</p>
+
+<p>Với báo cháy vật lý, nguồn là controller/gateway tại chỗ đã duyệt và giữ phân biệt alarm/supervisory/trouble. Chữa cháy tự động tại chỗ chạy trên đầu vào và cause-and-effect riêng được duyệt; chuỗi cloud này chỉ tạo incident và workflow phản ứng. Đóng incident không silence/reset tủ, dừng bơm PCCC, đóng van hoặc hủy bảo vệ tại chỗ. Các thao tác đó cần capability và thẩm quyền site riêng.</p>
+
+<h2 id="5-sequence-offline-sos-va-reconciliation">5. Sequence: offline SOS và reconciliation</h2>
+
+<p>Client tạo UUID request, lưu encrypted local outbox và hiển thị “chưa gửi”. Khi online, POST cùng request ID; server commit rồi trả receipt. Nếu response mất, client retry, server trả SOS ID cũ. Client mới hiển thị received; human ACK đến bằng event riêng. Offline location update luôn có observed_at; server giữ lịch sử, không ghi đè vị trí mới hơn chỉ vì đến muộn. Cancel trong lúc offline là queued request, không hứa dừng dispatch. Thiết bị mất hoặc account revoked thì app purge secure cache theo policy khi có thể, không hứa remote wipe khi thiết bị luôn offline.</p>
+
+<h2 id="6-workflow-va-deadlines">6. Workflow và deadlines</h2>
+
+<p>Workflow ID = tenant:aggregate:playbook_version. Timers chạy server-side; cron polling client không dùng làm safety mechanism. Mỗi bước có input schema, activity idempotency key, deadline, retry policy, compensation policy và manual fallback. Retry dùng exponential backoff+jitter, max attempts/time; business rejection không retry. Escalation step key workflow+step+recipient giúp không gửi lặp vô hạn. Warning expiry hủy jobs chưa gửi; job đã gửi cần cancel/update message, không thu hồi bằng cách xóa DB.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Tình huống</th>
+  <th>Timer baseline đề xuất</th>
+  <th>Hết hạn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>P1 incident chưa operator ACK</td>
+  <td>60 s</td>
+  <td>Shift supervisor, sau đó regional backup ở 120 s</td>
+</tr>
+<tr>
+  <td>Task offer chưa nhận</td>
+  <td>60 s</td>
+  <td>Expire offer, dispatcher chọn unit khác</td>
+</tr>
+<tr>
+  <td>Possible fall check-in</td>
+  <td>30 s cấu hình</td>
+  <td>Tạo care request, không kết luận chẩn đoán</td>
+</tr>
+<tr>
+  <td>Physical command</td>
+  <td>TTL 30 s hoặc capability-specific</td>
+  <td>Expire trước dispatch; sau dispatch reconcile unknown</td>
+</tr>
+<tr>
+  <td>Webhook delivery</td>
+  <td>Backoff trong tối đa 24 h hoặc event expiry ngắn hơn</td>
+  <td>DLQ + owner alert</td>
+</tr>
+</tbody>
+</table>
+
+<p>Đây là default sản phẩm cần site validation; policy có min/max và approver, không cho admin đổi timeout tùy tiện trong incident mà không ghi version.</p>
+
+<p>Workflow vật lý baseline 1.0 gồm WF-28 onboarding point/zone; WF-29 giám sát vật lý; WF-30 actuation có quyền, feedback và reconcile UNKNOWN; WF-31 impairment/test/restoration; WF-32 tương thích FAT/SAT; WF-33 nhiệm vụ thiết bị cứu nạn. Human deadline và command TTL là cấu hình capability/site có approver. Không timeout phần mềm phổ quát nào cấp quyền xả, reset, silence hoặc tự dừng bơm. Default command 30 s ở trên chỉ là đề xuất, phải override hoặc từ chối khi không phù hợp thiết kế thiết bị đã duyệt.</p>
+
+<h2 id="7-correlation-algorithm-va-hazard-expansion">7. Correlation algorithm và hazard expansion</h2>
+
+<p>Exact dedupe trước fuzzy correlation. Candidate query theo tenant, mode, hazard compatibility, location graph và event window; score tính từ time distance, same zone, source diversity, semantic match. Score chỉ là suggestion trừ rule automation đã approved. Rule input gồm source confidence/quality, không count hai camera cùng model như hai bằng chứng độc lập tuyệt đối. Khi nhiều incident candidate, operator chọn; khi source correction, append correction event thay vì sửa event gốc.</p>
+
+<p>Hazard registry gồm key, localized labels, severity policy, required fields, playbook binding, sensitivity, default audience, detector schema, retention class. Thêm “gas leak”, “industrial spill”, “lone worker”, “missing person”, “infrastructure outage” bằng registry/schema/plugin sau domain review; không sửa enum cứng trong mọi service. Category mới không tự có command quyền vật lý.</p>
+
+<h2 id="8-command-safety-protocol">8. Command safety protocol</h2>
+
+<p>Request có command_id, device_id, capability, canonical params digest, tenant, writer_epoch, nonce, issued_at, expires_at, requester, approval evidence. Approval ký digest nên sửa params hủy approval. Gateway kiểm tra credential, epoch, TTL, capability, zone, local interlocks và used nonce. Non-idempotent capability trả retry_class=manual_reconcile; không tự gửi lại khi ACK mất. Local controller result ghi source time và observed physical state nếu có. Success chỉ khi capability-specific completion criterion đạt; accepted/executing/unknown phải hiện riêng trên UI.</p>
+
+<p>HA command workers có distributed fencing; failover không reissue expired command. Local safety interlock có quyền từ chối dù cloud approved. Emergency stop chỉ hiển thị khi thiết bị hỗ trợ đúng semantics; stop request receipt không chứng minh thiết bị dừng. Drone gateway có flight stack capability negotiation, altitude frame, link health, pilot override và lost-link policy; video streaming tách command channel. Không dùng MAVLink command cancel làm bảo đảm phổ quát khi flight stack không hỗ trợ.</p>
+
+<h3 id="chuoi-thuc-thi-lenh-vat-ly">Chuỗi thực thi lệnh vật lý</h3>
+
+<p>Cloud policy/approval → conduit OT DMZ có xác thực → site edge command ledger bền vững/fencing → gateway hãng được duyệt → controller tại chỗ → thiết bị vật lý → feedback độc lập khi có. Chuỗi bảo vệ và điều khiển thủ công tại chỗ không phụ thuộc đường cloud này. Access profile adapter là observe-only trừ khi model/firmware/license chính xác và phê duyệt site xác lập write capability cụ thể; quảng bá BACnet WriteProperty đơn thuần chưa đủ. Dùng giới hạn trong <a href="Physical-Device-Catalog.html">Catalog thiết bị vật lý</a> và <a href="Rescue-IoT-Device-Catalog.html">Catalog cứu nạn/IoT</a>.</p>
+
+<p>Trạng thái vật lý gồm DRAFT, PENDING_APPROVAL, AUTHORIZED, SENT, ACCEPTED, EXECUTING, COMPLETED_VERIFIED, REJECTED, EXPIRED, FAILED, UNKNOWN, RECONCILED. Chỉ map Command <code>succeeded</code> hiện hữu khi tiêu chí hoàn thành vật lý đã được xác minh; giữ physical_state chi tiết trong PhysicalCommandDetail. Approval gắn target, capability revision, point/zone/cause-and-effect revision, parameter digest, TTL và writer epoch. Edge kiểm freshness, local mode, impairment, operation cho phép và feedback availability trước gửi; controller tại chỗ giữ interlock cuối cùng. Sau gửi, timeout là UNKNOWN trừ khi evidence đáng tin chứng minh thất bại. Reconciliation append evidence/lý do, không replay lệnh âm thầm.</p>
+
+<p>Đầu sprinkler wet-pipe tác động nhiệt không phải actuator có địa chỉ chung. Tổ hợp controlled-release giữ releasing logic tại chỗ được duyệt; cấm relay bypass đa dụng, trigger từ AI confidence hoặc cause-and-effect do LLM tạo. I/O có giám sát được phép tuân theo thiết kế điện, supervision và feedback chính xác. <code>release_output_active</code>, vị trí van, bơm chạy, áp suất và waterflow là observation khác nhau. Thiết bị cứu nạn chỉ hỗ trợ console thủ công nhận mission assignment, không nhận API drive/aim/discharge bịa ra. Giao diện remote emergency-stop chưa xác minh không được hiển thị như bảo đảm dừng vật lý.</p>
+
+<h2 id="9-localization-vi-en-ja">9. Localization vi / en / ja</h2>
+
+<p>UI key dạng <code>incident.status.active</code>; resource bundles versioned, ICU MessageFormat cho plural/select, không nối fragments. Locale user ưu tiên explicit choice → profile → OS supported locale → tenant default → English reviewed. Language selection không đổi region hoặc authorization. Font stack: system UI + Noto Sans khi deploy font bundle, Japanese dùng Noto Sans JP/system CJK; no forced uppercase cho tiếng Nhật; line height tối thiểu 1.5 body, text expansion 40% để test. Dates/numbers/unit hiển thị theo locale nhưng có timezone bên cạnh khi command/incident cross-country.</p>
+
+<p>Content template là entity có <code>template_id</code>, <code>version</code>, <code>locale</code>, <code>text</code>, <code>variables_schema</code>, <code>reviewer</code>, <code>approved_at</code>, <code>voice_asset_ref</code>. Warning approval tham chiếu exact locale versions. Thiếu bản dịch đã duyệt: hiển thị fallback language rõ và yêu cầu publisher xác nhận policy; không tạo bản dịch AI rồi tự phát. Không block toàn bộ P1 nếu emergency fallback template đã preapproved. Original message/user chat giữ nguyên ngôn ngữ; translation hỗ trợ được gắn machine translated và không thay original evidence. TTS voice được chọn theo locale, transcript luôn có; nếu TTS lỗi vẫn đọc text được. Bản dịch critical phải được người bản ngữ/domain reviewer kiểm tra trước release.</p>
+
+<p>Thuật ngữ vật lý phải phân biệt nhất quán “yêu cầu được cấp quyền”, “controller chấp nhận”, “kết quả vật lý đã xác minh”, “kết quả chưa rõ”, “test”, “suy giảm chức năng” và “đã khôi phục” trong vi/en/ja. Giữ nhãn point hãng cùng ngữ nghĩa bản địa hóa đã duyệt. Dịch không đổi ngữ nghĩa register, cực tính điều khiển, đơn vị parameter hoặc thẩm quyền. Hỗ trợ TTS/ngôn ngữ loa theo model; dùng bản thu được duyệt khi payload đã nghiên cứu chưa xác minh locale hoặc API.</p>
+
+<h2 id="10-evidence-chat-va-privacy">10. Evidence, chat và privacy</h2>
+
+<p>Upload policy baseline 20 MB/file cho ảnh/tài liệu/clip ngắn; MIME sniffing + extension allowlist + antivirus + decompression limits; quarantine trước scan. Signed upload URL scope object key và expiry ngắn; download URL kiểm tra policy và TTL, không public bucket. Video session token incident-scoped, audit access, region-resident relay. Webhook payload không gửi raw medical notes mặc định. Chat retention theo incident/social class, abuse report/restricted thread, attachment policy chung. Safety fan-out snapshot gồm group membership version nhưng recheck revocation lúc send.</p>
+
+<p>Precise location được field-level protected; generalized site status cho family default. Retention purge gồm DB, object store, search index, caches và export links; backup có expiry và restore reapply tombstones. Legal hold và data subject deletion conflict chuyển privacy review; không silently ignore request. Audit hash chain/tamper-evident storage hỗ trợ phát hiện sửa đổi, không tuyên bố tuyệt đối không thể sửa khi toàn bộ authority bị compromise.</p>
+
+<p>Hồ sơ FAT/SAT có serial/firmware/license/config chính xác, trạng thái point kỳ vọng/thực tế, timestamp, người chứng kiến, quyền test đã duyệt, sai lệch và khôi phục có ký. Lưu raw capture riêng cùng hash và quyền; redact secret nhưng giữ source reference truy vết được. Brochure hoặc chứng chỉ linh kiện không được đặt field_accepted. Nghiệm thu gắn binding lắp đặt cụ thể và phạm vi duyệt; thay firmware, point map hoặc cause-and-effect mở lại review liên quan.</p>
+
+<h2 id="11-frontend-runtime-va-state-design">11. Frontend runtime và state design</h2>
+
+<h3 id="hop-đong-trinh-bay-v2-va-kiem-thu-chuyen-trang-thai">Hợp đồng trình bày v2 và kiểm thử chuyển trạng thái</h3>
+
+<p><code>getContent()</code> chọn renderer theo nhóm; <code>SAEnterprise.render(s,c)</code> chọn composition theo screen ID; <code>SAVisual.scene()</code> vẽ sơ đồ với ngôn ngữ và trạng thái. Không dùng thuộc tính <code>type</code> chung để quyết định mọi bố cục. <code>data-go</code> chỉ điều hướng, <code>data-demo</code> chỉ tương tác minh họa; không diễn giải hai loại event này thành success của API hoặc actuator. Giữ <code>Screen-Registry.json</code> và FR hiện có là hợp đồng nguồn.</p>
+
+<p>Production phải áp dụng quy tắc dưới đây trước render và trước speech; đây là quy tắc kỹ thuật cần triển khai, không phải API schema mới:</p>
+
+<table>
+<thead>
+<tr>
+  <th>Đầu vào / chuyển trạng thái</th>
+  <th>Kết quả bắt buộc và assertion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Heading unknown, floor known</td>
+  <td>Giữ mặt bằng/mốc hợp lệ; bỏ mũi tên tương đối và câu “rẽ trái/phải”. QR xác nhận vị trí không tự xác nhận hướng.</td>
+</tr>
+<tr>
+  <td>Floor unknown / route withdrawn / evidence stale</td>
+  <td>Hủy speech đang phát và hàng đợi; bỏ route overlay và chỉ dẫn cũ trong cùng cập nhật; giữ cảnh báo, nhập vị trí, trợ giúp. Không cho back/history khôi phục tuyến cũ.</td>
+</tr>
+<tr>
+  <td>Snapshot mới đến muộn hơn revision đã thu hồi</td>
+  <td>Bỏ cập nhật cũ theo revision; không dùng thời điểm HTTP response để kết luận tuyến mới.</td>
+</tr>
+<tr>
+  <td>SOS local pending → durable receipt → human ACK</td>
+  <td>Chỉ tiến trạng thái khi có bằng chứng đúng request ID; không lấy click hoặc chuyển hash làm biên nhận.</td>
+</tr>
+<tr>
+  <td>Command accepted, readback absent</td>
+  <td>F11/F12 vẫn UNKNOWN; nút retry vật lý không xuất hiện. Chỉ ra bằng chứng thiếu và quy trình đối soát.</td>
+</tr>
+<tr>
+  <td>Vào C27 / đổi ngôn ngữ / rời hướng dẫn</td>
+  <td>Hủy âm cũ; C27 giữ im lặng khi quay lại, tải lại, đổi trạng thái hoặc có notification mới.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Test component kiểm tra chữ và thuộc tính accessibility cùng SVG, không chỉ snapshot ảnh. Test tích hợp mô phỏng đổi revision khi speech đang phát, mất mạng giữa gửi/receipt, ACK trễ và local override. Test E2E đo focus, target, reflow, bàn phím và văn bản thay bản đồ ở VI/EN/JA. Bản mẫu hiện có speech ví dụ cố định, local state và dữ liệu minh họa; không có cơ chế production chứng minh các assertions trên.</p>
+
+<p>Server state cache keyed tenant+region+user scope+resource; workspace switch purge hoặc partition hoàn toàn. Client store chỉ giữ draft/UI preferences, không dùng làm nguồn incident truth. Server-rendered shell hoặc static app + BFF được chọn theo deployment; CSP chặt, no tokens in localStorage, secure cookie cho web/session BFF. Native secure keystore cho tokens, encrypted offline database. Websocket sequence gap → snapshot refresh; stale banner hiển thị age. Command buttons disabled khi capability/location/policy stale vượt ngưỡng, có reason và manual channel.</p>
+
+<p>Form pattern: label luôn hiển thị; required/error theo field; submit state pending; receipt sau server ACK; conflict hiển thị server version và draft, không tự ghi đè. List pattern: filters shareable nhưng không PII trong URL; accessible table, keyboard focus, selectable row có context. Map luôn có list alternative; floor controls hỗ trợ keyboard; no safety information solely via color. SOS action không phụ thuộc gesture giữ nút duy nhất; explicit button + confirmation có fast path theo accessibility/site policy.</p>
+
+<p>F01–F20 nâng bộ màn hình phối hợp lên 233 màn. View vật lý gồm inventory point/zone, quality/freshness, chứng cứ capability đã nghiệm thu, review target, approval, timeline receipt/feedback riêng, reconcile UNKNOWN, impairment/test/restoration, nghiệm thu FAT/SAT và phân công thiết bị cứu nạn. FR-PHY-01–FR-PHY-16 quy định các hành vi này. Không bật action từ projection cũ; server/edge kiểm lại. Action local-only hoặc chưa hỗ trợ hiện lý do và workflow thủ công có quyền. Không AI response nào được submit actuator command hoặc đổi cấu hình controller.</p>
+
+<h2 id="12-test-architecture">12. Test architecture</h2>
+
+<p>Unit test state guards/rules/unit conversion. Contract tests OpenAPI/events/adapters. Integration tests outbox/inbox, workflow restart, DB tenant isolation, provider callbacks và replay. E2E tests theo actor và vi/en/ja, offline/reconnect, accessibility, role changes. Performance tests steady/burst/fan-out, soak, noisy neighbor, media overload. Chaos tests broker fail, DB failover, workflow worker kill, provider timeouts, region partition, clock skew. Security tests BOLA, source spoof, SSRF URL validation, upload malware fixtures, replay nonce, key revocation, support break-glass. Hardware-in-loop tests riêng cho từng actuator/drone vendor trong môi trường được phép.</p>
+
+<p>Test data synthetic, deterministic clock cho deadlines, mock provider thể hiện accepted/delivered/unknown separately. Passing prototype navigation không bằng passing production E2E. Acceptance matrix có actor, trigger, expected evidence và architecture owner để QA độc lập thiết kế test, không chỉ mirror implementation.</p>
+
+<p>Nghiệm thu vật lý thêm FAT đúng cấu hình và SAT sau lắp. Test từng mapping point/zone và capability được bật, negative authorization chéo tenant/site/zone, sai revision, approval hết hạn, event lặp, thiếu feedback và accepted nhưng chưa hoàn thành. Ngắt cloud, tắt nguồn edge, restart gateway, cách ly một nhóm point, làm lệch clock và khôi phục link; xác minh bảo vệ tự động tại chỗ tiếp tục và intent cũ không gây actuation. Test hardware theo impairment plan đã duyệt với nhân sự đủ năng lực tại chỗ; simulator pass không cấp quyền xả thật. FMEA gán owner site và quyết định residual risk cho tác động sai vùng, mất feedback, lỗi nguồn cấp, relay lỗi, nhầm test/actual và gateway bị xâm nhập. Gate test/quản trị chi tiết nằm trong <a href="External-Integration-Standards-Deployment.html">Tiêu chuẩn và triển khai</a>.</p>
+
+<h2 id="13-runbooks-trong-yeu">13. Runbooks trọng yếu</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Failure</th>
+  <th>Detection</th>
+  <th>Containment / recovery</th>
+  <th>Verify</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Ingestion lag</td>
+  <td>oldest event age + p95</td>
+  <td>Reserve SOS lane; scale consumers; quarantine faulty source</td>
+  <td>No lost receipts, replay preserved IDs</td>
+</tr>
+<tr>
+  <td>Provider outage</td>
+  <td>failed/unknown attempts + callback age</td>
+  <td>Circuit break; alternate channel; operator visibility</td>
+  <td>Human ACK tracked separately; no duplicate flood</td>
+</tr>
+<tr>
+  <td>DB primary loss</td>
+  <td>health + write errors</td>
+  <td>Fence; promote verified replica; refresh service connections</td>
+  <td>Committed SOS present; no dual writer</td>
+</tr>
+<tr>
+  <td>Region unavailable</td>
+  <td>multi-vantage synthetic</td>
+  <td>Approved DR routing; epoch increase; outbox reconcile</td>
+  <td>Residency unchanged or explicitly approved; RPO/RTO measured</td>
+</tr>
+<tr>
+  <td>False detector storm</td>
+  <td>incident rate + operator feedback</td>
+  <td>Disable specific rule/model deployment; retain raw signals</td>
+  <td>Manual SOS unaffected; rollback version audited</td>
+</tr>
+<tr>
+  <td>Lost drone link</td>
+  <td>telemetry age</td>
+  <td>Expose unknown; local pilot/lost-link procedure</td>
+  <td>Receipt and physical state reconciled; no blind command replay</td>
+</tr>
+<tr>
+  <td>Compromised device</td>
+  <td>abnormal source behavior</td>
+  <td>Revoke cert; quarantine; rotate binding; coverage warning</td>
+  <td>Denied traffic; replacement device validated</td>
+</tr>
+<tr>
+  <td>Translation error</td>
+  <td>report/locale review</td>
+  <td>Withdraw affected template version; reviewed correction</td>
+  <td>Version lineage and recipients of correction visible</td>
+</tr>
+<tr>
+  <td>Mất cloud hoặc edge tại site</td>
+  <td>heartbeat/quality age, quan sát tủ tại chỗ</td>
+  <td>Đánh dấu remote integration unavailable; giữ bảo vệ tại chỗ; buffer/reconcile observation hỗ trợ</td>
+  <td>Chuỗi tự động độc lập đã xác minh; không replay lệnh ghi cũ</td>
+</tr>
+<tr>
+  <td>Sai vùng hoặc binding revision</td>
+  <td>point walkdown, digest mismatch</td>
+  <td>Dừng remote capability liên quan; giữ local operation; sửa/nghiệm thu lại mapping</td>
+  <td>Test point-to-point và negative chéo vùng có ký</td>
+</tr>
+<tr>
+  <td>Kết quả vật lý chưa rõ</td>
+  <td>accepted/sent thiếu feedback bắt buộc</td>
+  <td>UNKNOWN; người đủ năng lực xác minh tại chỗ; phản ứng thay thế; không retry mù</td>
+  <td>Reconciliation gắn evidence, không sửa lịch sử lệnh</td>
+</tr>
+<tr>
+  <td>Impairment hoặc test quá thời gian</td>
+  <td>planned_until, lệch mode controller</td>
+  <td>Báo người phụ trách site; theo compensatory plan và quy trình khôi phục đã duyệt</td>
+  <td>Trạng thái restored tại chỗ, witness và signoff trước đóng</td>
+</tr>
+<tr>
+  <td>Link/console thiết bị cứu nạn unavailable</td>
+  <td>Operator báo, tuổi telemetry được hỗ trợ</td>
+  <td>Operator theo lost-link/stop procedure hãng; mission hiện unknown/unavailable</td>
+  <td>Ghi trạng thái vật lý tại chỗ và handback operator</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="14-delivery-decomposition-cho-full-build">14. Delivery decomposition cho full build</h2>
+
+<p>Các workstream đồng thời thuộc cùng phạm vi đầy đủ: platform/IAM/regions; event/connectors/devices; incident/workflow/dispatch; Companion/Field; Command/admin; content/i18n; media/privacy/audit; observability/DR/security; hardware integration. Thứ tự dependency: contracts/domain invariants → platform foundations → vertical flows → complete role surfaces → integrations + resilience → independent acceptance. Không bỏ UI quản trị hoặc trạng thái lỗi vì chúng ít xuất hiện trong demo.</p>
+
+<p>Definition of Ready: approved actor/permissions, state transitions, API/event schema, error cases, translated copy, test fixtures. Definition of Done: code + migrations + contract tests + UI three locales + accessible errors + dashboards/runbook + rollback + security/tenant tests + reviewer signoff. Production go-live cần domain/site authority validation; tài liệu này là bản sâu để review, chưa phải chữ ký nghiệm thu.</p>
+
+<p>Workstream full build nay bao gồm rõ physical point/zone integration, OT DMZ/site edge, gateway hãng được duyệt, capability/feedback contract, quản trị impairment/test, FAT/SAT và vận hành thiết bị cứu nạn. Definition of Ready cho physical write cần hãng cho phép bằng tài liệu, cause-and-effect site và completion quan sát được; Definition of Done cần nghiệm thu đúng cấu hình và runbook khôi phục tại chỗ. Hành động chưa hỗ trợ giữ unavailable rõ ràng trong khi phạm vi thiết kế đầy đủ vẫn được giữ. Operation/event đề xuất ở trên phải đồng bộ với JSON contract riêng khi triển khai.</p>
+
+<h2 id="phu-luc-bat-buoc-trong-cung-baseline">Phụ lục bắt buộc trong cùng baseline</h2>
+
+<p><a href="Voice-Rescue-Design.html">Loa cứu hộ và voice navigation</a> bổ sung WF-21–22. <a href="Positioning-AI-Care-Design.html">Định vị, tối ưu, AI và hồ sơ hỗ trợ</a> bổ sung WF-23–27. Hai tài liệu này là thành phần của full design, không phải tính năng tùy chọn cho giai đoạn sau. <a href="Screen-Specifications.html">Đặc tả màn hình</a> cung cấp FR theo từng screen ID.</p>
+</main></body></html>

@@ -1,0 +1,152 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Voice-Rescue-Design · SmartAlarm</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eef2f5;color:#142536;font-family:"Segoe UI","Yu Gothic",Arial,sans-serif;font-size:15px;line-height:1.58}a{color:#00766d;text-decoration:none;overflow-wrap:anywhere}header{position:sticky;top:0;z-index:2;padding:16px max(24px,calc((100vw - 1100px)/2));background:#102534;color:white;border-bottom:4px solid #c9253d;display:flex;gap:22px;align-items:center}header a{color:white}header .brand{font-weight:750;margin-right:auto}button{border:1px solid #b7cad3;background:transparent;color:inherit;padding:7px 12px;border-radius:5px;cursor:pointer}main{max-width:1100px;margin:30px auto;background:white;padding:50px 60px;box-shadow:0 10px 40px #12283a0a}h1{font-size:34px;line-height:1.2;letter-spacing:-.6px;margin:0 0 24px;color:#142c40}h2{font-size:24px;line-height:1.3;border-bottom:2px solid #d8e9e7;padding-bottom:9px;margin:32px 0 15px;break-after:avoid}h3{font-size:19px;line-height:1.35;margin:25px 0 12px;break-after:avoid}h4{font-size:16px;break-after:avoid}p,li{orphans:3;widows:3}strong{font-weight:650}table{border-collapse:collapse;width:100%;font-size:12px;margin:18px 0;table-layout:auto}th,td{border:1px solid #cbd7df;padding:8px 9px;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf3f2;color:#123b3c;text-align:left;font-weight:700}tbody tr:nth-child(even){background:#f8fafb}thead{display:table-header-group}tr{break-inside:avoid}img{display:block;max-width:100%;height:auto;max-height:170mm;object-fit:contain;margin:20px auto}figure{margin:22px 0;break-inside:avoid}figcaption{font-size:11px;color:#516775;text-align:center}pre{font-size:11px;background:#f0f4f7;padding:13px;border-left:3px solid #218c80;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}code{font-family:Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}blockquote{border-left:3px solid #218c80;margin-left:0;padding-left:18px;color:#405965}.document-meta{font-size:11px;color:#617785;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}.cover{break-after:page}.cover h1{font-size:42px}.cover .summary{font-size:18px;line-height:1.5;color:#365566}.toc{break-after:page}.toc ol{line-height:1.9}.chapter{break-before:page}.chapter:first-child{break-before:auto}.chapter-label{color:#00766d;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}.physical-figure img{max-height:105mm}.no-print{display:block}
+@media(max-width:700px){main{padding:25px;margin:0}header{padding:12px;flex-wrap:wrap}table{font-size:11px}h1{font-size:29px}}
+@page{size:A4;margin:17mm 14mm 20mm}
+@media print{html{scroll-behavior:auto}body{background:white;font-size:10pt;line-height:1.48}header,.no-print{display:none}main{max-width:none;margin:0;padding:0;box-shadow:none}h1{font-size:25pt;margin:0 0 14pt}h2{font-size:16pt;margin:20pt 0 10pt;padding-bottom:6pt}h3{font-size:12.2pt;margin:16pt 0 8pt}h4{font-size:10.5pt}table{font-size:7.8pt;margin:10pt 0}th,td{padding:5pt 6pt}pre{font-size:7.5pt;padding:9pt}img{max-height:120mm;margin:12pt auto}figcaption{font-size:8pt}.document-meta{font-size:8pt;margin-bottom:12pt}.cover h1{font-size:34pt}.cover .summary{font-size:15pt}.cover img{max-height:100mm}.physical-figure img{max-height:90mm}.chapter-label{font-size:9pt}}
+</style></head><body><header><a class="brand" href="index.html">SmartAlarm / Design Library</a><a href="English/Voice-Rescue-Design.html">English</a><button onclick="window.print()">In / Lưu PDF</button></header><main><div class="document-meta">BASELINE 2.0 · 23/10/2026 · THIẾT KẾ ĐỂ REVIEW</div><h1 id="smartalarm-loa-cuu-ho-dan-đuong-bang-voice-va-tranh-vung-nguy-hiem">SmartAlarm — Loa cứu hộ, dẫn đường bằng voice và tránh vùng nguy hiểm</h1>
+
+<p><img src="assets/proposal-v2/voice.png" alt="SmartAlarm — sơ đồ giải thích" /></p>
+
+<p>Baseline production 1.0 · yêu cầu bổ sung ngày 23/10/2026. Tài liệu này là phần mở rộng bắt buộc của BRD/FRD/Basic/Detail Design, không phải ý tưởng giai đoạn sau.</p>
+
+<h2 id="1-business-requirement-br-09">1. Business requirement BR-09</h2>
+
+<p>Hỗ trợ người không có smartphone bằng hệ thống loa và hỗ trợ người dùng smartphone di chuyển bằng hướng dẫn giọng nói theo từng chặng. Cùng một incident phải tạo ra nội dung nhất quán giữa app, loa khu vực, màn hình và đội ứng cứu. Mục tiêu là đưa hướng dẫn đã được phê duyệt tới đúng người, đúng vùng, đồng thời thể hiện các giới hạn của dữ liệu. Không gọi tuyến là “an toàn tuyệt đối”; thiết bị và dữ liệu không quan sát được mọi nguy hiểm thực địa.</p>
+
+<h2 id="2-wf-21-public-address-loa-cuu-ho">2. WF-21 — Public address / loa cứu hộ</h2>
+
+<p>Actor: PA author, approver, live announcer, device admin và local controller. Thiết bị: PA amplifier/controller, IP speaker, SIP audio endpoint khi có adapter hỗ trợ, loa gateway tại site, payload loa drone và phương tiện. Mỗi thiết bị khai báo zone coverage polygon/indoor zone, priority capabilities, audio formats, playback feedback, mic streaming support, local override, battery/power/network và health.</p>
+
+<p>Luồng chuẩn: chọn incident → chọn vùng → preview coverage gaps → chọn bản ghi/TTS approved vi/en/ja → priority/repetition/expiry → duyệt exact message+zone digest → dispatch → controller ACK → per-speaker playback state → reconcile lỗi. Chọn “toàn khu vực” phải hiển thị số loa và vùng trước khi duyệt. Có thể dùng template emergency đã được duyệt trước theo local policy cho phản ứng nhanh, vẫn giữ actor/audit và scope.</p>
+
+<p>Playback model: queued → accepted_by_controller → buffering → playing → completed, hoặc rejected/failed/unknown/preempted/expired. “Completed” nghĩa thiết bị báo đã phát hết nội dung, không đồng nghĩa mọi người đã nghe hoặc hiểu. Acoustic feedback nếu được trang bị phải là bằng chứng riêng; không suy ra từ network heartbeat. Loa lỗi tạo coverage gap và fallback task tới đội tuần tra/loa di động/app/SMS theo policy.</p>
+
+<p>Priority arbitration ưu tiên đường báo động cục bộ được site authority chấp thuận; cloud không được tắt hoặc lấn quyền hệ thống fire alarm bắt buộc. Routine audio có thể preempt; emergency content tương đương cần arbiter/zone lease để tránh hai nội dung chồng nhau. Stop command chỉ dừng broadcast instance được chỉ định nếu capability hỗ trợ; không tự tắt toàn bộ báo cháy. Reconnect không phát lại thông báo hết hạn. Recording/microphone/live speech có quyền riêng, push-to-talk hoặc explicit start/stop; mic không bật khi chỉ mở màn hình.</p>
+
+<p>Live rescue: xin microphone permission sau thao tác rõ; approve session zones; short-lived media token; indicators local + remote; max duration; lease heartbeat; timeout tự ngừng live channel theo controller policy. Không giả định mọi PA có two-way audio. Audio transport đề xuất WebRTC giữa announcer và regional media gateway; gateway chuyển SIP/RTP/vendor protocol theo capability, TLS/SRTP khi thiết bị hỗ trợ, mạng OT tách biệt. Recorded/TTS assets cache tại edge theo checksum/version để vẫn phát được local approved procedure khi WAN mất.</p>
+
+<h2 id="3-wf-22-smartphone-voice-navigation">3. WF-22 — Smartphone voice navigation</h2>
+
+<p>Actor: citizen/responder; inputs gồm location report, floor anchor, heading quality, route graph version, hazard restrictions, accessibility profile, destination capacity và instruction template locale. Outputs: ordered steps có landmark, direction nếu đáng tin, distance estimate, expected node, voice text, expiry, route version và reason for replan. App có play/pause/repeat, text transcript, speech rate, haptic cues và fallback offline. Discreet mode không bị voice tự bật làm lộ vị trí.</p>
+
+<p>Luồng: nhận alert → xác nhận tầng/vị trí (GPS ngoài trời; QR/BLE/UWB/manual trong nhà tùy triển khai) → chọn nhu cầu mobility → request route → kiểm tra freshness/authorization → hiển thị tuyến và lý do chọn → phát từng step → cập nhật vị trí → advance/replan → đến điểm tập kết → user tự báo an toàn. Đến geofence không tự xác nhận safe. Hướng cầm máy không đồng nghĩa hướng di chuyển; nếu heading quality thấp, chỉ dẫn theo mốc “đến biển CẦU THANG TÂY”, không trái/phải. Nếu floor không xác định hoặc map registration sai thì không turn-by-turn; hướng dẫn tìm mã vị trí hoặc SOS.</p>
+
+<p>App tránh nguy hiểm bằng route graph có constraints, không đơn giản chọn vector ngược tâm polygon. Một tuyến càng xa đám cháy vẫn có thể đi vào ngõ cụt, vùng ngập hoặc tầng không phù hợp. Outdoor route kiểm tra network walkability, closures, polygon/hazard evolution và destination status; indoor route dùng cửa, cầu thang, refuge, exit và directional constraints được site review. Elevator không mặc định được dùng, chỉ khi approved evacuation plan rõ ràng cho capability cụ thể. Accessibility profile loại stairs nếu người dùng không thể dùng; nếu không có đường phù hợp, đề xuất assistance/refuge theo site plan, không tạo tuyến giả.</p>
+
+<h2 id="4-services-bo-sung-va-ownership">4. Services bổ sung và ownership</h2>
+
+<table>
+<thead>
+<tr>
+  <th>Service</th>
+  <th>Owner data</th>
+  <th>API/events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Hazard &amp; route guidance</td>
+  <td>Hazard polygons/restrictions, route request, route version, graph validation</td>
+  <td>POST /guidance/routes; guidance.updated/withdrawn</td>
+</tr>
+<tr>
+  <td>PA orchestration</td>
+  <td>Broadcast instance, zone lease, language sequence, repetition, device receipts</td>
+  <td>POST /broadcasts; broadcast.playback.changed</td>
+</tr>
+<tr>
+  <td>Speech content</td>
+  <td>Reviewed audio/TTS text, voice config, pronunciation lexicon, locale versions</td>
+  <td>POST /speech/previews; speech.asset.approved</td>
+</tr>
+<tr>
+  <td>Real-time media gateway</td>
+  <td>Short-lived live session/transport state, no business authority</td>
+  <td>POST /broadcasts/{id}/live-session; media.session.closed</td>
+</tr>
+</tbody>
+</table>
+
+<p>Mapping sở hữu graph/plan, Incident sở hữu restrictions approval references, Command service thực thi approved PA intent qua adapter. PA không được bypass command policy; Guidance không được tự sửa incident severity. Service additions áp dụng production cell deployment, HA và observability như các service lõi.</p>
+
+<h2 id="5-data-design-va-route-algorithm">5. Data design và route algorithm</h2>
+
+<p>RouteNode(id,tenant,plan_revision,level,geometry,type,landmark_i18n); RouteEdge(id,from,to,direction,width_m,stairs,accessible,door_state,approval_ref). HazardRestriction(id,incident_ref,geometry/zone,level_range,source,certainty,severity,observed_at,valid_until,approved_by,version). RoutePlan(id,person_session,graph_revision,hazard_version,profile,destination,steps,issued_at,expires_at,state). Broadcast(id,incident,scope_digest,content_version,locale_order,priority,repeat_count,expires_at,state). PlaybackReceipt(broadcast,device,sequence,state,device_at,received_at,evidence_type).</p>
+
+<p>Algorithm baseline: validate location/floor confidence → snapshot graph+restrictions+profile → remove forbidden/blocked/unknown-critical edges and destinations expired/closed → apply accessibility constraints → find feasible paths using Dijkstra/A* with distance, congestion estimate and exposure penalties → choose path only if hard safety constraints pass → produce landmark steps with localized templates → sign/cache route version with expiry. Exposure penalty không cho phép vượt hard exclusion bằng cách chọn “ngắn hơn”. Unknown edges xử lý conservative theo policy, không coi unknown là clear. Dynamic predictive hazard models chỉ advisory cho operator trừ khi được validated riêng; không tự forecast fire spread như bằng chứng chắc chắn.</p>
+
+<p>Replan triggers: hazard version changed, new closure, destination closes, deviation vượt threshold, location/heading quality degrades, route TTL expires. Debounce và hysteresis chống xoay hướng liên tục; nguy hiểm mới cắt tuyến thì withdraw ngay không chờ debounce. Client phải cancel queued TTS của route cũ trước khi phát hướng dẫn mới. Khi chưa có route mới hợp lệ, phát thông báo không xác minh được tuyến và hiển thị SOS/approved local instructions; không phát lại turn cũ vì đang offline.</p>
+
+<p>Các thresholds như location age ≤ 10 s cho step guidance, hazard recheck ≤ 30 s, route TTL ≤ 60 s là giả định thiết kế cần site trials; không dùng chung cho mọi hazard/indoor technology. Rule theo hazard có max age, source reliability và fallback được approved.</p>
+
+<h2 id="6-i18n-audio-va-intelligibility">6. I18n, audio và intelligibility</h2>
+
+<p>Ba locale vi-VN/en/ja-JP có bản text và voice riêng, giữ nguyên semantics và variables. App chọn ngôn ngữ cá nhân; loa có language order theo audience/site policy. Không dùng một chu kỳ quá dài làm chậm chỉ dẫn chính: thiết kế primary-language immediate message và các bản tiếp theo có giới hạn, do operator preview tổng duration. TTS critical phrase được review pronunciation; tên địa điểm có lexicon và approved recording khi TTS không ổn định. Ngắt câu/đơn vị/cách đọc tầng phải phù hợp ngôn ngữ. Không nâng volume cực đại như giải pháp mặc định: coverage/intelligibility cần khảo sát acoustics và acceptance tại site.</p>
+
+<p>Offline: cached graph/audio/instructions có revision và expiry. Khi hazard data quá cũ, chỉ dùng offline approved site procedure với nhãn dữ liệu cũ, không tiếp tục khẳng định tuyến động tránh nguy hiểm. Bluetooth/headphones, silent mode, permission và OS interruption làm delivery audio không chắc chắn; UI có visual/haptic alternative. Voice bắt đầu theo interaction/permission và policy đã consent; critical alert entitlement của OS là integration task riêng, không giả định app luôn bật loa được.</p>
+
+<h2 id="7-api-details">7. API details</h2>
+
+<p>POST /v1/guidance/routes: location{method,accuracy_m,observed_at,floor_ref,heading,heading_accuracy}, incident_id, mobility_profile, locale; response route_id/version, graph_revision,hazard_revision,expires_at,quality,steps[]. Mỗi step có landmark_i18n_key, direction enum optional, distance_m optional, speech_template_ref và prohibited-actions. Không đủ data trả 422 LOCATION_UNCERTAIN hoặc 409 NO_VERIFIED_ROUTE kèm safe fallback object, không HTTP success với đường rỗng.</p>
+
+<p>POST /v1/broadcasts: incident_id,zone_refs[],content_versions[],priority,repeat_count,expires_at,idempotency_key; 201 draft. POST /{id}/approve: exact digest + version; POST /{id}/start: command intent sau policy, 202 chưa playback. GET /{id}/receipts: per-device accepted/playing/completed/unknown. POST /{id}/stop: instance-scoped, permission, controller capability. POST /{id}/live-session: session TTL, approved zones, media endpoint token; UI không hiển thị credential. Device telemetry ingestion source-bound và monotonically sequenced để receipt trễ không rollback state.</p>
+
+<h2 id="8-acceptance-scenarios-bat-buoc">8. Acceptance scenarios bắt buộc</h2>
+
+<h3 id="bo-sung-v2-hinh-loi-đoc-va-hieu-luc-cung-mot-quyet-đinh">Bổ sung v2: hình, lời đọc và hiệu lực cùng một quyết định</h3>
+
+<p>C35/C36 đặt mốc đã xác minh và một việc tiếp theo trước trường kỹ thuật; C03 là mặt bằng, không mặc nhiên là tuyến khả dụng. C37 thể hiện tuyến cũ bị thu hồi; C38 thể hiện vị trí/tầng/hướng chưa đủ; C39 cần chuyển đúng bối cảnh ngoài nhà. Không hiển thị mũi tên rẽ khi heading chưa rõ. Nhận biết mốc không được diễn đạt thành cam kết đoạn đường an toàn.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Ca kiểm thử</th>
+  <th>Kết quả bắt buộc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Thu hồi tuyến trong lúc đọc C35</td>
+  <td>Ngắt âm và xóa hàng đợi chứa revision cũ; đồng thời xóa overlay và câu hướng dẫn. C37 chỉ mở tuyến thay thế khi có bản duyệt mới; nếu chưa có, cung cấp trợ giúp.</td>
+</tr>
+<tr>
+  <td>QR đúng tầng nhưng không có heading</td>
+  <td>Hiện nguồn vị trí, mốc và hướng chưa rõ; không đọc “rẽ trái/phải”. C38 cho nhập tay hoặc nhờ hướng dẫn.</td>
+</tr>
+<tr>
+  <td>Người dùng dừng / đổi ngôn ngữ / chuyển màn</td>
+  <td>Âm cũ dừng; nghe lại chỉ đọc bản hiện còn hợp lệ. Có bản chữ tương đương, không phụ thuộc TTS hoặc biểu tượng loa.</td>
+</tr>
+<tr>
+  <td>Chế độ riêng C27</td>
+  <td>Không phát âm/rung tự động; nút thoát nhanh không kích hoạt speech; trở lại không phát tiếp âm trước đó.</td>
+</tr>
+<tr>
+  <td>P04/P09 nhận ACK gateway nhưng chưa có playback</td>
+  <td>Hiện riêng nhận lệnh, trạng thái phát, vùng chưa rõ và kiểm chứng nghe tại chỗ; không ghi “mọi người đã nghe”.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Prototype có nút nghe/dừng chủ động bằng Web Speech và nội dung mẫu; không phải bản tin được phê duyệt cho tình huống thật. Việc nghe được trên máy reviewer không chứng minh đúng voice, phát âm địa danh, khả năng nghe rõ hiện trường hoặc coverage loa. Chấp nhận production cần kiểm tra bản chữ/âm theo revision, biến template, VI/EN/JA, ưu tiên tủ cục bộ và mất nối. Âm cảnh báo trên loa công cộng và âm điện thoại kín đáo là hai chính sách riêng; không dùng một toggle để điều khiển cả hai.</p>
+
+<p>PA-01 đúng 8 loa đã chọn, không phát sang site khác. PA-02 một loa network online nhưng amplifier fault vẫn báo coverage gap. PA-03 controller ACK không hiện “mọi người đã nghe”. PA-04 reconnect sau expiry không phát thông điệp cũ. PA-05 local fire controller priority không bị cloud override. PA-06 hai announcer tranh cùng zone chỉ một lease hợp lệ; người còn lại thấy conflict. PA-07 mic chỉ mở sau user action và tắt khi session hết hạn. PA-08 drone payload không feedback hiển thị unknown, không complete giả.</p>
+
+<p>NAV-01 vị trí tầng chưa xác định không đưa rẽ trái/phải. NAV-02 hazard cắt route đang đi thì rút route và hủy TTS cũ. NAV-03 người dùng wheelchair không được route qua cầu thang. NAV-04 no feasible path chuyển assistance/refuge theo approved plan. NAV-05 mất mạng và hazard TTL hết hạn không giữ nhãn route current. NAV-06 vi/en/ja đọc đúng landmark, đơn vị và hướng; text/audio parity. NAV-07 route app và PA dùng cùng guidance version hoặc hiện mismatch cần operator xử lý. NAV-08 arrival không tự safe. NAV-09 emergency navigation không yêu cầu tác vụ nhập liệu dài. NAV-10 heading không đáng tin sử dụng landmark, không hướng tương đối.</p>
+
+<h2 id="9-mockup-coverage">9. Mockup coverage</h2>
+
+<p>C35–C40: navigation từng chặng, uncertainty, reroute, outdoor, voice settings. P01–P09: zone/coverage, author/approve, playback, health, live mic, mobile speaker, content và priority. S15–S16: graph editor/test/approval. O35–O36: hazard restriction và consistency/receipt. Các trạng thái offline/error/accessibility dùng chung X01–X10 cùng state selector. Tất cả là màn baseline bắt buộc của full product.</p>
+
+<!-- PHYSICAL_DESIGN_1_0 -->
+
+<h2 id="10-baseline-10-phoi-hop-loa-voi-chua-chay-va-cuu-ho-vat-ly">10. Baseline 1.0 — phối hợp loa với chữa cháy và cứu hộ vật lý</h2>
+
+<p>WF-28–WF-33 bổ sung thiết bị vật lý trong cùng incident, nhưng PA, release chữa cháy và điều khiển phương tiện là ba miền capability riêng. PA nhận hazard/guidance version và trạng thái site đã được phê duyệt; không coi flow switch, pump run hoặc valve open là bằng chứng đám cháy đã tắt để tự phát “an toàn”. Thay đổi cause-and-effect tại controller phải qua engineering review/FAT/SAT, không do TTS hoặc AI tạo ra.</p>
+
+<p>Hệ thống voice alarm được chứng nhận và đường báo cháy cục bộ giữ ưu tiên; adapter SmartAlarm phải tuân phạm vi chứng nhận của cấu hình lắp đặt. Unknown/failed PA receipt sinh coverage gap và nhiệm vụ đội hiện trường. Test/impairment của loa phải thể hiện phạm vi, biện pháp bù và thời hạn; không kết thúc fire watch chỉ vì cloud kết nối lại. Local takeover thu hồi lease live, giữ recording/audit theo policy và không bật mic lại tự động.</p>
+
+<p>Loa drone dùng đúng cặp thiết bị được xác minh: Matrice 4T+AS1 là workflow operator khi API cụ thể chưa xác minh; Matrice 400+V1 có hướng SDK được tài liệu hãng công bố, vẫn cần kiểm chứng từng thao tác trên firmware chọn. Không suy native TTS tiếng Việt từ việc hỗ trợ tiếng Anh/Nhật; dùng bản ghi đã review nếu cần. F19 ghi pilot, mission authority, vùng phát, expiry, local abort và trạng thái âm thanh; phát loa không cấp quyền tự bay. Robot Colossus có nhiệm vụ phun/vận chuyển nhưng API công khai chưa rõ: chỉ dispatch tới console operator đủ năng lực, không chuyển message thành lệnh di chuyển/phun.</p>
+
+<p>Acceptance bổ sung: PA-PHY-01 local fire priority không bị live cloud lấn; PA-PHY-02 telemetry suppression chưa xác minh không đổi nội dung thành all-clear; PA-PHY-03 local override chấm dứt quyền remote, reconnect không phát lại; PA-PHY-04 test zone không phát tới actual audience; PA-PHY-05 expired drone message không phát sau recovery; PA-PHY-06 thiếu SDK playback feedback giữ unknown và yêu cầu operator evidence. Các bài thử có nghe hiểu hiện trường và chứng kiến của site; prototype không thay nghiệm thu. Xem <a href="Rescue-IoT-Device-Catalog.html">danh mục thiết bị</a>, F09–F19 trong <a href="Screen-Specifications.html">đặc tả màn hình</a>.</p>
+</main></body></html>
